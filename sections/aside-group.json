@@ -1,0 +1,240 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "Overlay",
+  "type": "aside",
+  "sections": {
+    "product-labels-and-badges": {
+      "type": "product-labels-and-badges",
+      "blocks": {
+        "sale-label": {
+          "type": "sale-label",
+          "settings": {}
+        },
+        "sold-out-label": {
+          "type": "sold-out-label",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "sale-label",
+        "sold-out-label"
+      ],
+      "settings": {
+        "enable": true
+      }
+    },
+    "popup-promotion": {
+      "type": "popup-promotion",
+      "blocks": {
+        "heading_4dbaw4": {
+          "type": "heading",
+          "settings": {
+            "subheading": "",
+            "heading": "$10 off your first order",
+            "heading_color": "rgba(0,0,0,0)",
+            "heading_color_dark": "rgba(0,0,0,0)"
+          }
+        },
+        "text_kdaEnB": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Simply enter code coupon_code at checkout</p>",
+            "coupon_code": "SIMPLY10",
+            "coupon_color": "rgba(0,0,0,0)",
+            "coupon_color_dark": "rgba(0,0,0,0)"
+          }
+        },
+        "button_3VYLyj": {
+          "type": "button",
+          "settings": {
+            "button_label": "SHOP NOW",
+            "button_link": "",
+            "open_new_window": false,
+            "button_color": "rgba(0,0,0,0)",
+            "button_text_color": "rgba(0,0,0,0)",
+            "button_color_dark": "rgba(0,0,0,0)",
+            "button_text_color_dark": "rgba(0,0,0,0)"
+          }
+        }
+      },
+      "block_order": [
+        "heading_4dbaw4",
+        "text_kdaEnB",
+        "button_3VYLyj"
+      ],
+      "settings": {
+        "popup_position": "bottom-left",
+        "content_position": "left",
+        "content_alignment": "center",
+        "show_for_guests_only": true,
+        "show_on_mobile": false,
+        "schedule_enabled": false,
+        "delay": 5,
+        "reappear_after": 7,
+        "enable_desktop": true,
+        "default_style": "full",
+        "enable_mobile": false,
+        "default_style_mobile": "minimal",
+        "minimal_subtitle": "",
+        "minimal_title": "",
+        "color_scheme_light": "",
+        "color_scheme_dark": ""
+      }
+    },
+    "quick-view": {
+      "type": "quick-view",
+      "blocks": {
+        "vendor_dRdGfk": {
+          "type": "vendor",
+          "settings": {
+            "link_vendor": false,
+            "select_page": "",
+            "link": "",
+            "open_new_window": false
+          }
+        },
+        "product_title_JbDAdt": {
+          "type": "product_title",
+          "settings": {
+            "heading_size": "medium"
+          }
+        },
+        "rating_nRC8zV": {
+          "type": "rating",
+          "settings": {}
+        },
+        "price_hmyDwB": {
+          "type": "price",
+          "settings": {
+            "show_tax_and_shipping": false,
+            "text_size_price": 100,
+            "show_sale_label": true,
+            "sale_label_content": "{sale}",
+            "sale_label_light": "rgba(0,0,0,0)",
+            "sale_label_dark": "rgba(0,0,0,0)",
+            "sale_label_text_light": "rgba(0,0,0,0)",
+            "sale_label_text_dark": "rgba(0,0,0,0)"
+          }
+        },
+        "variant_picker_wEnghL": {
+          "type": "variant_picker",
+          "settings": {
+            "enable_size_chart": false,
+            "size_chart_label": "Size chart",
+            "associated_option_name": "Size",
+            "size_chart_page": ""
+          }
+        },
+        "buy_buttons_gwkBVd": {
+          "type": "qty_and_buy_buttons",
+          "settings": {
+            "show_quantity_selector": true,
+            "show_dynamic_checkout": true,
+            "pickup_availability": true,
+            "preorder_button_label": "Pre-order",
+            "preorder_message": "<p>This product will be available for sale in 2 weeks, but you can pre-order now to receive 10% discount!</p>",
+            "preorder_show_dynamic_button": false,
+            "show_background": false
+          }
+        },
+        "description_tm8VLy": {
+          "type": "description",
+          "settings": {
+            "show_in_tab": false,
+            "open_by_default": false,
+            "make_content_center": false,
+            "icon": "authentic",
+            "heading": "Description",
+            "number_of_lines_shown": "none",
+            "read_more_label": "Read more",
+            "see_less_label": "See less"
+          }
+        }
+      },
+      "block_order": [
+        "vendor_dRdGfk",
+        "product_title_JbDAdt",
+        "rating_nRC8zV",
+        "price_hmyDwB",
+        "variant_picker_wEnghL",
+        "buy_buttons_gwkBVd",
+        "description_tm8VLy"
+      ],
+      "settings": {
+        "product": "",
+        "show_media_with_variant_selected": false,
+        "option_to_classify_variant_media": "",
+        "enable_quickview": true,
+        "quickview_label": ""
+      }
+    },
+    "store-locator": {
+      "type": "store-locator",
+      "blocks": {
+        "store_location_RNBcrU": {
+          "type": "store_location",
+          "settings": {
+            "image_ratio": "100",
+            "title": "Store branch",
+            "location_address": "75 9th Ave, New York, NY 10011-7006",
+            "pickup_fee": "Free",
+            "ready_time": "Usually ready for pickup in 24 hours",
+            "text": "<p>(+84) 123 456 789<br/><br/>Store hours<br/>Mon - Fri, 8:30am - 10:30pm,<br/>Saturday, 8:30am - 10:30pm,<br/>Sunday, Closed</p>",
+            "button_label": "Get directions",
+            "button_style": "primary"
+          }
+        },
+        "store_location_qtCaQB": {
+          "type": "store_location",
+          "settings": {
+            "image_ratio": "100",
+            "title": "Store branch",
+            "location_address": "75 9th Ave, New York, NY 10011-7006",
+            "pickup_fee": "Free",
+            "ready_time": "Usually ready for pickup in 24 hours",
+            "text": "<p>(+84) 123 456 789<br/><br/>Store hours<br/>Mon - Fri, 8:30am - 10:30pm,<br/>Saturday, 8:30am - 10:30pm,<br/>Sunday, Closed</p>",
+            "button_label": "Get directions",
+            "button_style": "primary"
+          }
+        },
+        "store_location_pdnLT4": {
+          "type": "store_location",
+          "settings": {
+            "image_ratio": "100",
+            "title": "Store branch",
+            "location_address": "75 9th Ave, New York, NY 10011-7006",
+            "pickup_fee": "Free",
+            "ready_time": "Usually ready for pickup in 24 hours",
+            "text": "<p>(+84) 123 456 789<br/><br/>Store hours<br/>Mon - Fri, 8:30am - 10:30pm,<br/>Saturday, 8:30am - 10:30pm,<br/>Sunday, Closed</p>",
+            "button_label": "Get directions",
+            "button_style": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "store_location_RNBcrU",
+        "store_location_qtCaQB",
+        "store_location_pdnLT4"
+      ],
+      "settings": {
+        "pickup_button_label": "Select store",
+        "color_scheme_light": "",
+        "color_scheme_dark": ""
+      }
+    }
+  },
+  "order": [
+    "product-labels-and-badges",
+    "popup-promotion",
+    "quick-view",
+    "store-locator"
+  ]
+}

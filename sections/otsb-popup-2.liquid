@@ -1,0 +1,612 @@
+{% render 'otsb-popup-exit-intent-base' %}
+{% schema %}
+{
+  "name": "OT: Popup #2",
+  "tag": "section",
+  "class": "otsb-popup-exit-intent otsb__root otsb-v2",
+  "disabled_on": {
+    "groups": [
+      "header"
+    ]
+  },
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "To make editing easier, only the selecting popup is shown in Theme editor. Kindly [contact us](https://omnithemes.com/contact/) to remove the Omni Themes brand name"
+    },
+    {
+      "type": "select",
+      "id": "popup_position",
+      "options": [
+        {
+          "value": "top-left",
+          "label": "Top left"
+        },
+        {
+          "value": "top-center",
+          "label": "Top center"
+        },
+        {
+          "value": "top-right",
+          "label": "Top right"
+        },
+        {
+          "value": "center-left",
+          "label": "Middle left"
+        },
+        {
+          "value": "center",
+          "label": "Middle center"
+        },
+        {
+          "value": "center-right",
+          "label": "Middle right"
+        },
+        {
+          "value": "bottom-left",
+          "label": "Bottom left"
+        },
+        {
+          "value": "bottom-center",
+          "label": "Bottom center"
+        },
+        {
+          "value": "bottom-right",
+          "label": "Bottom right"
+        }
+      ],
+      "default": "center",
+      "label": "Popup position",
+      "info": "Only applies to desktop display."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "For recommended image sizes, check our [user guide](https://support.omnithemes.com/blogs/user-guide/faqs)."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_image_mobile",
+      "default": true,
+      "label": "Show image on mobile"
+    },
+    {
+      "type": "checkbox",
+      "id": "disable_zoom",
+      "default": false,
+      "label": "Disable image zoom-in animation"
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        },
+        {
+          "value": "left",
+          "label": "Left"
+        }
+      ],
+      "default": "right",
+      "label": "Desktop content position"
+    },
+    {
+      "type": "select",
+      "id": "mobile_content_position",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        }
+      ],
+      "default": "top",
+      "label": "Mobile content position"
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center",
+      "label": "Content alignment"
+    },
+    {
+      "type": "select",
+      "id": "edges_type",
+      "options": [
+        {
+          "value": "square",
+          "label": "Square"
+        },
+        {
+          "value": "rounded_corners",
+          "label": "Rounded corners"
+        }
+      ],
+      "default": "rounded_corners",
+      "label": "Edges"
+    },
+    {
+      "type": "select",
+      "id": "button_type",
+      "default": "square",
+      "options": [
+        {
+          "value": "square",
+          "label": "Square"
+        },
+        {
+          "value": "rounded",
+          "label": "Rounded"
+        },
+        {
+          "value": "rounded_corners",
+          "label": "Rounded corners"
+        }
+      ],
+      "label": "Button style"
+    },
+    {
+      "type": "select",
+      "id": "button_color_mobile",
+      "options": [
+          {
+              "value": "hover",
+              "label": "Use button hover color"
+          },
+          {
+              "value": "color",
+              "label": "Use button color"
+          }
+      ],
+      "label": "Mobile primary button style",
+      "default": "color"
+    },
+    {
+      "type": "select",
+      "id": "button_animation",
+      "options": [
+        {
+          "value": "slide",
+          "label": "Slide"
+        },
+        {
+          "value": "fill_up",
+          "label": "Fill up"
+        },
+        {
+          "value": "sliced",
+          "label": "Sliced with icon"
+        },
+        {
+          "value": "underline",
+          "label": "Underline"
+        }
+      ],
+      "label": "Primary button hover animation",
+      "default": "fill_up"
+    },
+    {
+      "type": "html",
+      "id": "custom_icon_button",
+      "label": "Custom icon (SVG code)",
+      "info": "Applies to 'Sliced with icon' animation type. For assistance with custom SVG code or fixing issues that arise from custom SVG code, please [contact our support](https://omnithemes.com/contact/)."
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "default": "#212020",
+      "label": "Heading"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "default": "#999999",
+      "label": "Subheading"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "default": "#fff",
+      "label": "Background"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "default": "#4B4B4B",
+      "label": "Text"
+    },
+    {
+      "type": "color",
+      "id": "text_link_color",
+      "default": "#FD8E16",
+      "label": "Text link"
+    },
+    {
+      "type": "color",
+      "id": "line_n_border_color",
+      "default": "#f2f2f2",
+      "label": "Line and border"
+    },
+    {
+      "type": "color",
+      "id": "solid_button",
+      "label": "Primary button",
+      "default": "#DCDCDC"
+    },
+    {
+      "type": "color",
+      "id": "solid_button_text",
+      "label": "Primary button text",
+      "default": "#000"
+    },
+    {
+      "type": "color",
+      "id": "solid_button_hover",
+      "label": "Primary button hover",
+      "default": "#000"
+    },
+    {
+      "type": "color",
+      "id": "solid_button_text_hover",
+      "label": "Primary button hover text",
+      "default": "#fff"
+    },
+    {
+      "type": "header",
+      "content": "DISPLAY RULES"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_for_guests_only",
+      "default": true,
+      "label": "Show for guests only"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_exit_intent",
+      "default": true,
+      "label": "Enable Exit Intent PopUp",
+      "info": "The exit-intent popup triggers on the desktop when users move their mouse to the top of their screen. This indicates they're about to click their browser's “X” button. When enabled, Delay & Reappear aren't applied to show the exit-intent popup on the desktop. Please note this exit-intent function isn't available on mobile, or tablet (devices without mouse/cursor). Disable if you want to use General Popup: Show popup when customer visits a page"
+    },
+    {
+      "type": "header",
+      "content": "Exit- intent Rules & Triggers"
+    },
+    {
+      "type": "select",
+      "id": "exit_intent_trigger",
+      "options": [{
+        "value": "always",
+        "label": "Always"
+      }, {
+        "value": "once_per_session",
+        "label": "Once per session"
+      }, {
+        "value": "once_per_x_days",
+        "label": "Once per x days"
+      }],
+      "default": "once_per_session",
+      "label": "Trigger campaign"
+    },
+    {
+      "type": "number",
+      "id": "x_days",
+      "default": 7,
+      "label": "X days",
+    },
+    {
+      "type": "header",
+      "content": "General Popup Rules & Triggers"
+    },
+    {
+      "type": "select",
+      "id": "popup_trigger",
+      "label": "Trigger Rules",
+      "options": [
+        { "value": "delay_x_second", "label": "Delay x second" },
+        { "value": "scroll_down", "label": "Scroll down" }
+      ],
+      "default": "delay_x_second"
+    },
+    {
+      "type": "range",
+      "id": "delay",
+      "min": 2,
+      "max": 60,
+      "step": 1,
+      "unit": "s",
+      "label": "Delay",
+      "info": "Delay is disabled in theme editor for editing purposes.",
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "scroll_down",
+      "min": 10,
+      "max": 100,
+      "step": 2,
+      "unit": "%",
+      "label": "Scroll page down",
+      "info": "Scroll down is disabled in theme editor for editing purposes.",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "reappear_after",
+      "min": 1,
+      "max": 30,
+      "step": 1,
+      "unit": "day",
+      "label": "Reappear after",
+      "default": 7
+    },
+    {
+      "type": "checkbox",
+      "id": "show_on_mobile",
+      "default": false,
+      "label": "Show on mobile",
+      "info": "For better website accessibility, we recommend that only one popup should be shown on mobile devices."
+    },
+    {
+      "type": "header",
+      "content": "General Minimal Popup",
+      "info": "Show a small sticky message for the popup at the screen bottom. Clicking this message will open the full popup as configured."
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_desktop",
+      "default": false,
+      "label": "Enable on desktop"
+    },
+    {
+      "type": "select",
+      "id": "default_style",
+      "label": "Default style on desktop",
+      "options": [
+        {
+          "value": "full",
+          "label": "Full"
+        },
+        {
+          "value": "minimal",
+          "label": "Minimal"
+        }
+      ],
+      "default": "minimal"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_mobile",
+      "default": false,
+      "label": "Enable on mobile"
+    },
+    {
+      "type": "select",
+      "id": "default_style_mobile",
+      "label": "Default style on mobile",
+      "options": [
+        {
+          "value": "full",
+          "label": "Full"
+        },
+        {
+          "value": "minimal",
+          "label": "Minimal"
+        }
+      ],
+      "default": "minimal"
+    },
+    {
+      "type": "text",
+      "id": "minimal_title",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "minimal_subtitle",
+      "label": "Subtitle"
+    },
+    {
+      "type": "select",
+      "id": "position_minimal",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left",
+      "label": "Minimal popup position"
+    },
+    {
+      "type": "text",
+      "id": "ga_event",
+      "label": "Google Analytic event",
+      "info": "Under development, contact us for FREE customization."
+    },
+  ],
+  "blocks": [
+    {
+      "type": "thankiu_page",
+      "name": "Thank you page",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "This block is only shown when the popup has contained an email form and the form is successfully submitted."
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Congrats 20% off",
+          "label": "Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "default": "<p>Today you got lucky!<br />coupon_code</p>",
+          "label": "Text",
+          "info": "Use coupon_code to show the coupon code within the text box."
+        },
+        {
+          "type": "text",
+          "id": "coupon_code",
+          "default": "NEWCOME20",
+          "label": "Coupon code"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_button",
+          "default": false,
+          "label": "Show continue shopping button"
+        },
+        {
+          "type": "text",
+          "id": "continue_shopping_text",
+          "default": "Continue shopping",
+          "label": "Continue shopping button text"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button link"
+        },
+        {
+          "type": "checkbox",
+          "id": "open_in_new_tab",
+          "default": true,
+          "label": "Open this link in a new window"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "name": "Heading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "Subheading",
+          "default": "Signup for Emails"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Get 20% discount shipped to your inbox",
+          "label": "Heading"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "default": "<p>Subscribe to our newsletter and we will ship 20% discount code today</p>",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "type": "email_form",
+      "name": "Email form",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "submit_button_type",
+          "options": [
+            {
+              "value": "line_icon",
+              "label": "Line icon"
+            },
+            {
+              "value": "solid",
+              "label": "Solid"
+            }
+          ],
+          "default": "line_icon",
+          "label": "Subscribe Button"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "OT: Popup #2",
+      "settings": {
+        "button_type": "rounded",
+        "content_position": "bottom",
+        "solid_button": "#1D1D1F",
+        "solid_button_text": "#fff",
+        "solid_button_hover": "#000",
+        "enable_desktop": true,
+        "enable_mobile": true,
+        "enable_exit_intent": false,
+        "default_style": "full"
+      },
+      "blocks": [
+        {
+          "type": "heading",
+          "settings": {
+            "heading": "Subscribe to Our Emails"
+          }
+        },
+        {
+          "type": "text",
+          "settings": {
+            "text": "<p>Subscrible & get 10% discount. Get E-mail updates about our latest shop and special offers.</p>"
+          }
+        },
+        {
+          "type": "email_form",
+          "settings": {
+            "submit_button_type": "solid"
+          }
+        },
+        { "type": "thankiu_page" }
+      ]
+    }
+  ]
+}
+{% endschema %}

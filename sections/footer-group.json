@@ -1,0 +1,124 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "Footer",
+  "type": "footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "email_footer_3VCKXg": {
+          "type": "email_footer",
+          "settings": {
+            "open_by_default": false,
+            "number_of_columns_wide": 5,
+            "heading_email": "Sign up for our newsletter to be the first to receive news, inspiration and take part in exclusive offers.",
+            "subtext_email": "<p>Subscribe to our newsletter</p>",
+            "show_social_icons": false
+          }
+        },
+        "text_MtiyQ6": {
+          "type": "text",
+          "settings": {
+            "open_by_default": false,
+            "number_of_columns_wide": 1,
+            "heading_text": "Need help? Call now!",
+            "subtext": "<p>Need help? Call now!</p><h3>(+84) 123 4567</h3><p>Address:</p><p>75 9th Ave, New York, NY 10011-7006</p><p>Email:</p><p>support@example.com</p>",
+            "show_social_icons": false,
+            "image_width": 100,
+            "link_image_footer": "",
+            "open_new_window": false
+          }
+        },
+        "link_list_iLj4Xy": {
+          "type": "link_list",
+          "settings": {
+            "open_by_default": false,
+            "number_of_columns_wide": 1,
+            "heading_menu": "Quick links",
+            "menu": "footer",
+            "menu_desktop_layout": "vertical"
+          }
+        },
+        "link_list_TdTjqW": {
+          "type": "link_list",
+          "settings": {
+            "open_by_default": false,
+            "number_of_columns_wide": 1,
+            "heading_menu": "Quick links",
+            "menu": "footer",
+            "menu_desktop_layout": "vertical"
+          }
+        },
+        "link_list_9jaDpd": {
+          "type": "link_list",
+          "settings": {
+            "open_by_default": false,
+            "number_of_columns_wide": 1,
+            "heading_menu": "Quick links",
+            "menu": "footer",
+            "menu_desktop_layout": "vertical"
+          }
+        },
+        "text_JwHLxc": {
+          "type": "text",
+          "settings": {
+            "open_by_default": false,
+            "number_of_columns_wide": 1,
+            "heading_text": "Connect with Us",
+            "subtext": "",
+            "show_social_icons": true,
+            "image_width": 100,
+            "link_image_footer": "",
+            "open_new_window": false
+          }
+        },
+        "subfooter_cEETBB": {
+          "type": "subfooter",
+          "settings": {
+            "show_block_divider": true,
+            "show_payment_icons": true,
+            "payment_icon": "",
+            "show_copyright": true,
+            "show_powered_by": true,
+            "custom_copyright_text": "",
+            "padding_top": 20,
+            "padding_bottom": 20,
+            "enable_country_selector": true,
+            "enable_language_selector": true,
+            "enable_follow_on_shop": true
+          }
+        }
+      },
+      "block_order": [
+        "email_footer_3VCKXg",
+        "text_MtiyQ6",
+        "link_list_iLj4Xy",
+        "link_list_TdTjqW",
+        "link_list_9jaDpd",
+        "text_JwHLxc",
+        "subfooter_cEETBB"
+      ],
+      "settings": {
+        "number_of_columns": 5,
+        "spacing": 32,
+        "content_alignment": "left",
+        "hide_footer_on_page": "",
+        "section_width": "page-width",
+        "top_padding": 72,
+        "bottom_padding": 0,
+        "show_section_divider": false
+      }
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}
