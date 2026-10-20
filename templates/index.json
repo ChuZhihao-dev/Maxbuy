@@ -175,48 +175,48 @@
       }
     },
     "logo_list_PhR4bb": {
-      "type": "logo-list",
+      "type": "shop-by-brand",
       "blocks": {
         "logo_NDJmY3": {
-          "type": "logo",
+          "type": "brand",
           "settings": {
-            "image_link": "",
-            "open_new_window": false
+            "name": "Haier",
+            "link": ""
           }
         },
         "logo_4PyeKN": {
-          "type": "logo",
+          "type": "brand",
           "settings": {
-            "image_link": "",
-            "open_new_window": false
+            "name": "TECNO",
+            "link": ""
           }
         },
         "logo_GKnJ8R": {
-          "type": "logo",
+          "type": "brand",
           "settings": {
-            "image_link": "",
-            "open_new_window": false
+            "name": "LG",
+            "link": ""
           }
         },
         "logo_F9RWMP": {
-          "type": "logo",
+          "type": "brand",
           "settings": {
-            "image_link": "",
-            "open_new_window": false
+            "name": "Binatone",
+            "link": ""
           }
         },
         "logo_VYzRjE": {
-          "type": "logo",
+          "type": "brand",
           "settings": {
-            "image_link": "",
-            "open_new_window": false
+            "name": "Samsung",
+            "link": ""
           }
         },
         "logo_P37fmY": {
-          "type": "logo",
+          "type": "brand",
           "settings": {
-            "image_link": "",
-            "open_new_window": false
+            "name": "Apple",
+            "link": ""
           }
         }
       },
@@ -228,29 +228,11 @@
         "logo_VYzRjE",
         "logo_P37fmY"
       ],
-      "name": "t:logo_list.name",
+      "name": "Shop by Brand",
       "settings": {
         "heading": "Shop by Brand",
-        "heading_size": "medium",
-        "heading_tag": "h2",
-        "heading_alignment": "center",
-        "highlight_effect": "underline",
-        "text_transform": "none",
-        "image_ratio": "auto",
-        "enable_carousel_on_desktop": true,
-        "swiper_on_mobile": true,
-        "auto_play": 0,
-        "show_navigation": true,
-        "columns_desktop": 6,
-        "spacing": 12,
-        "columns_mobile": "2",
-        "spacing_mobile": 8,
-        "section_width": "page-width",
         "padding_top": 80,
-        "padding_bottom": 80,
-        "show_section_divider": false,
-        "color_scheme_light": "",
-        "color_scheme_dark": ""
+        "padding_bottom": 64
       }
     },
     "promotional_collections_PXYQcb": {

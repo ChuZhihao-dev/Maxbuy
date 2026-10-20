@@ -1,0 +1,75 @@
+{{ 'shop-by-brand.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'shop-by-brand.js' | asset_url }}" defer="defer"></script>
+{%- liquid
+  assign brand_font_medium = section.settings.font | font_modify: 'weight', '500'
+  assign brand_font_semibold = section.settings.font | font_modify: 'weight', '600'
+-%}
+{% style %}
+  {{ brand_font_medium | font_face: font_display: 'swap' }}
+  {{ brand_font_semibold | font_face: font_display: 'swap' }}
+{% endstyle %}
+<shop-by-brand class="shop-by-brand" style="--brand-font: {{ section.settings.font.family | escape }}, {{ section.settings.font.fallback_families | escape }}; --brand-padding-top: {{ section.settings.padding_top }}px; --brand-padding-bottom: {{ section.settings.padding_bottom }}px;{% if section.settings.background_color != blank and section.settings.background_color.alpha != 0 %} background-color: {{ section.settings.background_color }};{% endif %}">
+  <div class="page-width">
+    {% if section.settings.heading != blank %}
+      <h2 class="shop-by-brand__heading">{{ section.settings.heading | escape }}</h2>
+    {% endif %}
+    <div class="shop-by-brand__carousel">
+      <div id="BrandTrack-{{ section.id }}" class="shop-by-brand__track" tabindex="0" role="region" aria-label="{{ section.settings.heading | default: 'Brands' | escape }}">
+        {% for block in section.blocks %}
+          {% assign page_position = forloop.index0 | modulo: 6 %}
+          {% if page_position == 0 %}<div class="shop-by-brand__page">{% endif %}
+          <div class="shop-by-brand__item" {{ block.shopify_attributes }}>
+            {% if block.settings.link != blank %}<a class="shop-by-brand__link" href="{{ block.settings.link }}">{% else %}<div class="shop-by-brand__link">{% endif %}
+              <span class="shop-by-brand__circle">
+                {% if block.settings.svg_url != blank %}
+                  <img src="{{ block.settings.svg_url | escape }}" width="110" height="110" alt="" loading="lazy">
+                {% elsif block.settings.image != blank %}
+                  {{ block.settings.image | image_url: width: 240 | image_tag: widths: '72, 120, 144, 240', sizes: '(max-width: 767px) 72px, 110px', loading: 'lazy', alt: '' }}
+                {% endif %}
+              </span>
+              <span class="shop-by-brand__name">{{ block.settings.name | escape }}</span>
+            {% if block.settings.link != blank %}</a>{% else %}</div>{% endif %}
+          </div>
+          {% if page_position == 5 or forloop.last %}</div>{% endif %}
+        {% endfor %}
+      </div>
+      {% if section.blocks.size > 0 %}
+        <div class="shop-by-brand__navigation">
+          <button type="button" data-direction="-1" aria-label="Previous brands" aria-controls="BrandTrack-{{ section.id }}" disabled>{% render 'brand-design-svg', asset: 'arrow-prev', width: 36, height: 36, mobile_width: 24, mobile_height: 24 %}</button>
+          <button type="button" data-direction="1" aria-label="Next brands" aria-controls="BrandTrack-{{ section.id }}"{% if section.blocks.size <= 6 %} disabled{% endif %}>{% render 'brand-design-svg', asset: 'arrow-next', width: 36, height: 36, mobile_width: 24, mobile_height: 24 %}</button>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</shop-by-brand>
+{% schema %}
+{
+  "name": "Shop by Brand",
+  "tag": "section",
+  "max_blocks": 48,
+  "settings": [
+    { "type": "font_picker", "id": "font", "label": "Font", "default": "montserrat_n4" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Shop by Brand" },
+    { "type": "color", "id": "background_color", "label": "Background color", "info": "Leave empty to use the page background." },
+    { "type": "range", "id": "padding_top", "label": "Desktop top padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "label": "Desktop bottom padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 }
+  ],
+  "blocks": [{
+    "type": "brand", "name": "Brand",
+    "settings": [
+      { "type": "text", "id": "name", "label": "Brand name", "default": "Brand" },
+      { "type": "image_picker", "id": "image", "label": "Brand logo", "info": "Upload or select the brand logo." },
+      { "type": "url", "id": "svg_url", "label": "SVG logo URL", "info": "For SVG logos, upload the SVG in Shopify Content > Files and paste its URL here. Takes priority over the image above." },
+      { "type": "url", "id": "link", "label": "Brand link" }
+    ]
+  }],
+  "presets": [{ "name": "Shop by Brand", "blocks": [
+    { "type": "brand", "settings": { "name": "Haier" } },
+    { "type": "brand", "settings": { "name": "TECNO" } },
+    { "type": "brand", "settings": { "name": "LG" } },
+    { "type": "brand", "settings": { "name": "Binatone" } },
+    { "type": "brand", "settings": { "name": "Samsung" } },
+    { "type": "brand", "settings": { "name": "Apple" } }
+  ]}]
+}
+{% endschema %}
