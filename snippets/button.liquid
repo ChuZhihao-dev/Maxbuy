@@ -41,6 +41,9 @@
     {% endif %}
     {{ additional_attributes }}
   >
+    {% if button_icon_asset != blank %}
+      <img src="{{ button_icon_asset | asset_url }}" width="16" height="16" alt="" aria-hidden="true" class="promotion-banner__button-icon">
+    {% endif %}
     {% render 'button-label', button_label: button_label, show_button_style: button_style, allow_wrap: allow_wrap %}
   </a>
 </custom-button>

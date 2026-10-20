@@ -1,0 +1,464 @@
+{% liquid
+  assign banner_image = section.settings.image | default: section.settings.mobile_image
+  assign mobile_image = section.settings.mobile_image | default: banner_image
+  assign desktop_ratio = banner_image.aspect_ratio | default: 5.0
+  assign mobile_ratio = mobile_image.aspect_ratio | default: desktop_ratio
+  if section.settings.mobile_design_layout
+    assign mobile_ratio = 1
+  endif
+  assign banner_heading_semibold = section.settings.banner_text_font | font_modify: 'weight', '600'
+  assign image_loading = 'lazy'
+  if section.index == 1 and section.location == 'template'
+    assign image_loading = 'eager'
+  endif
+  assign has_content = false
+  if section.settings.subheading != blank or section.settings.heading != blank or section.settings.text != blank or section.settings.button_label != blank
+    assign has_content = true
+  endif
+  assign link_label = section.settings.heading | default: banner_image.alt
+  if link_label == blank
+    assign link_label = 'accessibility.image_link' | t
+  endif
+  assign banner_heading_bold = section.settings.banner_text_font | font_modify: 'weight', 'bold'
+%}
+{{ 'section-promotion-banner.css' | asset_url | stylesheet_tag }}
+{% style %}
+  {{ section.settings.banner_text_font | font_face: font_display: 'swap' }}
+  {{ banner_heading_bold | font_face: font_display: 'swap' }}
+  {{ banner_heading_semibold | font_face: font_display: 'swap' }}
+  @font-face {
+    font-family: 'Promotion Banner Public Sans';
+    src: url('{{ 'promotion-banner-public-sans.ttf' | asset_url }}') format('truetype');
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+  }
+  #PromotionBanner-{{ section.id }} {
+    --pb-text-font: {{ section.settings.banner_text_font.family }}, {{ section.settings.banner_text_font.fallback_families }};
+    --pb-button-font: 'Promotion Banner Public Sans', sans-serif;
+    --pb-radius: {{ section.settings.corner_radius }}px;
+    --pb-ratio: {{ mobile_ratio }};
+    --pb-height: {% if section.settings.mobile_height == 'adapt' %}auto{% else %}{{ section.settings.mobile_height }}px{% endif %};
+    --pb-position: {{ section.settings.mobile_content_position }};
+    --pb-align: {{ section.settings.mobile_content_alignment }};
+    padding-top: calc({{ section.settings.padding_top }}px * var(--mobile-padding-ratio));
+    padding-bottom: calc({{ section.settings.padding_bottom }}px * var(--mobile-padding-ratio));
+  }
+  @media (min-width: 768px) {
+    #PromotionBanner-{{ section.id }} {
+      --pb-ratio: {{ desktop_ratio }};
+      --pb-height: {% if section.settings.desktop_height == 'adapt' %}auto{% else %}{{ section.settings.desktop_height }}px{% endif %};
+      --pb-position: {{ section.settings.desktop_content_position }};
+      --pb-align: {{ section.settings.desktop_content_alignment }};
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{% endstyle %}
+<div id="PromotionBanner-{{ section.id }}" class="promotion-banner {{ section.settings.section_width }}{% if section.settings.mobile_design_layout %} promotion-banner--mobile-design{% endif %}{% if section.settings.mobile_image != blank %} promotion-banner--mobile-image{% endif %}">
+  <div class="promotion-banner__frame color-{{ section.settings.color_scheme_light }} dark-color-{{ section.settings.color_scheme_dark }}">
+    <div class="promotion-banner__media">
+      {% if banner_image != blank %}
+        {% render 'image-new', image: banner_image, image_mobile: section.settings.mobile_image, image_class: 'promotion-banner__image', loading: image_loading, sizes: '100vw' %}
+      {% else %}
+        <div class="promotion-banner__placeholder">{% render 'placeholder-image', image_type: 'banner' %}</div>
+        {% if section.settings.mobile_design_layout %}
+          <img class="promotion-banner__reference promotion-banner__image" src="{{ 'promotion-banner-reference.png' | asset_url }}" width="2528" height="560" loading="{{ image_loading }}" alt="">
+        {% endif %}
+      {% endif %}
+    </div>
+    <div class="promotion-banner__shade scheme-image-overlay" style="opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};"></div>
+    {% if section.settings.image_link != blank %}
+      <a class="promotion-banner__link" href="{{ section.settings.image_link }}" aria-label="{{ link_label | escape }}"{% if section.settings.open_new_window_image %} target="_blank" rel="noopener noreferrer"{% endif %}></a>
+    {% endif %}
+    {% if has_content %}
+      <div class="promotion-banner__content">
+        <div class="promotion-banner__copy">
+          {% if section.settings.subheading != blank %}<p class="promotion-banner__subheading">{{ section.settings.subheading | escape }}</p>{% endif %}
+          {% if section.settings.heading != blank %}<h2 class="promotion-banner__heading">{{ section.settings.heading | escape }}</h2>{% endif %}
+          {% if section.settings.text != blank %}<div class="rte">{{ section.settings.text }}</div>{% endif %}
+          {% if section.settings.button_label != blank %}
+            <div class="promotion-banner__button-wrapper">
+              <a class="promotion-banner__button"
+                {% if section.settings.button_link != blank %}
+                  href="{{ section.settings.button_link }}"
+                  {% if section.settings.open_new_window_button %}target="_blank" rel="noopener noreferrer"{% endif %}
+                {% else %}
+                  role="link" aria-disabled="true"
+                {% endif %}
+              >
+                <picture class="promotion-banner__button-icon">
+                  {% if section.settings.mobile_design_layout %}<source media="(max-width: 767px)" srcset="{{ 'promotion-banner-cart-mobile.svg' | asset_url }}">{% endif %}
+                  <img src="{{ 'promotion-banner-cart.svg' | asset_url }}" width="16" height="16" alt="" aria-hidden="true">
+                </picture>
+                <span class="promotion-banner__button-label">{{ section.settings.button_label | escape }}</span>
+              </a>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% schema %}
+{
+  "name": "t:promotion_banner.name",
+  "tag": "section",
+  "class": "section-promotion-banner",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer",
+      "aside"
+    ]
+  },
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:promotion_banner.image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "t:promotion_banner.mobile_image"
+    },
+    {
+      "type": "url",
+      "id": "image_link",
+      "label": "t:promotion_banner.image_link"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_new_window_image",
+      "label": "t:promotion_banner.new_window",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "t:promotion_banner.subheading"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:promotion_banner.heading"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "t:promotion_banner.text"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:promotion_banner.button_label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "t:promotion_banner.button_link"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_new_window_button",
+      "label": "t:promotion_banner.new_window",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:promotion_banner.desktop"
+    },
+    {
+      "type": "select",
+      "id": "desktop_height",
+      "label": "t:promotion_banner.height",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "t:promotion_banner.adapt"
+        },
+        {
+          "value": "160",
+          "label": "t:promotion_banner.height_160"
+        },
+        {
+          "value": "240",
+          "label": "t:promotion_banner.height_240"
+        },
+        {
+          "value": "320",
+          "label": "t:promotion_banner.height_320"
+        },
+        {
+          "value": "400",
+          "label": "t:promotion_banner.height_400"
+        },
+        {
+          "value": "500",
+          "label": "t:promotion_banner.height_500"
+        }
+      ],
+      "default": "adapt"
+    },
+    {
+      "type": "select",
+      "id": "desktop_content_position",
+      "label": "t:promotion_banner.position",
+      "options": [
+        {
+          "value": "start start",
+          "label": "t:promotion_banner.top_left"
+        },
+        {
+          "value": "start center",
+          "label": "t:promotion_banner.top_center"
+        },
+        {
+          "value": "start end",
+          "label": "t:promotion_banner.top_right"
+        },
+        {
+          "value": "center start",
+          "label": "t:promotion_banner.middle_left"
+        },
+        {
+          "value": "center center",
+          "label": "t:promotion_banner.middle_center"
+        },
+        {
+          "value": "center end",
+          "label": "t:promotion_banner.middle_right"
+        },
+        {
+          "value": "end start",
+          "label": "t:promotion_banner.bottom_left"
+        },
+        {
+          "value": "end center",
+          "label": "t:promotion_banner.bottom_center"
+        },
+        {
+          "value": "end end",
+          "label": "t:promotion_banner.bottom_right"
+        }
+      ],
+      "default": "start start"
+    },
+    {
+      "type": "select",
+      "id": "desktop_content_alignment",
+      "label": "t:promotion_banner.alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:promotion_banner.left"
+        },
+        {
+          "value": "center",
+          "label": "t:promotion_banner.center"
+        },
+        {
+          "value": "right",
+          "label": "t:promotion_banner.right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "t:promotion_banner.mobile"
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_design_layout",
+      "label": "t:promotion_banner.mobile_design_layout",
+      "info": "t:promotion_banner.mobile_design_info",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "mobile_height",
+      "label": "t:promotion_banner.height",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "t:promotion_banner.adapt"
+        },
+        {
+          "value": "160",
+          "label": "t:promotion_banner.height_160"
+        },
+        {
+          "value": "240",
+          "label": "t:promotion_banner.height_240"
+        },
+        {
+          "value": "320",
+          "label": "t:promotion_banner.height_320"
+        },
+        {
+          "value": "400",
+          "label": "t:promotion_banner.height_400"
+        },
+        {
+          "value": "500",
+          "label": "t:promotion_banner.height_500"
+        }
+      ],
+      "default": "adapt"
+    },
+    {
+      "type": "select",
+      "id": "mobile_content_position",
+      "label": "t:promotion_banner.position",
+      "options": [
+        {
+          "value": "start start",
+          "label": "t:promotion_banner.top_left"
+        },
+        {
+          "value": "start center",
+          "label": "t:promotion_banner.top_center"
+        },
+        {
+          "value": "start end",
+          "label": "t:promotion_banner.top_right"
+        },
+        {
+          "value": "center start",
+          "label": "t:promotion_banner.middle_left"
+        },
+        {
+          "value": "center center",
+          "label": "t:promotion_banner.middle_center"
+        },
+        {
+          "value": "center end",
+          "label": "t:promotion_banner.middle_right"
+        },
+        {
+          "value": "end start",
+          "label": "t:promotion_banner.bottom_left"
+        },
+        {
+          "value": "end center",
+          "label": "t:promotion_banner.bottom_center"
+        },
+        {
+          "value": "end end",
+          "label": "t:promotion_banner.bottom_right"
+        }
+      ],
+      "default": "center start"
+    },
+    {
+      "type": "select",
+      "id": "mobile_content_alignment",
+      "label": "t:promotion_banner.alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:promotion_banner.left"
+        },
+        {
+          "value": "center",
+          "label": "t:promotion_banner.center"
+        },
+        {
+          "value": "right",
+          "label": "t:promotion_banner.right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "t:promotion_banner.layout"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "t:promotion_banner.width",
+      "options": [
+        {
+          "value": "page-width",
+          "label": "t:promotion_banner.page_width"
+        },
+        {
+          "value": "full-width",
+          "label": "t:promotion_banner.full_width"
+        },
+        {
+          "value": "full-width-padded",
+          "label": "t:promotion_banner.padded_width"
+        }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:promotion_banner.padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:promotion_banner.padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "label": "t:promotion_banner.corner_radius",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "t:promotion_banner.overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 0
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme_light",
+      "label": "t:promotion_banner.light_scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme_dark",
+      "label": "t:promotion_banner.dark_scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "font_picker",
+      "id": "banner_text_font",
+      "label": "t:promotion_banner.text_font",
+      "default": "montserrat_n4"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:promotion_banner.name"
+    }
+  ]
+}
+{% endschema %}
