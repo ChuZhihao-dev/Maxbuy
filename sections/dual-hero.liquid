@@ -1,0 +1,126 @@
+{%- liquid
+  assign banners = section.blocks | where: 'type', 'banner'
+  assign categories = section.blocks | where: 'type', 'category'
+  assign category_count = 0
+  for category in categories
+    if category.settings.collection != blank
+      assign category_count = category_count | plus: 1
+    endif
+  endfor
+  assign font_medium = section.settings.font | font_modify: 'weight', '500'
+  assign font_semibold = section.settings.font | font_modify: 'weight', '600'
+  assign font_bold = section.settings.font | font_modify: 'weight', '700'
+-%}
+{% if banners.size > 0 %}
+  {{ 'dual-hero.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'dual-hero.js' | asset_url }}" defer="defer"></script>
+  {% style %}
+    {{ font_medium | font_face: font_display: 'swap' }}
+    {{ font_semibold | font_face: font_display: 'swap' }}
+    {{ font_bold | font_face: font_display: 'swap' }}
+  {% endstyle %}
+  <dual-hero class="dual-hero" style="--hero-font: {{ section.settings.font.family | escape }}, {{ section.settings.font.fallback_families | escape }}; --hero-height-desktop: {{ section.settings.height_desktop | default: 70 }}vh; --hero-height-mobile: {{ section.settings.height_mobile | default: 70 }}vh" data-autoplay="{{ section.settings.autoplay }}" role="region" aria-label="{{ section.settings.accessibility_label | escape }}">
+    {% if category_count > 0 %}
+      <div class="dual-hero__categories" data-carousel="categories" role="region" aria-label="Product categories">
+        <button class="dual-hero__category-arrow" data-direction="-1" type="button" aria-label="Previous categories" aria-controls="HeroCategories-{{ section.id }}" disabled><img class="dual-hero__desktop-icon" src="{{ 'hero-category-desktop.svg' | asset_url }}" width="36" height="36" alt=""><img class="dual-hero__mobile-icon" src="{{ 'hero-category-prev.svg' | asset_url }}" width="4.24117" height="7.67652" alt=""></button>
+        <div class="slider-container dual-hero__category-track" id="HeroCategories-{{ section.id }}" data-mobile-gap="8px" data-desktop-gap="20px" tabindex="0">
+          {% for block in categories %}
+            {% assign collection = block.settings.collection %}
+            {% if collection != blank %}
+              {% liquid
+                assign title = block.settings.title | default: collection.title
+                assign mobile_title = block.settings.mobile_title | default: title
+                assign image = block.settings.image | default: collection.featured_image
+              %}
+              <a class="slide-item dual-hero__category" href="{{ collection.url }}" {{ block.shopify_attributes }}>
+                <span class="dual-hero__category-text">
+                  <span class="dual-hero__category-title dual-hero__desktop-title">{{ title | escape }}</span>
+                  <span class="dual-hero__category-title dual-hero__mobile-title">{{ mobile_title | escape }}</span>
+                  <span class="dual-hero__category-count">{{ collection.all_products_count }} {% if collection.all_products_count == 1 %}Item{% else %}Items{% endif %}</span>
+                </span>
+                <span class="dual-hero__thumbnail">{% if image != blank %}{{ image | image_url: width: 144 | image_tag: widths: '48, 96, 144', sizes: '(max-width: 767px) 24px, 44px', loading: 'lazy', alt: '' }}{% endif %}</span>
+              </a>
+            {% elsif request.design_mode %}
+              <span class="dual-hero__editor-note" {{ block.shopify_attributes }}>Select a collection for this category.</span>
+            {% endif %}
+          {% endfor %}
+        </div>
+        <button class="dual-hero__category-arrow" data-direction="1" type="button" aria-label="Next categories" aria-controls="HeroCategories-{{ section.id }}"><img class="dual-hero__desktop-icon" src="{{ 'hero-category-desktop.svg' | asset_url }}" width="36" height="36" alt=""><img class="dual-hero__mobile-icon" src="{{ 'hero-category-next.svg' | asset_url }}" width="4.24117" height="7.67652" alt=""></button>
+      </div>
+    {% elsif request.design_mode and categories.size > 0 %}
+      <div class="dual-hero__setup">Select collections in the category blocks to display the category carousel.</div>
+    {% endif %}
+    <div class="dual-hero__banners" data-carousel="banners" aria-roledescription="carousel" aria-label="Promotions">
+      <div class="slider-container dual-hero__banner-track" id="HeroBanners-{{ section.id }}" data-mobile-gap="0px" data-desktop-gap="0px" tabindex="0">
+        {% for block in banners %}
+          {% liquid
+            assign loading = 'lazy'
+            assign priority = 'auto'
+            if forloop.first
+              assign loading = 'eager'
+              assign priority = 'high'
+            endif
+            assign mobile_image = block.settings.image_mobile | default: block.settings.image
+          %}
+          <div class="slide-item dual-hero__banner{% if forloop.first %} is-active{% endif %}" role="group" aria-roledescription="slide" aria-label="{{ forloop.index }} / {{ banners.size }}" {{ block.shopify_attributes }}>
+            {% if block.settings.image != blank or mobile_image != blank %}
+              <picture class="dual-hero__picture">
+                {% if mobile_image != blank %}<source media="(max-width: 767px)" srcset="{{ mobile_image | image_url: width: 375 }} 375w, {{ mobile_image | image_url: width: 750 }} 750w, {{ mobile_image | image_url: width: 1125 }} 1125w" sizes="100vw">{% endif %}
+                {% assign desktop_image = block.settings.image | default: mobile_image %}
+                {{ desktop_image | image_url: width: 2880 | image_tag: widths: '768, 1440, 1920, 2880', sizes: '100vw', loading: loading, fetchpriority: priority, alt: '' }}
+              </picture>
+            {% endif %}
+            <div class="dual-hero__content">
+              {% if block.settings.badge != blank %}<span class="dual-hero__badge">{{ block.settings.badge | escape }}<img class="dual-hero__desktop-icon" src="{{ 'hero-badge-tail.svg' | asset_url }}" width="6" height="6" alt=""><img class="dual-hero__mobile-icon" src="{{ 'hero-badge-tail-mobile.svg' | asset_url }}" width="4.157" height="4.157" alt=""></span>{% endif %}
+              {% if block.settings.title != blank %}<h2 class="dual-hero__heading">{{ block.settings.title | escape }}</h2>{% endif %}
+              {% if block.settings.description != blank %}<p class="dual-hero__description">{{ block.settings.description | escape }}</p>{% endif %}
+              {% if block.settings.button_label != blank and block.settings.button_link != blank %}<a class="dual-hero__button" href="{{ block.settings.button_link }}">{{ block.settings.button_label | escape }}</a>{% endif %}
+            </div>
+            {% if request.design_mode %}
+              {% if block.settings.image == blank %}<span class="dual-hero__editor-note dual-hero__image-note">Upload the desktop banner image (background + product, without text).</span>{% elsif block.settings.image_mobile == blank %}<span class="dual-hero__editor-note dual-hero__image-note">Upload a mobile banner image to match the mobile composition.</span>{% endif %}
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+      {% if banners.size > 1 %}
+        <button class="dual-hero__banner-arrow" data-direction="-1" type="button" aria-label="Previous promotion" aria-controls="HeroBanners-{{ section.id }}" disabled>{% render 'hero-carousel-arrow' %}</button>
+        <button class="dual-hero__banner-arrow" data-direction="1" type="button" aria-label="Next promotion" aria-controls="HeroBanners-{{ section.id }}">{% render 'hero-carousel-arrow' %}</button>
+        <div class="dual-hero__indicators" aria-label="Choose promotion">{% for block in banners %}<button class="dual-hero__indicator" data-slide="{{ forloop.index0 }}" type="button" aria-label="Promotion {{ forloop.index }}" aria-controls="HeroBanners-{{ section.id }}"{% if forloop.first %} aria-current="true"{% endif %}><span></span></button>{% endfor %}</div>
+      {% endif %}
+    </div>
+  </dual-hero>
+{% elsif request.design_mode %}
+  <p class="page-width">Add a banner block to display the hero section.</p>
+{% endif %}
+{% schema %}
+{
+  "name": "Hero + category carousel",
+  "tag": "section",
+  "max_blocks": 40,
+  "settings": [
+    { "type": "range", "id": "height_desktop", "label": "Desktop banner height", "min": 40, "max": 100, "step": 1, "unit": "vh", "default": 70, "info": "Percentage of the viewport height." },
+    { "type": "range", "id": "height_mobile", "label": "Mobile banner height", "min": 40, "max": 100, "step": 1, "unit": "vh", "default": 70, "info": "Percentage of the viewport height." },
+    { "type": "font_picker", "id": "font", "label": "Font", "default": "montserrat_n4" },
+    { "type": "text", "id": "accessibility_label", "label": "Accessibility label", "default": "Featured promotions and categories" },
+    { "type": "range", "id": "autoplay", "label": "Automatic banner interval", "info": "0 turns autoplay off. Stops at the last banner and pauses during interaction.", "min": 0, "max": 12, "step": 1, "unit": "s", "default": 0 }
+  ],
+  "blocks": [
+    { "type": "category", "name": "Category", "settings": [
+      { "type": "collection", "id": "collection", "label": "Collection" },
+      { "type": "text", "id": "title", "label": "Display name", "info": "Defaults to the collection title." },
+      { "type": "text", "id": "mobile_title", "label": "Mobile display name", "info": "Optional short name for mobile." },
+      { "type": "image_picker", "id": "image", "label": "Thumbnail", "info": "Defaults to the collection image." }
+    ] },
+    { "type": "banner", "name": "Banner", "settings": [
+      { "type": "image_picker", "id": "image", "label": "Desktop image", "info": "1440 × 624px recommended. Include background and product; leave space for text on the left." },
+      { "type": "image_picker", "id": "image_mobile", "label": "Mobile image", "info": "375 × 545px recommended. Include background and product; leave space for text at the top." },
+      { "type": "text", "id": "badge", "label": "Offer label", "default": "UP TO 50% OFF" },
+      { "type": "text", "id": "title", "label": "Title", "default": "Haier 55″ UHD Google TV" },
+      { "type": "textarea", "id": "description", "label": "Description", "default": "Upgrade your home with Haier 55″ UHD Google TV and enjoy the picture with 1 billion colors, even at the optimal brightness level." },
+      { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop Now" },
+      { "type": "url", "id": "button_link", "label": "Button link" }
+    ] }
+  ],
+  "presets": [{ "name": "Hero + category carousel", "blocks": [{ "type": "category" }, { "type": "category" }, { "type": "category" }, { "type": "category" }, { "type": "category" }, { "type": "banner" }] }]
+}
+{% endschema %}

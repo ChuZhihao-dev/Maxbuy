@@ -1,0 +1,50 @@
+@font-face { font-family: 'Maxbuy Lexend Deca'; src: url('feature-strip-lexend-deca.ttf') format('truetype'); font-weight: 100 900; font-style: normal; font-display: swap; }
+.feature-strip { background: #fff; color: #000; padding: 40px 24px 0; font-family: 'Maxbuy Lexend Deca', sans-serif; }
+.feature-strip__inner { max-width: 1232px; margin-inline: auto; }
+.feature-strip__heading { margin: 0 0 32px; color: #000; font: 700 28px/1.3 'Maxbuy Lexend Deca', sans-serif; text-align: center; }
+.feature-strip__items { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 84px; }
+.feature-strip__item { display: flex; align-items: flex-start; gap: 20px; position: relative; min-width: 0; }
+.feature-strip__icon { position: relative; flex: 0 0 56px; width: 56px; height: 56px; overflow: hidden; }
+.feature-strip__custom-icon { width: 56px; height: 56px; object-fit: contain; }
+.feature-strip__sprite-window { position: absolute; width: 61px; height: 56px; top: 0; left: -1.13px; overflow: hidden; }
+.feature-strip__sprite { position: absolute; max-width: none; width: 477.78%; height: 390.33%; top: -266.16%; }
+.feature-strip__icon--shipping .feature-strip__sprite-window { height: 40.667px; top: 7.667px; }
+.feature-strip__icon--shipping .feature-strip__sprite { left: -356.73%; top: -218.75%; height: 537.5%; }
+.feature-strip__icon--support .feature-strip__sprite { left: -131.68%; }
+.feature-strip__icon--payment .feature-strip__sprite { left: -21.81%; }
+.feature-strip__icon--trust .feature-strip__sprite { left: -244.17%; }
+.feature-strip__content { flex: 1; min-width: 0; }
+.feature-strip__title { margin: 0 0 9px; color: #000; font: 700 18px/normal 'Maxbuy Lexend Deca', sans-serif; overflow-wrap: anywhere; }
+.feature-strip__title a { color: inherit; text-decoration: none; }
+.feature-strip__title a:focus-visible { outline: 2px solid #000; outline-offset: 3px; }
+.feature-strip__description { color: rgb(0 0 0 / 60%); font: 400 14px/1.3 'Maxbuy Lexend Deca', sans-serif; overflow-wrap: anywhere; }
+.feature-strip__description p { margin: 0; }
+.feature-strip__divider { position: absolute; right: -42px; top: 0; max-width: none; }
+.feature-strip__rule { margin-top: 32px; overflow: hidden; }
+.feature-strip__rule img { max-width: none; }
+@media (min-width: 768px) and (max-width: 1199px) {
+  .feature-strip__items { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 48px; row-gap: 32px; }
+  .feature-strip__divider { right: -24px; }
+  .feature-strip__item:nth-child(2n) .feature-strip__divider { display: none; }
+}
+@font-face { font-family: 'Maxbuy Feature Montserrat'; src: url('feature-strip-montserrat.ttf') format('truetype'); font-weight: 100 900; font-style: normal; font-display: swap; }
+.feature-strip__mobile-rule { display: none; }
+@media (max-width: 767px) {
+  .feature-strip { padding: 24px 9px; border: 1px solid rgb(0 0 0 / 10%); }
+  .feature-strip__items { position: relative; grid-template-columns: minmax(0, calc(50% + 5px)) minmax(0, 1fr); gap: 36px 0; }
+  .feature-strip__item { align-items: center; gap: 12px; min-height: 71px; padding-left: 10px; }
+  .feature-strip__icon { flex-basis: 44.8px; width: 44.8px; height: 44.8px; }
+  .feature-strip__sprite-window { transform: scale(.8); transform-origin: top left; }
+  .feature-strip__icon--shipping .feature-strip__sprite-window { top: 6.133px; }
+  .feature-strip__custom-icon { width: 44.8px; height: 44.8px; }
+  .feature-strip__title { font: 700 11.2px/normal 'Maxbuy Feature Montserrat', sans-serif; margin-bottom: 7.2px; }
+  .feature-strip__description { max-width: 95.2px; font: 500 8px/1.3 'Maxbuy Feature Montserrat', sans-serif; }
+  .feature-strip__icon--support + .feature-strip__content .feature-strip__description,
+  .feature-strip__icon--payment + .feature-strip__content .feature-strip__description { max-width: 79.2px; }
+  .feature-strip__icon--trust + .feature-strip__content .feature-strip__description { max-width: 110.4px; }
+  .feature-strip__divider { right: 0; top: 0; }
+  .feature-strip__item:nth-child(2n) .feature-strip__divider { display: none; }
+  .feature-strip__mobile-rule { display: block; position: absolute; left: 50%; top: 50%; width: min(355px, 100%); height: 1px; transform: translate(-50%, -50%); overflow: hidden; }
+  .feature-strip__mobile-rule img { position: absolute; left: 50%; top: 50%; max-width: none; transform: translate(-50%, -50%) rotate(-90deg); }
+  .feature-strip__rule { display: none; }
+}

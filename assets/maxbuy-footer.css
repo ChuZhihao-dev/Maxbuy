@@ -1,0 +1,129 @@
+@font-face { font-family: 'Maxbuy Footer Montserrat'; src: url('feature-strip-montserrat.ttf') format('truetype'); font-weight: 100 900; font-style: normal; font-display: swap; }
+#x-footer { max-width: none; width: 100%; padding-inline: 24px; background: #f7f7f7; color: #000; font-family: 'Maxbuy Footer Montserrat', sans-serif; }
+#x-footer .footer { max-width: 1232px; margin-inline: auto; }
+#x-footer .footer-main { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)) 349px; gap: 32px 64px; }
+#x-footer .footer-col { min-width: 0; grid-column: auto; text-align: start; }
+#x-footer .footer-col-email_footer { grid-column: 4; grid-row: 1; }
+#x-footer .footer-col-subfooter { grid-column: 1 / -1; }
+#x-footer .footer-col-link_list .footer-collapse__label { margin-bottom: 32px; padding: 0; }
+#x-footer .footer-col .h5 { margin: 0; font: 700 18px/20px 'Maxbuy Footer Montserrat', sans-serif; color: #000; }
+#x-footer .footer-menu-links { margin: 0; padding: 0; gap: 32px; }
+#x-footer .footer-menu-links li { padding: 0; margin: 0; }
+#x-footer .footer-menu-links a { color: rgb(0 0 0 / 40%); font-size: 16px; font-weight: 500; line-height: 16px; }
+#x-footer .footer-menu-links a:hover, #x-footer .footer-menu-links a:focus-visible { color: #000; }
+#x-footer .footer-collapsed { border: 0; }
+#x-footer .maxbuy-footer__logo { display: block; width: 234px; margin-bottom: 21px; }
+#x-footer .maxbuy-footer__logo img { width: 100%; height: auto; }
+#x-footer .footer-col-email_footer .footer-collapse__label { padding: 0; }
+#x-footer .footer-col-email_footer .h5 { font-size: 18px; font-weight: 600; line-height: 1.3; }
+#x-footer .footer-col-email_footer .footer-collapse__content > div.flex-1 { display: none; }
+#x-footer .footer__newsletter { margin: 22px 0 0; }
+#x-footer .footer__newsletter > div:first-of-type { margin: 0; }
+#x-footer .text-field__wrapper { display: flex; align-items: center; background: #fff; border: 0; border-radius: 10px; padding: 2px; }
+#x-footer .text-field__content { flex: 1; min-width: 0; }
+#x-footer .text-field__input { height: 43px; padding: 0 18px; border: 0; background: transparent; font: 400 14px/1 'Maxbuy Footer Montserrat', sans-serif; }
+#x-footer .text-field__label { display: none; }
+#x-footer .text-field__input::placeholder { color: rgb(0 0 0 / 40%); opacity: 1; }
+#x-footer .footer__newsletter button { min-width: 100px; height: 43px; padding: 0 10px; margin: 0; background: #ed1c24; color: #fff; border: 0; border-radius: 10px; font: 700 14px/1 'Maxbuy Footer Montserrat', sans-serif; }
+#x-footer .footer__newsletter button::before, #x-footer .footer__newsletter button::after { display: none; }
+#x-footer .footer__newsletter .button-text { display: block; }
+#x-footer .footer__newsletter button > span:not(.button-text) { display: none; }
+#x-footer .maxbuy-footer__consent { display: flex; align-items: flex-start; gap: 7px; margin-top: 10px; color: rgb(0 0 0 / 60%); font-size: 12px; line-height: 1.4; cursor: pointer; }
+#x-footer .maxbuy-footer__consent input { appearance: auto; flex: 0 0 14px; width: 14px; height: 14px; margin: 1px 0 0; accent-color: #ed1c24; }
+#x-footer .maxbuy-footer__consent a { text-decoration: underline; }
+#x-footer .footer-col-email_footer .social { display: flex; justify-content: flex-start; gap: 22px; margin: 22px 0 0; color: #000; }
+#x-footer .social a, #x-footer .social svg { width: 20px; height: 20px; }
+#x-footer .sub-footer { display: grid; grid-template-columns: 1fr auto; gap: 24px; padding-top: 0; color: rgb(0 0 0 / 50%); font-size: 14px; }
+#x-footer .sub-footer > ul:not(.maxbuy-footer__policies) { grid-row: 1; grid-column: 1 / -1; justify-content: flex-start; margin: 0; }
+#x-footer .maxbuy-footer__copyright { grid-column: 1; grid-row: 2; padding-top: 20px; border-top: 1px solid rgb(0 0 0 / 10%); }
+#x-footer .maxbuy-footer__policies { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 24px; margin: 0; padding: 20px 0 0; grid-column: 2; grid-row: 2; border-top: 1px solid rgb(0 0 0 / 10%); }
+@media (min-width: 768px) and (max-width: 1199px) {
+  #x-footer .footer-main { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
+  #x-footer .footer-col-email_footer { grid-column: 1 / -1; grid-row: auto; max-width: 450px; }
+  #x-footer .footer-col .h5 { font-size: 16px; }
+  #x-footer .footer-menu-links a { font-size: 14px; }
+}
+@media (max-width: 767px) {
+  #x-footer { padding-inline: 13px; }
+  #x-footer .footer-main { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 16px; }
+  #x-footer .footer-col-link_list .footer-collapse__label { pointer-events: none; margin-bottom: 18px; }
+  #x-footer .footer-collapse__label > span { display: none; }
+  #x-footer .footer-col-email_footer .footer-collapse__content { display: block !important; height: auto !important; overflow: visible !important; }
+  #x-footer .footer-col-link_list .h5 { font-size: 12px; line-height: 1.4; }
+  #x-footer .footer-menu-links { display: flex; gap: 16px; }
+  #x-footer .footer-menu-links a { font-size: 10px; line-height: 1.4; }
+  #x-footer .footer-col-email_footer { grid-column: 1 / -1; grid-row: auto; }
+  #x-footer .footer-col-email_footer .footer-collapse__label { pointer-events: none; }
+  #x-footer .sub-footer { grid-template-columns: minmax(0, 1fr); gap: 16px; font-size: 10px; }
+  #x-footer .maxbuy-footer__copyright { grid-column: 1; }
+  #x-footer .maxbuy-footer__policies { grid-column: 1; grid-row: 3; justify-content: flex-start; padding: 0; border: 0; gap: 16px; }
+}
+#x-footer .maxbuy-footer__menu-labels { display: flex; flex-direction: column; }
+#x-footer .maxbuy-footer__menu-labels span { color: rgb(0 0 0 / 40%); font-size: 16px; font-weight: 500; line-height: 16px; }
+#x-footer .maxbuy-footer__menu-labels .maxbuy-footer__highlight { color: #000; font-weight: 600; }
+@media (max-width: 1199px) { #x-footer .maxbuy-footer__menu-labels span { font-size: 14px; } }
+@media (max-width: 767px) { #x-footer .maxbuy-footer__menu-labels span { font-size: 10px; line-height: 1.4; } }
+#x-footer .footer-col-email_footer .footer-collapse__content { margin: 0; padding: 0; }
+#x-footer .footer-col-email_footer .footer-collapse__label { margin: 0; }
+#x-footer .footer__newsletter { width: 100%; }
+#x-footer .maxbuy-footer__logo { min-height: 48px; display: flex; align-items: center; }
+/* Footer links and newsletter fields follow the clean design treatment. */
+#x-footer a,
+#x-footer a:hover,
+#x-footer a:focus-visible { text-decoration: none; }
+#x-footer .text-link-animation::before,
+#x-footer .text-link-animation::after { display: none; }
+#x-footer .footer__newsletter .text-field__wrapper,
+#x-footer .footer__newsletter .text-field__wrapper:hover,
+#x-footer .footer__newsletter .text-field__wrapper:focus-within,
+#x-footer .footer__newsletter .text-field__content,
+#x-footer .footer__newsletter .text-field__input,
+#x-footer .footer__newsletter .text-field__input:hover,
+#x-footer .footer__newsletter .text-field__input:focus,
+#x-footer .footer__newsletter .text-field__input:focus-visible { border: 0; outline: none; box-shadow: none; }
+#x-footer .footer__newsletter .text-field__wrapper::before,
+#x-footer .footer__newsletter .text-field__wrapper::after,
+#x-footer .footer__newsletter .text-field__content::before,
+#x-footer .footer__newsletter .text-field__content::after { display: none; }
+#x-footer .maxbuy-footer__copyright,
+#x-footer .maxbuy-footer__copyright :is(a, span),
+#x-footer .maxbuy-footer__copyright :is(a, span):hover,
+#x-footer .maxbuy-footer__copyright :is(a, span):focus-visible {
+  color: rgb(0 0 0 / 50%);
+  text-decoration: none !important;
+  border-bottom: 0;
+  box-shadow: none;
+  background-image: none;
+}
+#x-footer .maxbuy-footer__copyright ::before,
+#x-footer .maxbuy-footer__copyright ::after { display: none; }
+
+#x-footer .maxbuy-footer__menu-toggle { width: 100%; border: 0; background: transparent; text-align: start; }
+#x-footer .maxbuy-footer__chevron { display: none; }
+@media (min-width: 768px) { #x-footer .maxbuy-footer__menu-labels { display: flex !important; height: auto !important; } }
+@media (max-width: 767px) {
+  #x-footer .footer { padding-top: 24px; padding-bottom: 24px; }
+  #x-footer .footer-main { grid-template-columns: minmax(0, 1fr); gap: 30px; }
+  #x-footer .footer-col-link_list .footer-collapse__label { display: flex; align-items: center; justify-content: space-between; pointer-events: auto; margin: 0 0 20px; padding: 0; cursor: pointer; }
+  #x-footer .footer-col-link_list .h5 { display: block; font-size: 18px; line-height: 18px; }
+  #x-footer .maxbuy-footer__chevron { display: block; flex: 0 0 auto; transform: rotate(0deg); transition: transform .2s; }
+  #x-footer .maxbuy-footer__chevron.is-open { transform: rotate(90deg); }
+  #x-footer .footer-menu-links { margin: 0; padding: 0; gap: 24px; }
+  #x-footer .footer-menu-links :is(a,span), #x-footer .maxbuy-footer__menu-labels .maxbuy-footer__highlight { font-size: 16px; font-weight: 400; line-height: 20px; color: rgb(0 0 0 / 80%); }
+  #x-footer .footer-col-email_footer { padding-top: 24px; border-top: 1px solid rgb(0 0 0 / 10%); }
+  #x-footer .maxbuy-footer__logo { width: 175.175px; min-height: 36px; margin-bottom: 21px; }
+  #x-footer .footer-col-email_footer .h5 { font-size: 16px; line-height: 20px; }
+  #x-footer .footer__newsletter { width: min(338px, 100%); margin-top: 16px; }
+  #x-footer .text-field__input { font-size: 12px; font-weight: 500; padding-inline: 10px; }
+  #x-footer .maxbuy-footer__consent { font-size: 10px; }
+  #x-footer .footer-col-email_footer .social { margin-top: 24px; gap: 21px; }
+  #x-footer .social a, #x-footer .social svg { width: 16px; height: 16px; }
+  #x-footer .footer-col-subfooter { margin-top: -6px; }
+  #x-footer .sub-footer { padding-bottom: 0; gap: 24px; font-size: 12px; line-height: 1.4; }
+  #x-footer .sub-footer > ul:not(.maxbuy-footer__policies) { gap: 10px; }
+  #x-footer .sub-footer > ul:not(.maxbuy-footer__policies) li { padding: 0; }
+  #x-footer .sub-footer > ul:not(.maxbuy-footer__policies) svg { width: 22.167px; height: 14px; }
+  #x-footer .maxbuy-footer__copyright { border: 0; padding-top: 0; }
+  #x-footer .maxbuy-footer__copyright > span { text-align: start; }
+  #x-footer .maxbuy-footer__policies { gap: 20px; font-size: 12px; }
+}

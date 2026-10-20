@@ -47,12 +47,24 @@
 
 {% render 'section-divider' %}
 
+{% if section.settings.best_sellers_style %}
+  {{ 'best-sellers.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'best-sellers.js' | asset_url }}" defer="defer"></script>
+  {% style %}
+    @font-face { font-family: 'Maxbuy Public Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url({{ 'best-sellers-public-sans-bold.ttf' | asset_url }}) format('truetype'); }
+    {{ settings.heading_font | font_modify: 'weight', '600' | font_face: font_display: 'swap' }}
+    {{ settings.body_font | font_modify: 'weight', '500' | font_face: font_display: 'swap' }}
+    {{ settings.body_font | font_modify: 'weight', '700' | font_face: font_display: 'swap' }}
+    .section--{{ section_id_for_class }} { --best-sellers-button-font: 'Maxbuy Public Sans', sans-serif; }
+  {% endstyle %}
+{% endif %}
+
 {% liquid
   assign first_block = section.blocks.first
 %}
 <custom-collections
   data-section-id="{{ section.id }}"
-  class="block section--{{ section.id }} relative bg-blend-overlay section-promotional-collection {{ section.settings.section_width }} rounded-corners-container color-{{ section.settings.color_scheme_light.id }} dark-color-{{ section.settings.color_scheme_dark.id }}"
+  class="block section--{{ section.id }} relative bg-blend-overlay section-promotional-collection{% if section.settings.best_sellers_style %} best-sellers{% endif %} {{ section.settings.section_width }} rounded-corners-container color-{{ section.settings.color_scheme_light.id }} dark-color-{{ section.settings.color_scheme_dark.id }}"
   data-default-view-all-link="{{ first_block.settings.collection.url | default: '' }}"
 >
   <div 
@@ -132,10 +144,13 @@
                   else
                     assign title = 'Collection'
                   endif
+                  if block.settings.tab_title != blank
+                    assign title = block.settings.tab_title
+                  endif
                 -%}
                 <custom-button>
                   <button
-                     class="promotional-collections__tab collection-title shrink-0 collection-title--{{ section.id }} anm-button-primary h6 tab-title-{{ section.settings.title_size }} text-left rtl:text-right cursor-pointer flex items-center gap-x-1.5 rounded-corners focus-visible:-outline-offset-1 border relative
+                     class="promotional-collections__tab collection-title shrink-0 collection-title--{{ section.id }} anm-button-primary h6 tab-title-{{ section.settings.title_size }} text-left rtl:text-right cursor-pointer flex items-center gap-x-1.5 rounded-corners focus-visible:-outline-offset-1 border relative{% if section.settings.best_sellers_style and forloop.first %} is-active{% endif %}
                         {%- if section.settings.show_collection_image %} p-1 ltr:pr-3 rtl:pl-3 lg:p-1.5 ltr:lg:pr-4 rtl:lg:pl-4{%- else %} py-2.5 px-3 lg:py-3 lg:px-4{% endif -%}
                       "
                     data-tab-index="{{ forloop.index }}"
@@ -169,12 +184,16 @@
         </div>
       {% endif %}
     </div>
+    {% if section.settings.best_sellers_style %}
+      {% render 'best-sellers-grid', section: section %}
+    {% else %}
     {% render 'promotional-collections',
       section: section,
       columns_mobile: section.settings.mobile_products_per_row,
       columns_desktop: section.settings.desktop_products_per_row,
       rows_desktop: section.settings.desktop_number_of_rows
     %}
+    {% endif %}
     {% if section.settings.view_all_button_label != blank and section.settings.view_all_button_position == 'below' %}
           <div class="flex justify-center md:mt-[26px] mt-4">
             <a
@@ -200,6 +219,17 @@
     ]
   },
   "settings": [
+    { "type": "checkbox", "id": "show_discount_percentage", "label": "显示降价百分比", "default": false, "info": "控制商品价格旁的降价百分比标签，适用于桌面端和移动端。" },
+    {
+      "type": "checkbox",
+      "id": "best_sellers_style",
+      "label": "Use Best Sellers design",
+      "default": false,
+      "info": "Applies the Maxbuy Best Sellers layout to this section only."
+    },
+    { "type": "range", "id": "best_sellers_mobile_rows", "label": "Best Sellers mobile rows per page", "min": 1, "max": 4, "step": 1, "default": 3 },
+    { "type": "text", "id": "best_sellers_button_label", "label": "Best Sellers button label", "default": "Shop Now" },
+    { "type": "text", "id": "best_sellers_badge_label", "label": "Best Sellers sale badge", "default": "Special Offer" },
     {
       "type": "text",
       "id": "subheading",
@@ -671,6 +701,12 @@
       "name": "t:promotional_collections.blocks.promotional_collection.name",
       "limit": 5,
       "settings": [
+        {
+          "type": "text",
+          "id": "tab_title",
+          "label": "Tab label",
+          "info": "Leave empty to use the collection title."
+        },
         {
           "type": "collection",
           "id": "collection",

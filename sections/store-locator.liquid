@@ -5,6 +5,7 @@
     assign is_rtl = false
   endif
 -%}
+{% render 'store-locator-data', section: section, source_role: 'popup' %}
 {% style %}
   @media screen and (max-width: 1023px) {
     .store-locator-popup__content {
@@ -201,6 +202,12 @@
                             {% if block.settings.location_address != blank %}
                               <p class="location-address-msg mb-0.5">{{ block.settings.location_address }}</p>
                             {% endif %}
+                            {% if block.settings.opening_hours != blank %}
+                              <p class="mb-0.5">{{ block.settings.opening_hours | escape }}</p>
+                            {% endif %}
+                            {% if block.settings.phone != blank %}
+                              <p class="mb-0.5"><a href="tel:{{ block.settings.phone | remove: ' ' | escape }}">{{ block.settings.phone | escape }}</a></p>
+                            {% endif %}
                             {% if block.settings.text != blank %}
                               <div class="rte block h-full min-h-[0.5rem]">
                                 {{ block.settings.text }}
@@ -392,6 +399,7 @@
   </div>
 </div>
 
+<script src="{{ 'store-locator-shared.js' | asset_url }}" defer></script>
 <script src="{{ 'store-locator.js' | asset_url }}" defer></script>
 <script src="{{ 'map.js' | asset_url }}" defer></script>
 {% schema %}
@@ -493,6 +501,23 @@
           "default": "75 9th Ave, New York, NY 10011-7006",
           "label": "t:store_locator.blocks.store_location.settings.location_address",
           "info": "t:store_locator.blocks.store_location.settings.location_address_info"
+        },
+        {
+          "type": "text",
+          "id": "phone",
+          "label": "Phone number"
+        },
+        {
+          "type": "text",
+          "id": "opening_hours",
+          "label": "Opening hours",
+          "info": "Shown in the homepage store locator and store selector. For example: Mon–Sat, 8:00 AM – 6:30 PM."
+        },
+        {
+          "type": "text",
+          "id": "search_keywords",
+          "label": "Search keywords",
+          "info": "City, area, landmarks or other names customers may search for."
         },
         {
           "type": "text",

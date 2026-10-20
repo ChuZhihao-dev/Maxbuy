@@ -10,168 +10,133 @@
 {
   "sections": {
     "section_collections_list_RhaDWD": {
-      "type": "section-collections-list",
+      "type": "dual-hero",
       "blocks": {
-        "collections_list_qjCtpN": {
-          "type": "collections-list",
-          "name": "Collection list",
+        "hero_category_1": {
+          "type": "category",
           "settings": {
-            "collection_list": [],
-            "display_type_desktop": "grid",
-            "display_type_mobile": "carousel",
-            "column_layout_desktop": 6,
-            "column_layout_tablet": 2,
-            "column_layout_mobile": 2,
-            "auto_play_time": 0,
-            "show_navigation_arrows": true,
-            "height": "fit",
-            "gap": 8,
-            "spacing_choose_device": "desktop",
-            "desktop_padding_top": 0,
-            "desktop_padding_bottom": 0,
-            "desktop_padding_left": 0,
-            "desktop_padding_right": 0,
-            "mobile_padding_top": 0,
-            "mobile_padding_bottom": 0,
-            "mobile_padding_left": 0,
-            "mobile_padding_right": 0,
-            "color_scheme_light": "scheme-1",
-            "color_scheme_dark": "scheme-2"
-          },
-          "blocks": {
-            "collection-card": {
-              "type": "_collection-card",
-              "static": true,
-              "settings": {
-                "desktop_layout": "separate",
-                "desktop_content_position": "side_by_side",
-                "desktop_image_side": "right",
-                "desktop_overlay_position": "center",
-                "desktop_content_alignment": "start",
-                "mobile_layout": "separate",
-                "mobile_content_position": "image_above",
-                "mobile_image_side": "right",
-                "mobile_overlay_position": "center",
-                "mobile_content_alignment": "center",
-                "spacing_choose_device": "desktop",
-                "desktop_padding_top": 8,
-                "desktop_padding_bottom": 8,
-                "desktop_padding_left": 8,
-                "desktop_padding_right": 8,
-                "mobile_padding_top": 8,
-                "mobile_padding_bottom": 8,
-                "mobile_padding_left": 8,
-                "mobile_padding_right": 8,
-                "gap": 8,
-                "show_border": true,
-                "show_border_mobile": true,
-                "color_scheme_light": "scheme-1",
-                "color_scheme_dark": "scheme-2"
-              },
-              "blocks": {
-                "collection_title_NW6fJt": {
-                  "type": "collection-title",
-                  "name": "Collection title",
-                  "settings": {
-                    "enable_link": true,
-                    "title_metafield": "",
-                    "heading_tag": "h2",
-                    "heading_size": "custom",
-                    "desktop_font_size": 14,
-                    "mobile_font_size": 14,
-                    "line_height": 140,
-                    "spacing_choose_device": "desktop",
-                    "desktop_padding_top": 0,
-                    "desktop_padding_bottom": 0,
-                    "desktop_padding_left": 0,
-                    "desktop_padding_right": 0,
-                    "mobile_padding_top": 0,
-                    "mobile_padding_bottom": 0,
-                    "mobile_padding_left": 0,
-                    "mobile_padding_right": 0,
-                    "title_color_light": "rgba(0,0,0,0)",
-                    "title_color_dark": "rgba(0,0,0,0)"
-                  },
-                  "blocks": {}
-                },
-                "collection_item_count_KYgAVA": {
-                  "type": "collection-item-count",
-                  "name": "Item count",
-                  "settings": {
-                    "prefix_text": "",
-                    "suffix_text_singular": "Item",
-                    "suffix_text_plural": "Items",
-                    "font_size": "custom",
-                    "desktop_font_size": 12,
-                    "mobile_font_size": 12,
-                    "line_height": 160,
-                    "spacing_choose_device": "desktop",
-                    "desktop_padding_top": 0,
-                    "desktop_padding_bottom": 0,
-                    "desktop_padding_left": 0,
-                    "desktop_padding_right": 0,
-                    "mobile_padding_top": 0,
-                    "mobile_padding_bottom": 0,
-                    "mobile_padding_left": 0,
-                    "mobile_padding_right": 0,
-                    "text_color_light": "rgba(0,0,0,0)",
-                    "text_color_dark": "rgba(0,0,0,0)"
-                  },
-                  "blocks": {}
-                },
-                "collection-card-image": {
-                  "type": "_collection-image",
-                  "static": true,
-                  "settings": {
-                    "enable_link": true,
-                    "image_metafield": "",
-                    "image_ratio": "1/1",
-                    "overlay_opacity": 0,
-                    "show_secondary_image": false,
-                    "secondary_image_source": "first_product_image",
-                    "secondary_image_metafield": "",
-                    "enable_link_secondary": true,
-                    "secondary_image_link": "",
-                    "gap": 4,
-                    "spacing_choose_device": "desktop",
-                    "desktop_padding_top": 0,
-                    "desktop_padding_bottom": 0,
-                    "desktop_padding_left": 0,
-                    "desktop_padding_right": 0,
-                    "mobile_padding_top": 0,
-                    "mobile_padding_bottom": 0,
-                    "mobile_padding_left": 0,
-                    "mobile_padding_right": 0
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "collection_title_NW6fJt",
-                "collection_item_count_KYgAVA"
-              ]
-            }
-          },
-          "block_order": []
+            "collection": "smart-phones",
+            "title": "",
+            "mobile_title": "",
+            "image": "shopify://shop_images/Group_2090050802.webp"
+          }
+        },
+        "hero_category_2": {
+          "type": "category",
+          "settings": {
+            "collection": "televisions",
+            "title": "",
+            "mobile_title": "",
+            "image": "shopify://shop_images/Frame_2090050801.webp"
+          }
+        },
+        "hero_category_3": {
+          "type": "category",
+          "settings": {
+            "collection": "home-appliances",
+            "title": "",
+            "mobile_title": "",
+            "image": "shopify://shop_images/Frame_2090050801_1.webp"
+          }
+        },
+        "hero_category_4": {
+          "type": "category",
+          "settings": {
+            "collection": "kitchen-appliances",
+            "title": "",
+            "mobile_title": "",
+            "image": "shopify://shop_images/Group_2090050802_1.webp"
+          }
+        },
+        "hero_category_5": {
+          "type": "category",
+          "settings": {
+            "collection": "fans",
+            "title": "",
+            "mobile_title": "",
+            "image": "shopify://shop_images/Frame_2090050801_2.webp"
+          }
+        },
+        "hero_banner_1": {
+          "type": "banner",
+          "settings": {
+            "image": "shopify://shop_images/Group_2090050804.webp",
+            "image_mobile": "shopify://shop_images/Mask_group.webp",
+            "badge": "UP TO 50% OFF",
+            "title": "Haier 55″ UHD Google TV",
+            "description": "Upgrade your home with Haier 55″ UHD Google TV and enjoy the picture with 1 billion colors, even at the optimal brightness level; pure colors at any brightness level thanks to Quantum Dot technology.",
+            "button_label": "Shop Now",
+            "button_link": "shopify://collections/all"
+          }
+        },
+        "banner_pGkrMN": {
+          "type": "banner",
+          "settings": {
+            "image": "shopify://shop_images/Group_2090050804.webp",
+            "image_mobile": "shopify://shop_images/Mask_group.webp",
+            "badge": "UP TO 50% OFF",
+            "title": "Haier 55″ UHD Google TV",
+            "description": "Upgrade your home with Haier 55″ UHD Google TV and enjoy the picture with 1 billion colors, even at the optimal brightness level; pure colors at any brightness level thanks to Quantum Dot technology.",
+            "button_label": "Shop Now",
+            "button_link": "shopify://collections/all"
+          }
+        },
+        "banner_8yqyWY": {
+          "type": "banner",
+          "settings": {
+            "image": "shopify://shop_images/Group_2090050804.webp",
+            "image_mobile": "shopify://shop_images/Mask_group.webp",
+            "badge": "UP TO 50% OFF",
+            "title": "Haier 55″ UHD Google TV",
+            "description": "Upgrade your home with Haier 55″ UHD Google TV and enjoy the picture with 1 billion colors, even at the optimal brightness level; pure colors at any brightness level thanks to Quantum Dot technology.",
+            "button_label": "Shop Now",
+            "button_link": "shopify://collections/all"
+          }
+        },
+        "banner_Htifdw": {
+          "type": "banner",
+          "settings": {
+            "image": "shopify://shop_images/Group_2090050804.webp",
+            "image_mobile": "shopify://shop_images/Mask_group.webp",
+            "badge": "UP TO 50% OFF",
+            "title": "Haier 55″ UHD Google TV",
+            "description": "Upgrade your home with Haier 55″ UHD Google TV and enjoy the picture with 1 billion colors, even at the optimal brightness level; pure colors at any brightness level thanks to Quantum Dot technology.",
+            "button_label": "Shop Now",
+            "button_link": "shopify://collections/all"
+          }
+        },
+        "banner_cQBfm3": {
+          "type": "banner",
+          "settings": {
+            "image": "shopify://shop_images/Group_2090050804.webp",
+            "image_mobile": "shopify://shop_images/Mask_group.webp",
+            "badge": "UP TO 50% OFF",
+            "title": "Haier 55″ UHD Google TV",
+            "description": "Upgrade your home with Haier 55″ UHD Google TV and enjoy the picture with 1 billion colors, even at the optimal brightness level; pure colors at any brightness level thanks to Quantum Dot technology.",
+            "button_label": "Shop Now",
+            "button_link": "shopify://collections/all"
+          }
         }
       },
       "block_order": [
-        "collections_list_qjCtpN"
+        "hero_category_1",
+        "hero_category_2",
+        "hero_category_3",
+        "hero_category_4",
+        "hero_category_5",
+        "hero_banner_1",
+        "banner_pGkrMN",
+        "banner_8yqyWY",
+        "banner_Htifdw",
+        "banner_cQBfm3"
       ],
-      "name": "Collection list: Showcase",
+      "name": "Hero + category carousel",
       "settings": {
-        "section_width": "page-width",
-        "desktop_direction": "col",
-        "mobile_direction": "col",
-        "background_media": "none",
-        "overlay_opacity": 20,
-        "padding_top": 28,
-        "padding_bottom": 28,
-        "gap": 0,
-        "show_section_divider": false,
-        "color_scheme_light": "scheme-1",
-        "color_scheme_dark": "scheme-2",
-        "display_type": "show_case"
+        "height_desktop": 78,
+        "height_mobile": 80,
+        "font": "montserrat_n4",
+        "accessibility_label": "Featured promotions and categories",
+        "autoplay": 5
       }
     },
     "logo_list_PhR4bb": {
@@ -181,6 +146,8 @@
           "type": "brand",
           "settings": {
             "name": "Haier",
+            "image": "shopify://shop_images/Group_2090050803_1.png",
+            "svg_url": "",
             "link": ""
           }
         },
@@ -188,6 +155,8 @@
           "type": "brand",
           "settings": {
             "name": "TECNO",
+            "image": "shopify://shop_images/Group_2090050803_2.png",
+            "svg_url": "",
             "link": ""
           }
         },
@@ -195,6 +164,8 @@
           "type": "brand",
           "settings": {
             "name": "LG",
+            "image": "shopify://shop_images/Group_2090050803_3.png",
+            "svg_url": "",
             "link": ""
           }
         },
@@ -202,6 +173,8 @@
           "type": "brand",
           "settings": {
             "name": "Binatone",
+            "image": "shopify://shop_images/Group_2090050803_4.png",
+            "svg_url": "",
             "link": ""
           }
         },
@@ -209,6 +182,8 @@
           "type": "brand",
           "settings": {
             "name": "Samsung",
+            "image": "shopify://shop_images/Group_2090050803_1.svg",
+            "svg_url": "",
             "link": ""
           }
         },
@@ -216,6 +191,17 @@
           "type": "brand",
           "settings": {
             "name": "Apple",
+            "image": "shopify://shop_images/Group_2090050803_2.svg",
+            "svg_url": "",
+            "link": ""
+          }
+        },
+        "brand_yYGrYL": {
+          "type": "brand",
+          "settings": {
+            "name": "Apple",
+            "image": "shopify://shop_images/Group_2090050803_2.svg",
+            "svg_url": "",
             "link": ""
           }
         }
@@ -226,13 +212,16 @@
         "logo_GKnJ8R",
         "logo_F9RWMP",
         "logo_VYzRjE",
-        "logo_P37fmY"
+        "logo_P37fmY",
+        "brand_yYGrYL"
       ],
       "name": "Shop by Brand",
       "settings": {
+        "font": "montserrat_n4",
         "heading": "Shop by Brand",
+        "background_color": "",
         "padding_top": 80,
-        "padding_bottom": 64
+        "padding_bottom": 80
       }
     },
     "promotional_collections_PXYQcb": {
@@ -241,7 +230,8 @@
         "collection_KHEEPr": {
           "type": "collection",
           "settings": {
-            "collection": "",
+            "tab_title": "Special Offer",
+            "collection": "special-offer",
             "show_vendor": true,
             "show_product_rating": false,
             "show_quickview": true,
@@ -253,6 +243,7 @@
             "product": "",
             "card_link": "",
             "open_card_link_new_window": false,
+            "video_url": "",
             "video_alt_text": "",
             "show_sound_control": false,
             "enable_video_autoplay": false,
@@ -289,6 +280,7 @@
         "collection_hymfwR": {
           "type": "collection",
           "settings": {
+            "tab_title": "On Sale",
             "collection": "",
             "show_vendor": true,
             "show_product_rating": false,
@@ -301,6 +293,7 @@
             "product": "",
             "card_link": "",
             "open_card_link_new_window": false,
+            "video_url": "",
             "video_alt_text": "",
             "show_sound_control": false,
             "enable_video_autoplay": false,
@@ -337,6 +330,7 @@
         "collection_XXDN49": {
           "type": "collection",
           "settings": {
+            "tab_title": "Top Rated",
             "collection": "",
             "show_vendor": true,
             "show_product_rating": false,
@@ -349,6 +343,57 @@
             "product": "",
             "card_link": "",
             "open_card_link_new_window": false,
+            "video_url": "",
+            "video_alt_text": "",
+            "show_sound_control": false,
+            "enable_video_autoplay": false,
+            "overlay_opacity": 10,
+            "content_alignment": "center",
+            "content_position": "center",
+            "image_ratio": "responsive",
+            "desktop_width": 200,
+            "mobile_height": 200,
+            "heading": "Promotional collection",
+            "heading_size": "medium",
+            "text": "<p>10% OFF</p>",
+            "text_size": "medium",
+            "highlight_effect": "underline",
+            "text_transform": "none",
+            "button_label": "",
+            "button_link": "",
+            "open_new_window_button": false,
+            "show_button_style": "primary",
+            "enable_countdown": true,
+            "countdown_text": "Hurry up! Get the best deal at best price.",
+            "countdown_text_size": "medium",
+            "timezone": "-4",
+            "end_year": 2025,
+            "end_month": "1",
+            "end_day": "1",
+            "end_hour": "0",
+            "end_minute": "0",
+            "show_border_around_timer": true,
+            "color_scheme_light": "",
+            "color_scheme_dark": ""
+          }
+        },
+        "collection_featured": {
+          "type": "collection",
+          "settings": {
+            "tab_title": "Featured",
+            "collection": "",
+            "show_vendor": true,
+            "show_product_rating": false,
+            "show_quickview": true,
+            "show_label_badges": true,
+            "show_b2b_price_label": true,
+            "enable_card": false,
+            "card_position": "left",
+            "enable_sticky": false,
+            "product": "",
+            "card_link": "",
+            "open_card_link_new_window": false,
+            "video_url": "",
             "video_alt_text": "",
             "show_sound_control": false,
             "enable_video_autoplay": false,
@@ -386,12 +431,18 @@
       "block_order": [
         "collection_KHEEPr",
         "collection_hymfwR",
-        "collection_XXDN49"
+        "collection_XXDN49",
+        "collection_featured"
       ],
       "name": "t:promotional_collections.name",
       "settings": {
-        "subheading": "Subheading",
-        "heading": "Promotional collection",
+        "show_discount_percentage": false,
+        "best_sellers_style": true,
+        "best_sellers_mobile_rows": 3,
+        "best_sellers_button_label": "Shop Now",
+        "best_sellers_badge_label": "Special Offer",
+        "subheading": "",
+        "heading": "Today's Best Sellers",
         "heading_size": "medium",
         "heading_tag": "h2",
         "highlight_effect": "underline",
@@ -403,7 +454,7 @@
         "view_all_button_style": "direction_link",
         "title_size": "medium",
         "title_style": "normal-case",
-        "show_collection_image": true,
+        "show_collection_image": false,
         "enable_desktop_slider": true,
         "swiper_on_mobile": false,
         "change_slides_speed": 0,
@@ -411,19 +462,44 @@
         "show_background_product": false,
         "desktop_side_padding": 18,
         "mobile_side_padding": 12,
-        "background_color_product_light": "#FFFFFF",
-        "background_color_product_dark": "#171A22",
+        "background_color_product_light": "#ffffff",
+        "background_color_product_dark": "#171a22",
         "desktop_products_per_row": 4,
-        "desktop_number_of_rows": 4,
-        "spacing": 12,
-        "mobile_products_per_row": "1",
-        "spacing_mobile": 8,
+        "desktop_number_of_rows": 2,
+        "spacing": 20,
+        "mobile_products_per_row": "2",
+        "spacing_mobile": 13,
         "section_width": "page-width",
-        "padding_top": 28,
-        "padding_bottom": 28,
+        "padding_top": 0,
+        "padding_bottom": 80,
         "show_section_divider": false,
         "color_scheme_light": "",
         "color_scheme_dark": ""
+      }
+    },
+    "flash_deals_maxbuy": {
+      "type": "flash-deals",
+      "name": "Limited-time deals",
+      "settings": {
+        "heading": "Deals You Don’t Want To Miss",
+        "description": "Great products. Better prices. Discover our latest offers and save more.",
+        "background": "#ed1c24",
+        "product_source": "collection",
+        "collection": "special-offer",
+        "products": [],
+        "product_limit": 12,
+        "show_discount_percentage": false,
+        "best_sellers_button_label": "Shop Now",
+        "empty_text": "New deals are coming soon.",
+        "navigation_step": "item",
+        "enable_countdown": true,
+        "countdown_label": "Hurry up! Offer ends in",
+        "end_date": "2026-10-31",
+        "end_time": "23:59",
+        "timezone": "0",
+        "expiry_behavior": "hide",
+        "padding_top": 40,
+        "padding_bottom": 40
       }
     },
     "1791795658c8e5d01d": {
@@ -432,93 +508,20 @@
         "include_margins": true
       }
     },
-    "featured_collections_w9CMee": {
-      "type": "featured-collections",
-      "blocks": {
-        "collection_jt6KMN": {
-          "type": "collection",
-          "settings": {
-            "collection": "",
-            "heading": "",
-            "show_vendor": true,
-            "show_product_rating": false,
-            "show_quickview": true,
-            "show_label_badges": true,
-            "show_b2b_price_label": true
-          }
-        }
-      },
-      "block_order": [
-        "collection_jt6KMN"
-      ],
-      "name": "t:featured_collections.name",
-      "settings": {
-        "subheading": "Subheading",
-        "heading": "Featured collections",
-        "heading_size": "medium",
-        "heading_tag": "h2",
-        "heading_alignment": "left",
-        "mobile_heading_alignment": "center",
-        "highlight_effect": "underline",
-        "text_transform": "none",
-        "view_all_button_label": "",
-        "view_all_button_position": "above",
-        "view_all_button_style": "direction_link",
-        "title_size": "medium",
-        "title_style": "normal-case",
-        "show_collection_image": true,
-        "enable_gradient_background": false,
-        "enable_desktop_slider": false,
-        "swiper_on_mobile": false,
-        "change_slides_speed": 0,
-        "show_navigation_arrows": false,
-        "show_background_product": false,
-        "desktop_side_padding": 18,
-        "mobile_side_padding": 12,
-        "background_color_product_light": "#FFFFFF",
-        "background_color_product_dark": "#171A22",
-        "enable_countdown": true,
-        "countdown_text": "Hurry up! Get the best deal at best price.",
-        "text_size": "medium",
-        "timezone": "-4",
-        "end_year": 2025,
-        "end_month": "1",
-        "end_day": "1",
-        "end_hour": "0",
-        "end_minute": "0",
-        "show_border_around_timer": false,
-        "desktop_products_per_row": 4,
-        "desktop_number_of_rows": 4,
-        "spacing": 12,
-        "mobile_products_per_row": "1",
-        "spacing_mobile": 8,
-        "section_width": "page-width",
-        "padding_top": 28,
-        "padding_bottom": 28,
-        "show_section_divider": false,
-        "color_scheme_light": "",
-        "color_background_light": "rgba(0,0,0,0)",
-        "countdown_text_light": "",
-        "color_timer_light": "",
-        "color_line_light": "",
-        "timer_background_light": "",
-        "color_scheme_dark": "",
-        "color_background_dark": "rgba(0,0,0,0)",
-        "countdown_text_dark": "",
-        "color_timer_dark": "",
-        "color_line_dark": "",
-        "timer_background_dark": ""
-      }
-    },
     "promotion_grid_rGJcga": {
       "type": "promotion-grid",
       "blocks": {
         "promotion_DhTTiQ": {
           "type": "promotion",
           "settings": {
+            "product": "apple-iphone-17-pro-max-2tb-cosmic-orange",
+            "featured_title": "",
+            "featured_badge": "HOT",
+            "featured_button": "Shop Now",
             "high_priority_image": false,
             "image_link": "",
             "open_new_window": false,
+            "video_url": "",
             "video_alt_text": "",
             "show_sound_control": false,
             "enable_video_autoplay": false,
@@ -553,16 +556,21 @@
             "sale_label_style": "angle",
             "color_scheme_light": "",
             "color_scheme_dark": "",
-            "sale_label_background_color": "#CE021E",
-            "sale_label_color": "#FFFFFF"
+            "sale_label_background_color": "#ce021e",
+            "sale_label_color": "#ffffff"
           }
         },
         "promotion_bUitwk": {
           "type": "promotion",
           "settings": {
+            "product": "samsung-galaxy-a06-6-128gb-5",
+            "featured_title": "",
+            "featured_badge": "HOT",
+            "featured_button": "Shop Now",
             "high_priority_image": false,
             "image_link": "",
             "open_new_window": false,
+            "video_url": "",
             "video_alt_text": "",
             "show_sound_control": false,
             "enable_video_autoplay": false,
@@ -597,16 +605,21 @@
             "sale_label_style": "circle",
             "color_scheme_light": "",
             "color_scheme_dark": "",
-            "sale_label_background_color": "#CE021E",
-            "sale_label_color": "#FFFFFF"
+            "sale_label_background_color": "#ce021e",
+            "sale_label_color": "#ffffff"
           }
         },
         "promotion_jaTLFK": {
           "type": "promotion",
           "settings": {
+            "product": "samsung-galaxy-a06-6-128gb-4",
+            "featured_title": "",
+            "featured_badge": "HOT",
+            "featured_button": "Shop Now",
             "high_priority_image": false,
             "image_link": "",
             "open_new_window": false,
+            "video_url": "",
             "video_alt_text": "",
             "show_sound_control": false,
             "enable_video_autoplay": false,
@@ -641,13 +654,17 @@
             "sale_label_style": "circle",
             "color_scheme_light": "",
             "color_scheme_dark": "",
-            "sale_label_background_color": "#CE021E",
-            "sale_label_color": "#FFFFFF"
+            "sale_label_background_color": "#ce021e",
+            "sale_label_color": "#ffffff"
           }
         },
         "promotion_6fU8LK": {
           "type": "promotion",
           "settings": {
+            "product": "binatone-kettle-cej-1799dw",
+            "featured_title": "",
+            "featured_badge": "HOT",
+            "featured_button": "Shop Now",
             "high_priority_image": false,
             "image_link": "",
             "open_new_window": false,
@@ -693,6 +710,10 @@
         "promotion_nGRQwM": {
           "type": "promotion",
           "settings": {
+            "product": "lg-674l-side-by-side-refrigerator",
+            "featured_title": "",
+            "featured_badge": "HOT",
+            "featured_button": "Shop Now",
             "high_priority_image": false,
             "image_link": "",
             "open_new_window": false,
@@ -738,6 +759,10 @@
         "promotion_Y9fNwm": {
           "type": "promotion",
           "settings": {
+            "product": "syinix-50-4k-smart-tv",
+            "featured_title": "",
+            "featured_badge": "HOT",
+            "featured_button": "Shop Now",
             "high_priority_image": false,
             "image_link": "",
             "open_new_window": false,
@@ -791,6 +816,7 @@
       ],
       "name": "t:promotion_grid.name",
       "settings": {
+        "favorite_products_style": true,
         "heading": "Shop Your Favorite Product",
         "heading_size": "medium",
         "heading_tag": "h2",
@@ -805,12 +831,85 @@
         "spacing_mobile": 20,
         "height_mobile": 200,
         "section_width": "page-width",
-        "padding_top": 80,
+        "padding_top": 40,
         "padding_bottom": 80,
         "show_section_divider": false,
         "color_scheme_light": "",
         "color_scheme_dark": ""
       }
+    },
+    "promotion_banner_f983xT": {
+      "type": "promotion-banner",
+      "name": "t:promotion_banner.name",
+      "settings": {
+        "image": "shopify://shop_images/image_606.webp",
+        "image_link": "",
+        "open_new_window_image": false,
+        "subheading": "SAMSUNG Galaxy Z Fold8 Ultra",
+        "heading": "Up to 30% OFF",
+        "text": "",
+        "button_label": "Shop Now",
+        "button_link": "",
+        "open_new_window_button": false,
+        "desktop_height": "adapt",
+        "desktop_content_position": "start start",
+        "desktop_content_alignment": "left",
+        "mobile_design_layout": true,
+        "mobile_height": "adapt",
+        "mobile_content_position": "center start",
+        "mobile_content_alignment": "left",
+        "section_width": "page-width",
+        "padding_top": 20,
+        "padding_bottom": 80,
+        "corner_radius": 8,
+        "overlay_opacity": 0,
+        "color_scheme_light": "scheme-2",
+        "color_scheme_dark": "",
+        "banner_text_font": "montserrat_n4"
+      }
+    },
+    "store_locator_maxbuy": {
+      "type": "store-locator-showcase",
+      "name": "Store locator showcase",
+      "settings": {
+        "heading": "Find A Maxbuy Store Near You",
+        "accent_color": "#ed1c24",
+        "background_color": "#000000",
+        "padding_top": 39,
+        "padding_bottom": 74,
+        "show_store_actions": false
+      },
+      "blocks": {
+        "store_location_RNBcrU": {
+          "type": "store_location",
+          "settings": {
+            "title": "Store branch",
+            "location_address": "75 9th Ave, New York, NY 10011-7006",
+            "text": "<p>(+84) 123 456 789<br/><br/>Store hours<br/>Mon - Fri, 8:30am - 10:30pm,<br/>Saturday, 8:30am - 10:30pm,<br/>Sunday, Closed</p>"
+          }
+        },
+        "store_location_qtCaQB": {
+          "type": "store_location",
+          "settings": {
+            "title": "Store branch",
+            "location_address": "75 9th Ave, New York, NY 10011-7006",
+            "text": "<p>(+84) 123 456 789<br/><br/>Store hours<br/>Mon - Fri, 8:30am - 10:30pm,<br/>Saturday, 8:30am - 10:30pm,<br/>Sunday, Closed</p>"
+          }
+        },
+        "store_location_pdnLT4": {
+          "type": "store_location",
+          "settings": {
+            "title": "Store branch",
+            "location_address": "75 9th Ave, New York, NY 10011-7006",
+            "text": "<p>(+84) 123 456 789<br/><br/>Store hours<br/>Mon - Fri, 8:30am - 10:30pm,<br/>Saturday, 8:30am - 10:30pm,<br/>Sunday, Closed</p>"
+          }
+        }
+      },
+      "block_order": [
+        "store_location_RNBcrU",
+        "store_location_qtCaQB",
+        "store_location_pdnLT4"
+      ]
     },
     "text_columns_with_icons_bwQ3jk": {
       "type": "text-columns-with-icons",
@@ -818,13 +917,14 @@
         "column_RxtPfc": {
           "type": "column",
           "settings": {
+            "feature_icon": "shipping",
             "icon": "free-shipping",
             "another_icon": "",
-            "title": "Column",
+            "title": "Free Shipping",
             "title_link": "",
             "open_new_window": false,
             "heading_size": "medium",
-            "text": "<p>Add details on availability, style, or even provide a review.</p>",
+            "text": "<p>Convenient delivery on all orders</p>",
             "highlight_effect": "underline",
             "text_transform": "none"
           }
@@ -832,13 +932,14 @@
         "column_RnjjbT": {
           "type": "column",
           "settings": {
+            "feature_icon": "support",
             "icon": "live-chat",
             "another_icon": "",
-            "title": "Column",
+            "title": "24/7 Support",
             "title_link": "",
             "open_new_window": false,
             "heading_size": "medium",
-            "text": "<p>Add details on availability, style, or even provide a review.</p>",
+            "text": "<p>We’re here whenever you need us</p>",
             "highlight_effect": "underline",
             "text_transform": "none"
           }
@@ -846,13 +947,14 @@
         "column_hapnKf": {
           "type": "column",
           "settings": {
+            "feature_icon": "payment",
             "icon": "money-back",
             "another_icon": "",
-            "title": "Column",
+            "title": "Flexible Payment",
             "title_link": "",
             "open_new_window": false,
             "heading_size": "medium",
-            "text": "<p>Add details on availability, style, or even provide a review.</p>",
+            "text": "<p>Buy now and pay over time</p>",
             "highlight_effect": "underline",
             "text_transform": "none"
           }
@@ -860,13 +962,14 @@
         "column_N4Ygen": {
           "type": "column",
           "settings": {
+            "feature_icon": "trust",
             "icon": "payment-secured",
             "another_icon": "",
-            "title": "Column",
+            "title": "Trusted Brands",
             "title_link": "",
             "open_new_window": false,
             "heading_size": "medium",
-            "text": "<p>Add details on availability, style, or even provide a review.</p>",
+            "text": "<p>Shop genuine products from leading brands</p>",
             "highlight_effect": "underline",
             "text_transform": "none"
           }
@@ -889,13 +992,13 @@
         "icon_position": "next",
         "icon_size": 36,
         "enable_desktop_slider": true,
-        "swipe_on_mobile": true,
+        "swipe_on_mobile": false,
         "change_bar_every": 0,
         "show_navigation_arrows": true,
         "column_layout_desktop": 4,
         "section_height_desktop": "md:py-7",
         "spacing_desktop": 28,
-        "column_layout_mobile": "1",
+        "column_layout_mobile": "2",
         "section_height_mobile": "py-5",
         "spacing_mobile": 16,
         "section_width": "page-width",
@@ -915,9 +1018,11 @@
     "section_collections_list_RhaDWD",
     "logo_list_PhR4bb",
     "promotional_collections_PXYQcb",
+    "flash_deals_maxbuy",
     "1791795658c8e5d01d",
-    "featured_collections_w9CMee",
     "promotion_grid_rGJcga",
-    "text_columns_with_icons_bwQ3jk"
+    "promotion_banner_f983xT",
+    "text_columns_with_icons_bwQ3jk",
+    "store_locator_maxbuy"
   ]
 }

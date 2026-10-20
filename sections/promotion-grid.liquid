@@ -7,6 +7,10 @@
     assign swipe_on_mobile = true
   endif
 
+  if section.settings.favorite_products_style
+    assign swipe_on_mobile = false
+  endif
+
   assign columns_mobile_size = min_columns_mobile | plus: 0
   assign enable_swiper_on_mobile = false
   if section.settings.swipe_on_mobile and section.blocks.size > columns_mobile_size
@@ -60,18 +64,23 @@
   }
 {%- endstyle -%}
 {{ 'section-promotion-grid.css' | asset_url | stylesheet_tag }}
+{% if section.settings.favorite_products_style %}{{ 'favorite-products.css' | asset_url | stylesheet_tag }}{% endif %}
 
 {% render 'section-divider' %}
 
-<div class="promotion-grid section--{{ section.id }} {{ section.settings.section_width }} rounded-corners-container color-{{ section.settings.color_scheme_light }} dark-color-{{ section.settings.color_scheme_dark }}">
+<div class="promotion-grid{% if section.settings.favorite_products_style %} favorite-products{% endif %} section--{{ section.id }} {{ section.settings.section_width }} rounded-corners-container color-{{ section.settings.color_scheme_light }} dark-color-{{ section.settings.color_scheme_dark }}">
   {%- if section.settings.heading != blank -%}
     <{{ section.settings.heading_tag }} class="promotion-grid__heading heading-{{ section.settings.heading_size }} block text-{{ section.settings.heading_alignment }} heading-content-spacing p-break-words">
+      {% if section.settings.favorite_products_style %}
+        {{ section.settings.heading | escape }}
+      {% else %}
       {% render 'text-highlight',
         id: section.id,
         text: section.settings.heading,
         highlight_effect: section.settings.highlight_effect,
         text_transform: section.settings.text_transform
       %}
+      {% endif %}
     </{{ section.settings.heading_tag }}>
   {%- endif -%}
   <div class="promotion-grid__wrapper md:!swiffy-slider slider-item-snapstart
@@ -97,6 +106,9 @@
       data-desktop-gap="{{ section.settings.spacing }}px"
     >
       {%- for block in section.blocks -%}
+        {% if section.settings.favorite_products_style and block.type != 'collection' %}
+          {% render 'favorite-product-tile', block: block, section: section, index: forloop.index %}
+        {% else %}
         {% case block.type %}
           {% when 'promotion' %}
             {%- liquid
@@ -497,6 +509,7 @@
               </div>
             </div>
         {% endcase %}
+        {% endif %}
       {%- endfor -%}
     </div>
     {%- if swipe_on_mobile -%}
@@ -517,6 +530,13 @@
     ]
   },
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "favorite_products_style",
+      "label": "Shop Your Favorite Product style",
+      "default": false,
+      "info": "Uses the six-card design layout on desktop. Select a product in each promotion or product block."
+    },
     {
       "type": "text",
       "id": "heading",
@@ -799,6 +819,34 @@
       "name": "t:promotion_grid.blocks.promotion.name",
       "settings": [
         {
+          "type": "product",
+          "id": "product",
+          "label": "Featured product"
+        },
+        {
+          "type": "image_picker",
+          "id": "featured_image",
+          "label": "Product display image",
+          "info": "Optional image override. Uses the selected product image when empty."
+        },
+        {
+          "type": "text",
+          "id": "featured_title",
+          "label": "Product title override"
+        },
+        {
+          "type": "text",
+          "id": "featured_badge",
+          "label": "Product badge",
+          "default": "HOT"
+        },
+        {
+          "type": "text",
+          "id": "featured_button",
+          "label": "Product button label",
+          "default": "Shop Now"
+        },
+        {
           "type": "image_picker",
           "id": "image",
           "label": "t:global.image.image"
@@ -840,7 +888,10 @@
         {
           "type": "video_url",
           "id": "video_url",
-          "accept": ["youtube", "vimeo"],
+          "accept": [
+            "youtube",
+            "vimeo"
+          ],
           "label": "t:global.video.video_url",
           "info": "t:global.video.video_url_info"
         },
@@ -1406,6 +1457,29 @@
       "type": "product",
       "name": "t:global.product.product",
       "settings": [
+        {
+          "type": "image_picker",
+          "id": "featured_image",
+          "label": "Product display image",
+          "info": "Optional image override. Uses the selected product image when empty."
+        },
+        {
+          "type": "text",
+          "id": "featured_title",
+          "label": "Product title override"
+        },
+        {
+          "type": "text",
+          "id": "featured_badge",
+          "label": "Product badge",
+          "default": "HOT"
+        },
+        {
+          "type": "text",
+          "id": "featured_button",
+          "label": "Product button label",
+          "default": "Shop Now"
+        },
         {
           "type": "product",
           "id": "product",

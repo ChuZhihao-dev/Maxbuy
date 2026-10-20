@@ -6,18 +6,24 @@ if (!window.Maximize.loadedScript.includes("store-locator.js")) {
       Alpine.data('xStoreLocator', (sectionId, activeBlockId, autoSelectFirstStore) => ({
         show: false,
         active: activeBlockId,
-        currentSelected: JSON.parse(localStorage.getItem("currentStoreSelected"))?.currentSelected || false,
+        currentSelected: false,
         selectedStore: "",
+        selectionChanged: false,
         init() {
-          const currentSelectedStore = this.currentSelected ? this.currentSelected : (autoSelectFirstStore ? activeBlockId : false);
+          this.syncSelection();
+          const saved = window.MaxbuyStoreLocator.getSelection();
+          const currentSelectedStore = this.currentSelected || (!saved.selectedStore && autoSelectFirstStore ? activeBlockId : false);
           const currentCheckbox = document.getElementById(`Checkbox__${sectionId}-${currentSelectedStore}`);
           if (currentCheckbox) {
             this.currentSelected = currentSelectedStore;
             this.selectedStore = currentCheckbox.dataset.storeName;
-            Alpine.store('xStoreMap').currentStoreSelected = this.selectedStore;
-            localStorage.setItem('currentStoreSelected', JSON.stringify({ selectedStore: this.selectedStore, currentSelected: this.currentSelected }));
-            document.dispatchEvent(new CustomEvent('maximize:store-changed', { detail: { store: this.selectedStore } }));
+            window.MaxbuyStoreLocator.selectStore(this.currentSelected, sectionId);
           }
+
+          this.onStoreChanged = (event) => {
+            this.syncSelection(event.detail.selection);
+          };
+          document.addEventListener('maximize:store-changed', this.onStoreChanged);
 
           // Set fix height content on tablet and desktop 
           const storeLocatorContentEl = this.$el.querySelector('.store-locator__content');
@@ -56,30 +62,37 @@ if (!window.Maximize.loadedScript.includes("store-locator.js")) {
             })
           }
         },
+        destroy() {
+          document.removeEventListener('maximize:store-changed', this.onStoreChanged);
+        },
+        syncSelection(selection = window.MaxbuyStoreLocator.getSelection()) {
+          const store = window.MaxbuyStoreLocator.findSelectedStore(window.MaxbuyStoreLocator.getStores(sectionId), selection, sectionId);
+          this.currentSelected = store?.id || false;
+          this.selectedStore = store?.name || '';
+          this.selectionChanged = false;
+        },
         openStoreLocatorPopup() {
+          this.syncSelection();
           this.show = true;
           Alpine.store("xMaximizePopup").handleOpen();
           Alpine.store("xMaximizeDrawer").activeDrawerElement = window.Maximize.isShowPopupOverlay;
         },
         closeStoreLocatorPopup() {
-          if (this.currentSelected === false) {
-            localStorage.removeItem("currentStoreSelected");
-            Alpine.store('xStoreMap').currentStoreSelected = "";
-            document.dispatchEvent(new CustomEvent('maximize:store-changed', { detail: { store: '' } }));
+          if (this.currentSelected === false && this.selectionChanged) {
+            window.MaxbuyStoreLocator.clearSelection();
           }
+          this.selectionChanged = false;
           this.show = false;
           Alpine.store("xMaximizePopup").handleClose();
         },
         toggleSelected(el, currentSelected) {
+          this.selectionChanged = true;
           this.currentSelected = this.currentSelected == currentSelected ? false : currentSelected;
           this.selectedStore = this.currentSelected ? el.dataset.storeName : "";
         },
         setSelectedStore() {
           if (this.currentSelected) {
-            Alpine.store('xStoreMap').currentStoreSelected = this.selectedStore;
-            localStorage.setItem("currentStoreSelected", JSON.stringify({ selectedStore: this.selectedStore, currentSelected: this.currentSelected }));
-            document.dispatchEvent(new CustomEvent('maximize:store-changed', { detail: { store: this.selectedStore } }));
-            this.closeStoreLocatorPopup();
+            if (window.MaxbuyStoreLocator.selectStore(this.currentSelected, sectionId)) this.closeStoreLocatorPopup();
           }
         },
         isItemPartiallyVisible(el) {

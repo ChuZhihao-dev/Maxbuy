@@ -14,6 +14,7 @@
 -%}
 {% assign default_image_alt = 'accessibility.default_alt' | t %}
 {%- unless hide_footer -%}
+  {{ 'maxbuy-footer.css' | asset_url | stylesheet_tag }}
   {%- style -%}
     .section-{{ section.id }}-padding {
       padding-top: {{ section.settings.top_padding | times: 0.5  }}px;
@@ -140,18 +141,13 @@
               {%- when 'link_list' -%}
                 <div x-data="{ open: {{ block.settings.open_by_default }} }" class="footer-collapsed border-b border-b-solid md:border-none">
                   {%- if block.settings.heading_menu != blank -%}
-                    <div @click="open = ! open" class="footer-collapse__label relative pe-5 md:pe-0 cursor-pointer md:block md:pointer-events-none md:cursor-default">
-                      <p class="h5">{{- block.settings.heading_menu | escape -}}</p>
-                      <span class="md:hidden absolute w-3	h-3 top-1/2 -translate-y-1/2 flex ltr:right-2.5 rtl:left-2.5" {% if block.settings.open_by_default %} x-cloak{% endif %} x-show="open">
-                        {% render 'icon-all', icon: 'icon-minus' %}
-                      </span>
-                      <span class="md:hidden absolute w-3	h-3 top-1/2 -translate-y-1/2 ltr:right-2.5 rtl:left-2.5" {% unless block.settings.open_by_default %} x-cloak{% endunless %} x-show="!open">
-                        {% render 'icon-all', icon: 'icon-plus' %}
-                      </span>
-                    </div>
+                    <button type="button" @click="open = ! open" :aria-expanded="open" aria-controls="FooterMenu-{{ block.id }}" class="footer-collapse__label maxbuy-footer__menu-toggle relative pe-5 md:pe-0 md:pointer-events-none">
+                      <span class="h5">{{ block.settings.heading_menu | escape }}</span>
+                      <img class="maxbuy-footer__chevron" :class="{ 'is-open': open }" src="{{ 'footer-mobile-chevron.svg' | asset_url }}" width="18" height="17.716" alt="" loading="lazy">
+                    </button>
                   {%- endif -%}
                   {%- if block.settings.menu != blank -%}
-                    <ul class="footer-collapse__content footer-menu-links md:!h-auto md:!flex
+                    <ul id="FooterMenu-{{ block.id }}" class="footer-collapse__content footer-menu-links md:!h-auto md:!flex
                       {%- if block.settings.menu_desktop_layout == 'horizontal' %} flex-row flex-wrap gap-x-5{% if section.settings.content_alignment == 'right' %} justify-end rtl:justify-start{% elsif section.settings.content_alignment == 'left' %} justify-start rtl:justify-end{% else %} justify-center{% endif %}{% else %} flex-col{% endif -%}"
                     {% if block.settings.heading_menu != blank %}
                       x-show="open" x-collapse
@@ -164,6 +160,8 @@
                         </li>
                       {%- endfor -%}
                     </ul>
+                  {% elsif block.settings.menu_labels != blank %}
+                    <ul id="FooterMenu-{{ block.id }}" x-show="open" x-collapse class="footer-menu-links maxbuy-footer__menu-labels">{% assign menu_labels = block.settings.menu_labels | newline_to_br | split: '<br />' %}{% for label in menu_labels %}<li><span{% if label contains 'Delivery & Shipping' %} class="maxbuy-footer__highlight"{% endif %}>{{ label | strip | escape }}</span></li>{% endfor %}</ul>
                   {%- endif -%}
                 </div>
               {%- when 'text' -%}
@@ -258,6 +256,10 @@
                   </div>
                 </div>
               {%- when 'email_footer' -%}
+                {% assign footer_brand_logo = block.settings.footer_logo | default: images['maxbuy_logo.svg'] %}
+                {% if footer_brand_logo != blank %}
+                  <a class="maxbuy-footer__logo" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}">{{ footer_brand_logo | image_url: width: 468 | image_tag: width: 234, loading: 'lazy', alt: shop.name }}</a>
+                {% endif %}
                 <div x-data="{ open: {{ block.settings.open_by_default }} }" class="footer-collapsed border-b border-b-solid md:border-none">
                   <div @click="open = ! open" class="footer-collapse__label relative pe-5 md:pe-0 cursor-pointer md:cursor-default md:pointer-events-none">
                     <p class="h5{% if block.settings.number_of_columns_wide >= section.settings.number_of_columns %} md:hidden{% endif %}">{{ block.settings.heading_email | escape }}</p>
@@ -375,6 +377,10 @@
                           <p class="flex-1">{{ 'newsletter.success' | t }}</p>
                         </div>
                       {%- endif -%}
+                      <label class="maxbuy-footer__consent" for="FooterConsent-{{ section.id }}">
+                        <input id="FooterConsent-{{ section.id }}" type="checkbox" name="contact[footer_consent]" value="accepted" required>
+                        <span>{{ block.settings.consent_text | escape }}{% if block.settings.consent_link != blank %} <a href="{{ block.settings.consent_link }}">{{ block.settings.consent_link_label | escape }}</a>{% endif %}</span>
+                      </label>
                     {%- endform -%}
                     {%- if block.settings.show_social_icons -%}
                       <div class="mt-4 text-center md:text-{{ section.settings.content_alignment }}{% if block.settings.number_of_columns_wide >= section.settings.number_of_columns %} md:hidden{% endif %}">
@@ -535,7 +541,7 @@
                     </div>
                   {%- endif -%}
                   {%- capture copy_right_block -%}
-                    <div class="flex flex-row items-center">
+                    <div class="maxbuy-footer__copyright flex flex-row items-center">
                       <span class="{% if block.settings.show_copyright %}text-center lg:mt-0{% unless show_subfooter_left %} lg:text-left{% endunless %}{% endif %} p-break-words">
                         {%- if block.settings.show_copyright -%}
                           {% if block.settings.custom_copyright_text != blank -%}
@@ -551,6 +557,7 @@
                     </div>
                   {%- endcapture -%}
                   {{ copy_right_block }}
+                  {% if block.settings.policy_menu != blank %}<ul class="maxbuy-footer__policies" role="list">{% for link in block.settings.policy_menu.links %}<li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>{% endfor %}</ul>{% endif %}
                   {%- if block.settings.show_payment_icons -%}
                     <ul class="flex justify-center gap-y-2 flex-wrap{% unless block.settings.enable_language_selector or block.settings.enable_country_selector %} mt-5 md:mt-0{% endunless %}" role="list">
                       {% if block.settings.payment_icon != blank %}
@@ -787,6 +794,12 @@
             }
           ],
           "default": "vertical"
+        },
+        {
+          "type": "textarea",
+          "id": "menu_labels",
+          "label": "Menu labels before menu setup",
+          "info": "Shown as text until a navigation menu is selected."
         }
       ]
     },
@@ -1469,6 +1482,28 @@
           "id": "show_social_icons",
           "default": true,
           "label": "t:footer.blocks.custom_text.settings.show_social_icons"
+        },
+        {
+          "type": "image_picker",
+          "id": "footer_logo",
+          "label": "Footer logo"
+        },
+        {
+          "type": "text",
+          "id": "consent_text",
+          "label": "Subscription consent text",
+          "default": "By subscribing, you agree to our terms & conditions."
+        },
+        {
+          "type": "url",
+          "id": "consent_link",
+          "label": "Terms link"
+        },
+        {
+          "type": "text",
+          "id": "consent_link_label",
+          "label": "Terms link label",
+          "default": "Terms & Conditions"
         }
       ]
     },
@@ -1564,6 +1599,11 @@
           "id": "enable_follow_on_shop",
           "default": true,
           "label": "t:footer.blocks.subfooter.settings.follow_on_shop.enable_follow_on_shop"
+        },
+        {
+          "type": "link_list",
+          "id": "policy_menu",
+          "label": "Policy links menu"
         }
       ]
     },
@@ -1727,7 +1767,7 @@
           "label": "t:global.text.open_link_new_tab"
         }
       ]
-    },
+    }
   ],
   "settings": [
     {
@@ -1846,7 +1886,9 @@
     ]
   },
   "enabled_on": {
-    "groups": ["footer"]
+    "groups": [
+      "footer"
+    ]
   }
 }
 {% endschema %}

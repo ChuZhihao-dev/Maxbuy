@@ -1,0 +1,138 @@
+{{ 'store-locator-showcase.css' | asset_url | stylesheet_tag }}
+{%- style -%}
+  #StoreLocator-{{ section.id }} {
+    --locator-accent: {{ section.settings.accent_color }};
+    --locator-background: {{ section.settings.background_color }};
+    --locator-padding-top: {{ section.settings.padding_top }}px;
+    --locator-padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+{%- endstyle -%}
+<maxbuy-store-locator
+  id="StoreLocator-{{ section.id }}"
+  class="store-showcase"
+  data-section-id="{{ section.id }}"
+  data-design-mode="{{ request.design_mode }}"
+  data-result-label="{{ section.settings.results_label | escape }}"
+  data-map-label="{{ section.settings.map_label | escape }}"
+  data-map-loading="{{ section.settings.map_loading | escape }}"
+  data-map-failed="{{ section.settings.map_failed | escape }}"
+  aria-labelledby="StoreLocatorHeading-{{ section.id }}"
+>
+  {% render 'store-locator-data', section: section %}
+  <div class="store-showcase__backdrop" aria-hidden="true">
+    {% if section.settings.background_image != blank %}
+      {{ section.settings.background_image | image_url: width: 2400 | image_tag: loading: 'lazy', class: 'store-showcase__background', alt: '' }}
+    {% else %}
+      <img class="store-showcase__background" src="{{ 'store-locator-background.png' | asset_url }}" width="1920" height="960" loading="lazy" alt="">
+    {% endif %}
+  </div>
+  <div class="store-showcase__inner">
+    <h2 id="StoreLocatorHeading-{{ section.id }}" class="store-showcase__heading">{{ section.settings.heading | escape }}</h2>
+    <div class="store-showcase__grid">
+      <div class="store-showcase__directory">
+        <form class="store-showcase__search" role="search" aria-label="{{ section.settings.heading | escape }}">
+          <label class="store-showcase__sr-only" for="StoreLocatorSearch-{{ section.id }}">{{ section.settings.search_placeholder | escape }}</label>
+          <input id="StoreLocatorSearch-{{ section.id }}" name="store-search" type="search" placeholder="{{ section.settings.search_placeholder | escape }}" autocomplete="off" aria-controls="StoreLocatorResults-{{ section.id }}">
+          <button type="submit">{{ section.settings.search_label | escape }}</button>
+        </form>
+        <p class="store-showcase__sr-only" data-results-status role="status" aria-live="polite" aria-atomic="true"></p>
+        <div id="StoreLocatorResults-{{ section.id }}" class="store-showcase__results" role="list" data-store-results>
+          {% for block in section.blocks %}
+            {% render 'store-locator-showcase-card', block: block, section: section %}
+          {% endfor %}
+        </div>
+        <div class="store-showcase__pagination" data-store-pagination>
+          <button type="button" data-previous-stores aria-label="{{ section.settings.previous_stores_label | escape }}" aria-controls="StoreLocatorResults-{{ section.id }}" disabled>
+            <img src="{{ 'store-locator-previous.svg' | asset_url }}" width="24" height="24" alt="">
+          </button>
+          <button type="button" data-next-stores aria-label="{{ section.settings.next_stores_label | escape }}" aria-controls="StoreLocatorResults-{{ section.id }}" disabled>
+            <img src="{{ 'store-locator-next.svg' | asset_url }}" width="24" height="24" alt="">
+          </button>
+        </div>
+        <p class="store-showcase__empty" data-no-results hidden>{{ section.settings.no_results_text | escape }}</p>
+        <p class="store-showcase__empty" data-no-stores hidden>
+          {% if request.design_mode %}
+            Add a Store location block for each store in this section.
+          {% else %}
+            {{ section.settings.no_stores_text | escape }}
+          {% endif %}
+        </p>
+        <noscript><p class="store-showcase__empty">{{ section.settings.noscript_text | escape }}</p></noscript>
+      </div>
+      <div class="store-showcase__map-column">
+        <div class="store-showcase__map" data-map-container>
+          <iframe id="StoreLocatorMap-{{ section.id }}" data-store-map title="{{ section.settings.map_label | escape }}" referrerpolicy="no-referrer-when-downgrade" allowfullscreen hidden></iframe>
+          <div class="store-showcase__map-placeholder" data-map-placeholder>
+            <img src="{{ 'store-locator-pin.svg' | asset_url }}" width="16" height="16" alt="">
+            <span data-map-message data-default-message="{{ section.settings.map_placeholder | escape }}">{{ section.settings.map_placeholder | escape }}</span>
+            <a data-map-fallback target="_blank" rel="noopener" hidden>{{ section.settings.directions_label | escape }}</a>
+          </div>
+        </div>
+        {% if section.settings.show_store_actions %}
+          <div class="store-showcase__actions" data-store-actions hidden>
+            <a data-directions target="_blank" rel="noopener">{{ section.settings.directions_label | escape }}</a>
+            <button type="button" data-select-store data-default-label="{{ section.settings.select_store_label | escape }}" data-selected-label="{{ section.settings.selected_store_label | escape }}">{{ section.settings.select_store_label | escape }}</button>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</maxbuy-store-locator>
+<script src="{{ 'store-locator-shared.js' | asset_url }}" defer></script>
+<script src="{{ 'map.js' | asset_url }}" defer></script>
+<script src="{{ 'store-locator-showcase.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Store locator showcase",
+  "limit": 1,
+  "tag": "section",
+  "class": "section-store-showcase",
+  "disabled_on": { "groups": ["header", "footer", "aside"] },
+  "settings": [
+    { "type": "paragraph", "content": "Add one Store location block per store. Drag blocks to change the order. Store fields and selection behavior follow the theme's original store locator." },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Find A Maxbuy Store Near You" },
+    { "type": "image_picker", "id": "background_image", "label": "Background image", "info": "Uses the original design background when empty." },
+    { "type": "color", "id": "background_color", "label": "Background color", "default": "#000000" },
+    { "type": "color", "id": "accent_color", "label": "Accent color", "default": "#ed1c24" },
+    { "type": "header", "content": "Search and store cards" },
+    { "type": "text", "id": "search_placeholder", "label": "Search placeholder", "default": "Search By City, Area Or Landmark" },
+    { "type": "text", "id": "search_label", "label": "Search button", "default": "Search" },
+    { "type": "text", "id": "hours_label", "label": "Opening hours label", "default": "Hours:" },
+    { "type": "text", "id": "phone_label", "label": "Phone label", "default": "Phone:" },
+    { "type": "text", "id": "results_label", "label": "Result count announcement", "default": "{count} stores found", "info": "Keep {count} for the number of matching stores." },
+    { "type": "text", "id": "previous_stores_label", "label": "Previous stores button", "default": "Previous stores" },
+    { "type": "text", "id": "next_stores_label", "label": "Next stores button", "default": "Next stores" },
+    { "type": "text", "id": "no_results_text", "label": "No search results", "default": "No stores found. Try another city, area or landmark." },
+    { "type": "text", "id": "no_stores_text", "label": "No stores available", "default": "Store information is coming soon." },
+    { "type": "text", "id": "noscript_text", "label": "JavaScript unavailable message", "default": "Please enable JavaScript to search stores and view the map." },
+    { "type": "header", "content": "Map and store selection" },
+    { "type": "text", "id": "map_label", "label": "Map title", "default": "Store location" },
+    { "type": "text", "id": "map_placeholder", "label": "Map placeholder", "default": "Choose a store to view its location." },
+    { "type": "text", "id": "map_loading", "label": "Map loading message", "default": "Loading store map…" },
+    { "type": "text", "id": "map_failed", "label": "Map unavailable message", "default": "The map is taking longer to load. You can open directions in Google Maps." },
+    { "type": "checkbox", "id": "show_store_actions", "label": "Show directions and set-as-my-store buttons", "default": false, "info": "Browsing cards only changes the map. Setting a store also updates the header and pickup availability." },
+    { "type": "text", "id": "directions_label", "label": "Directions button", "default": "Get directions" },
+    { "type": "text", "id": "select_store_label", "label": "Select store button", "default": "Set as my store" },
+    { "type": "text", "id": "selected_store_label", "label": "Selected store button", "default": "My store" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top spacing", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 39 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom spacing", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 74 }
+  ],
+  "blocks": [
+    {
+      "type": "store_location",
+      "name": "t:store_locator.blocks.store_location.name",
+      "settings": [
+        { "type": "text", "id": "title", "label": "t:store_locator.blocks.store_location.settings.location_name", "default": "Store branch", "info": "t:store_locator.blocks.store_location.settings.location_name_info" },
+        { "type": "text", "id": "location_address", "label": "t:store_locator.blocks.store_location.settings.location_address", "default": "75 9th Ave, New York, NY 10011-7006", "info": "t:store_locator.blocks.store_location.settings.location_address_info" },
+        { "type": "text", "id": "phone", "label": "Phone number" },
+        { "type": "text", "id": "opening_hours", "label": "Opening hours", "info": "For example: Mon–Sat, 8:00 AM – 6:30 PM." },
+        { "type": "text", "id": "search_keywords", "label": "Search keywords", "info": "City, area, landmarks or other names customers may search for." },
+        { "type": "richtext", "id": "text", "label": "t:store_locator.blocks.store_location.settings.location_details" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Store locator showcase", "category": "Store information", "blocks": [{ "type": "store_location" }, { "type": "store_location" }, { "type": "store_location" }] }]
+}
+{% endschema %}

@@ -1,0 +1,32 @@
+{{ 'feature-strip.css' | asset_url | stylesheet_tag }}
+<div class="feature-strip">
+  <div class="feature-strip__inner">
+    {% if section.settings.title != blank %}<{{ section.settings.heading_tag }} class="feature-strip__heading">{{ section.settings.title | escape }}</{{ section.settings.heading_tag }}>{% endif %}
+    <div class="feature-strip__items">
+      {% for block in section.blocks %}
+        <div class="feature-strip__item" {{ block.shopify_attributes }}>
+          <div class="feature-strip__icon feature-strip__icon--{{ block.settings.feature_icon | default: 'shipping' }}" aria-hidden="true">
+            {% if block.settings.custom_icon_image != blank %}
+              {{ block.settings.custom_icon_image | image_url: width: 112 | image_tag: width: 56, height: 56, loading: 'lazy', class: 'feature-strip__custom-icon', alt: '' }}
+            {% else %}
+              <div class="feature-strip__sprite-window"><img class="feature-strip__sprite" src="{{ 'feature-strip-icons.png' | asset_url }}" width="292" height="219" alt="" loading="lazy"></div>
+            {% endif %}
+          </div>
+          <div class="feature-strip__content">
+            {% if block.settings.title != blank %}
+              <h3 class="feature-strip__title">{% if block.settings.title_link != blank %}<a href="{{ block.settings.title_link }}"{% if block.settings.open_new_window %} target="_blank" rel="noopener"{% endif %}>{{ block.settings.title | escape }}</a>{% else %}{{ block.settings.title | escape }}{% endif %}</h3>
+            {% endif %}
+            {% if block.settings.text != blank %}<div class="feature-strip__description">{{ block.settings.text }}</div>{% endif %}
+          </div>
+          {% unless forloop.last %}
+            {% assign divider_asset = 'feature-strip-divider-alt.svg' %}
+            {% if forloop.first %}{% assign divider_asset = 'feature-strip-divider.svg' %}{% endif %}
+            <img class="feature-strip__divider" src="{{ divider_asset | asset_url }}" width="1" height="71" alt="" loading="lazy">
+          {% endunless %}
+        </div>
+      {% endfor %}
+      <div class="feature-strip__mobile-rule"><img src="{{ 'feature-strip-mobile-rule.svg' | asset_url }}" width="1" height="355" alt="" loading="lazy"></div>
+    </div>
+    <div class="feature-strip__rule"><img src="{{ 'feature-strip-rule.svg' | asset_url }}" width="1232" height="1" alt="" loading="lazy"></div>
+  </div>
+</div>

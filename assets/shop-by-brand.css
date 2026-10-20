@@ -24,6 +24,17 @@ shop-by-brand { color: #000; font-family: var(--brand-font); font-style: normal;
 .shop-by-brand__navigation button:disabled .shop-by-brand__arrow-enabled { display: none; }
 .shop-by-brand__navigation button:disabled .shop-by-brand__arrow-disabled { display: block; }
 .shop-by-brand__link:focus-visible, .shop-by-brand__navigation button:focus-visible, .shop-by-brand__track:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+@media (min-width: 768px) and (max-width: 1199px) {
+  shop-by-brand { padding-top: calc(var(--brand-padding-top) * .75); padding-bottom: calc(var(--brand-padding-bottom) * .75); }
+  .shop-by-brand > .page-width { padding-left: 24px; padding-right: 24px; }
+  .shop-by-brand__heading { font-size: 28px; margin-bottom: 28px; }
+  .shop-by-brand__track { gap: 20px; }
+  .shop-by-brand__item { flex-basis: calc((100% - 60px) / 4); }
+  .shop-by-brand__circle { width: 88px; height: 88px; }
+  .shop-by-brand__link { gap: 14px; }
+  .shop-by-brand__name { font-size: 13px; }
+  .shop-by-brand__navigation button { top: 26px; }
+}
 @media (max-width: 767px) {
   shop-by-brand { padding: 32px 0 12px; }
   .shop-by-brand > .page-width { padding-left: 12px; padding-right: 12px; }

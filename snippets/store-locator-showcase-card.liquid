@@ -1,0 +1,36 @@
+{%- liquid
+  assign default_store_name = 'store_selector.location_name' | t
+  assign store_name = block.settings.title | default: default_store_name
+  assign name_id = 'StoreName-' | append: section.id | append: '-' | append: block.id
+  assign address_id = 'StoreAddress-' | append: section.id | append: '-' | append: block.id
+-%}
+<div class="store-showcase__card" role="listitem" data-store-card data-store-id="{{ block.id }}" {{ block.shopify_attributes }}>
+  <button type="button" class="store-showcase__card-select" data-store-id="{{ block.id }}" aria-controls="StoreLocatorMap-{{ section.id }}" aria-labelledby="{{ name_id }}" aria-describedby="{{ address_id }}" aria-pressed="false"></button>
+  <h3 id="{{ name_id }}" class="store-showcase__name" data-store-name>{{ store_name | escape }}</h3>
+  <p class="store-showcase__row" data-address-row{% if block.settings.location_address == blank %} hidden{% endif %}>
+    <picture class="store-showcase__row-icon">
+      <source media="(max-width: 767px)" srcset="{{ 'store-locator-pin-mobile.svg' | asset_url }}">
+      <img src="{{ 'store-locator-pin.svg' | asset_url }}" width="16" height="16" alt="">
+    </picture>
+    <span id="{{ address_id }}" data-store-address>{{ block.settings.location_address | escape }}</span>
+  </p>
+  <p class="store-showcase__row" data-hours-row{% if block.settings.opening_hours == blank %} hidden{% endif %}>
+    <picture class="store-showcase__row-icon">
+      <source media="(max-width: 767px)" srcset="{{ 'store-locator-clock-mobile.svg' | asset_url }}">
+      <img src="{{ 'store-locator-clock.svg' | asset_url }}" width="16" height="16" alt="">
+    </picture>
+    <span>{{ section.settings.hours_label | escape }} <strong data-store-hours>{{ block.settings.opening_hours | escape }}</strong></span>
+  </p>
+  <p class="store-showcase__row" data-phone-row{% if block.settings.phone == blank %} hidden{% endif %}>
+    <picture class="store-showcase__row-icon">
+      <source media="(max-width: 767px)" srcset="{{ 'store-locator-phone-mobile.svg' | asset_url }}">
+      <img src="{{ 'store-locator-phone.svg' | asset_url }}" width="16" height="16" alt="">
+    </picture>
+    <span>{{ section.settings.phone_label | escape }} <a data-store-phone href="tel:{{ block.settings.phone | remove: ' ' | escape }}">{{ block.settings.phone | escape }}</a></span>
+  </p>
+  <p class="store-showcase__legacy-details" data-store-details hidden></p>
+  <picture class="store-showcase__arrow">
+    <source media="(max-width: 767px)" srcset="{{ 'store-locator-arrow-mobile.svg' | asset_url }}">
+    <img src="{{ 'store-locator-arrow.svg' | asset_url }}" width="9" height="15" alt="">
+  </picture>
+</div>

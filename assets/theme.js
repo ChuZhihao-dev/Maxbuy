@@ -144,6 +144,7 @@ requestAnimationFrame(() => {
 
     Alpine.store("xHelper", {
       countdown(configs, callback) {
+        if (configs.signal?.aborted) return;
         let endDate = new Date(configs.end_year, configs.end_month - 1, configs.end_day, configs.end_hour, configs.end_minute);
         const endTime = endDate.getTime() + (-1 * configs.timezone * 60 - endDate.getTimezoneOffset()) * 60 * 1000;
 
@@ -173,6 +174,9 @@ requestAnimationFrame(() => {
             callback(true, seconds, minutes, hours, days);
           }
         }, 1000);
+        // Optional lifecycle support for sections removed by the theme editor.
+        configs.signal?.addEventListener('abort', () => clearInterval(x), { once: true });
+        return x;
       },
       countdownByTime(startTime = Date.now(), endTime, callback) {
         const x = setInterval(() => {

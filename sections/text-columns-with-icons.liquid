@@ -1,336 +1,6 @@
-{%- liquid
-  assign swipe_on_mobile = section.settings.swipe_on_mobile 
-  assign column_layout_mobile = section.settings.column_layout_mobile | times: 1
-  if section.blocks.size <= column_layout_mobile 
-    assign swipe_on_mobile = false
-  endif
-
-  assign enable_desktop_slider = section.settings.enable_desktop_slider
-  assign column_layout_desktop = section.settings.column_layout_desktop | times: 1
-  if section.blocks.size <= column_layout_desktop
-    assign enable_desktop_slider = false
-  endif
-
-  if column_layout_desktop == 1
-    assign class_column_desktop = 'md:w-full'
-  else
-    assign class_column_desktop = 'md:w-1/' | append: column_layout_desktop
-  endif
-
-  if column_layout_mobile == 1
-    assign class_column_mobile = 'w-full'
-  else
-    assign class_column_mobile = 'w-1/' | append: column_layout_mobile
-  endif
-
-
-  assign rounded_corner = true
-  if section.settings.section_width == "full-width"
-    assign rounded_corner = false
-  elsif section.settings.section_width != "full-width" and section.settings.secondary_background == "section"
-    assign rounded_corner = false
-  endif
-
-  assign section_id_for_class = section.id
-  if request.visual_preview_mode
-    assign section_id_for_class = section_id_for_class | replace: '=', '\='
-  endif
--%}
-
-{%- style -%}
-  .section--{{ section_id_for_class }} {
-    padding-top: calc({{ section.settings.padding_top }}px * var(--mobile-padding-ratio));
-    padding-bottom: calc({{ section.settings.padding_bottom }}px * var(--mobile-padding-ratio));
-  }
-  .section--{{ section_id_for_class }} .slider-container {
-    --swiffy-slider-item-gap: 0px;
-  }
-  .section--{{ section_id_for_class }} .spacing-row {
-    row-gap: {{ section.settings.spacing_mobile }}px;
-  }
-  .section--{{ section_id_for_class }} .spacing-column {
-    padding: 0 {{ section.settings.spacing_mobile | times: 0.5 }}px;
-  }
-  .size-icon-{{ section_id_for_class }} {
-    width: {{ section.settings.icon_size | times: 0.7 }}px;
-    height: {{ section.settings.icon_size | times: 0.7 }}px;
-  }
-  .color-icon--{{ section_id_for_class }} {
-    {% if section.settings.color_icon_light.alpha != 0.0 %}
-      color: {{ section.settings.color_icon_light }};
-    {% else %}
-      color: var(--color-text);
-    {% endif %}
-  }
-  .dark .color-icon--{{ section_id_for_class }} {
-    {% if section.settings.color_icon_dark.alpha != 0.0 %}
-      color: {{ section.settings.color_icon_dark }};
-    {% else %}
-      color: rgba(var(--color-text));
-    {% endif %}
-  }
-
-  .maximize-theme:not(.dark) .column-background-{{ section_id_for_class }} {
-    {% if section.settings.background_color_light.alpha != 0.0 %}
-      background: {{ section.settings.background_color_light }};
-      padding-left: 16px;
-      padding-right: 16px;
-    {% else %}
-      {% if section.settings.border_column == 'column'%}
-        padding-left: 16px;
-        padding-right: 16px;
-      {% endif %}
-    {% endif %}
-  }
-
-  .maximize-theme.dark .column-background-{{ section_id_for_class }} {
-    {% if section.settings.background_color_dark.alpha != 0.0 %}
-      background: {{ section.settings.background_color_dark }};
-      padding-left: 16px;
-      padding-right: 16px;
-    {% else %}
-      background: inherit;
-      {% if section.settings.border_column == 'column'%}
-        padding-left: 16px;
-        padding-right: 16px;
-      {% endif %}
-    {% endif %}
-  }
-  .section--{{ section_id_for_class }} .margin-columns {
-    margin: 0 -{{ section.settings.spacing_mobile | times: 0.5 }}px;
-  }
-  .section--{{ section_id_for_class }} .swiffy-slide-progress {
-    margin: 0 {{ section.settings.spacing_mobile | times: 0.5 }}px;
-  }
-  {% if section.settings.border_column == 'line_vertical' %}
-    .text-icon-column__item::after {
-      position: absolute;
-      top: 0;
-      right: 0;
-      height: 50%;
-      transform: translateY(50%);
-    }
-  {% endif %}
-  @media (min-width: 768px) {
-    .section--{{ section_id_for_class }} {
-      padding-top: {{ section.settings.padding_top }}px;
-      padding-bottom: {{ section.settings.padding_bottom }}px;
-    }
-    .section--{{ section_id_for_class }} .spacing-row {
-      row-gap: {{ section.settings.spacing_desktop }}px;
-    }
-    .section--{{ section_id_for_class }} .spacing-column {
-      padding: 0 {{ section.settings.spacing_desktop | times: 0.5 }}px;
-    }
-    .section--{{ section_id_for_class }} .margin-columns {
-      margin: 0 -{{ section.settings.spacing_desktop | times: 0.5 }}px;
-    }
-    .section--{{ section_id_for_class }} .swiffy-slide-progress {
-      margin: 0 {{ section.settings.spacing_desktop | times: 0.5 }}px;
-    }
-    .size-icon-{{ section_id_for_class }} {
-      width: {{ section.settings.icon_size }}px;
-      height: {{ section.settings.icon_size }}px;
-    }
-  }
-{%- endstyle -%}
-
 {% render 'section-divider' %}
 
-<div class="text-icon-column section--{{ section.id }} rounded-corners-container color-{{ section.settings.color_scheme_light }} dark-color-{{ section.settings.color_scheme_dark }} {{ section.settings.section_width -}} 
-  {%- if section.settings.secondary_background == "section" -%}
-    {%- if settings.edges_type == 'rounded_corners' and rounded_corner %} md:rounded-[10px]{% else %} md:rounded-none{% endif -%}
-  {%- endif -%}"
->
-  {% if section.settings.title != blank %}
-    <{{ section.settings.heading_tag }} class="text-icon-column__title text-center block empty:hidden heading-{{ section.settings.heading_size }} heading-content-spacing p-break-words">
-      {% render 'text-highlight',
-        id: section.id,
-        text: section.settings.title,
-        highlight_effect: section.settings.highlight_effect,
-        text_transform: section.settings.text_transform
-      %}
-    </{{ section.settings.heading_tag }}>
-  {% endif %}
-  <div
-    {% if enable_desktop_slider or swipe_on_mobile -%}
-      id="x-text-with-icon-{{ section.id }}"
-      class="text-icon-column__container swiffy-slider w-auto overflow-hidden md:pt-0.5 md:pb-0.5 enable-effect-hover slider-item-snapstart slider-nav-animation-fadein
-      {%- if enable_desktop_slider %} md:cursor-grab{% else %} md:!swiffy-slider{% endif -%}
-      {%- unless swipe_on_mobile %} !swiffy-slider{% endunless -%}
-      {%- if settings.lang_direction contains request.locale.iso_code %} rtl{% endif -%}"
-        x-data="{}"
-        x-intersect.once="$store.xSwiffy.load($el, {
-          'effect': 'slide',
-          'isLoop': true,
-          {%- if section.settings.change_bar_every > 0 %}
-          'autoPlay': true,
-          'autoPause': true,
-          'speed': {{ section.settings.change_bar_every | times: 1000 | default: 5000 }},
-          {% endif -%}
-          'mediaQuery': 'min',
-          'breakPoints':{
-            '0': {
-              'slidesPerView': {{ column_layout_mobile }}
-            },
-            '768': {
-              'slidesPerView': {{ column_layout_desktop }}
-            },
-            '1024': {
-              'slidesPerView': {{ column_layout_desktop }}
-            }
-          }
-        })"
-    {% else %}
-      class="text-icon-column__container overflow-hidden w-auto"
-    {% endif %}
-  >
-    {%- if enable_desktop_slider and section.settings.show_navigation_arrows -%}
-      {% render 'slider-navigation-button' %}
-    {%- endif -%}
-    <div 
-      class="text-icon-column__blocks margin-columns
-        {%- if swipe_on_mobile or enable_desktop_slider %} slider-container scrollbar-hidden
-          {%- if swipe_on_mobile and enable_desktop_slider == false %} md:flex md:flex-wrap md:justify-center spacing-row slider-item-show{{ section.settings.column_layout_mobile -}}
-          {%- elsif swipe_on_mobile == false and enable_desktop_slider %} flex flex-wrap spacing-row justify-center md:justify-start md:grid md:slider-item-show{{- section.settings.column_layout_desktop -}}
-          {% else %} slider-item-show{{- section.settings.column_layout_mobile }} md:slider-item-show{{ section.settings.column_layout_desktop -}}
-          {% endif -%}
-        {% else %} flex flex-wrap spacing-row justify-center{% endif -%}"
-      data-mobile-gap="0px"
-      data-desktop-gap="0px"
-    >
-      {%- for block in section.blocks -%}
-        {%- liquid 
-          if section.settings.border_column == 'line_vertical'
-            if swipe_on_mobile
-              if column_layout_mobile == 1
-                assign last_column_mobile = true
-              else 
-                assign last_column_mobile = false
-              endif
-            else 
-              assign modulo_column = forloop.index | modulo: column_layout_mobile
-              if modulo_column == 0 or column_layout_mobile == 1
-                assign last_column_mobile = true
-              else 
-                assign last_column_mobile = false
-              endif
-            endif
-
-            if enable_desktop_slider 
-              assign last_column_desktop = false
-            else 
-              assign modulo_column = forloop.index | modulo: column_layout_desktop
-              if modulo_column == 0
-                assign last_column_desktop = true
-              else
-                assign last_column_desktop = false
-              endif
-            endif
-          endif
-        -%}
-        <div
-          x-slide-index="{{ forloop.index0 }}"
-          id="Slide-{{ section.id }}-{{ forloop.index }}"
-          class="text-icon-column__item spacing-column
-            {%- if swipe_on_mobile or enable_desktop_slider %} slide-item
-              {%- if swipe_on_mobile and enable_desktop_slider == false %} w-full {{ class_column_desktop -}}
-              {%- elsif swipe_on_mobile == false and enable_desktop_slider %} md:w-full {{ class_column_mobile -}}
-              {%- else %} w-full{% endif -%}
-            {% else %} {{ class_column_mobile }} {{ class_column_desktop -}}{% endif -%}
-            {%- if section.settings.border_column == 'line_vertical' and forloop.last != true %} relative
-              {%- unless last_column_mobile %} after:border-r{% endunless -%}
-              {%- unless last_column_desktop %} md:after:border-r{% else %} md:after:border-r-0{% endunless -%}
-            {% endif -%}"
-        >
-          <div class="h-full anm-fade-element {{ section.settings.section_height_mobile }} {{ section.settings.section_height_desktop }} column-background-{{ section.id -}}
-            {%- if section.settings.icon_position == 'next' %} flex justify-{{ section.settings.column_content_alignment }} items-center{% endif -%}
-            {%- if section.settings.border_column == 'column' %} border border-solid{% endif -%}
-            {%- if settings.edges_type == 'rounded_corners' %} rounded-md{% endif -%}"
-            data-fade-on-intersect
-            {{- block.shopify_attributes -}}
-          >
-            {% unless block.settings.icon == 'none' or block.settings.custom_icon_image == blank and block.settings.icon == 'another' and block.settings.another_icon == blank %}
-              <div class="text-icon-column__item__icon text-{{ section.settings.column_content_alignment }} shrink-0
-                {%- if section.settings.icon_position == 'above' %} mb-1.5{% else %} relative size-icon-{{ section.id }} inline-block mr-2.5 rtl:mr-0 rtl:ml-2.5{% endif -%}"
-              >
-                <span class="{% if section.settings.icon_position == 'above' %} inline-block relative size-icon-{{ section.id }}{% endif %} color-icon--{{ section.id }}">
-                  {% if block.settings.custom_icon_image != blank %}
-                    {% assign default_image_alt = 'accessibility.default_alt' | t %}
-                    <img 
-                      src="{{ block.settings.custom_icon_image | image_url: width: section.settings.icon_size }}"
-                      alt="{{ block.settings.custom_icon_image.alt | default: default_image_alt | escape }}"
-                      {% if section.index == 1 and section.location == 'template' %}
-                        loading="eager"
-                        fetchpriority="high"
-                        decoding="sync"
-                      {% else %}
-                        loading="lazy"
-                      {% endif %} 
-                      width="{{ block.settings.custom_icon_image.width }}"
-                      height="{{ block.settings.custom_icon_image.height }}"
-                      style="object-position: {{ block.settings.custom_icon_image.presentation.focal_point }}"
-                      class="object-cover absolute top-0 left-0 w-full h-full rounded-corners custom-icon-image_rounded-corners"
-                    >
-                  {% else %}
-                    {% if block.settings.icon == 'another' %}
-                      {% render 'icon-another', icon: block.settings.another_icon %}  
-                    {% else %}
-                      {% render 'icon-labels-bags', icon: block.settings.icon %}
-                    {% endif %}
-                  {% endif %}
-                </span>
-              </div>
-            {% endunless %}
-            <div class="text-icon-column__item__text">
-              {% if block.settings.title != blank %}
-                <span class="h5 p-break-words heading-{{ block.settings.heading_size }} text-{{ section.settings.column_content_alignment }}">
-                  <p class="text-[70%]">
-                    {% if block.settings.title_link %}
-                      <a class="title-link" href="{{ block.settings.title_link }}"{% if block.settings.open_new_window %} target="_blank"{% endif %}>
-                        {% render 'text-highlight',
-                          id: block.id,
-                          text: block.settings.title,
-                          highlight_effect: block.settings.highlight_effect,
-                          text_transform: block.settings.text_transform,
-                          disable_animation_fade: true
-                        %}
-                      </a>
-                    {% else %}
-                      {% render 'text-highlight',
-                        id: block.id,
-                        text: block.settings.title,
-                        highlight_effect: block.settings.highlight_effect,
-                        text_transform: block.settings.text_transform,
-                        disable_animation_fade: true
-                      %}
-                    {% endif %}
-                  </p>
-                </span>
-              {% endif %}
-              {% if block.settings.text != blank %}
-                <div class="rte {% if block.settings.heading == blank %} margin-y-0{% endif %} text-medium text-{{ section.settings.column_content_alignment }} p-break-words color-text-[rgba(var(--color-text))]">
-                  {% render 'text-highlight',
-                    id: block.id,
-                    text: block.settings.text,
-                    highlight_effect: block.settings.highlight_effect,
-                    text_transform: block.settings.text_transform,
-                    disable_animation_fade: true,
-                    allow_html: true
-                  %}
-                </div>
-              {% endif %}
-            </div>
-          </div>
-        </div>
-      {%- endfor -%}
-    </div>
-    {% render 'progress-bar',
-      show_on_mobile: swipe_on_mobile,
-      show_on_tablet: enable_desktop_slider
-    %}
-  </div>
-</div>
+{% render 'feature-strip', section: section %}
 {% schema %}
 {
   "name": "t:text_columns_width_icons.name",
@@ -741,6 +411,31 @@
       "type": "column",
       "name": "t:text_columns_width_icons.blocks.column.name",
       "settings": [
+        {
+          "type": "select",
+          "id": "feature_icon",
+          "label": "Feature strip icon",
+          "options": [
+            {
+              "value": "shipping",
+              "label": "Shipping"
+            },
+            {
+              "value": "support",
+              "label": "Support"
+            },
+            {
+              "value": "payment",
+              "label": "Flexible payment"
+            },
+            {
+              "value": "trust",
+              "label": "Trusted brands"
+            }
+          ],
+          "default": "shipping",
+          "info": "Uploaded custom icons take priority."
+        },
         {
           "type": "select",
           "id": "icon",

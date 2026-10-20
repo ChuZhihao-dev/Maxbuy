@@ -690,6 +690,11 @@
               if settings.show_sale_label and settings.sale_label_content != blank
                 assign is_show_sale_label = true
               endif
+              assign card_sale_label_content = settings.sale_label_content
+              if show_discount_percentage != nil
+                assign is_show_sale_label = show_discount_percentage
+                assign card_sale_label_content = '{sale}'
+              endif
               assign price_id = 'Price' | append: '-' | append: product_card_id
             %}
             {% render 'price',
@@ -700,7 +705,7 @@
               price_id: price_id,
               is_show_sale_label: is_show_sale_label,
               class_sale_label: ' text-x-small font-base-body pt-0.5 pb-0.5 pl-1 pr-1',
-              sale_label_content: settings.sale_label_content,
+              sale_label_content: card_sale_label_content,
               sale_label_light: settings.sale_label_light,
               sale_label_dark: settings.sale_label_dark,
               sale_label_text_light: settings.sale_label_text_light,

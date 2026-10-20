@@ -1,3 +1,6 @@
+window.MaxbuyMapUrl = window.MaxbuyMapUrl || ((address) =>
+  `https://maps.google.com/maps?q=${encodeURIComponent(address)}&t=m&z=17&ie=UTF8&output=embed&iwloc=near`);
+
 if (!window.Maximize.loadedScript.includes('map.js')) {
   window.Maximize.loadedScript.push('map.js');
 
@@ -11,13 +14,13 @@ if (!window.Maximize.loadedScript.includes('map.js')) {
               mapIframe.classList.remove("hidden");
               this.$refs.iframe_placeholder?.classList.add("hidden");
             });
-            mapIframe.src = `https://maps.google.com/maps?q=${data}&t=m&z=17&ie=UTF8&output=embed&iwloc=near`;
+            mapIframe.src = window.MaxbuyMapUrl(data);
           }
         },
         loadMap(location) {
           this.$el.querySelector(
             "iframe"
-          ).src = `https://maps.google.com/maps?q=${location}&t=m&z=17&ie=UTF8&output=embed&iwloc=near`;
+          ).src = window.MaxbuyMapUrl(location);
         },
         removeMap() {
           this.$el.querySelector(

@@ -1,0 +1,29 @@
+{%- paginate pages by 1 -%}
+  {% liquid
+    assign block_index = 0
+    if section.index == nil
+      assign block_index = paginate.current_page | minus: 1
+    endif
+    assign block = section.blocks[block_index]
+    assign collection = block.settings.collection
+  %}
+  <div class="promotional-collections__products">
+    <div id="Collections--{{ section.id }}" class="promotional-collections__content-wrapper">
+      <best-sellers-carousel class="best-sellers__carousel" data-desktop-columns="{{ section.settings.desktop_products_per_row }}" data-desktop-rows="{{ section.settings.desktop_number_of_rows }}" data-mobile-columns="{{ section.settings.mobile_products_per_row }}" data-mobile-rows="{{ section.settings.best_sellers_mobile_rows }}">
+        <div class="best-sellers__track" tabindex="0" role="region" aria-label="{{ collection.title | default: section.settings.heading | escape }}" id="BestSellers-{{ section.id }}-{{ block.id }}">
+          {% for product in collection.products limit: 50 %}
+            {% render 'best-sellers-card', product: product, section: section, block: block, index: forloop.index, collection: collection %}
+          {% else %}
+            {% for index in (1..8) %}{% render 'best-sellers-card', section: section, block: block, index: index %}{% endfor %}
+          {% endfor %}
+        </div>
+        {% if section.settings.show_navigation_arrows %}
+          <div class="best-sellers__navigation">
+            <button type="button" data-direction="-1" aria-label="Previous products" aria-controls="BestSellers-{{ section.id }}-{{ block.id }}" disabled>{% render 'hero-carousel-arrow' %}</button>
+            <button type="button" data-direction="1" aria-label="Next products" aria-controls="BestSellers-{{ section.id }}-{{ block.id }}" disabled>{% render 'hero-carousel-arrow' %}</button>
+          </div>
+        {% endif %}
+      </best-sellers-carousel>
+    </div>
+  </div>
+{%- endpaginate -%}

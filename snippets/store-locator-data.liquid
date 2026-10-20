@@ -1,0 +1,18 @@
+{% comment %}Serialize this section's store_location blocks for either locator layout.{% endcomment %}
+<script type="application/json" data-store-locator-source data-source-role="{{ source_role | default: 'inline' }}" data-section-id="{{ section.id }}">
+  [
+    {%- for block in section.blocks -%}
+      {%- assign default_store_name = 'store_selector.location_name' | t -%}
+      {%- assign store_name = block.settings.title | default: default_store_name -%}
+      {
+        "id": {{ block.id | json }},
+        "name": {{ store_name | json | replace: '<', '\u003c' }},
+        "address": {{ block.settings.location_address | json | replace: '<', '\u003c' }},
+        "phone": {{ block.settings.phone | default: '' | json | replace: '<', '\u003c' }},
+        "hours": {{ block.settings.opening_hours | default: '' | json | replace: '<', '\u003c' }},
+        "keywords": {{ block.settings.search_keywords | default: '' | json | replace: '<', '\u003c' }},
+        "details": {{ block.settings.text | default: '' | json | replace: '<', '\u003c' }}
+      }{% unless forloop.last %},{% endunless %}
+    {%- endfor -%}
+  ]
+</script>

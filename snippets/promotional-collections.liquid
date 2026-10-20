@@ -115,6 +115,7 @@
                   {% if block.settings.product != blank %}
                     <div class="w-full relative {% if block.settings.enable_sticky %} lg:sticky sticky-top max-lg:top-0{% endif %} product-card">
                       {% render 'product-card',
+                        show_discount_percentage: section.settings.show_discount_percentage,
                         product: block.settings.product,
                         show_vendor: block.settings.show_vendor,
                         show_rating: block.settings.show_product_rating,
@@ -375,6 +376,7 @@
                         data-item-index="{{ forloop.index }}"
                       >
                         {% render 'product-card',
+                        show_discount_percentage: section.settings.show_discount_percentage,
                           product: product,
                           show_vendor: block.settings.show_vendor,
                           show_rating: block.settings.show_product_rating,
@@ -399,6 +401,7 @@
                           data-item-index="{{ forloop.index }}"
                         >
                           {% render 'product-card',
+                        show_discount_percentage: section.settings.show_discount_percentage,
                             product: '',
                             show_vendor: block.settings.show_vendor,
                             show_rating: block.settings.show_product_rating,

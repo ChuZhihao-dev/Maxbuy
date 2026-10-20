@@ -24,7 +24,7 @@
                 {% if block.settings.svg_url != blank %}
                   <img src="{{ block.settings.svg_url | escape }}" width="110" height="110" alt="" loading="lazy">
                 {% elsif block.settings.image != blank %}
-                  {{ block.settings.image | image_url: width: 240 | image_tag: widths: '72, 120, 144, 240', sizes: '(max-width: 767px) 72px, 110px', loading: 'lazy', alt: '' }}
+                  {{ block.settings.image | image_url: width: 240 | image_tag: widths: '72, 120, 144, 240', sizes: '(max-width: 767px) 72px, (max-width: 1199px) 88px, 110px', loading: 'lazy', alt: '' }}
                 {% endif %}
               </span>
               <span class="shop-by-brand__name">{{ block.settings.name | escape }}</span>

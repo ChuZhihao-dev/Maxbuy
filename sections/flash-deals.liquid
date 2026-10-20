@@ -1,0 +1,85 @@
+{% liquid
+  assign collection = section.settings.collection
+  assign products = collection.products
+  if section.settings.product_source == 'manual'
+    assign products = section.settings.products
+    assign collection = nil
+  endif
+%}
+{{ 'best-sellers.css' | asset_url | stylesheet_tag }}
+{{ 'flash-deals.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'flash-deals.js' | asset_url }}" defer="defer"></script>
+{% style %}
+  @font-face { font-family: 'Maxbuy Public Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url({{ 'best-sellers-public-sans-bold.ttf' | asset_url }}) format('truetype'); }
+  @font-face { font-family: 'Deals Public Sans'; font-style: normal; font-weight: 400; font-display: swap; src: url({{ 'deals-public-sans-regular.ttf' | asset_url }}) format('truetype'); }
+  @font-face { font-family: 'Deals Public Sans'; font-style: normal; font-weight: 600; font-display: swap; src: url({{ 'deals-public-sans-semibold.ttf' | asset_url }}) format('truetype'); }
+  {{ settings.heading_font | font_modify: 'weight', '600' | font_face: font_display: 'swap' }}
+  {{ settings.body_font | font_modify: 'weight', '500' | font_face: font_display: 'swap' }}
+  {{ settings.body_font | font_modify: 'weight', '700' | font_face: font_display: 'swap' }}
+{% endstyle %}
+<div class="flash-deals-section" style="--deals-padding-top: {{ section.settings.padding_top }}px; --deals-padding-bottom: {{ section.settings.padding_bottom }}px">
+  <flash-deals class="best-sellers flash-deals" style="--deals-background: {{ section.settings.background }}; --best-sellers-button-font: 'Maxbuy Public Sans', sans-serif" data-step="{{ section.settings.navigation_step }}" data-countdown="{{ section.settings.enable_countdown }}" data-end-date="{{ section.settings.end_date | escape }}" data-end-time="{{ section.settings.end_time | escape }}" data-timezone="{{ section.settings.timezone }}" data-expired="{{ section.settings.expiry_behavior }}" aria-label="{{ section.settings.heading | escape }}" role="region">
+    <div class="flash-deals__inner">
+      <div class="flash-deals__copy">
+        {% if section.settings.heading != blank %}<h2 class="flash-deals__heading">{{ section.settings.heading | escape }}</h2>{% endif %}
+        {% if section.settings.description != blank %}<p class="flash-deals__description">{{ section.settings.description | escape | newline_to_br }}</p>{% endif %}
+        {% if section.settings.enable_countdown %}
+          <div class="flash-deals__countdown" hidden>
+            {% if section.settings.countdown_label != blank %}<p class="flash-deals__countdown-label">{{ section.settings.countdown_label | escape }}</p>{% endif %}
+            <div class="flash-deals__timer" role="timer" aria-label="Time remaining">
+              {% assign parts = 'days,hours,minutes,seconds' | split: ',' %}
+              {% assign labels = 'Days,Hours,Minutes,Seconds' | split: ',' %}
+              {% for part in parts %}{% unless forloop.first %}<span class="flash-deals__colon" aria-hidden="true">:</span>{% endunless %}<span class="flash-deals__time"><span class="flash-deals__number" data-time="{{ part }}">00</span><span class="flash-deals__unit">{{ labels[forloop.index0] }}</span></span>{% endfor %}
+            </div>
+          </div>
+          {% if request.design_mode and section.settings.end_date == blank %}<p class="flash-deals__setup">Set the countdown end date (YYYY-MM-DD) and time.</p>{% endif %}
+        {% endif %}
+      </div>
+      <div class="flash-deals__carousel">
+        <div class="flash-deals__track" id="DealsTrack-{{ section.id }}" tabindex="0" role="region" aria-label="Promotional products">
+          {% for product in products limit: section.settings.product_limit %}
+            {% render 'best-sellers-card', product: product, section: section, index: forloop.index, collection: collection, deals_card: true %}
+          {% else %}
+            {% if request.design_mode %}{% for index in (1..4) %}{% render 'best-sellers-card', section: section, index: index, deals_card: true %}{% endfor %}{% else %}<p class="flash-deals__empty">{{ section.settings.empty_text | escape }}</p>{% endif %}
+          {% endfor %}
+        </div>
+        <div class="flash-deals__shade" aria-hidden="true" hidden></div>
+        <div class="flash-deals__navigation"{% if products == blank and request.design_mode == false %} hidden{% endif %}>
+          <button type="button" data-direction="-1" aria-label="Previous deals" aria-controls="DealsTrack-{{ section.id }}" disabled>{% render 'hero-carousel-arrow' %}</button>
+          <button type="button" data-direction="1" aria-label="Next deals" aria-controls="DealsTrack-{{ section.id }}" disabled>{% render 'hero-carousel-arrow' %}</button>
+        </div>
+        <span class="visually-hidden" data-deals-status aria-live="polite"></span>
+      </div>
+    </div>
+  </flash-deals>
+</div>
+{% schema %}
+{
+  "name": "Limited-time deals",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Deals You Don’t Want To Miss" },
+    { "type": "textarea", "id": "description", "label": "Description", "default": "Great products. Better prices. Discover our latest offers and save more." },
+    { "type": "color", "id": "background", "label": "Background", "default": "#ed1c24" },
+    { "type": "header", "content": "Products" },
+    { "type": "select", "id": "product_source", "label": "Product source", "default": "collection", "options": [{ "value": "collection", "label": "Collection" }, { "value": "manual", "label": "Selected products" }] },
+    { "type": "collection", "id": "collection", "label": "Promotion collection", "info": "Uses the collection's product order. Selecting a collection does not create a discount." },
+    { "type": "product_list", "id": "products", "label": "Selected products", "limit": 24, "info": "Used when Product source is Selected products. Drag to reorder." },
+    { "type": "range", "id": "product_limit", "label": "Maximum products", "min": 1, "max": 24, "step": 1, "default": 12 },
+    { "type": "checkbox", "id": "show_discount_percentage", "label": "Show discount percentage badge", "default": false },
+    { "type": "text", "id": "best_sellers_button_label", "label": "Product button label", "default": "Shop Now" },
+    { "type": "text", "id": "empty_text", "label": "Empty collection message", "default": "New deals are coming soon." },
+    { "type": "select", "id": "navigation_step", "label": "Arrow navigation", "default": "item", "options": [{ "value": "item", "label": "One product" }, { "value": "screen", "label": "One screen of products" }] },
+    { "type": "header", "content": "Countdown" },
+    { "type": "checkbox", "id": "enable_countdown", "label": "Show countdown", "default": true },
+    { "type": "text", "id": "countdown_label", "label": "Countdown label", "default": "Hurry up! Offer ends in" },
+    { "type": "text", "id": "end_date", "label": "End date", "info": "YYYY-MM-DD, for example 2026-12-31. Leave empty to hide the countdown." },
+    { "type": "text", "id": "end_time", "label": "End time", "default": "23:59", "info": "24-hour HH:MM format, in the selected timezone." },
+    { "type": "select", "id": "timezone", "label": "Countdown timezone", "default": "0", "options": [{ "value": "-8", "label": "UTC−8" }, { "value": "-5", "label": "UTC−5" }, { "value": "0", "label": "UTC (Ghana)" }, { "value": "1", "label": "UTC+1" }, { "value": "5.5", "label": "UTC+5:30" }, { "value": "8", "label": "UTC+8 (China)" }] },
+    { "type": "select", "id": "expiry_behavior", "label": "When countdown ends", "default": "hide", "info": "Display only. Does not end Shopify discounts or change product prices.", "options": [{ "value": "hide", "label": "Hide countdown" }, { "value": "zero", "label": "Keep showing zero" }] },
+    { "type": "range", "id": "padding_top", "label": "Top spacing", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 40 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom spacing", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 40 }
+  ],
+  "presets": [{ "name": "Limited-time deals" }]
+}
+{% endschema %}

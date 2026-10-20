@@ -285,7 +285,7 @@
                     x-show="!isFocusedSearchForm"
                   {% endif %}
                 >
-                  {%- render 'icon-all', icon: 'icon-search' -%}
+                  {% if type == 'desktop' %}<img class="maxbuy-header__desktop-art" src="{{ 'maxbuy-header-search.svg' | asset_url }}" width="17.9994" height="18.0012" alt="">{% endif %}{%- render 'icon-all', icon: 'icon-search' -%}
                 </span>
                 {% if type == 'mobile' and use_full_layout == false %}
                   <span

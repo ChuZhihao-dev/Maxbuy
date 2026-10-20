@@ -14,105 +14,85 @@
     "footer": {
       "type": "footer",
       "blocks": {
-        "email_footer_3VCKXg": {
+        "company": {
+          "type": "link_list",
+          "settings": {
+            "open_by_default": true,
+            "number_of_columns_wide": 1,
+            "heading_menu": "Company",
+            "menu": "company",
+            "menu_desktop_layout": "vertical",
+            "menu_labels": "About Us\nOur Branches\nBlog"
+          }
+        },
+        "contact": {
+          "type": "link_list",
+          "settings": {
+            "open_by_default": true,
+            "number_of_columns_wide": 1,
+            "heading_menu": "Contact Us",
+            "menu": "contact-us",
+            "menu_desktop_layout": "vertical",
+            "menu_labels": ""
+          }
+        },
+        "order": {
+          "type": "link_list",
+          "settings": {
+            "open_by_default": true,
+            "number_of_columns_wide": 1,
+            "heading_menu": "Order",
+            "menu": "order",
+            "menu_desktop_layout": "vertical",
+            "menu_labels": ""
+          }
+        },
+        "subscribe": {
           "type": "email_footer",
           "settings": {
-            "open_by_default": false,
-            "number_of_columns_wide": 5,
-            "heading_email": "Sign up for our newsletter to be the first to receive news, inspiration and take part in exclusive offers.",
-            "subtext_email": "<p>Subscribe to our newsletter</p>",
-            "show_social_icons": false
-          }
-        },
-        "text_MtiyQ6": {
-          "type": "text",
-          "settings": {
-            "open_by_default": false,
-            "number_of_columns_wide": 1,
-            "heading_text": "Need help? Call now!",
-            "subtext": "<p>Need help? Call now!</p><h3>(+84) 123 4567</h3><p>Address:</p><p>75 9th Ave, New York, NY 10011-7006</p><p>Email:</p><p>support@example.com</p>",
-            "show_social_icons": false,
-            "image_width": 100,
-            "link_image_footer": "",
-            "open_new_window": false
-          }
-        },
-        "link_list_iLj4Xy": {
-          "type": "link_list",
-          "settings": {
-            "open_by_default": false,
-            "number_of_columns_wide": 1,
-            "heading_menu": "Quick links",
-            "menu": "footer",
-            "menu_desktop_layout": "vertical"
-          }
-        },
-        "link_list_TdTjqW": {
-          "type": "link_list",
-          "settings": {
-            "open_by_default": false,
-            "number_of_columns_wide": 1,
-            "heading_menu": "Quick links",
-            "menu": "footer",
-            "menu_desktop_layout": "vertical"
-          }
-        },
-        "link_list_9jaDpd": {
-          "type": "link_list",
-          "settings": {
-            "open_by_default": false,
-            "number_of_columns_wide": 1,
-            "heading_menu": "Quick links",
-            "menu": "footer",
-            "menu_desktop_layout": "vertical"
-          }
-        },
-        "text_JwHLxc": {
-          "type": "text",
-          "settings": {
-            "open_by_default": false,
-            "number_of_columns_wide": 1,
-            "heading_text": "Connect with Us",
-            "subtext": "",
+            "open_by_default": true,
+            "number_of_columns_wide": 2,
+            "heading_email": "Join Waitlist /Subscription",
+            "subtext_email": "",
             "show_social_icons": true,
-            "image_width": 100,
-            "link_image_footer": "",
-            "open_new_window": false
+            "footer_logo": "shopify://shop_images/maxbuy_logo.svg",
+            "consent_text": "By subscribing, you agree to our terms & conditions.",
+            "consent_link": "",
+            "consent_link_label": "Terms & Conditions"
           }
         },
-        "subfooter_cEETBB": {
+        "bottom": {
           "type": "subfooter",
           "settings": {
-            "show_block_divider": true,
+            "show_block_divider": false,
             "show_payment_icons": true,
-            "payment_icon": "",
+            "payment_icon": "discover,paypal,jcb,unionpay,visa",
             "show_copyright": true,
             "show_powered_by": true,
             "custom_copyright_text": "",
-            "padding_top": 20,
-            "padding_bottom": 20,
+            "padding_top": 0,
+            "padding_bottom": 24,
             "enable_country_selector": true,
             "enable_language_selector": true,
-            "enable_follow_on_shop": true
+            "enable_follow_on_shop": true,
+            "policy_menu": ""
           }
         }
       },
       "block_order": [
-        "email_footer_3VCKXg",
-        "text_MtiyQ6",
-        "link_list_iLj4Xy",
-        "link_list_TdTjqW",
-        "link_list_9jaDpd",
-        "text_JwHLxc",
-        "subfooter_cEETBB"
+        "company",
+        "contact",
+        "order",
+        "subscribe",
+        "bottom"
       ],
       "settings": {
         "number_of_columns": 5,
-        "spacing": 32,
+        "spacing": 64,
         "content_alignment": "left",
         "hide_footer_on_page": "",
         "section_width": "page-width",
-        "top_padding": 72,
+        "top_padding": 32,
         "bottom_padding": 0,
         "show_section_divider": false
       }

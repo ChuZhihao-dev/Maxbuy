@@ -58,6 +58,136 @@
     },
     "header": {
       "type": "header",
+      "blocks": {
+        "tree_menu_XXtghB": {
+          "type": "tree_menu",
+          "settings": {
+            "heading": "Series",
+            "menu": "customer-account-main-menu",
+            "menu_item_link": "",
+            "open_new_window": false,
+            "enable_on_mobile": true,
+            "label": "",
+            "icon": "authentic",
+            "another_icon": "",
+            "label_color": "#ce021e",
+            "label_text_color_light": "#ffffff",
+            "label_color_dark": "#ce021e",
+            "label_text_color_dark": "#ffffff"
+          }
+        },
+        "tree_menu_FQPyyk": {
+          "type": "tree_menu",
+          "settings": {
+            "heading": "Brands",
+            "menu": "customer-account-main-menu",
+            "menu_item_link": "",
+            "open_new_window": false,
+            "enable_on_mobile": true,
+            "label": "New",
+            "icon": "none",
+            "another_icon": "",
+            "label_color": "#1c70ed",
+            "label_text_color_light": "#ffffff",
+            "label_color_dark": "#ce021e",
+            "label_text_color_dark": "#ffffff"
+          }
+        },
+        "tree_menu_tVmaYm": {
+          "type": "tree_menu",
+          "settings": {
+            "heading": "New Arrivals",
+            "menu": "",
+            "menu_item_link": "",
+            "open_new_window": false,
+            "enable_on_mobile": true,
+            "label": "New",
+            "icon": "none",
+            "another_icon": "",
+            "label_color": "#1c70ed",
+            "label_text_color_light": "#ffffff",
+            "label_color_dark": "#ce021e",
+            "label_text_color_dark": "#ffffff"
+          }
+        },
+        "tree_menu_zkr4Ve": {
+          "type": "tree_menu",
+          "settings": {
+            "heading": "Super Deals",
+            "menu": "",
+            "menu_item_link": "",
+            "open_new_window": false,
+            "enable_on_mobile": true,
+            "label": "",
+            "icon": "authentic",
+            "another_icon": "",
+            "label_color": "#ce021e",
+            "label_text_color_light": "#ffffff",
+            "label_color_dark": "#ce021e",
+            "label_text_color_dark": "#ffffff"
+          }
+        },
+        "tree_menu_TW7gQH": {
+          "type": "tree_menu",
+          "settings": {
+            "heading": "Best Sellers",
+            "menu": "",
+            "menu_item_link": "",
+            "open_new_window": false,
+            "enable_on_mobile": true,
+            "label": "HOT",
+            "icon": "none",
+            "another_icon": "",
+            "label_color": "#ed1c24",
+            "label_text_color_light": "#ffffff",
+            "label_color_dark": "#ce021e",
+            "label_text_color_dark": "#ffffff"
+          }
+        },
+        "tree_menu_3Ghqww": {
+          "type": "tree_menu",
+          "settings": {
+            "heading": "Our Branches",
+            "menu": "",
+            "menu_item_link": "",
+            "open_new_window": false,
+            "enable_on_mobile": true,
+            "label": "",
+            "icon": "authentic",
+            "another_icon": "",
+            "label_color": "#ce021e",
+            "label_text_color_light": "#ffffff",
+            "label_color_dark": "#ce021e",
+            "label_text_color_dark": "#ffffff"
+          }
+        },
+        "tree_menu_cHAMcz": {
+          "type": "tree_menu",
+          "settings": {
+            "heading": "About Us",
+            "menu": "customer-account-main-menu",
+            "menu_item_link": "",
+            "open_new_window": false,
+            "enable_on_mobile": true,
+            "label": "",
+            "icon": "authentic",
+            "another_icon": "",
+            "label_color": "#ce021e",
+            "label_text_color_light": "#ffffff",
+            "label_color_dark": "#ce021e",
+            "label_text_color_dark": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "tree_menu_XXtghB",
+        "tree_menu_FQPyyk",
+        "tree_menu_tVmaYm",
+        "tree_menu_zkr4Ve",
+        "tree_menu_TW7gQH",
+        "tree_menu_3Ghqww",
+        "tree_menu_cHAMcz"
+      ],
       "settings": {
         "logo_position": "logo-on-side",
         "sticky_header_type": "on-scroll-up",
@@ -65,10 +195,10 @@
         "reduce_logo_by": 75,
         "logo": "shopify://shop_images/maxbuy_logo.svg",
         "logo_width": 230,
-        "menu": "main-menu",
+        "menu": "",
         "desktop_menu_selection": "hover",
-        "desktop_menu_alignment": "center",
-        "desktop_search_popup_layout": "minimized",
+        "desktop_menu_alignment": "start",
+        "desktop_search_popup_layout": "full",
         "show_search_bar_on_mobile": false,
         "search_color_scheme_light": "",
         "search_color_scheme_dark": "",
@@ -86,12 +216,12 @@
         "highlight_menus": "",
         "highlight_effect": "underline",
         "section_width": "page-width",
-        "padding_top": 12,
-        "padding_bottom": 12,
+        "padding_top": 24,
+        "padding_bottom": 24,
         "show_section_divider": false,
         "display_menu_title": true,
-        "logo_width_mobile": 150,
-        "color_scheme_light": "",
+        "logo_width_mobile": 120,
+        "color_scheme_light": "scheme-823f967a-dfe8-4a0a-8b87-483905b01e19",
         "color_scheme_dark": ""
       }
     }

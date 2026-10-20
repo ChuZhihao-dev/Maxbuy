@@ -1,3 +1,4 @@
+{{ 'maxbuy-header.css' | asset_url | stylesheet_tag }}
 {%- liquid
   assign rtl = false
   if settings.lang_direction contains request.locale.iso_code
@@ -400,7 +401,7 @@
                   <shopify-account menu='{{ section.settings.customer_account_menu }}'>
                     <div slot="signed-out-avatar">
                       <span class="header-account-icon icon w-11 h-10 pl-3 pr-2.5 pt-2.5 pb-2 block">
-                      {% render 'icon-all', icon: 'icon-account' %}
+                      <img class="maxbuy-header__desktop-art" src="{{ 'maxbuy-header-account.svg' | asset_url }}" width="32" height="32" alt="">{% render 'icon-all', icon: 'icon-account' %}
                       </span>
                     </div>
                   </shopify-account>
@@ -419,7 +420,7 @@
                   tabindex="0"
                 >
                   <span class="w-6 h-6 lg:w-7 lg:h-7 px-0.5 py-0.5 inline-block icon color-text-[rgba(var(--color-heading))] translate-y-0">
-                    {%- render 'icon-cart', icon: settings.cart_icon -%}
+                    <img class="maxbuy-header__desktop-art" src="{{ 'maxbuy-header-bag.svg' | asset_url }}" width="32" height="32" alt="">{%- render 'icon-cart', icon: settings.cart_icon -%}
                   </span>
                   <div id="cart-icon-bubble" class="relative -left-0.5 rtl:left-0 rtl:-right-0.5">
                     <div class="cart-bubble__container empty:hidden color-bg-[rgba(var(--color-cart))] color-text-[rgba(var(--color-cart-text))] h-5 w-5 lg:h-6 lg:w-6 rounded-full text-x-small" data-count-item="{{ cart.item_count }}">

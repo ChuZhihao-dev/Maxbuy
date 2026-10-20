@@ -1,0 +1,34 @@
+.maxbuy-header__desktop-art { display: none; }
+@media (min-width: 1024px) {
+  .section-header .x-header { background: #fff; color: #000; font-family: 'Maxbuy Footer Montserrat', Montserrat, sans-serif; }
+  .section-header .header-top, .section-header .header-bottom { max-width: 1232px; margin-inline: auto; }
+  .section-header .header-top { grid-template-columns: 234px minmax(0, 594px) auto; column-gap: clamp(24px, 3vw, 48px); }
+  .section-header .header-bottom { margin-top: 28px; }
+  .section-header .main-menu-nav { width: 100%; }
+  .section-header .main-nav { display: flex; justify-content: space-between; width: 100%; gap: 16px; }
+  .section-header .main-nav > li { flex: 0 0 auto; }
+  .section-header .main-nav .item-spacing { padding-inline: 0; font-size: 16px; font-weight: 500; color: #000; }
+  .section-header .header-item { gap: 12px; }
+  .section-header .header-icon-cart { order: 2; }
+  .section-header .header-item > .hidden.lg\:flex { order: 3; }
+  .section-header .header-account-menu { margin: 0; }
+  .section-header .header-account-icon, .section-header .header-icon-cart > a > .icon { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; padding: 0; }
+  .section-header .maxbuy-header__desktop-art { display: block; max-width: none; }
+  .section-header .header-account-icon > svg, .section-header .header-icon-cart > a > .icon > svg { display: none; }
+  .section-header #FormSearch__desktop:not(.is-open) .header-search-inner { height: 47px; padding: 0; border: 0; border-radius: 8px; background: #fff; }
+  .section-header #FormSearch__desktop:not(.is-open) .header-search-refined { margin: 0; flex-shrink: 0; }
+  .section-header #FormSearch__desktop:not(.is-open) .select-button { height: 47px; width: 172px; padding: 0 20px; gap: 12px; border-radius: 8px 0 0 8px; background: rgb(0 0 0 / 10%); color: #000; font-size: 14px; font-weight: 600; }
+  .section-header #FormSearch__desktop:not(.is-open) .form-search { position: relative; min-width: 0; }
+  .section-header #FormSearch__desktop:not(.is-open) .input-search { height: 47px; padding: 0 76px 0 20px; border: 1px solid rgb(0 0 0 / 10%); border-radius: 0 8px 8px 0; font-size: 14px; font-weight: 500; }
+  .section-header #FormSearch__desktop:not(.is-open) .btn-search { display: flex; align-items: center; justify-content: center; width: 56px; height: 47px; padding: 0; right: 0; border-radius: 0 8px 8px 0; background: #ed1c24; color: #fff; }
+  .section-header #FormSearch__desktop .btn-search > span > svg { display: none; }
+  .section-header #FormSearch__desktop:not(.is-open) .search__speech { display: none; }
+  .announcement { background: #ed1c24; color: #fff; padding-block: 0; min-height: 36px; font: 600 14px/1.06 'Maxbuy Footer Montserrat', Montserrat, sans-serif; }
+  .announcement > div { min-height: 36px; }
+}
+.maxbuy-header__label-tail { display: none; }
+@media (min-width: 1024px) {
+  .section-header .header-label__wrapper { border-radius: 0; box-shadow: none; padding: 0 2px; font-size: 10px; font-weight: 600; line-height: 1.06; }
+  .section-header .header-label__wrapper:has(.maxbuy-header__label-tail)::before { display: none; }
+  .section-header .maxbuy-header__label-tail { display: block; position: absolute; top: 100%; left: 0; }
+}

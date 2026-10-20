@@ -10,7 +10,7 @@
 {
   "current": {
     "theme_mode_enabled": true,
-    "theme_mode_mode": "switch",
+    "theme_mode_mode": "auto",
     "color_schemes_light": "scheme-1",
     "header_icon": "#100f0f",
     "color_cart_dot": "#2d4895",
@@ -343,6 +343,26 @@
           "line_and_border_color": "#f1f1f1",
           "heading_highlight": "#0f398b",
           "background": "#f7f7f7",
+          "background_gradient": "",
+          "button": "#2d4895",
+          "button_label": "#ffffff",
+          "button_hover": "#0f398b",
+          "button_label_hover": "#ffffff",
+          "secondary_button": "#e7e7e7",
+          "secondary_button_label_color": "#393838",
+          "secondary_button_hover": "#d6d6d6",
+          "secondary_button_label_hover": "#393838",
+          "link_button_color": "#0f398b",
+          "link_button_label_hover": "#ca3333"
+        }
+      },
+      "scheme-823f967a-dfe8-4a0a-8b87-483905b01e19": {
+        "settings": {
+          "heading": "#000000",
+          "text": "#000000",
+          "line_and_border_color": "#f1f1f1",
+          "heading_highlight": "#0f398b",
+          "background": "#FFFFFF",
           "background_gradient": "",
           "button": "#2d4895",
           "button_label": "#ffffff",
