@@ -214,9 +214,11 @@ if(window.Maximize.checkFileNotLoaded()) {
                 if (mediaItem.dataset.mediaType == 'image' || mediaItem.dataset.mediaType == 'video') {
                   const imageEl = mediaItem.querySelector('img');
                   if (imageEl) {
-                    const srcset = isTwoColumns ? imageEl.dataset.srcsetInTwoColumns : imageEl.dataset.srcset;
+                    const isFeaturedGridMedia = mediaGalleryWrapperEle.dataset.featuredGrid === 'true' && mediaItem === this.mediaItemsShow[0];
+                    const srcset = isTwoColumns && !isFeaturedGridMedia ? imageEl.dataset.srcsetInTwoColumns : imageEl.dataset.srcset;
+                    const imageSizes = isFeaturedGridMedia ? this.mediaWrapper.dataset.sizes : sizes;
                     if (srcset) imageEl.setAttribute('srcset', srcset);
-                    if (sizes) imageEl.setAttribute('sizes', sizes);
+                    if (imageSizes) imageEl.setAttribute('sizes', imageSizes);
                   }
                 }
               })

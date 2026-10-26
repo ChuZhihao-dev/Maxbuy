@@ -18,6 +18,7 @@
   @param [is_active_media] - {Boolean} True if this media is the currently active
   @param [number_media_show] - {Number} Number of media items to show (product info only)
   @param [is_show_media_with_variant_selected] - {Boolean} True if showing media based on selected variant
+  @param [is_featured_grid_media] - {Boolean} First visible media uses the full desktop grid width
 
   @example
   {%- render 'media-of-media-gallery',
@@ -41,6 +42,9 @@
 
 {%- liquid
   assign loading = 'loading="lazy"'
+  if is_featured_grid_media
+    assign loading = 'loading="eager" fetchpriority="high"'
+  endif
   assign media_alt = media.alt | default: product.title
   assign show_controls = show_sound_control
 
@@ -153,7 +157,7 @@
     {%- endcapture -%}
     <img
       src="{{ media.preview_image | image_url: width: 1780 }}"
-      {% if number_media_show and desktop_layout != '1_column' and number_media_show > 1  %}
+      {% if number_media_show and desktop_layout != '1_column' and number_media_show > 1 and is_featured_grid_media != true %}
         srcset="{{ srcset_in_2_columns }}"
         sizes="{{ sizes_in_2_columns }}"
       {% else %}
@@ -220,7 +224,7 @@
           <img
             src="{{ media.preview_image | image_url: width: 1780 }}"
             alt="{{ media.preview_image.alt | default: product.title | escape }}"
-            {% if number_media_show and desktop_layout != '1_column' and number_media_show > 1  %}
+            {% if number_media_show and desktop_layout != '1_column' and number_media_show > 1 and is_featured_grid_media != true %}
               srcset="{{ srcset_in_2_columns }}"
               sizes="{{ sizes_in_2_columns }}"
             {% else %}

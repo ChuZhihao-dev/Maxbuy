@@ -81,7 +81,7 @@
           {%- render 'quantity-rule-note', variant: variant, class: 'mb-1 md:mb-2.5 mt-1 md:mt-2.5' -%}
         {%- endif -%}
         {% comment %} end quantity rule {% endcomment %}
-        <div class="w-full flex flex-row flex-wrap gap-1.5">
+        <div class="product-form__purchase-row w-full flex flex-row flex-wrap gap-1.5">
           {% if show_quantity_selector and settings.hide_cart == false and login_hide_price != "true" %}
             {% render 'product-quantity',
               section: section,
@@ -94,7 +94,7 @@
             %}
           {% endif %}
           {%- unless settings.hide_cart or login_hide_price == 'true' -%}
-            <div class="grow">
+            <div class="product-form__submit-wrapper grow">
               <custom-button>
                 <button
                   class="product-form__btn-add-to-cart button button-secondary button-large w-full relative h-full rounded-corners-md"
@@ -221,7 +221,7 @@
           {% endif %}
         </div>
         {% if block.settings.show_dynamic_checkout and settings.hide_cart == false and login_hide_price != 'true' %}
-          <div class="mt-2.5 w-full relative">
+          <div class="product-form__checkout-wrapper mt-2.5 w-full relative">
             <custom-button data-check-dom-change="true">
               <div 
                 class="product-form__dynamic-checkout w-full button-large"

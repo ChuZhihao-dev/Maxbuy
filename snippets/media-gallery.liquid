@@ -9,6 +9,7 @@
   @param block_labels_and_badge - {Block} Block Liquid object used for labels_and_badge
   @param is_show_preorder - {Boolean} Whether to display the pre order
   @param desktop_layout - {String} Media gallery layouts on desktop devices
+  @param [featured_grid] - {Boolean} Show the first visible media full width in the desktop grid
   @param desktop_carousel_option - {String} Carousel navigation layout style on desktop devices
   @param desktop_carousel_position - {String} Carousel navigation position on desktop devices
   @param show_navigation_arrows - {Boolean} Show previous/next navigation arrows
@@ -50,6 +51,10 @@
     assign is_rounded_corners = true
   endif
   assign enable_desktop_slider = false
+  assign use_featured_grid = false
+  if featured_grid and desktop_layout == 'grid_2_columns'
+    assign use_featured_grid = true
+  endif
 
   if desktop_layout == '2_columns' and desktop_carousel_option == 'thumbnail'
     assign desktop_carousel_position = 'bottom'
@@ -180,6 +185,7 @@
     :data-item-count="listMediaApplyShowMediaWithVariantSelected.length"
     data-is-grid-layout-on-desktop="{% if enable_desktop_slider %}false{% else %}true{% endif %}"
     data-is-scrolling-on-desktop="false"
+    {% if use_featured_grid %}data-featured-grid="true"{% endif %}
     :data-is-first-loaded="!isFirstLoading"
   >
     <custom-button>
@@ -406,11 +412,12 @@
         data-desktop-gap="{% if desktop_layout == '2_columns' %}4px{% else %}0px{% endif %}"
         data-scroll-to-change-image="false"
         data-desktop-layout="{{ desktop_layout }}"
-        {% if desktop_layout != '1_column' and is_show_media_with_variant_selected %}
+        {% if use_featured_grid or desktop_layout != '1_column' and is_show_media_with_variant_selected %}
           data-sizes="{{ sizes }}"
           data-sizes-in-two-columns="{{ sizes_in_2_columns }}"
         {% endif %}
       >
+        {% assign featured_grid_media_rendered = false %}
         {% for media in product.media %}
           {% liquid
             if media.alt contains "#"
@@ -427,6 +434,13 @@
             endif
 
             assign media_id = '||' | append: media.id | append: '||'
+            assign is_featured_grid_media = false
+            if use_featured_grid and featured_grid_media_rendered == false
+              if is_show_media_with_variant_selected == false or list_media_show contains media_id
+                assign is_featured_grid_media = true
+                assign featured_grid_media_rendered = true
+              endif
+            endif
           %}
           
           <div
@@ -468,7 +482,8 @@
               desktop_carousel_position: desktop_carousel_position,
               is_active_media: is_active_media,
               number_media_show: number_media_show,
-              is_show_media_with_variant_selected: is_show_media_with_variant_selected
+              is_show_media_with_variant_selected: is_show_media_with_variant_selected,
+              is_featured_grid_media: is_featured_grid_media
             -%}
           </div>
         {% endfor %}
