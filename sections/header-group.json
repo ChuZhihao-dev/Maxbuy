@@ -165,7 +165,7 @@
           "type": "tree_menu",
           "settings": {
             "heading": "About Us",
-            "menu": "customer-account-main-menu",
+            "menu": "",
             "menu_item_link": "",
             "open_new_window": false,
             "enable_on_mobile": true,
@@ -198,7 +198,7 @@
         "menu": "",
         "desktop_menu_selection": "hover",
         "desktop_menu_alignment": "start",
-        "desktop_search_popup_layout": "full",
+        "desktop_search_popup_layout": "minimized",
         "show_search_bar_on_mobile": false,
         "search_color_scheme_light": "",
         "search_color_scheme_dark": "",

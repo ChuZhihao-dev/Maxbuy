@@ -42,6 +42,8 @@
     {% liquid
       assign max_column_width_tablet = 3
       assign max_column_width_desktop = section.settings.number_of_columns
+      assign footer_social_icons = ''
+      assign footer_payment_icons = ''
       if section.settings.number_of_columns < max_column_width_tablet
         assign max_column_width_tablet = section.settings.number_of_columns
       endif
@@ -271,10 +273,10 @@
                     </span>
                   </div>
 
-                  {%- capture social_icons -%}
+                  {%- capture footer_social_icons -%}
                     {%- if block.settings.show_social_icons -%}
-                      <div class="mt-4 text-center md:text-{{ section.settings.content_alignment }} hidden md:block">
-                        {% render 'social-media', icon_height: 24, class: " flex-wrap gap-2.5", content_alignment: section.settings.content_alignment %}
+                      <div class="maxbuy-footer__social">
+                        {% render 'footer-social-media' %}
                       </div>
                     {%- endif -%}
                   {%- endcapture -%}
@@ -294,9 +296,6 @@
                         </div>
                       {% endif %}
 
-                      {% if block.settings.number_of_columns_wide >= section.settings.number_of_columns %}
-                        {{ social_icons }}
-                      {% endif %}
                     </div>
                     {%- form 'customer', id: 'ContactFooter', class: 'footer__newsletter newsletter-form grow flex-1 mx-0.5' -%}
                       <input type="hidden" name="contact[tags]" value="newsletter">
@@ -382,11 +381,6 @@
                         <span>{{ block.settings.consent_text | escape }}{% if block.settings.consent_link != blank %} <a href="{{ block.settings.consent_link }}">{{ block.settings.consent_link_label | escape }}</a>{% endif %}</span>
                       </label>
                     {%- endform -%}
-                    {%- if block.settings.show_social_icons -%}
-                      <div class="mt-4 text-center md:text-{{ section.settings.content_alignment }}{% if block.settings.number_of_columns_wide >= section.settings.number_of_columns %} md:hidden{% endif %}">
-                        {% render 'social-media', icon_height: 24, class: " flex-wrap gap-2.5", content_alignment: section.settings.content_alignment %}
-                      </div>
-                    {%- endif -%}
                   </div>
                   </div>
               {%- when 'image' -%}
@@ -483,7 +477,10 @@
               {%- when 'subfooter' -%}
                 {% liquid
                   assign show_subfooter_left = false
-                  if block.settings.enable_country_selector or block.settings.enable_language_selector
+                  if block.settings.enable_country_selector and shop.enabled_currencies.size > 1
+                    assign show_subfooter_left = true
+                  endif
+                  if block.settings.enable_language_selector and shop.published_locales.size > 1
                     assign show_subfooter_left = true
                   endif
                   if shop.features.follow_on_shop? and block.settings.enable_follow_on_shop and show_subfooter_left == false
@@ -516,7 +513,7 @@
                     {%- if block.settings.show_payment_icons or show_subfooter_left %} md:flex-row{% endif -%}"
                 >
                   {%- if show_subfooter_left -%}
-                    <div class="text-left rtl:text-right lg:pr-5 rtl:lg:pl-5">
+                    <div class="maxbuy-footer__localization text-left rtl:text-right lg:pr-5 rtl:lg:pl-5">
                       <div class="inline-flex flex-col items-center gap-2.5 md:flex-row lg:gap-4">
                         {% if subfooter_localization > 0 %}
                           <div class="subfooter-localization inline-block whitespace-nowrap">
@@ -558,8 +555,9 @@
                   {%- endcapture -%}
                   {{ copy_right_block }}
                   {% if block.settings.policy_menu != blank %}<ul class="maxbuy-footer__policies" role="list">{% for link in block.settings.policy_menu.links %}<li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>{% endfor %}</ul>{% endif %}
+                  {%- capture footer_payment_icons -%}
                   {%- if block.settings.show_payment_icons -%}
-                    <ul class="flex justify-center gap-y-2 flex-wrap{% unless block.settings.enable_language_selector or block.settings.enable_country_selector %} mt-5 md:mt-0{% endunless %}" role="list">
+                    <ul class="maxbuy-footer__payments" role="list" aria-label="{{ 'general.cart.payment_methods' | t }}">
                       {% if block.settings.payment_icon != blank %}
                         {% assign enabled_payment_types =  block.settings.payment_icon | remove: ' ' | split: ',' %}
                         {%- for type in enabled_payment_types -%}
@@ -576,6 +574,7 @@
                       {% endif %}
                     </ul>
                   {%- endif -%}
+                  {%- endcapture -%}
                 </div>
               {%- when 'enlarged_store_name' -%}
                 {%- liquid 
@@ -737,6 +736,12 @@
             {%- endcase -%}
           </div>
         {%- endfor -%}
+        {%- if footer_social_icons != blank or footer_payment_icons != blank -%}
+          <div class="maxbuy-footer__media">
+            {{ footer_social_icons }}
+            {{ footer_payment_icons }}
+          </div>
+        {%- endif -%}
       </div>
       {%- endif -%}
     </div>

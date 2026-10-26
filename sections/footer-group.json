@@ -11,6 +11,108 @@
   "name": "Footer",
   "type": "footer",
   "sections": {
+    "text_columns_with_icons_YkmAkW": {
+      "type": "text-columns-with-icons",
+      "blocks": {
+        "column_VMgK97": {
+          "type": "column",
+          "settings": {
+            "feature_icon": "shipping",
+            "icon": "free-shipping",
+            "another_icon": "",
+            "title": "Free Shipping",
+            "title_link": "",
+            "open_new_window": false,
+            "heading_size": "medium",
+            "text": "<p>Convenient delivery on all orders</p>",
+            "highlight_effect": "underline",
+            "text_transform": "none"
+          }
+        },
+        "column_mQyFAf": {
+          "type": "column",
+          "settings": {
+            "feature_icon": "support",
+            "icon": "live-chat",
+            "another_icon": "",
+            "title": "24/7 Support",
+            "title_link": "",
+            "open_new_window": false,
+            "heading_size": "medium",
+            "text": "<p>We’re here whenever you need us</p>",
+            "highlight_effect": "underline",
+            "text_transform": "none"
+          }
+        },
+        "column_WKWUMm": {
+          "type": "column",
+          "settings": {
+            "feature_icon": "payment",
+            "icon": "money-back",
+            "another_icon": "",
+            "title": "Flexible Payment",
+            "title_link": "",
+            "open_new_window": false,
+            "heading_size": "medium",
+            "text": "<p>Buy now and pay over time</p>",
+            "highlight_effect": "underline",
+            "text_transform": "none"
+          }
+        },
+        "column_CLgNH8": {
+          "type": "column",
+          "settings": {
+            "feature_icon": "trust",
+            "icon": "payment-secured",
+            "another_icon": "",
+            "title": "Trusted Brands",
+            "title_link": "",
+            "open_new_window": false,
+            "heading_size": "medium",
+            "text": "<p>Shop genuine products from leading brands</p>",
+            "highlight_effect": "underline",
+            "text_transform": "none"
+          }
+        }
+      },
+      "block_order": [
+        "column_VMgK97",
+        "column_mQyFAf",
+        "column_WKWUMm",
+        "column_CLgNH8"
+      ],
+      "settings": {
+        "title": "",
+        "heading_size": "medium",
+        "heading_tag": "h2",
+        "highlight_effect": "underline",
+        "text_transform": "none",
+        "border_column": "line_vertical",
+        "column_content_alignment": "center",
+        "icon_position": "next",
+        "icon_size": 36,
+        "enable_desktop_slider": true,
+        "swipe_on_mobile": false,
+        "change_bar_every": 0,
+        "show_navigation_arrows": true,
+        "column_layout_desktop": 4,
+        "section_height_desktop": "md:py-7",
+        "spacing_desktop": 28,
+        "column_layout_mobile": "2",
+        "section_height_mobile": "py-5",
+        "spacing_mobile": 16,
+        "section_width": "page-width",
+        "padding_top": 28,
+        "padding_bottom": 28,
+        "show_section_divider": false,
+        "color_scheme_light": "",
+        "background_color_light": "rgba(0,0,0,0)",
+        "color_icon_light": "rgba(0,0,0,0)",
+        "color_scheme_dark": "",
+        "background_color_dark": "rgba(0,0,0,0)",
+        "color_icon_dark": "rgba(0,0,0,0)"
+      }
+    },
     "footer": {
       "type": "footer",
       "blocks": {
@@ -75,7 +177,7 @@
             "enable_country_selector": true,
             "enable_language_selector": true,
             "enable_follow_on_shop": true,
-            "policy_menu": ""
+            "policy_menu": "policy"
           }
         }
       },
@@ -99,6 +201,7 @@
     }
   },
   "order": [
+    "text_columns_with_icons_YkmAkW",
     "footer"
   ]
 }

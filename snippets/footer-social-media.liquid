@@ -1,0 +1,43 @@
+{%- assign footer_social_platforms = 'facebook,instagram,tiktok,youtube,twitter,pinterest,tumblr,snapchat,vimeo,linkedin' | split: ',' -%}
+<ul class="social" role="list">
+  {%- for platform in footer_social_platforms -%}
+    {%- assign setting_key = 'social_' | append: platform | append: '_link' -%}
+    {%- if settings[setting_key] != blank -%}
+      {%- assign label_key = 'general.social.links.' | append: platform -%}
+      <li class="social-link">
+        <a href="{{ settings[setting_key] }}" target="_blank" rel="noopener" aria-label="{{ label_key | t }}">
+          {%- if forloop.index <= 5 -%}
+            {%- liquid
+              assign icon_width = 20
+              assign icon_height = 20
+              case platform
+                when 'instagram'
+                  assign icon_width = 20.0004
+                when 'tiktok'
+                  assign icon_width = 17.4994
+                when 'youtube'
+                  assign icon_width = 24
+                  assign icon_height = 16
+                when 'twitter'
+                  assign icon_height = 18.0782
+              endcase
+              assign icon_asset = 'footer-social-' | append: platform | append: '.svg'
+            -%}
+            <span class="maxbuy-footer__social-icon" style="--footer-social-icon: url('{{ icon_asset | asset_url }}')">
+              <img src="{{ icon_asset | asset_url }}" width="{{ icon_width }}" height="{{ icon_height }}" alt="" loading="lazy">
+            </span>
+          {%- else -%}
+            {%- assign icon_name = 'icon-' | append: platform -%}
+            {% render 'icon-media', icon: icon_name %}
+          {%- endif -%}
+        </a>
+      </li>
+    {%- endif -%}
+  {%- endfor -%}
+  {%- if settings.email_address != blank -%}
+    <li class="social-link"><a href="mailto:{{ settings.email_address }}" aria-label="{{ 'accessibility.email' | t }}">{% render 'icon-all', icon: 'icon-email' %}</a></li>
+  {%- endif -%}
+  {%- if settings.phone_number != blank -%}
+    <li class="social-link"><a href="tel:{{ settings.phone_number }}" aria-label="{{ 'accessibility.phone_number' | t }}">{% render 'icon-all', icon: 'icon-phone' %}</a></li>
+  {%- endif -%}
+</ul>

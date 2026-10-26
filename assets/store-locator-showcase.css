@@ -157,7 +157,7 @@
 .store-showcase__actions a { color: #fff; text-underline-offset: 3px; }
 .store-showcase__actions button { min-height: 40px; padding: 10px 18px; border: 0; border-radius: 8px; background: var(--locator-accent); color: #fff; font: inherit; font-weight: 700; cursor: pointer; }
 .store-showcase__actions button:disabled { cursor: default; opacity: .7; }
-.store-showcase button:focus-visible, .store-showcase a:focus-visible, .store-showcase input:focus-visible { outline: 2px solid var(--locator-accent); outline-offset: 3px; }
+.store-showcase button:focus-visible, .store-showcase a:focus-visible, .store-showcase input:focus-visible { outline: none; }
 .store-showcase .store-showcase__card-select:focus-visible { outline-offset: -3px; }
 .store-showcase__sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
 [dir='rtl'] .store-showcase__arrow { transform: rotate(180deg); }

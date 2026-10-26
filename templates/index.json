@@ -440,7 +440,7 @@
         "best_sellers_style": true,
         "best_sellers_mobile_rows": 3,
         "best_sellers_button_label": "Shop Now",
-        "best_sellers_badge_label": "Special Offer",
+        "best_sellers_badge_label": "Special Offer\nNew\nHOT",
         "subheading": "",
         "heading": "Today's Best Sellers",
         "heading_size": "medium",
@@ -870,21 +870,15 @@
     },
     "store_locator_maxbuy": {
       "type": "store-locator-showcase",
-      "name": "Store locator showcase",
-      "settings": {
-        "heading": "Find A Maxbuy Store Near You",
-        "accent_color": "#ed1c24",
-        "background_color": "#000000",
-        "padding_top": 39,
-        "padding_bottom": 74,
-        "show_store_actions": false
-      },
       "blocks": {
         "store_location_RNBcrU": {
           "type": "store_location",
           "settings": {
             "title": "Store branch",
             "location_address": "75 9th Ave, New York, NY 10011-7006",
+            "phone": "",
+            "opening_hours": "",
+            "search_keywords": "",
             "text": "<p>(+84) 123 456 789<br/><br/>Store hours<br/>Mon - Fri, 8:30am - 10:30pm,<br/>Saturday, 8:30am - 10:30pm,<br/>Sunday, Closed</p>"
           }
         },
@@ -892,7 +886,10 @@
           "type": "store_location",
           "settings": {
             "title": "Store branch",
-            "location_address": "75 9th Ave, New York, NY 10011-7006",
+            "location_address": "1842 Maple Avenue, Apt 305, Los Angeles, CA 90017, United States",
+            "phone": "",
+            "opening_hours": "",
+            "search_keywords": "",
             "text": "<p>(+84) 123 456 789<br/><br/>Store hours<br/>Mon - Fri, 8:30am - 10:30pm,<br/>Saturday, 8:30am - 10:30pm,<br/>Sunday, Closed</p>"
           }
         },
@@ -900,7 +897,10 @@
           "type": "store_location",
           "settings": {
             "title": "Store branch",
-            "location_address": "75 9th Ave, New York, NY 10011-7006",
+            "location_address": "2756 Oak Street, Apt 402, San Francisco, CA 94103, United States",
+            "phone": "",
+            "opening_hours": "",
+            "search_keywords": "",
             "text": "<p>(+84) 123 456 789<br/><br/>Store hours<br/>Mon - Fri, 8:30am - 10:30pm,<br/>Saturday, 8:30am - 10:30pm,<br/>Sunday, Closed</p>"
           }
         }
@@ -909,108 +909,32 @@
         "store_location_RNBcrU",
         "store_location_qtCaQB",
         "store_location_pdnLT4"
-      ]
-    },
-    "text_columns_with_icons_bwQ3jk": {
-      "type": "text-columns-with-icons",
-      "blocks": {
-        "column_RxtPfc": {
-          "type": "column",
-          "settings": {
-            "feature_icon": "shipping",
-            "icon": "free-shipping",
-            "another_icon": "",
-            "title": "Free Shipping",
-            "title_link": "",
-            "open_new_window": false,
-            "heading_size": "medium",
-            "text": "<p>Convenient delivery on all orders</p>",
-            "highlight_effect": "underline",
-            "text_transform": "none"
-          }
-        },
-        "column_RnjjbT": {
-          "type": "column",
-          "settings": {
-            "feature_icon": "support",
-            "icon": "live-chat",
-            "another_icon": "",
-            "title": "24/7 Support",
-            "title_link": "",
-            "open_new_window": false,
-            "heading_size": "medium",
-            "text": "<p>We’re here whenever you need us</p>",
-            "highlight_effect": "underline",
-            "text_transform": "none"
-          }
-        },
-        "column_hapnKf": {
-          "type": "column",
-          "settings": {
-            "feature_icon": "payment",
-            "icon": "money-back",
-            "another_icon": "",
-            "title": "Flexible Payment",
-            "title_link": "",
-            "open_new_window": false,
-            "heading_size": "medium",
-            "text": "<p>Buy now and pay over time</p>",
-            "highlight_effect": "underline",
-            "text_transform": "none"
-          }
-        },
-        "column_N4Ygen": {
-          "type": "column",
-          "settings": {
-            "feature_icon": "trust",
-            "icon": "payment-secured",
-            "another_icon": "",
-            "title": "Trusted Brands",
-            "title_link": "",
-            "open_new_window": false,
-            "heading_size": "medium",
-            "text": "<p>Shop genuine products from leading brands</p>",
-            "highlight_effect": "underline",
-            "text_transform": "none"
-          }
-        }
-      },
-      "block_order": [
-        "column_RxtPfc",
-        "column_RnjjbT",
-        "column_hapnKf",
-        "column_N4Ygen"
       ],
+      "name": "Store locator showcase",
       "settings": {
-        "title": "",
-        "heading_size": "medium",
-        "heading_tag": "h2",
-        "highlight_effect": "underline",
-        "text_transform": "none",
-        "border_column": "line_vertical",
-        "column_content_alignment": "center",
-        "icon_position": "next",
-        "icon_size": 36,
-        "enable_desktop_slider": true,
-        "swipe_on_mobile": false,
-        "change_bar_every": 0,
-        "show_navigation_arrows": true,
-        "column_layout_desktop": 4,
-        "section_height_desktop": "md:py-7",
-        "spacing_desktop": 28,
-        "column_layout_mobile": "2",
-        "section_height_mobile": "py-5",
-        "spacing_mobile": 16,
-        "section_width": "page-width",
-        "padding_top": 28,
-        "padding_bottom": 28,
-        "show_section_divider": false,
-        "color_scheme_light": "",
-        "background_color_light": "rgba(0,0,0,0)",
-        "color_icon_light": "rgba(0,0,0,0)",
-        "color_scheme_dark": "",
-        "background_color_dark": "rgba(0,0,0,0)",
-        "color_icon_dark": "rgba(0,0,0,0)"
+        "heading": "Find A Maxbuy Store Near You",
+        "background_color": "#000000",
+        "accent_color": "#ed1c24",
+        "search_placeholder": "Search By City, Area Or Landmark",
+        "search_label": "Search",
+        "hours_label": "Hours:",
+        "phone_label": "Phone:",
+        "results_label": "{count} stores found",
+        "previous_stores_label": "Previous stores",
+        "next_stores_label": "Next stores",
+        "no_results_text": "No stores found. Try another city, area or landmark.",
+        "no_stores_text": "Store information is coming soon.",
+        "noscript_text": "Please enable JavaScript to search stores and view the map.",
+        "map_label": "Store location",
+        "map_placeholder": "Choose a store to view its location.",
+        "map_loading": "Loading store map…",
+        "map_failed": "The map is taking longer to load. You can open directions in Google Maps.",
+        "show_store_actions": false,
+        "directions_label": "Get directions",
+        "select_store_label": "Set as my store",
+        "selected_store_label": "My store",
+        "padding_top": 39,
+        "padding_bottom": 74
       }
     }
   },
@@ -1022,7 +946,6 @@
     "1791795658c8e5d01d",
     "promotion_grid_rGJcga",
     "promotion_banner_f983xT",
-    "text_columns_with_icons_bwQ3jk",
     "store_locator_maxbuy"
   ]
 }

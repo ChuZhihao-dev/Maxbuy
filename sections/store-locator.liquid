@@ -17,9 +17,10 @@
       display: flex;
       gap: 4px;
       font-style: var(--menu-font-style);
-      font-weight: var(--menu-font-weight);
+      font-weight: 500;
       letter-spacing: var(--menu-letter-spacing);
-      font-size: var(--body-font-size);
+      font-size: 14px;
+      line-height: 1.06;
       align-items: center;
     }
     .x-header-store-selector-desktop:empty::before {
@@ -358,7 +359,7 @@
         <span
           x-show="$store.xStoreMap?.currentStoreSelected !== ''"
           x-text="$store.xStoreMap?.getStoreText()"
-          class="line-clamp-2"
+          class="maxbuy-header__location-name"
         ></span>
         {% if section.blocks.size > 1 %}
           <span x-show="$store.xStoreMap?.currentStoreSelected !== ''" class="w-2.5 h-2.5 {% if is_rtl %} mr-1{% else %} ml-1{% endif %} shrink-0">{% render 'icon-all', icon: 'icon-caret' %}</span>

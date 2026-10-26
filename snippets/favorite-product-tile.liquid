@@ -11,18 +11,21 @@
   endif
 -%}
 <article class="favorite-products__tile favorite-products__tile--{{ index }}" {{ block.shopify_attributes }}>
+  {% if tile_link != blank %}
+    <a class="favorite-products__link" href="{{ tile_link }}" aria-labelledby="FavoriteProductTitle-{{ section.id }}-{{ block.id }}"></a>
+  {% endif %}
   <div class="favorite-products__content">
     {% if tile_badge != blank %}
       <span class="favorite-products__badge"><span>{{ tile_badge | escape }}</span><img class="favorite-products__desktop-icon" src="{{ 'favorite-products-tag-tail.svg' | asset_url }}" width="4" height="4" alt="" loading="lazy"><img class="favorite-products__mobile-icon" src="{{ 'favorite-products-tag-tail-mobile.svg' | asset_url }}" width="1.71288" height="1.71288" alt="" loading="lazy"></span>
     {% endif %}
-    <h3 class="favorite-products__title">{% if tile_link != blank %}<a href="{{ tile_link }}">{{ tile_title | escape }}</a>{% else %}{{ tile_title | default: 'Select a product' | escape }}{% endif %}</h3>
+    <h3 id="FavoriteProductTitle-{{ section.id }}-{{ block.id }}" class="favorite-products__title">{{ tile_title | default: 'Select a product' | escape }}</h3>
     {% if tile_product != blank %}
       <div class="favorite-products__price">
         {% render 'price', product: tile_product, is_show_sale_label: false, price_class: 'favorite-products__current', compare_at_price_class: 'favorite-products__compare', show_b2b_price_label: block.settings.show_b2b_price_label %}
       </div>
     {% endif %}
     {% if tile_link != blank %}
-      <a class="favorite-products__button" href="{{ tile_link }}"><img class="favorite-products__desktop-icon" src="{{ 'favorite-products-cart.svg' | asset_url }}" width="16" height="16" alt="" loading="lazy"><img class="favorite-products__mobile-icon" src="{{ mobile_cart_asset | asset_url }}" width="6.85153" height="6.85153" alt="" loading="lazy"><span>{{ tile_button | escape }}</span></a>
+      <span class="favorite-products__button"><img class="favorite-products__desktop-icon" src="{{ 'favorite-products-cart.svg' | asset_url }}" width="16" height="16" alt="" loading="lazy"><img class="favorite-products__mobile-icon" src="{{ mobile_cart_asset | asset_url }}" width="6.85153" height="6.85153" alt="" loading="lazy"><span>{{ tile_button | escape }}</span></span>
     {% elsif request.design_mode %}
       <span class="favorite-products__setup">Choose a product in this block.</span>
     {% endif %}

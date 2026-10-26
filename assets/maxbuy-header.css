@@ -12,6 +12,13 @@
   .section-header .header-icon-cart { order: 2; }
   .section-header .header-item > .hidden.lg\:flex { order: 3; }
   .section-header .header-account-menu { margin: 0; }
+  .section-header .header-account-menu shopify-account { display: flex; }
+  .section-header .header-account-menu shopify-account::part(signed-out-avatar) { width: 32px; height: 32px; min-width: 32px; min-height: 32px; padding: 0; }
+  /* Keep the avatar out of an inline line box, which adds space below its baseline. */
+  .section-header .header-account-menu [slot="signed-out-avatar"] { display: flex; align-items: center; justify-content: center; line-height: 0; }
+  .section-header .x-header-store-selector-desktop .icon { display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; }
+  .section-header .x-header-store-selector-desktop .icon > svg { width: 24px; height: 24px; }
+  .section-header .maxbuy-header__location-name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 14px; font-weight: 500; line-height: 1.06; }
   .section-header .header-account-icon, .section-header .header-icon-cart > a > .icon { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; padding: 0; }
   .section-header .maxbuy-header__desktop-art { display: block; max-width: none; }
   .section-header .header-account-icon > svg, .section-header .header-icon-cart > a > .icon > svg { display: none; }
@@ -22,13 +29,15 @@
   .section-header #FormSearch__desktop:not(.is-open) .input-search { height: 47px; padding: 0 76px 0 20px; border: 1px solid rgb(0 0 0 / 10%); border-radius: 0 8px 8px 0; font-size: 14px; font-weight: 500; }
   .section-header #FormSearch__desktop:not(.is-open) .btn-search { display: flex; align-items: center; justify-content: center; width: 56px; height: 47px; padding: 0; right: 0; border-radius: 0 8px 8px 0; background: #ed1c24; color: #fff; }
   .section-header #FormSearch__desktop .btn-search > span > svg { display: none; }
+  .section-header #FormSearch__desktop.is-open .btn-search .maxbuy-header__desktop-art { filter: brightness(0); }
   .section-header #FormSearch__desktop:not(.is-open) .search__speech { display: none; }
   .announcement { background: #ed1c24; color: #fff; padding-block: 0; min-height: 36px; font: 600 14px/1.06 'Maxbuy Footer Montserrat', Montserrat, sans-serif; }
   .announcement > div { min-height: 36px; }
 }
 .maxbuy-header__label-tail { display: none; }
+#x-header-container header .header-label__wrapper.h7 { font-weight: 600; }
 @media (min-width: 1024px) {
-  .section-header .header-label__wrapper { border-radius: 0; box-shadow: none; padding: 0 2px; font-size: 10px; font-weight: 600; line-height: 1.06; }
+  .section-header .header-label__wrapper { border-radius: 0; box-shadow: none; padding: 0 2px; font-size: 10px; line-height: 1.06; }
   .section-header .header-label__wrapper:has(.maxbuy-header__label-tail)::before { display: none; }
   .section-header .maxbuy-header__label-tail { display: block; position: absolute; top: 100%; left: 0; }
 }

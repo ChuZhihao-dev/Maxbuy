@@ -13,8 +13,31 @@
   {% render 'product-card', show_discount_percentage: show_price_discount, product: product, section_id: product_id, index: index, index_param: index, columns_desktop: section.settings.desktop_products_per_row, column_mobile: section.settings.mobile_products_per_row, collection: collection, show_vendor: false, show_rating: false, show_quickview: false, disable_badges: true, is_always_active: true %}
   {% if deals_card %}
     {% if on_sale and section.settings.show_discount_percentage %}<span class="flash-deals__badge">{{ product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round }}%OFF<img class="flash-deals__badge-desktop" src="{{ 'best-sellers-badge-tail.svg' | asset_url }}" width="4" height="4" alt=""><img class="flash-deals__badge-mobile" src="{{ 'best-sellers-badge-tail-mobile.svg' | asset_url }}" width="2.41882" height="2.41882" alt=""></span>{% endif %}
-  {% elsif on_sale and block.settings.show_label_badges %}
-    <span class="best-sellers__badge"><span class="best-sellers__badge-desktop">{{ section.settings.best_sellers_badge_label | escape }}</span><img class="best-sellers__badge-tail-desktop" src="{{ 'best-sellers-badge-tail.svg' | asset_url }}" width="4" height="4" alt=""></span>
+  {% elsif block.settings.show_label_badges and product.tags != blank %}
+    {% assign badge_tags = section.settings.best_sellers_badge_label | newline_to_br | strip_newlines | split: '<br />' %}
+    {%- capture product_badges -%}
+      {%- for product_tag in product.tags -%}
+        {%- liquid
+          assign product_tag_key = product_tag | strip | downcase
+          assign show_product_tag = false
+          if section.settings.best_sellers_badge_label == blank
+            assign show_product_tag = true
+          else
+            for badge_tag in badge_tags
+              assign badge_tag_key = badge_tag | strip | downcase
+              if product_tag_key == badge_tag_key
+                assign show_product_tag = true
+                break
+              endif
+            endfor
+          endif
+        -%}
+        {%- if show_product_tag -%}
+          <span class="best-sellers__badge"><span class="best-sellers__badge-desktop">{{ product_tag | escape }}</span><img class="best-sellers__badge-tail-desktop" src="{{ 'best-sellers-badge-tail.svg' | asset_url }}" width="4" height="4" alt=""></span>
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endcapture -%}
+    {% if product_badges != blank %}<div class="best-sellers__badges">{{ product_badges }}</div>{% endif %}
   {% endif %}
   {% if product != blank %}
     <a class="best-sellers__shop" href="{{ product.url | within: collection }}" aria-label="{{ section.settings.best_sellers_button_label | escape }}: {{ product.title | escape }}">
