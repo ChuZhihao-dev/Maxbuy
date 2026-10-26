@@ -1,0 +1,78 @@
+{% liquid
+  assign promotion = product.metafields.custom.promotion.value
+  assign expires_at = 0
+  if promotion.ends_at.type == 'date_time'
+    assign expires_at = promotion.ends_at.value | date: '%s' | plus: 0
+  endif
+  assign now_timestamp = 'now' | date: '%s' | plus: 0
+  assign coupon_code = promotion.code.value | strip
+  assign offer_title = promotion.offer_title.value | strip
+  assign remaining = expires_at | minus: now_timestamp
+  assign valid_promotion = false
+  if promotion != blank and remaining > 0 and coupon_code != blank and offer_title != blank
+    assign valid_promotion = true
+  endif
+%}
+
+{% if valid_promotion %}
+  {{ 'product-promotion.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'product-promotion.js' | asset_url }}" defer="defer"></script>
+  <product-promotion
+    class="product-promotion"
+    data-expires="{{ expires_at | times: 1000 }}"
+    data-copy-label="{{ 'general.global.copy_code' | t | escape }}"
+    data-copied-label="{{ 'general.global.copied' | t | escape }}"
+    data-copy-error="{{ block.settings.copy_error | default: 'Select and copy the code above.' | escape }}"
+    data-animation="{{ block.settings.enable_animation }}"
+    style="--promotion-duration: {{ block.settings.animation_duration | default: 150 }}ms; --promotion-delay: {{ block.settings.animation_delay | default: 0 }}ms;"
+    role="region"
+    aria-label="{{ block.settings.accessible_label | default: 'Limited time offer' | escape }}"
+    {{ block.shopify_attributes }}
+  >
+    <div class="product-promotion__timer" role="timer">
+      {% assign units = 'days,hours,minutes,seconds' | split: ',' %}
+      {% for unit in units %}
+        {% liquid
+          case unit
+            when 'days'
+              assign value = remaining | divided_by: 86400
+              assign unit_label = 'sections.promotion_banner.days' | t
+            when 'hours'
+              assign value = remaining | modulo: 86400 | divided_by: 3600
+              assign unit_label = 'sections.promotion_banner.hours' | t
+            when 'minutes'
+              assign value = remaining | modulo: 3600 | divided_by: 60
+              assign unit_label = 'sections.promotion_banner.mins' | t
+            when 'seconds'
+              assign value = remaining | modulo: 60
+              assign unit_label = 'sections.promotion_banner.secs' | t
+          endcase
+        %}
+        {% unless forloop.first %}<span class="product-promotion__colon" aria-hidden="true">:</span>{% endunless %}
+        <div class="product-promotion__unit">
+          <span class="product-promotion__number" data-time="{{ unit }}">{% if value < 10 %}0{% endif %}{{ value }}</span>
+          <span class="product-promotion__unit-label">{{ unit_label }}</span>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="product-promotion__footer">
+      <div class="product-promotion__offer">
+        <p class="product-promotion__offer-title">{{ offer_title | escape }}</p>
+        {% if promotion.description.value != blank %}
+          <p class="product-promotion__description">{{ promotion.description.value | escape }}</p>
+        {% endif %}
+      </div>
+      <span class="product-promotion__divider" aria-hidden="true">
+        <img src="{{ 'product-promotion-divider.svg' | asset_url }}" width="1" height="36.5" alt="">
+      </span>
+      <div class="product-promotion__coupon">
+        <p class="product-promotion__code-label">{{ block.settings.code_label | default: 'Code' | escape }}</p>
+        <p class="product-promotion__code" data-code tabindex="0">{{ coupon_code | escape }}</p>
+      </div>
+      <button class="product-promotion__copy" type="button" data-copy>{{ 'general.global.copy_code' | t }}</button>
+    </div>
+    <p class="sr-only" data-copy-status role="status" aria-live="polite" aria-atomic="true"></p>
+  </product-promotion>
+{% elsif request.design_mode %}
+  <p class="text-small" {{ block.shopify_attributes }}>Link this product's custom.promotion to an active promotion with ends_at (date and time), code and offer_title. Missing or expired promotions are hidden on the storefront.</p>
+{% endif %}

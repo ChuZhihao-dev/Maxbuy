@@ -1,0 +1,49 @@
+{% liquid
+  assign promise_types = 'shipping,support,payment,trust' | split: ','
+  assign promise_count = 0
+%}
+{% capture promise_items %}
+  {% for promise in promise_types %}
+    {% liquid
+      assign label_key = promise | append: '_label'
+      assign icon_key = promise | append: '_icon'
+      assign link_key = promise | append: '_link'
+      assign label = block.settings[label_key]
+      assign icon = block.settings[icon_key]
+      assign link = block.settings[link_key]
+    %}
+    {% if label == blank %}{% continue %}{% endif %}
+    {% assign promise_count = promise_count | plus: 1 %}
+    <div class="product-service-promises__item" role="listitem">
+      <span class="product-service-promises__icon product-service-promises__icon--{{ promise }}" aria-hidden="true">
+        {% if icon != blank %}
+          <img class="product-service-promises__custom-icon" src="{{ icon | image_url: width: 92 }}" width="46" height="46" loading="lazy" alt="">
+        {% else %}
+          <span class="product-service-promises__frame">
+            <span class="product-service-promises__crop">
+              <img class="product-service-promises__sprite" src="{{ 'feature-strip-icons.png' | asset_url }}" width="2000" height="1500" loading="lazy" alt="">
+            </span>
+          </span>
+        {% endif %}
+      </span>
+      <p class="product-service-promises__label">
+        {% if link != blank %}<a href="{{ link }}">{{ label | escape }}</a>{% else %}{{ label | escape }}{% endif %}
+      </p>
+    </div>
+  {% endfor %}
+{% endcapture %}
+{% if promise_count > 0 %}
+  {{ 'product-service-promises.css' | asset_url | stylesheet_tag }}
+  <div
+    class="product-service-promises"
+    role="list"
+    data-mobile-columns="{{ block.settings.mobile_columns | default: '2' }}"
+    data-animation="{{ block.settings.enable_animation }}"
+    style="--service-promises-duration: {{ block.settings.animation_duration | default: 150 }}ms; --service-promises-delay: {{ block.settings.animation_delay | default: 0 }}ms;"
+    {{ block.shopify_attributes }}
+  >
+    {{ promise_items }}
+  </div>
+{% elsif request.design_mode %}
+  <p class="text-small" {{ block.shopify_attributes }}>Add a service label to display this block.</p>
+{% endif %}

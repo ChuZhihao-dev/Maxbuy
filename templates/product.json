@@ -54,34 +54,6 @@
           "type": "separator",
           "settings": {}
         },
-        "description_7pUwRw": {
-          "type": "description",
-          "settings": {
-            "show_in_tab": false,
-            "open_by_default": false,
-            "make_content_center": false,
-            "icon": "authentic",
-            "another_icon": "",
-            "heading": "Description",
-            "number_of_lines_shown": "none",
-            "read_more_label": "Read more",
-            "see_less_label": "See less"
-          }
-        },
-        "estimate_delivery_MTTqQU": {
-          "type": "estimate_delivery",
-          "settings": {
-            "hide_when_pre_order": false,
-            "message": "<p>Estimated delivery between <strong>earliest_delivery_date and latest_delivery_date.</strong></p>",
-            "enable_tooltip": false,
-            "tooltip_content": "Deliveries to rural areas in Western Australia may take an additional 2–3 business days.",
-            "show_background": true,
-            "background_color_light": "#dceedf",
-            "message_color_light": "rgba(0,0,0,0)",
-            "background_color_dark": "rgba(0,0,0,0)",
-            "message_color_dark": "rgba(0,0,0,0)"
-          }
-        },
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
@@ -119,10 +91,51 @@
             "message_color_dark": "rgba(0,0,0,0)"
           }
         },
+        "promotion_countdown": {
+          "type": "promotion_countdown",
+          "settings": {
+            "accessible_label": "Limited time offer",
+            "code_label": "Code",
+            "copy_error": "Select and copy the code above.",
+            "enable_animation": true,
+            "animation_duration": 150,
+            "animation_delay": 0
+          }
+        },
+        "accessories": {
+          "type": "accessories",
+          "settings": {
+            "heading": "Accessories",
+            "more_label": "More Accessories",
+            "more_link": "",
+            "max_products": 2,
+            "mobile_layout": "compact",
+            "enable_animation": true,
+            "animation_duration": 150,
+            "animation_delay": 0
+          }
+        },
         "space_KKnHzV": {
           "type": "space",
           "settings": {
             "gap": "small"
+          }
+        },
+        "service_promises": {
+          "type": "service_promises",
+          "settings": {
+            "shipping_label": "Free Shipping",
+            "shipping_link": "",
+            "support_label": "24/7 Support",
+            "support_link": "",
+            "payment_label": "Flexible Payment",
+            "payment_link": "",
+            "trust_label": "Trusted Brands",
+            "trust_link": "",
+            "mobile_columns": "2",
+            "enable_animation": true,
+            "animation_duration": 150,
+            "animation_delay": 0
           }
         },
         "collapsible_tab_1": {
@@ -172,12 +185,13 @@
         "identifier",
         "price",
         "separator_nUa9hN",
-        "description_7pUwRw",
-        "estimate_delivery_MTTqQU",
         "variant_picker",
         "inventory_status_8LgeE4",
+        "promotion_countdown",
+        "accessories",
         "buy_buttons",
         "space_KKnHzV",
+        "service_promises",
         "collapsible_tab_1",
         "collapsible_tab_HXkwRD",
         "collapsible_tab_2"

@@ -6,6 +6,10 @@
   @param {boolean} [show_stock_indicator_bar] - Flag to show the visual stock indicator bar for low stock
   @param {boolean} [show_content_center] - Flag to center align the inventory content
   @param {string} [custom_class] - Custom CSS class for the inventory status container
+  @param {string} [inventory_layout] - Use 'bar' for the product-page stock heading, bar and message
+  @param {string} [stock_heading] - Heading for the bar layout
+  @param {number} [stock_bar_capacity] - Stock quantity that fills the visual bar
+  @param {string} [low_stock_text] - Low-stock fallback message for the bar layout; accepts {qty}
 
   @example
   {% render 'inventory-status',
@@ -29,7 +33,12 @@
   assign inventory_quantity = variant.inventory_quantity
   assign inventory_policy = variant.inventory_policy
   assign inventory_management = variant.inventory_management
-  assign percentage_stock_indicator_bar = 100
+  if inventory_layout == 'bar' and low_stock_message == blank
+    assign low_stock_message = low_stock_text | default: 'Hurry, only {qty} items left in stock!'
+    if inventory_quantity == 1
+      assign low_stock_message = low_stock_message | replace: ' items ', ' item '
+    endif
+  endif
 %}
 
 {% liquid
@@ -47,7 +56,6 @@
   elsif inventory_quantity > 0
     if inventory_quantity <= low_stock_threshold
       assign inventory_status = 'low-stock'
-      assign percentage_stock_indicator_bar = inventory_quantity | times: 100 | divided_by: low_stock_threshold
       assign inventory_text = low_stock_message
       if inventory_text != blank
         assign inventory_text = inventory_text | replace: '{qty}', inventory_quantity
@@ -77,6 +85,33 @@
   endif
 %}
 
+{% if inventory_layout == 'bar' %}
+  {% liquid
+    assign show_inventory_bar = false
+    if show_stock_indicator_bar and inventory_management == 'shopify'
+      if inventory_status == 'low-stock' or inventory_status == 'in-stock' or inventory_status == 'out-of-stock'
+        assign show_inventory_bar = true
+      endif
+    endif
+    assign stock_bar_capacity = stock_bar_capacity | default: 20 | at_least: 1
+    assign stock_bar_percentage = inventory_quantity | default: 0 | at_least: 0 | times: 100.0 | divided_by: stock_bar_capacity | at_most: 100
+  %}
+  <div
+    class="product-info__inventory-status product-info__inventory-status--bar{% if show_content_center %} text-center{% endif %}"
+    data-inventory-status="{{ inventory_status }}"
+    role="status"
+    aria-live="polite"
+    aria-atomic="true"
+  >
+    <p class="product-info__stock-heading">{{ stock_heading | default: 'Stock:' | escape }}</p>
+    {% if show_inventory_bar %}
+      <div class="product-info__stock-track" aria-hidden="true">
+        <div class="product-info__stock-fill" style="width: {{ stock_bar_percentage }}%;"></div>
+      </div>
+    {% endif %}
+    <p class="product-info__stock-message">{{ inventory_text | escape }}</p>
+  </div>
+{% else %}
 <div class="product-info__inventory-status anm-fade-element" data-fade-on-intersect data-inventory-status="{{ inventory_status }}">
   <span 
     class="product-info__inventory-label flex items-center gap-1.5
@@ -90,14 +125,5 @@
     </span>
     <span>{{ inventory_text }}</span>
   </span>
-  {% comment %} Hidden stock indicator bar{% endcomment %}
-  {% if false %}
-    {% if show_stock_indicator_bar and inventory_quantity > 0 and inventory_status == 'low-stock' %}
-      <div class="mt-1">
-        <div class="product-info__stock-indicator-bar-wrapper w-full h-1 rounded-full">
-          <div class="product-info__stock-indicator-bar h-1 rounded-full" style="width: {{ percentage_stock_indicator_bar }}%"></div>
-        </div>
-      </div>
-    {% endif %}
-  {% endif %}
 </div>
+{% endif %}

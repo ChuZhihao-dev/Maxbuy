@@ -1,0 +1,55 @@
+{% liquid
+  assign input_id = 'Accessory-' | append: section_id | append: '-' | append: block_id | append: '-' | append: index
+  assign title = accessory.title
+  assign image = accessory_variant.featured_image | default: accessory.featured_image
+  assign details = accessory.metafields.custom.short_description.value | default: accessory.description | strip_html | strip
+  assign price = accessory_variant.price | money
+  assign compare_price = accessory_variant.compare_at_price | money
+  if settings.currency_code_enable
+    assign price = accessory_variant.price | money_with_currency
+    assign compare_price = accessory_variant.compare_at_price | money_with_currency
+  endif
+  if selectable == false
+    if accessory.requires_selling_plan
+      assign details = 'products.product.choose_option' | t
+    else
+      assign details = 'products.product.sold_out' | t
+    endif
+  elsif accessory.has_only_default_variant == false
+    assign details = accessory_variant.title | append: ' · ' | append: details
+  endif
+%}
+<div class="product-accessories__option{% if selectable == false %} product-accessories__option--unavailable{% endif %}">
+  <input
+    class="product-accessories__checkbox"
+    id="{{ input_id }}"
+    type="checkbox"
+    aria-labelledby="{{ input_id }}-title"
+    aria-describedby="{{ input_id }}-prices"
+    data-accessory-variant
+    value="{{ accessory_variant.id }}"
+    data-min="{{ accessory_variant.quantity_rule.min | default: 1 }}"
+    data-increment="{{ accessory_variant.quantity_rule.increment | default: 1 }}"
+    {% if selectable == false %}disabled{% endif %}
+  >
+  <label class="product-accessories__card" for="{{ input_id }}">
+    <span class="product-accessories__selected" aria-hidden="true">
+      <img src="{{ 'product-accessories-selected.svg' | asset_url }}" width="24" height="24" alt="">
+    </span>
+    <span class="product-accessories__image">
+      {% if image != blank %}
+        <img src="{{ image | image_url: width: 96 }}" srcset="{{ image | image_url: width: 48 }} 48w, {{ image | image_url: width: 96 }} 96w" sizes="48px" width="48" height="48" loading="lazy" alt="{{ image.alt | default: title | escape }}">
+      {% endif %}
+    </span>
+    <span class="product-accessories__copy">
+      <span class="product-accessories__title" id="{{ input_id }}-title">{{ title | escape }}</span>
+      {% if details != blank %}<span class="product-accessories__details">{{ details | escape }}</span>{% endif %}
+    </span>
+    <span class="product-accessories__prices" id="{{ input_id }}-prices">
+      <span class="product-accessories__price">{{ price }}</span>
+      {% if accessory_variant.compare_at_price > accessory_variant.price %}
+        <s class="product-accessories__compare">{{ compare_price }}</s>
+      {% endif %}
+    </span>
+  </label>
+</div>

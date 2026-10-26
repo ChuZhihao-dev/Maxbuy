@@ -4,7 +4,10 @@
   {{ settings.menu_font | font_face: font_display: 'swap' }}
   {{ settings.button_font | font_face: font_display: 'swap' }}
 
-  {{ settings.body_font | font_modify: 'weight', 'bold' | font_face: font_display: 'swap' }}
+  {%- assign body_font_weights = '100,200,300,400,500,600,700,800,900' | split: ',' -%}
+  {%- for weight in body_font_weights -%}
+    {{ settings.body_font | font_modify: 'weight', weight | font_face: font_display: 'swap' }}
+  {%- endfor -%}
   {{ settings.body_font | font_modify: 'style', 'italic' | font_face: font_display: 'swap' }}
   {{ settings.body_font | font_modify: 'weight', 'bold' | font_modify: 'style', 'italic' | font_face: font_display: 'swap' }}
   {{ settings.menu_font | font_modify: 'weight', '400' | font_face: font_display: 'swap' }}

@@ -1,0 +1,60 @@
+{% liquid
+  assign accessories = product.metafields.custom.accessories.value
+  assign accessories_count = 0
+  assign max_products = block.settings.max_products | default: 2
+%}
+
+{% capture accessory_cards %}
+  {% for accessory in accessories %}
+    {% if accessory.id == product.id %}{% continue %}{% endif %}
+    {% liquid
+      assign accessory_variant = accessory.selected_or_first_available_variant
+      assign selectable = false
+      if accessory_variant.available and accessory.requires_selling_plan == false
+        assign selectable = true
+      endif
+      assign accessories_count = accessories_count | plus: 1
+    %}
+    {% render 'product-accessory-card',
+      accessory: accessory,
+      accessory_variant: accessory_variant,
+      selectable: selectable,
+      section_id: section.id,
+      block_id: block.id,
+      index: accessories_count
+    %}
+    {% if accessories_count >= max_products %}{% break %}{% endif %}
+  {% endfor %}
+{% endcapture %}
+
+{% if accessories_count > 0 or request.design_mode %}
+  {{ 'product-accessories.css' | asset_url | stylesheet_tag }}
+  {% if accessories_count > 0 %}
+  <fieldset
+    class="product-accessories product-accessories--{{ block.settings.mobile_layout | default: 'compact' }}"
+    data-product-accessories
+    data-section-id="{{ section.id }}"
+    data-animation="{{ block.settings.enable_animation }}"
+    style="--accessories-duration: {{ block.settings.animation_duration | default: 150 }}ms; --accessories-delay: {{ block.settings.animation_delay | default: 0 }}ms;"
+    {{ block.shopify_attributes }}
+  >
+    <legend class="product-accessories__legend">{{ block.settings.heading | default: 'Accessories' | escape }}</legend>
+    <div class="product-accessories__header">
+      <h2 class="product-accessories__heading">{{ block.settings.heading | default: 'Accessories' | escape }}</h2>
+      {% if block.settings.more_link != blank and block.settings.more_label != blank %}
+        <a class="product-accessories__more" href="{{ block.settings.more_link }}">
+          {{ block.settings.more_label | escape }}
+          <span class="product-accessories__arrow" aria-hidden="true">
+            <img src="{{ 'product-accessories-arrow.svg' | asset_url }}" width="10" height="6.41421" alt="">
+          </span>
+        </a>
+      {% endif %}
+    </div>
+    <div class="product-accessories__list">
+      {{ accessory_cards }}
+    </div>
+  </fieldset>
+  {% else %}
+    <p class="product-accessories__editor-note" {{ block.shopify_attributes }}>Add products to this product's custom.accessories metafield to display accessories.</p>
+  {% endif %}
+{% endif %}

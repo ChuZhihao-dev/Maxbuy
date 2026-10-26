@@ -593,7 +593,29 @@
     {
       "type": "inventory_status",
       "name": "t:main_product.blocks.inventory_status.name",
-      "limit": 1
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Stock label",
+          "default": "Stock:"
+        },
+        {
+          "type": "number",
+          "id": "stock_bar_capacity",
+          "label": "Stock quantity for a full bar",
+          "default": 20,
+          "info": "A visual reference, not total inventory. The bar fills according to the current variant's actual stock."
+        },
+        {
+          "type": "text",
+          "id": "low_stock_text",
+          "label": "Low stock message",
+          "default": "Hurry, only {qty} items left in stock!",
+          "info": "Use {qty} for the available quantity. Used when the theme's low stock message is empty."
+        }
+      ]
     },
     {
       "type": "identifier",
@@ -1121,6 +1143,166 @@
           "id": "see_less_label",
           "default": "See less",
           "label": "t:global.text.see_less_label"
+        }
+      ]
+    },
+    {
+      "type": "service_promises",
+      "name": "Product service promises",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "shipping_label", "label": "Shipping label", "default": "Free Shipping" },
+        { "type": "image_picker", "id": "shipping_icon", "label": "Shipping icon" },
+        { "type": "url", "id": "shipping_link", "label": "Shipping link" },
+        { "type": "text", "id": "support_label", "label": "Support label", "default": "24/7 Support" },
+        { "type": "image_picker", "id": "support_icon", "label": "Support icon" },
+        { "type": "url", "id": "support_link", "label": "Support link" },
+        { "type": "text", "id": "payment_label", "label": "Payment label", "default": "Flexible Payment" },
+        { "type": "image_picker", "id": "payment_icon", "label": "Payment icon" },
+        { "type": "url", "id": "payment_link", "label": "Payment link" },
+        { "type": "text", "id": "trust_label", "label": "Trust label", "default": "Trusted Brands" },
+        { "type": "image_picker", "id": "trust_icon", "label": "Trust icon" },
+        { "type": "url", "id": "trust_link", "label": "Trust link" },
+        {
+          "type": "select",
+          "id": "mobile_columns",
+          "label": "Mobile columns",
+          "options": [
+            { "value": "2", "label": "Two columns" },
+            { "value": "1", "label": "One column" }
+          ],
+          "default": "2"
+        },
+        { "type": "checkbox", "id": "enable_animation", "label": "Animate link hover", "default": true },
+        { "type": "range", "id": "animation_duration", "label": "Hover animation duration", "unit": "ms", "min": 0, "max": 400, "step": 50, "default": 150 },
+        { "type": "range", "id": "animation_delay", "label": "Hover animation delay", "unit": "ms", "min": 0, "max": 300, "step": 50, "default": 0 }
+      ]
+    },
+    {
+      "type": "promotion_countdown",
+      "name": "Promotion countdown",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Reads this product's custom.promotion metaobject reference. Required fields: ends_at (date and time), code, offer_title. Optional: description. Give each product its own promotion entry for an independent countdown."
+        },
+        {
+          "type": "text",
+          "id": "accessible_label",
+          "label": "Accessible label",
+          "default": "Limited time offer"
+        },
+        {
+          "type": "text",
+          "id": "code_label",
+          "label": "Coupon label",
+          "default": "Code"
+        },
+        {
+          "type": "text",
+          "id": "copy_error",
+          "label": "Copy failure message",
+          "default": "Select and copy the code above."
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_animation",
+          "label": "Animate button hover",
+          "default": true
+        },
+        {
+          "type": "range",
+          "id": "animation_duration",
+          "label": "Hover animation duration",
+          "unit": "ms",
+          "min": 0,
+          "max": 400,
+          "step": 50,
+          "default": 150
+        },
+        {
+          "type": "range",
+          "id": "animation_delay",
+          "label": "Hover animation delay",
+          "unit": "ms",
+          "min": 0,
+          "max": 300,
+          "step": 50,
+          "default": 0
+        }
+      ]
+    },
+    {
+      "type": "accessories",
+      "name": "Accessories",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Reads this product's custom.accessories metafield (list of product references). Selected accessories are included when using Add to cart."
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Accessories"
+        },
+        {
+          "type": "text",
+          "id": "more_label",
+          "label": "More accessories label",
+          "default": "More Accessories"
+        },
+        {
+          "type": "url",
+          "id": "more_link",
+          "label": "More accessories link"
+        },
+        {
+          "type": "range",
+          "id": "max_products",
+          "label": "Maximum accessories",
+          "min": 1,
+          "max": 6,
+          "step": 1,
+          "default": 2
+        },
+        {
+          "type": "select",
+          "id": "mobile_layout",
+          "label": "Mobile text layout",
+          "options": [
+            { "value": "compact", "label": "Compact" },
+            { "value": "two_lines", "label": "Two-line title" }
+          ],
+          "default": "compact"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_animation",
+          "label": "Animate selection",
+          "default": true
+        },
+        {
+          "type": "range",
+          "id": "animation_duration",
+          "label": "Selection animation duration",
+          "unit": "ms",
+          "min": 0,
+          "max": 400,
+          "step": 50,
+          "default": 150
+        },
+        {
+          "type": "range",
+          "id": "animation_delay",
+          "label": "Selection animation delay",
+          "unit": "ms",
+          "min": 0,
+          "max": 300,
+          "step": 50,
+          "default": 0
         }
       ]
     },

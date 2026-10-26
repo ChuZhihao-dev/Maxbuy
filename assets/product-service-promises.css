@@ -1,0 +1,19 @@
+.product-service-promises{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:4px;width:100%;color:rgb(var(--product-purchase-text,0 0 0)/.6);font-family:var(--body-font-family)}
+.product-service-promises__item{box-sizing:border-box;display:flex;align-items:center;gap:16px;min-width:0;min-height:82px;padding:18px 0 17px;border-bottom:1px solid rgba(255,255,255,.12)}
+.product-service-promises__icon{position:relative;display:block;flex:0 0 46px;width:46px;height:46px;overflow:hidden;border-radius:10.222px;background:#fff}
+.product-service-promises__custom-icon{display:block;width:46px;height:46px;object-fit:contain}
+.product-service-promises__frame{position:absolute;top:7px;left:7px;width:32px;height:32px;overflow:hidden}
+.product-service-promises__crop{position:absolute;left:calc(50% - .44px);top:calc(50% - .29px);width:35.125px;height:23.417px;overflow:hidden;transform:translate(-50%,-50%)}
+.product-service-promises__sprite{position:absolute;display:block;max-width:none;width:477.78%;height:537.5%;left:-353.88%;top:-218.75%;pointer-events:none}
+.product-service-promises__icon--support .product-service-promises__crop{left:calc(50% - .5px);top:calc(50% - .5px);width:35px;height:31px}
+.product-service-promises__icon--support .product-service-promises__sprite{width:456.84%;height:386.84%;left:-126.67%;top:-263.89%}
+.product-service-promises__icon--payment .product-service-promises__sprite{left:-23.31%;top:-387.33%}
+.product-service-promises__icon--trust .product-service-promises__crop{left:calc(50% + .5px);top:50%;width:37px;height:33.967px}
+.product-service-promises__icon--trust .product-service-promises__sprite{height:390.33%;left:-244.17%;top:-266.16%}
+.product-service-promises__label{min-width:0;margin:0;font-size:18px;font-weight:400;line-height:normal;overflow-wrap:anywhere}
+.product-service-promises__label a{color:inherit;text-decoration:none;transition:color var(--service-promises-duration,150ms) ease var(--service-promises-delay,0ms)}
+.product-service-promises__label a:hover{color:rgb(var(--product-purchase-text,0 0 0))}
+.product-service-promises__label a:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+.product-service-promises[data-animation=false] .product-service-promises__label a{transition:none}
+@media(max-width:767px){.product-service-promises{column-gap:12px}.product-service-promises__item{gap:12px}.product-service-promises__label{font-size:14px;line-height:1.3}.product-service-promises[data-mobile-columns="1"]{grid-template-columns:minmax(0,1fr)}}
+@media(prefers-reduced-motion:reduce){.product-service-promises__label a{transition:none}}
