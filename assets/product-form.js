@@ -245,6 +245,43 @@ if (!window.Maximize.loadedScript.includes('product-form.js')) {
         input.scrollIntoView({ behavior: "smooth", block: "center" });
         return false;
       },
+      __accessoryCartRequest(formData) {
+        const form = this.$refs.product_form;
+        const section = this.$el.closest('.section-main-product');
+        // Only the detail-page and its sticky form share this product's selection.
+        if (!section || !form?.matches('.product-info__form, .sticky-add-to-cart__form')) {
+          return { body: formData, lines: [] };
+        }
+
+        const mainId = String(formData.get('id') || '');
+        const mainQuantity = Number(formData.get('quantity')) || 1;
+        const lines = new Map();
+        section.querySelectorAll('[data-product-accessories] [data-accessory-variant]:checked:not(:disabled)').forEach((input) => {
+          const id = String(input.value);
+          if (!/^\d+$/.test(id) || id === mainId || lines.has(id)) return;
+          const increment = Math.max(1, Number(input.dataset.increment) || 1);
+          const minimum = Math.max(1, Number(input.dataset.min) || 1);
+          const quantity = Math.ceil(Math.max(mainQuantity, minimum) / increment) * increment;
+          lines.set(id, { id, quantity });
+        });
+        if (!lines.size) return { body: formData, lines: [] };
+
+        // Preserve files, personalization and selling plans on the main line, and
+        // request cart sections once for the complete multi-item operation.
+        const body = new FormData();
+        for (const [key, value] of formData) {
+          const property = key.match(/^properties\[(.*)\]$/);
+          if (property) body.append(`items[0][properties][${property[1]}]`, value);
+          else if (['id', 'quantity', 'selling_plan'].includes(key)) body.append(`items[0][${key}]`, value);
+          else body.append(key, value);
+        }
+        if (!formData.has('quantity')) body.append('items[0][quantity]', mainQuantity);
+        Array.from(lines.values()).forEach((line, index) => {
+          body.append(`items[${index + 1}][id]`, line.id);
+          body.append(`items[${index + 1}][quantity]`, line.quantity);
+        });
+        return { body, lines: Array.from(lines.values()) };
+      },
       handleAddToCart: async function (e, isCheckRequired = false) {
         if (isCheckRequired) {
           let productInfo = this.$el.closest(".product-template__wrapper");
@@ -345,8 +382,10 @@ if (!window.Maximize.loadedScript.includes('product-form.js')) {
           }
         }
 
+        const accessoryRequest = this.__accessoryCartRequest(formData);
         const _atcContext = this.$el.closest("cart-drawer") ? "dialog" : "product";
         const _atcLines = this.variantId ? [{ id: this.variantId, quantity: Number(formData.get("quantity")) || 1 }] : [];
+        _atcLines.push(...accessoryRequest.lines);
         const _slUpdate = window.MaximizeStorefrontEvents?.createCartLinesUpdate({
           action: "add",
           context: _atcContext,
@@ -359,7 +398,7 @@ if (!window.Maximize.loadedScript.includes('product-form.js')) {
             method: "POST",
             credentials: "same-origin",
             headers: { Accept: "application/javascript", "X-Requested-With": "XMLHttpRequest" },
-            body: formData,
+            body: accessoryRequest.body,
           })
           .then((response) => {
             return response.json();
