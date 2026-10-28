@@ -20,6 +20,12 @@
       --description-table-ink: {{ section.settings.table_text_color }};
     }
   {%- endstyle -%}
+  <span id="product-overview" class="product-description-overview__anchor" aria-hidden="true"></span>
+  {%- if section.settings.heading != blank -%}
+    <div class="product-description-overview__heading-wrap {{ section.settings.section_width }}">
+      <h2 class="product-description-overview__heading">{{ section.settings.heading | escape }}</h2>
+    </div>
+  {%- endif -%}
   <product-description-overview
     class="product-overview product-description-overview {{ section.settings.section_width }}"
     data-columns="{{ section.settings.specification_columns }}"
@@ -29,9 +35,6 @@
       <div class="product-overview__body product-description-overview__content rte" data-description-content>
         {{- product.description | replace: '<h1', '<h2' | replace: '</h1>', '</h2>' -}}
       </div>
-      {%- if section.settings.show_product_details -%}
-        {% render 'product-overview-details', product: product, section: section %}
-      {%- endif -%}
     </div>
   </product-description-overview>
 {%- elsif request.design_mode -%}
@@ -50,7 +53,13 @@
   "settings": [
     {
       "type": "paragraph",
-      "content": "Reads the current product Description. Add headings, paragraphs and a simple two-column table in the product editor. All content follows the order in the description."
+      "content": "Reads the current product Description, including SKU and other details if entered there. Add headings, paragraphs and a simple two-column table in the product editor."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Product Overview"
     },
     {
       "type": "checkbox",
@@ -119,40 +128,6 @@
       "id": "table_text_color",
       "label": "Table text",
       "default": "#003521"
-    },
-    {
-      "type": "header",
-      "content": "Product details"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_product_details",
-      "label": "Show SKU, collections, tags and brand",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "sku_label",
-      "label": "SKU label",
-      "default": "SKU"
-    },
-    {
-      "type": "text",
-      "id": "categories_label",
-      "label": "Collections label",
-      "default": "Categories"
-    },
-    {
-      "type": "text",
-      "id": "tags_label",
-      "label": "Tags label",
-      "default": "Tags"
-    },
-    {
-      "type": "text",
-      "id": "brand_label",
-      "label": "Brand label",
-      "default": "Brand"
     },
     {
       "type": "header",

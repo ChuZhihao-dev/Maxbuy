@@ -1,0 +1,7 @@
+.section-main-collection-banner .collection-banner__title-padding {
+  padding-inline: var(--padding-content-page-width);
+}
+
+.section-main-collection-banner .collection-banner__title-padding--full {
+  padding-inline: var(--padding-content-full-width);
+}

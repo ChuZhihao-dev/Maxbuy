@@ -69,26 +69,10 @@
         },
         "inventory_status_8LgeE4": {
           "type": "inventory_status",
-          "settings": {}
-        },
-        "buy_buttons": {
-          "type": "buy_buttons",
           "settings": {
-            "show_quantity_selector": true,
-            "show_dynamic_checkout": true,
-            "show_gift_card_recipient": true,
-            "show_add_to_compare_button": true,
-            "compare_button_label": "Compare",
-            "pickup_availability": true,
-            "pickup_hide_when_pre_order": false,
-            "preorder_button_label": "Pre-order",
-            "preorder_message": "<p>This product will be available for sale in 2 weeks, but you can pre-order now to receive 10% discount!</p>",
-            "preorder_show_dynamic_button": false,
-            "show_background": false,
-            "background_color_light": "rgba(0,0,0,0)",
-            "message_color_light": "rgba(0,0,0,0)",
-            "background_color_dark": "rgba(0,0,0,0)",
-            "message_color_dark": "rgba(0,0,0,0)"
+            "heading": "Stock:",
+            "stock_bar_capacity": 20,
+            "low_stock_text": "Hurry, only {qty} items left in stock!"
           }
         },
         "promotion_countdown": {
@@ -113,6 +97,26 @@
             "enable_animation": true,
             "animation_duration": 150,
             "animation_delay": 0
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_quantity_selector": true,
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true,
+            "show_add_to_compare_button": true,
+            "compare_button_label": "Compare",
+            "pickup_availability": true,
+            "pickup_hide_when_pre_order": false,
+            "preorder_button_label": "Pre-order",
+            "preorder_message": "<p>This product will be available for sale in 2 weeks, but you can pre-order now to receive 10% discount!</p>",
+            "preorder_show_dynamic_button": false,
+            "show_background": false,
+            "background_color_light": "rgba(0,0,0,0)",
+            "message_color_light": "rgba(0,0,0,0)",
+            "background_color_dark": "rgba(0,0,0,0)",
+            "message_color_dark": "rgba(0,0,0,0)"
           }
         },
         "space_KKnHzV": {
@@ -196,6 +200,38 @@
         "show_section_divider": false
       }
     },
+    "product_section_nav": {
+      "type": "product-section-nav",
+      "settings": {
+        "highlights_label": "Highlight Features",
+        "overview_label": "Product Overview",
+        "specifications_label": "Product Specifications",
+        "recommendations_label": "You May Also Like",
+        "reviews_label": "Reviews"
+      }
+    },
+    "highlight_features": {
+      "type": "product-highlight-features",
+      "settings": {}
+    },
+    "product_description_overview": {
+      "type": "product-description-overview",
+      "settings": {
+        "heading": "Product Overview",
+        "promote_bold_titles": true,
+        "section_width": "page-width",
+        "specification_columns": "2",
+        "specification_font": "outfit_n4",
+        "table_odd_color": "#efefef",
+        "table_even_color": "#ffffff",
+        "table_text_color": "#003521",
+        "padding_top": 32,
+        "padding_bottom": 0,
+        "enable_animation": true,
+        "animation_duration": 300,
+        "animation_delay": 0
+      }
+    },
     "product_recommendations_hcJBTH": {
       "type": "product-recommendations",
       "settings": {
@@ -225,51 +261,12 @@
         "color_scheme_light": "",
         "color_scheme_dark": ""
       }
-    },
-    "product_overview": {
-      "type": "product-overview",
-      "settings": {
-        "section_width": "page-width",
-        "specification_columns": "2",
-        "specification_font": "outfit_n4",
-        "show_product_details": true,
-        "sku_label": "SKU",
-        "categories_label": "Categories",
-        "tags_label": "Tags",
-        "brand_label": "Brand",
-        "padding_top": 32,
-        "padding_bottom": 0,
-        "enable_animation": false,
-        "animation_duration": 300,
-        "animation_delay": 0
-      }
-    },
-    "product_description_overview": {
-      "type": "product-description-overview",
-      "settings": {
-        "section_width": "page-width",
-        "specification_columns": "2",
-        "specification_font": "outfit_n4",
-        "show_product_details": true,
-        "sku_label": "SKU",
-        "categories_label": "Categories",
-        "tags_label": "Tags",
-        "brand_label": "Brand",
-        "padding_top": 32,
-        "padding_bottom": 0,
-        "enable_animation": false,
-        "animation_duration": 300,
-        "animation_delay": 0,
-        "promote_bold_titles": true,
-        "table_odd_color": "#efefef",
-        "table_even_color": "#ffffff",
-        "table_text_color": "#003521"
-      }
     }
   },
   "order": [
     "main",
-    "product_overview",
+    "product_section_nav",
+    "highlight_features",
     "product_description_overview",
     "product_recommendations_hcJBTH"
   ]

@@ -1,0 +1,31 @@
+{{ 'product-section-nav.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-section-nav.js' | asset_url }}" defer></script>
+
+<nav class="product-section-nav" aria-label="Product sections" data-product-section-nav hidden>
+  <div class="product-section-nav__links">
+    <a class="product-section-nav__link" href="#highlight-features" data-product-nav-target="highlight-features" data-label="{{ section.settings.highlights_label | escape }}" hidden><span>{{ section.settings.highlights_label | escape }}</span></a>
+    <a class="product-section-nav__link" href="#product-overview" data-product-nav-target="product-overview" data-label="{{ section.settings.overview_label | escape }}" hidden><span>{{ section.settings.overview_label | escape }}</span></a>
+    <a class="product-section-nav__link" href="#product-specifications" data-product-nav-target="product-specifications" data-label="{{ section.settings.specifications_label | escape }}" hidden><span>{{ section.settings.specifications_label | escape }}</span></a>
+    <a class="product-section-nav__link" href="#you-may-also-like" data-product-nav-target="you-may-also-like" data-label="{{ section.settings.recommendations_label | escape }}" hidden><span>{{ section.settings.recommendations_label | escape }}</span></a>
+    <a class="product-section-nav__link" href="#product-reviews" data-product-nav-target="product-reviews" data-label="{{ section.settings.reviews_label | escape }}" hidden><span>{{ section.settings.reviews_label | escape }}</span></a>
+  </div>
+</nav>
+
+{% schema %}
+{
+  "name": "Product navigation",
+  "tag": "section",
+  "class": "section-product-section-nav",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    { "type": "text", "id": "highlights_label", "label": "Highlight features label", "default": "Highlight Features" },
+    { "type": "text", "id": "overview_label", "label": "Product overview label", "default": "Product Overview" },
+    { "type": "text", "id": "specifications_label", "label": "Product specifications label", "default": "Product Specifications" },
+    { "type": "text", "id": "recommendations_label", "label": "Recommendations label", "default": "You May Also Like" },
+    { "type": "text", "id": "reviews_label", "label": "Reviews label", "default": "Reviews" }
+  ],
+  "presets": [
+    { "name": "Product navigation" }
+  ]
+}
+{% endschema %}

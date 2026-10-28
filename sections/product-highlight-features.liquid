@@ -1,0 +1,48 @@
+{%- liquid
+  assign highlight_field = product.metafields.custom.highlight_features
+  assign highlight_images = highlight_field.value
+  assign has_highlight_images = false
+
+  if highlight_field.type == 'list.file_reference'
+    for highlight_image in highlight_images
+      if highlight_image.media_type == 'image'
+        assign has_highlight_images = true
+        break
+      endif
+    endfor
+  endif
+-%}
+
+{%- if has_highlight_images -%}
+  {{ 'product-highlight-features.css' | asset_url | stylesheet_tag }}
+  <div id="highlight-features" class="product-highlight-features">
+    {%- for highlight_image in highlight_images -%}
+      {%- if highlight_image.media_type == 'image' -%}
+        {%- assign highlight_alt = highlight_image.alt | default: product.title -%}
+        {{- highlight_image | image_url: width: 3840 | image_tag: class: 'product-highlight-features__image', widths: '375, 550, 750, 990, 1200, 1500, 1800, 2200, 2600, 3000, 3840', sizes: '100vw', loading: 'lazy', alt: highlight_alt -}}
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+{%- elsif request.design_mode -%}
+  <div class="page-width product-highlight-features__empty">
+    <p>Add images to this product's custom.highlight_features metafield to display them here.</p>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Highlight Features",
+  "tag": "section",
+  "class": "section-product-highlight-features",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Reads the current product's custom.highlight_features list of image files. Images appear full width in the order saved on the product."
+    }
+  ],
+  "presets": [
+    { "name": "Highlight Features" }
+  ]
+}
+{% endschema %}
