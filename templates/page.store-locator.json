@@ -1,0 +1,231 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "show_heading": false,
+        "heading_size": "medium",
+        "heading_tag": "h1",
+        "show_breadcrumbs": true,
+        "padding_top": 28,
+        "padding_bottom": 28,
+        "breadcrumbs_background_light": "rgba(0,0,0,0)",
+        "breadcrumbs_text_light": "rgba(0,0,0,0)",
+        "breadcrumbs_text_link_light": "rgba(0,0,0,0)",
+        "breadcrumbs_background_dark": "rgba(0,0,0,0)",
+        "breadcrumbs_text_dark": "rgba(0,0,0,0)",
+        "breadcrumbs_text_link_dark": "rgba(0,0,0,0)"
+      }
+    },
+    "promotion_banner_cdQ44E": {
+      "type": "promotion-banner",
+      "disabled": true,
+      "name": "t:promotion_banner.name",
+      "settings": {
+        "image": "shopify://shop_images/Codex_2026_10_27_17_20_59.png",
+        "image_link": "",
+        "open_new_window_image": false,
+        "subheading": "",
+        "heading": "Track Your Order",
+        "text": "<p>Want to know where your order is? Chat with our customer care team on WhatsApp and we'll give you live updates on your delivery.</p>",
+        "button_label": "",
+        "button_link": "",
+        "open_new_window_button": false,
+        "desktop_height": "adapt",
+        "desktop_content_position": "center start",
+        "desktop_content_alignment": "left",
+        "mobile_design_layout": true,
+        "mobile_height": "160",
+        "mobile_content_position": "start center",
+        "mobile_content_alignment": "left",
+        "section_width": "page-width",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "corner_radius": 8,
+        "overlay_opacity": 20,
+        "color_scheme_light": "scheme-2",
+        "color_scheme_dark": "scheme-2",
+        "banner_text_font": "montserrat_n4"
+      }
+    },
+    "store_locator_showcase_49qp9N": {
+      "type": "store-locator-showcase",
+      "blocks": {
+        "store_location_fJcyJn": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY ACHIMOTA MALL STORE",
+            "location_address": "JQQ5+2H Achimota Mall, Accra, Ghana",
+            "phone": "",
+            "opening_hours": "Mon-Sun  9:30am-9:00pm",
+            "search_keywords": "Accra",
+            "text": "<p>Achimota mall oppsite to Hisense</p>"
+          }
+        },
+        "store_location_TjGPfR": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY WESTHILLS STORE",
+            "location_address": "GMV4+QC, Mile 11, Ghana",
+            "phone": "",
+            "opening_hours": "Mon-Sun  9:30am-9:00pm",
+            "search_keywords": "Accra",
+            "text": "<p>West Hills Mall</p>"
+          }
+        },
+        "store_location_hH7gJT": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY JUNCTION MALL STORE",
+            "location_address": "JW7H+88M, Accra, Ghana",
+            "phone": "",
+            "opening_hours": "Mon-Sun  9:30am-9:00pm",
+            "search_keywords": "Accra",
+            "text": "<p>Junction Mall</p>"
+          }
+        },
+        "store_location_YWbBUA": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY EAST LEGON STORE",
+            "location_address": "JRRP+VV9 Accra, Ghana",
+            "phone": "",
+            "opening_hours": "Mon-Sat 8:00am-6:00pm",
+            "search_keywords": "Accra",
+            "text": "<p>La-Bawaleshi Rd, opposite Allied Oil Fuel Station</p>"
+          }
+        },
+        "store_location_x9Q3Ax": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY CIRCLE ELECTRONIC STORE",
+            "location_address": "HQFM+4H4, Accra, Ghana",
+            "phone": "",
+            "opening_hours": "Mon-Sat 8:00am-6:00pm",
+            "search_keywords": "Accra",
+            "text": "<p>Accra, Circle Opposite Vodafone</p>"
+          }
+        },
+        "store_location_WzHpap": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY MADINA STORE",
+            "location_address": "MRGG+9MJ Madina, Ghana",
+            "phone": "",
+            "opening_hours": "Mon-Sat 8:00am-6:00pm",
+            "search_keywords": "Accra",
+            "text": "<p>Madina, Opposite Zongo Junction, Near Goil Fuel Station</p>"
+          }
+        },
+        "store_location_iLHrrX": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY KASOA STORE",
+            "location_address": "GHMC+PWF, Kasoa, Ghana",
+            "phone": "",
+            "opening_hours": "Mon-Sat 8:00am-6:00pm",
+            "search_keywords": "Accra",
+            "text": "<p>Kasoa, Takoradi Station</p>"
+          }
+        },
+        "store_location_KbWyNL": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY LAPAZ STORE",
+            "location_address": "JQ53+43P, Lapaz, Ghana",
+            "phone": "",
+            "opening_hours": "Mon-Sat 8:00am-6:00pm",
+            "search_keywords": "Accra",
+            "text": "<p>Lapaz, Opposite Tema Station&nbsp;</p>"
+          }
+        },
+        "store_location_6FwPrB": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY DARKUMAN ELCETRONIC STORE",
+            "location_address": "HPGV+MP7, Accra, Ghana",
+            "phone": "",
+            "opening_hours": "Mon-Sat 8:00am-6:00pm",
+            "search_keywords": "Accra",
+            "text": "<p>Darkuman Junction, Adjacent Enterprise</p>"
+          }
+        },
+        "store_location_LgV4jT": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY KANESHIE STORE",
+            "location_address": "HQ79+44F, Accra, Ghana",
+            "phone": "",
+            "opening_hours": "Mon-Sat 8:00am-6:00pm",
+            "search_keywords": "Accra",
+            "text": "<p>Kaneshie, Pamprom</p>"
+          }
+        },
+        "store_location_mLNFKd": {
+          "type": "store_location",
+          "settings": {
+            "title": "Store branch",
+            "location_address": "75 9th Ave, New York, NY 10011-7006",
+            "phone": "",
+            "opening_hours": "",
+            "search_keywords": "",
+            "text": ""
+          }
+        }
+      },
+      "block_order": [
+        "store_location_fJcyJn",
+        "store_location_TjGPfR",
+        "store_location_hH7gJT",
+        "store_location_YWbBUA",
+        "store_location_x9Q3Ax",
+        "store_location_WzHpap",
+        "store_location_iLHrrX",
+        "store_location_KbWyNL",
+        "store_location_6FwPrB",
+        "store_location_LgV4jT",
+        "store_location_mLNFKd"
+      ],
+      "name": "Store locator showcase",
+      "settings": {
+        "heading": "Find A Maxbuy Store Near You",
+        "background_color": "#000000",
+        "accent_color": "#ed1c24",
+        "search_placeholder": "Search By City, Area Or Landmark",
+        "search_label": "Search",
+        "hours_label": "Hours:",
+        "phone_label": "Phone:",
+        "results_label": "{count} stores found",
+        "previous_stores_label": "Previous stores",
+        "next_stores_label": "Next stores",
+        "no_results_text": "No stores found. Try another city, area or landmark.",
+        "no_stores_text": "Store information is coming soon.",
+        "noscript_text": "Please enable JavaScript to search stores and view the map.",
+        "map_label": "Store location",
+        "map_placeholder": "Choose a store to view its location.",
+        "map_loading": "Loading store map…",
+        "map_failed": "The map is taking longer to load. You can open directions in Google Maps.",
+        "show_store_actions": false,
+        "directions_label": "Get directions",
+        "select_store_label": "Set as my store",
+        "selected_store_label": "My store",
+        "padding_top": 39,
+        "padding_bottom": 74
+      }
+    }
+  },
+  "order": [
+    "main",
+    "promotion_banner_cdQ44E",
+    "store_locator_showcase_49qp9N"
+  ]
+}

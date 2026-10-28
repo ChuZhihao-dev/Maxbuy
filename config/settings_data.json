@@ -375,6 +375,26 @@
           "link_button_color": "#0f398b",
           "link_button_label_hover": "#ca3333"
         }
+      },
+      "scheme-2b4d2c89-5177-4370-9333-f891cd1880cd": {
+        "settings": {
+          "heading": "#100f0f",
+          "text": "#6B5B1E",
+          "line_and_border_color": "#000000",
+          "heading_highlight": "#268B0F",
+          "background": "#FBF7EC",
+          "background_gradient": "",
+          "button": "#000000",
+          "button_label": "#000000",
+          "button_hover": "#000000",
+          "button_label_hover": "#ffffff",
+          "secondary_button": "#e7e7e7",
+          "secondary_button_label_color": "#393838",
+          "secondary_button_hover": "#d6d6d6",
+          "secondary_button_label_hover": "#393838",
+          "link_button_color": "#000000",
+          "link_button_label_hover": "#000000"
+        }
       }
     }
   },

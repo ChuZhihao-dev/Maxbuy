@@ -205,7 +205,6 @@ requestAnimationFrame(() => {
 
           callback(true, seconds, minutes, hours, days);
         }, 1000);
-        return x;
       },
       canShow(configs) {
         let endDate = new Date(configs.end_year, configs.end_month - 1, configs.end_day, configs.end_hour, configs.end_minute);

@@ -1,0 +1,232 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "show_heading": false,
+        "heading_size": "medium",
+        "heading_tag": "h1",
+        "show_breadcrumbs": true,
+        "padding_top": 28,
+        "padding_bottom": 28,
+        "breadcrumbs_background_light": "rgba(0,0,0,0)",
+        "breadcrumbs_text_light": "rgba(0,0,0,0)",
+        "breadcrumbs_text_link_light": "rgba(0,0,0,0)",
+        "breadcrumbs_background_dark": "rgba(0,0,0,0)",
+        "breadcrumbs_text_dark": "rgba(0,0,0,0)",
+        "breadcrumbs_text_link_dark": "rgba(0,0,0,0)"
+      }
+    },
+    "promotion_banner_cdQ44E": {
+      "type": "promotion-banner",
+      "name": "t:promotion_banner.name",
+      "settings": {
+        "image": "shopify://shop_images/Codex_2026_10_27_17_20_59.png",
+        "image_link": "",
+        "open_new_window_image": false,
+        "subheading": "",
+        "heading": "Track Your Order",
+        "text": "<p>Want to know where your order is? Chat with our customer care team on WhatsApp and we'll give you live updates on your delivery.</p>",
+        "button_label": "",
+        "button_link": "",
+        "open_new_window_button": false,
+        "desktop_height": "adapt",
+        "desktop_content_position": "center start",
+        "desktop_content_alignment": "left",
+        "mobile_design_layout": true,
+        "mobile_height": "160",
+        "mobile_content_position": "start center",
+        "mobile_content_alignment": "left",
+        "section_width": "page-width",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "corner_radius": 8,
+        "overlay_opacity": 20,
+        "color_scheme_light": "scheme-2",
+        "color_scheme_dark": "scheme-2",
+        "banner_text_font": "montserrat_n4"
+      }
+    },
+    "text_with_image_cards_jnzkqJ": {
+      "type": "text-with-image-cards",
+      "blocks": {
+        "card_e9eFwR": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/step1_order_placed.jpg",
+            "image_link": "",
+            "image_open_new_window": false,
+            "subheading": "Step:1",
+            "heading": "Order Placed",
+            "heading_size": "medium",
+            "text": "<p>We confirm your order</p>",
+            "highlight_effect": "underline",
+            "text_transform": "none",
+            "button_label": "",
+            "button_link": "",
+            "button_open_new_window": false,
+            "show_button_style": "primary"
+          }
+        },
+        "card_D8Th9f": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/step2_packed_shipped.jpg",
+            "image_link": "",
+            "image_open_new_window": false,
+            "subheading": "Step:2",
+            "heading": "Packed & Shipped",
+            "heading_size": "medium",
+            "text": "<p>On its way to you</p>",
+            "highlight_effect": "underline",
+            "text_transform": "none",
+            "button_label": "",
+            "button_link": "",
+            "button_open_new_window": false,
+            "show_button_style": "primary"
+          }
+        },
+        "card_NtUp8q": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/step3_out_delivery.jpg",
+            "image_link": "",
+            "image_open_new_window": false,
+            "subheading": "Step:3",
+            "heading": "Out for Delivery",
+            "heading_size": "medium",
+            "text": "<p>Arriving soon</p>",
+            "highlight_effect": "underline",
+            "text_transform": "none",
+            "button_label": "",
+            "button_link": "",
+            "button_open_new_window": false,
+            "show_button_style": "primary"
+          }
+        },
+        "card_FNmL8h": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/step4_delivered.jpg",
+            "image_link": "",
+            "image_open_new_window": false,
+            "subheading": "Step:4",
+            "heading": "Delivered",
+            "heading_size": "medium",
+            "text": "<p>Enjoy your product</p>",
+            "highlight_effect": "underline",
+            "text_transform": "none",
+            "button_label": "",
+            "button_link": "",
+            "button_open_new_window": false,
+            "show_button_style": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "card_e9eFwR",
+        "card_D8Th9f",
+        "card_NtUp8q",
+        "card_FNmL8h"
+      ],
+      "name": "t:text_with_image_cards.name",
+      "settings": {
+        "subheading": "",
+        "heading": "",
+        "heading_size": "medium",
+        "heading_tag": "h2",
+        "heading_alignment": "center",
+        "highlight_effect": "marker",
+        "text_transform": "none",
+        "layout": "vertical",
+        "card_alignment": "center",
+        "image_style": "round",
+        "enable_desktop_slider": false,
+        "swipe_on_mobile": false,
+        "change_bar_every": 5,
+        "number_cards": 4,
+        "spacing_desktop": 84,
+        "number_cards_mobile": "2",
+        "spacing_mobile": 8,
+        "section_width": "page-width",
+        "padding_top": 28,
+        "padding_bottom": 28,
+        "show_section_divider": false,
+        "color_scheme_light": "",
+        "background_color_light": "rgba(0,0,0,0)",
+        "color_scheme_dark": "",
+        "background_color_dark": "rgba(0,0,0,0)"
+      }
+    },
+    "rich_text_C3RUCn": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_NbMTH8": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "heading": "Talk about your brand",
+            "heading_size": "medium",
+            "heading_tag": "h2",
+            "highlight_effect": "underline",
+            "text_transform": "none"
+          }
+        },
+        "text_jBJkcT": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>Please have your order number ready</strong> before you start the chat (for example <strong>MB-12345</strong>). You can find it in your order confirmation email.</p>",
+            "highlight_effect": "underline",
+            "text_transform": "none",
+            "number_of_lines_shown": "none",
+            "read_more_label": "Read more",
+            "see_less_label": "See less"
+          }
+        }
+      },
+      "block_order": [
+        "heading_NbMTH8",
+        "text_jBJkcT"
+      ],
+      "name": "t:rich_text.name",
+      "settings": {
+        "content_alignment": "center",
+        "content_alignment_mobile": "left",
+        "section_width": "page-width",
+        "padding_top": 28,
+        "padding_bottom": 28,
+        "show_section_divider": false,
+        "color_scheme_light": "scheme-2b4d2c89-5177-4370-9333-f891cd1880cd",
+        "color_scheme_dark": "scheme-3"
+      }
+    },
+    "whatsapp_cta_7Pixqg": {
+      "type": "whatsapp-cta",
+      "name": "WhatsApp CTA",
+      "settings": {
+        "whatsapp_number": "18601709312",
+        "button_text": "Chat on WhatsApp",
+        "default_message": "Hi Maxbuy, I'd like to track my order. My order number is:",
+        "show_hours": true,
+        "hours": "Available Mon-Sat, 8:00 AM – 6:00 PM GMT",
+        "alignment": "center"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "promotion_banner_cdQ44E",
+    "text_with_image_cards_jnzkqJ",
+    "rich_text_C3RUCn",
+    "whatsapp_cta_7Pixqg"
+  ]
+}

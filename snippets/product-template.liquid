@@ -564,16 +564,7 @@
               {{ block.shopify_attributes }}
             >
               <div class="{% if product != blank %} mb-2 md:mb-2.5{% endif %} ">
-                {% render 'inventory-status',
-                  variant: current_variant,
-                  is_show_preorder: is_show_preorder,
-                  show_stock_indicator_bar: true,
-                  show_content_center: show_content_center,
-                  inventory_layout: 'bar',
-                  stock_heading: block.settings.heading,
-                  stock_bar_capacity: block.settings.stock_bar_capacity,
-                  low_stock_text: block.settings.low_stock_text
-                %}
+                {% render 'inventory-status', variant: current_variant, is_show_preorder: is_show_preorder, show_stock_indicator_bar: true, show_content_center: show_content_center %}
               </div>
             </div>
           {%- when 'identifier' -%}
@@ -872,18 +863,6 @@
                 </div>
               {% endif %}
             </collapsible-tab>
-          {%- when 'product_accordion' -%}
-            {% render 'product-accordion', product: product, section: section, block: block %}
-          {%- when 'service_promises' -%}
-            {% render 'product-service-promises', block: block %}
-          {%- when 'promotion_countdown' -%}
-            {% if login_hide_price != 'true' %}
-              {% render 'product-promotion', product: product, block: block %}
-            {% endif %}
-          {%- when 'accessories' -%}
-            {% if login_hide_price != 'true' and settings.hide_cart == false %}
-              {% render 'product-accessories', product: product, section: section, block: block %}
-            {% endif %}
           {%- when 'complementary' -%}
             <div
               x-intersect.once.margin.200px="$store.xProductRecommendations.load($el, '{{ section.id }}', '{{ product.id }}', '{{ block.settings.max_product_show }}', 'complementary')"

@@ -1,13 +1,3 @@
-{% if display_style == 'product-accordion' %}
-  <ul class="product-accordion__payments" role="list">
-    {%- for payment_type in payment_types -%}
-      {%- assign type = payment_type | strip | downcase -%}
-      <li class="product-accordion__payment">
-        {% render 'product-accordion-payment-icon', type: type %}
-      </li>
-    {%- endfor -%}
-  </ul>
-{% else %}
 {% if show_background %}
   {% style %}
     .maximize-theme:not(.dark) .block--{{ blockId }} {
@@ -71,5 +61,3 @@
     <p class="color-text-[rgba(var(--color-text))] text-small anm-fade-element" data-fade-on-intersect>{{ text }}</p>
   {% endif %}
 </div>
-
-{% endif %}

@@ -1895,15 +1895,7 @@ class CollapsibleTab extends HTMLElement {
     this.isOpen = isOpen;
 
     if (this.content) {
-      const instantProductRow = this.classList.contains('product-accordion__row') && (
-        this.closest('.product-accordion')?.dataset.animation === 'false' ||
-        window.matchMedia('(prefers-reduced-motion: reduce)').matches
-      );
-      if (instantProductRow) {
-        this.content.classList.toggle('hidden', !this.isOpen);
-        this.content.style.height = this.isOpen ? 'auto' : '0px';
-        this.content.style.overflow = this.isOpen ? '' : 'hidden';
-      } else if (this._isAboveMode()) {
+      if (this._isAboveMode()) {
         this.content.classList.toggle("is-hidden", !this.isOpen);
       } else {
         if (this.isOpen) {
@@ -1945,13 +1937,6 @@ class CollapsibleTab extends HTMLElement {
   }
 
   _applyVisualState() {
-    if (this.classList.contains('product-accordion__row')) {
-      if (this.header) this.header.setAttribute('aria-expanded', String(this.isOpen));
-      if (this.content) {
-        this.content.inert = !this.isOpen;
-        this.content.setAttribute('aria-hidden', String(!this.isOpen));
-      }
-    }
     if (this.caret) {
       if (this.isFaq) {
         this.caret.classList.toggle("rotate-0", this.isOpen);

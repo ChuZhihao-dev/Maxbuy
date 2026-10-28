@@ -1,0 +1,332 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "show_heading": false,
+        "heading_size": "medium",
+        "heading_tag": "h1",
+        "show_breadcrumbs": true,
+        "padding_top": 28,
+        "padding_bottom": 28,
+        "breadcrumbs_background_light": "rgba(0,0,0,0)",
+        "breadcrumbs_text_light": "rgba(0,0,0,0)",
+        "breadcrumbs_text_link_light": "rgba(0,0,0,0)",
+        "breadcrumbs_background_dark": "rgba(0,0,0,0)",
+        "breadcrumbs_text_dark": "rgba(0,0,0,0)",
+        "breadcrumbs_text_link_dark": "rgba(0,0,0,0)"
+      }
+    },
+    "promotion_banner_cdQ44E": {
+      "type": "promotion-banner",
+      "name": "t:promotion_banner.name",
+      "settings": {
+        "image": "shopify://shop_images/c77bb18098e89076f66f7618441133f5.png",
+        "image_link": "",
+        "open_new_window_image": false,
+        "subheading": "",
+        "heading": "About Us",
+        "text": "<p>At Maxbuy, passion means more than just excitement,<br/>it is our relentless commitment to delivering the best to our customers.</p>",
+        "button_label": "",
+        "button_link": "",
+        "open_new_window_button": false,
+        "desktop_height": "adapt",
+        "desktop_content_position": "center start",
+        "desktop_content_alignment": "left",
+        "mobile_design_layout": true,
+        "mobile_height": "160",
+        "mobile_content_position": "center start",
+        "mobile_content_alignment": "left",
+        "section_width": "page-width",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "corner_radius": 8,
+        "overlay_opacity": 25,
+        "color_scheme_light": "scheme-2",
+        "color_scheme_dark": "scheme-2",
+        "banner_text_font": "montserrat_n4"
+      }
+    },
+    "text_with_image_cards_39KjzA": {
+      "type": "text-with-image-cards",
+      "blocks": {
+        "card_DLzPeN": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/WEB-2.png",
+            "image_link": "",
+            "image_open_new_window": false,
+            "subheading": "",
+            "heading": "About Maxbuy",
+            "heading_size": "medium",
+            "text": "<p>Welcome to Maxbuy, your trusted partner for quality electronics and home appliances in Ghana. Since our founding in 2020, we have rapidly grown into the country’s No. 1 electronics and home appliances retailer, dedicated to bringing the latest technology within everyone’s reach</p>",
+            "highlight_effect": "underline",
+            "text_transform": "none",
+            "button_label": "",
+            "button_link": "",
+            "button_open_new_window": false,
+            "show_button_style": "primary"
+          }
+        },
+        "card_hRwVE3": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/webw.png",
+            "image_link": "",
+            "image_open_new_window": false,
+            "subheading": "",
+            "heading": "Our Mission",
+            "heading_size": "medium",
+            "text": "<p>Our mission is simple: to provide high-quality, reliable electronics and home appliances at competitive prices, combined with an exceptional shopping experience. We believe that cutting-edge technology should be accessible to everyone, regardless of their budget. That’s why we have tailored our products and payment options to welcome customers from all income groups, from high-income earners to low-income households</p>",
+            "highlight_effect": "underline",
+            "text_transform": "none",
+            "button_label": "",
+            "button_link": "",
+            "button_open_new_window": false,
+            "show_button_style": "primary"
+          }
+        },
+        "card_9mzxYn": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/shop-prods.webp",
+            "image_link": "",
+            "image_open_new_window": false,
+            "subheading": "",
+            "heading": "A Commitment to Quality and Service",
+            "heading_size": "medium",
+            "text": "<p>At Maxbuy, we are proud to be recognized as the&nbsp;<strong>Electronics Company of the Year</strong> at the prestigious Ghana Business Awards 2024 . This honour reflects our unwavering commitment to customer satisfaction, innovation, and value</p>",
+            "highlight_effect": "underline",
+            "text_transform": "none",
+            "button_label": "",
+            "button_link": "",
+            "button_open_new_window": false,
+            "show_button_style": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "card_DLzPeN",
+        "card_hRwVE3",
+        "card_9mzxYn"
+      ],
+      "name": "t:text_with_image_cards.name",
+      "settings": {
+        "subheading": "",
+        "heading": "",
+        "heading_size": "medium",
+        "heading_tag": "h2",
+        "heading_alignment": "center",
+        "highlight_effect": "underline",
+        "text_transform": "none",
+        "layout": "horizontal",
+        "card_alignment": "left",
+        "image_style": "100%",
+        "enable_desktop_slider": false,
+        "swipe_on_mobile": false,
+        "change_bar_every": 5,
+        "number_cards": 3,
+        "spacing_desktop": 12,
+        "number_cards_mobile": "2",
+        "spacing_mobile": 8,
+        "section_width": "page-width",
+        "padding_top": 28,
+        "padding_bottom": 28,
+        "show_section_divider": false,
+        "color_scheme_light": "",
+        "background_color_light": "rgba(0,0,0,0)",
+        "color_scheme_dark": "",
+        "background_color_dark": "rgba(0,0,0,0)"
+      }
+    },
+    "promotion_banner_hArKtT": {
+      "type": "promotion-banner",
+      "name": "t:promotion_banner.name",
+      "settings": {
+        "image": "shopify://shop_images/MAXBUY-BANNER.jpg",
+        "image_link": "",
+        "open_new_window_image": false,
+        "subheading": "",
+        "heading": "",
+        "text": "",
+        "button_label": "",
+        "button_link": "",
+        "open_new_window_button": false,
+        "desktop_height": "adapt",
+        "desktop_content_position": "start start",
+        "desktop_content_alignment": "left",
+        "mobile_design_layout": true,
+        "mobile_height": "adapt",
+        "mobile_content_position": "center start",
+        "mobile_content_alignment": "left",
+        "section_width": "page-width",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "corner_radius": 8,
+        "overlay_opacity": 0,
+        "color_scheme_light": "",
+        "color_scheme_dark": "",
+        "banner_text_font": "montserrat_n4"
+      }
+    },
+    "testimonials_d9bjBR": {
+      "type": "testimonials",
+      "blocks": {
+        "testimonial_QKEV78": {
+          "type": "testimonial",
+          "settings": {
+            "video_url": "",
+            "video_alt_text": "",
+            "show_sound_control": false,
+            "enable_video_autoplay": false,
+            "icon_star": "quote",
+            "title": "Our Growing Presence",
+            "text": "<p>To serve you better, we have established a strong nationwide presence with over 40 showrooms across the country. We are continuing to expand, with our newest stores located in key areas like East Legon and Achimota Mall, ensuring that quality electronics are always close to home. You can find us in major cities including Accra (Circle, Darkuman Junction, Lapaz, Odorkor, Kasoa, Westhills Mall, and more), Tema, Kumasi, Tamale, Takoradi, Sunyani, Koforidua, and Ho<br/><br/></p>",
+            "author": "",
+            "author_note": "",
+            "product": ""
+          }
+        },
+        "testimonial_LDECrd": {
+          "type": "testimonial",
+          "settings": {
+            "video_url": "",
+            "video_alt_text": "",
+            "show_sound_control": false,
+            "enable_video_autoplay": false,
+            "icon_star": "quote",
+            "title": "Shop Your Way",
+            "text": "<p>We understand that our customers have different preferences. That’s why you can shop with us in person at any of our ultra-modern experience stores or conveniently online via our website at&nbsp;<a href=\"https://www.maxbuy.com.gh/\" target=\"_blank\">www.maxbuy.com.gh</a> .</p><p><strong>For customers who may not have the full amount upfront, we offer a flexible “buy-now-pay-later” policy and installment payment plans, some with 0% interest, to make your purchases easier and more affordable</strong></p>",
+            "author": "",
+            "author_note": "",
+            "product": ""
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_QKEV78",
+        "testimonial_LDECrd"
+      ],
+      "name": "t:testimonials.name",
+      "settings": {
+        "overlay_opacity": 0,
+        "heading": "",
+        "heading_size": "large",
+        "heading_tag": "h2",
+        "heading_alignment": "center",
+        "highlight_effect": "underline",
+        "text_transform": "none",
+        "text_alignment": "center",
+        "title_size": "medium",
+        "enable_desktop_slider": false,
+        "swipe_on_mobile": false,
+        "change_bar_every": 5,
+        "number_columns": 2,
+        "desktop_image_height": 300,
+        "block_spacing_desktop": 28,
+        "image_position_desktop": "md:flex-col",
+        "block_spacing_mobile": 16,
+        "image_position_mobile": "flex-col-reverse",
+        "show_background_image_mobile": false,
+        "section_width": "page-width",
+        "padding_top": 28,
+        "padding_bottom": 28,
+        "show_section_divider": false,
+        "color_scheme_light": "",
+        "column_background_color_light": "rgba(0,0,0,0)",
+        "color_scheme_dark": "",
+        "column_background_color_dark": "rgba(0,0,0,0)"
+      }
+    },
+    "faq_PTAYnq": {
+      "type": "faq",
+      "blocks": {
+        "frequently_asked_question_XntNjG": {
+          "type": "frequently_asked_question",
+          "settings": {
+            "icon": "in-person-support",
+            "another_icon": "",
+            "heading": "After Sales Service",
+            "row_content": "<p>To make your shopping experience as seamless as possible, Maxbuy is pleased to offer&nbsp;<strong>free delivery</strong>&nbsp;and&nbsp;<strong>free installation support</strong>&nbsp;on all appliance purchases nationwide. Our team is dedicated to ensuring that your new appliances are delivered safely and set up correctly, so you can start enjoying them right away</p>",
+            "highlight_effect": "underline",
+            "text_transform": "none"
+          }
+        },
+        "frequently_asked_question_eWnGXX": {
+          "type": "frequently_asked_question",
+          "settings": {
+            "icon": "authentic",
+            "another_icon": "",
+            "heading": "Best Quality",
+            "row_content": "<ul><li><strong>Premium Brands Only</strong>: We stock trusted global names like Samsung, LG, Apple, Tecno, Infinix, TCL, and more, so you can buy with confidence.</li><li><strong>Innovation First</strong>: We are proud to be the first in Ghana to introduce cutting-edge technologies, including Android AI TVs and hands-free voice control televisions.</li><li><strong>Reliability Guaranteed</strong>: Every product is carefully vetted for performance and durability, ensuring your investment stands the test of time</li></ul>",
+            "highlight_effect": "underline",
+            "text_transform": "none"
+          }
+        },
+        "frequently_asked_question_gnff6j": {
+          "type": "frequently_asked_question",
+          "settings": {
+            "icon": "delivery-to-door",
+            "another_icon": "",
+            "heading": "Fastest Delivery",
+            "row_content": "<p>At Maxbuy, we understand that when you make a purchase, you want to enjoy your new appliance as soon as possible. That’s why we are committed to providing some of the fastest delivery services in Ghana.</p>",
+            "highlight_effect": "underline",
+            "text_transform": "none"
+          }
+        }
+      },
+      "block_order": [
+        "frequently_asked_question_XntNjG",
+        "frequently_asked_question_eWnGXX",
+        "frequently_asked_question_gnff6j"
+      ],
+      "name": "t:faq.name",
+      "settings": {
+        "heading": "What can we do for you ?",
+        "heading_size": "medium",
+        "heading_tag": "h2",
+        "heading_alignment": "center",
+        "highlight_effect": "underline",
+        "text_transform": "none",
+        "collapsible": true,
+        "show_view_all_button": "",
+        "view_all_position": "top",
+        "view_all_button_style": "direction_link",
+        "button_link": "",
+        "open_new_window": false,
+        "show_additional_content": "none",
+        "additional_information": "<p>Use this text to share information about your supporting agents, policies such as support operating hours and average answer time.</p>",
+        "additional_content_alignment": "left",
+        "enable_microdata_schema": false,
+        "desktop_layout": "1",
+        "image_alignment": "left",
+        "desktop_height": "400px",
+        "image_alignment_mobile": "left",
+        "mobile_height": "250px",
+        "section_width": "page-width",
+        "padding_top": 28,
+        "padding_bottom": 28,
+        "show_section_divider": false,
+        "color_scheme_light": "",
+        "color_scheme_dark": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "promotion_banner_cdQ44E",
+    "text_with_image_cards_39KjzA",
+    "promotion_banner_hArKtT",
+    "testimonials_d9bjBR",
+    "faq_PTAYnq"
+  ]
+}
