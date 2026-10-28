@@ -1,0 +1,17 @@
+{%- case type -%}
+  {%- when 'paypal' -%}
+    <img src="{{ 'product-payment-paypal.svg' | asset_url }}" alt="PayPal" width="42.602" height="30" loading="lazy">
+  {%- when 'visa' -%}
+    <img src="{{ 'product-payment-visa.svg' | asset_url }}" alt="Visa" width="42.602" height="30" loading="lazy">
+  {%- when 'master' -%}
+    <img src="{{ 'product-payment-mastercard.svg' | asset_url }}" alt="Mastercard" width="42.602" height="30" loading="lazy">
+  {%- when 'american_express' -%}
+    <span class="product-accordion__amex" role="img" aria-label="American Express">
+      <img class="product-accordion__amex-bg" src="{{ 'product-payment-amex-bg.svg' | asset_url }}" alt="" width="42.602" height="30" loading="lazy">
+      <img class="product-accordion__amex-wordmark" src="{{ 'product-payment-amex-wordmark.png' | asset_url }}" alt="" width="1344" height="550" loading="lazy">
+      <img class="product-accordion__amex-caption" src="{{ 'product-payment-amex-caption.png' | asset_url }}" alt="" width="1080" height="159" loading="lazy">
+      <img class="product-accordion__amex-detail" src="{{ 'product-payment-amex-detail.svg' | asset_url }}" alt="" width="39.2219" height="5.02105" loading="lazy">
+    </span>
+  {%- else -%}
+    {{ type | payment_type_svg_tag }}
+{%- endcase -%}

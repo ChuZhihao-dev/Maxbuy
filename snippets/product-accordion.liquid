@@ -1,0 +1,88 @@
+{{ 'product-accordion.css' | asset_url | stylesheet_tag }}
+<div
+  class="product-accordion"
+  data-animation="{{ block.settings.enable_animation }}"
+  style="--product-accordion-duration: {{ block.settings.animation_duration }}ms"
+  {{ block.shopify_attributes }}
+>
+  {%- assign rows = 'description,shipping,returns,payment' | split: ',' -%}
+  {%- for row in rows -%}
+    {%- liquid
+      assign heading_key = row | append: '_heading'
+      assign open_key = row | append: '_open'
+      assign heading = block.settings[heading_key]
+      assign open = block.settings[open_key]
+      assign content = ''
+      assign policy_metafield = nil
+      assign payment_types = nil
+      assign arrow = 'product-accordion-policy.svg'
+      case row
+        when 'description'
+          if product.metafields.custom.product_description.type == 'multi_line_text_field'
+            assign content = product.metafields.custom.product_description.value | strip
+          endif
+          assign arrow = 'product-accordion-description.svg'
+        when 'shipping'
+          assign policy_metafield = product.metafields.custom.shipping_policy
+          if policy_metafield.type == 'rich_text_field'
+            assign content = policy_metafield.value
+          endif
+        when 'returns'
+          assign policy_metafield = product.metafields.custom.return_policy
+          if policy_metafield.type == 'rich_text_field'
+            assign content = policy_metafield.value
+          endif
+        when 'payment'
+          if product.metafields.custom.payment.type == 'list.single_line_text_field'
+            assign payment_types = product.metafields.custom.payment.value
+            assign content = payment_types | join: ',' | strip
+          endif
+          assign arrow = 'product-accordion-payment.svg'
+      endcase
+      assign row_id = 'ProductInfo-' | append: section.id | append: '-' | append: block.id | append: '-' | append: row
+    -%}
+    {%- if heading != blank and content != blank -%}
+      <collapsible-tab
+        class="product-accordion__row product-accordion__row--{{ row }}"
+        data-collapsible-tab-container
+        data-expanded="{{ open }}"
+        data-param-name="{{ row_id }}"
+      >
+        <h2 class="product-accordion__heading">
+          <button
+            type="button"
+            class="product-accordion__trigger"
+            id="{{ row_id }}-trigger"
+            aria-expanded="{{ open }}"
+            aria-controls="{{ row_id }}"
+            data-collapsible-tab-header
+          >
+            <span>{{ heading | escape }}</span>
+            <span class="product-accordion__arrow" aria-hidden="true">
+              <img src="{{ arrow | asset_url }}" alt="" width="20" height="20" loading="lazy">
+            </span>
+          </button>
+        </h2>
+        <div
+          id="{{ row_id }}"
+          class="product-accordion__content{% unless open %} hidden{% endunless %}"
+          role="region"
+          aria-labelledby="{{ row_id }}-trigger"
+          aria-hidden="{% if open %}false{% else %}true{% endif %}"
+          {% unless open %}inert{% endunless %}
+          data-collapsible-tab-content
+        >
+          {%- if row == 'payment' -%}
+            <div class="product-accordion__payment-content">
+              {% render 'payment-methods', display_style: 'product-accordion', payment_types: payment_types %}
+            </div>
+          {%- else -%}
+            <div class="product-accordion__body rte">{% if policy_metafield != nil %}{{ policy_metafield | metafield_tag }}{% else %}{{ content | escape | newline_to_br }}{% endif %}</div>
+          {%- endif -%}
+        </div>
+      </collapsible-tab>
+    {%- elsif request.design_mode and heading != blank -%}
+      <p class="product-accordion__editor-note">{{ heading | escape }}: add {% case row %}{% when 'description' %}the product metafield custom.product_description (multi-line text){% when 'payment' %}the product metafield custom.payment (single line text list){% when 'shipping' %}the product metafield custom.shipping_policy (rich text){% when 'returns' %}the product metafield custom.return_policy (rich text){% endcase %} to show this row.</p>
+    {%- endif -%}
+  {%- endfor -%}
+</div>

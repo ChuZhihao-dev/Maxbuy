@@ -1,0 +1,33 @@
+.product-accordion{width:100%;font-family:var(--body-font-family);color:rgb(var(--product-purchase-text,0 0 0))}
+.product-accordion__row{display:block;width:100%;border-bottom:1px solid rgba(255,255,255,.12)}
+.product-accordion__row.collapsible-hover-anm::before{content:none}
+.product-accordion__heading{margin:0;padding:0;font:inherit}
+.product-accordion__trigger{display:flex;align-items:center;justify-content:space-between;gap:16px;box-sizing:border-box;width:100%;margin:0;padding:18px 0;border:0;border-radius:0;background:transparent;color:inherit;font-family:inherit;font-size:18px;font-weight:600;line-height:normal;text-align:start;cursor:pointer}
+.product-accordion__trigger:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+.product-accordion__arrow{display:block;flex:0 0 20px;width:20px;height:20px;transition:transform var(--product-accordion-duration,300ms) ease}
+.product-accordion__arrow img{display:block;max-width:none}
+.product-accordion__row--description[data-expanded=false] .product-accordion__arrow{transform:rotate(-90deg)}
+.product-accordion__row--shipping[data-expanded=true] .product-accordion__arrow,.product-accordion__row--returns[data-expanded=true] .product-accordion__arrow{transform:rotate(90deg)}
+.product-accordion__row--payment .product-accordion__arrow{transform:rotate(-90deg) scaleY(-1)}
+.product-accordion__row--payment[data-expanded=true] .product-accordion__arrow{transform:scaleY(-1)}
+.product-accordion__content{transition:height var(--product-accordion-duration,300ms) ease}
+.product-accordion__content.hidden{display:none}
+.product-accordion__body{box-sizing:border-box;width:calc(100% - 33px);padding-bottom:18px;color:rgb(var(--product-purchase-text,0 0 0)/.7);font-size:16px;font-weight:400;line-height:1.6;overflow-wrap:anywhere}
+.product-accordion__body>:first-child{margin-top:0}
+.product-accordion__body>:last-child{margin-bottom:0}
+.product-accordion__body img,.product-accordion__body video,.product-accordion__body iframe{max-width:100%}
+.product-accordion__body table{display:block;max-width:100%;overflow-x:auto}
+.product-accordion__payment-content{padding-top:12px;padding-bottom:18px}
+.product-accordion__payments{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0;padding:0;list-style:none}
+.product-accordion__payment{display:flex;align-items:center;flex:none;margin:0;padding:0;line-height:0}
+.product-accordion__payment>img{display:block;max-width:none;width:42.602px;height:30px}
+.product-accordion__amex{position:relative;display:block;width:42.607px;height:30px}
+.product-accordion__amex img{position:absolute;display:block;max-width:none}
+.product-accordion__amex-bg{left:.01px;top:0;width:42.602px;height:30px}
+.product-accordion__amex-wordmark{left:0;top:7.11px;width:42.607px;height:17.436px}
+.product-accordion__amex-caption{left:8.4px;top:18.3px;width:34.238px;height:5.041px}
+.product-accordion__amex-detail{left:.03px;top:8.32px;width:39.2219px;height:5.02105px}
+.product-accordion__editor-note{margin:0;padding:18px 0;font-size:14px;line-height:1.6;opacity:.7}
+.product-accordion[data-animation=false] .product-accordion__content,.product-accordion[data-animation=false] .product-accordion__arrow{transition-duration:0s}
+@media(max-width:767px){.product-accordion__body{width:100%}}
+@media(prefers-reduced-motion:reduce){.product-accordion__content,.product-accordion__arrow{transition-duration:0s}}

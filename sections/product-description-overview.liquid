@@ -1,0 +1,218 @@
+{%- if product.description != blank -%}
+  {{ 'product-overview.css' | asset_url | stylesheet_tag }}
+  {{ 'product-description-overview.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'product-description-overview.js' | asset_url }}" defer></script>
+  {%- liquid
+    assign specification_font = section.settings.specification_font
+    assign specification_font_bold = specification_font | font_modify: 'weight', '700'
+  -%}
+  {%- style -%}
+    {{ specification_font | font_face: font_display: 'swap' }}
+    {{ specification_font_bold | font_face: font_display: 'swap' }}
+    #shopify-section-{{ section.id }} {
+      --overview-padding-top: {{ section.settings.padding_top }}px;
+      --overview-padding-bottom: {{ section.settings.padding_bottom }}px;
+      --overview-spec-font: {{ specification_font.family }}, {{ specification_font.fallback_families }};
+      --overview-animation-duration: {{ section.settings.animation_duration }}ms;
+      --overview-animation-delay: {{ section.settings.animation_delay }}ms;
+      --description-table-odd: {{ section.settings.table_odd_color }};
+      --description-table-even: {{ section.settings.table_even_color }};
+      --description-table-ink: {{ section.settings.table_text_color }};
+    }
+  {%- endstyle -%}
+  <product-description-overview
+    class="product-overview product-description-overview {{ section.settings.section_width }}"
+    data-columns="{{ section.settings.specification_columns }}"
+    data-promote-bold-titles="{{ section.settings.promote_bold_titles }}"
+  >
+    <div class="product-overview__card{% if section.settings.enable_animation %} anm-fade-element{% endif %}" id="ProductDescriptionOverview-{{ section.id }}"{% if section.settings.enable_animation %} data-fade-on-intersect{% endif %}>
+      <div class="product-overview__body product-description-overview__content rte" data-description-content>
+        {{- product.description | replace: '<h1', '<h2' | replace: '</h1>', '</h2>' -}}
+      </div>
+      {%- if section.settings.show_product_details -%}
+        {% render 'product-overview-details', product: product, section: section %}
+      {%- endif -%}
+    </div>
+  </product-description-overview>
+{%- elsif request.design_mode -%}
+  <div class="page-width product-overview__empty"><p>Product Overview - Text: add a description to this product. Use headings and a two-column table for specifications.</p></div>
+{%- endif -%}
+{% schema %}
+{
+  "name": "Product Overview - Text",
+  "tag": "section",
+  "class": "maximize-section section-product-description-overview",
+  "enabled_on": {
+    "templates": [
+      "product"
+    ]
+  },
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Reads the current product Description. Add headings, paragraphs and a simple two-column table in the product editor. All content follows the order in the description."
+    },
+    {
+      "type": "checkbox",
+      "id": "promote_bold_titles",
+      "label": "Use bold paragraphs as headings",
+      "default": true,
+      "info": "A paragraph containing only bold text becomes a section heading. Prefer Heading 2 in the product editor."
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Section width",
+      "options": [
+        {
+          "value": "page-width",
+          "label": "Page width"
+        },
+        {
+          "value": "full-width",
+          "label": "Full width"
+        }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "header",
+      "content": "Specifications"
+    },
+    {
+      "type": "select",
+      "id": "specification_columns",
+      "label": "Desktop columns",
+      "options": [
+        {
+          "value": "1",
+          "label": "One"
+        },
+        {
+          "value": "2",
+          "label": "Two"
+        }
+      ],
+      "default": "2",
+      "info": "Mobile always displays one column, preserving list order."
+    },
+    {
+      "type": "font_picker",
+      "id": "specification_font",
+      "label": "Specification font",
+      "default": "outfit_n4"
+    },
+    {
+      "type": "color",
+      "id": "table_odd_color",
+      "label": "Odd row background",
+      "default": "#efefef"
+    },
+    {
+      "type": "color",
+      "id": "table_even_color",
+      "label": "Even row background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "table_text_color",
+      "label": "Table text",
+      "default": "#003521"
+    },
+    {
+      "type": "header",
+      "content": "Product details"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_product_details",
+      "label": "Show SKU, collections, tags and brand",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "sku_label",
+      "label": "SKU label",
+      "default": "SKU"
+    },
+    {
+      "type": "text",
+      "id": "categories_label",
+      "label": "Collections label",
+      "default": "Categories"
+    },
+    {
+      "type": "text",
+      "id": "tags_label",
+      "label": "Tags label",
+      "default": "Tags"
+    },
+    {
+      "type": "text",
+      "id": "brand_label",
+      "label": "Brand label",
+      "default": "Brand"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_animation",
+      "label": "Enable content fade-in",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "animation_duration",
+      "label": "Duration",
+      "min": 100,
+      "max": 1000,
+      "step": 50,
+      "unit": "ms",
+      "default": 300
+    },
+    {
+      "type": "range",
+      "id": "animation_delay",
+      "label": "Delay",
+      "min": 0,
+      "max": 1000,
+      "step": 50,
+      "unit": "ms",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Overview - Text"
+    }
+  ]
+}
+{% endschema %}

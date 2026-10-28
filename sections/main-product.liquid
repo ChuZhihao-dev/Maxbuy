@@ -1147,6 +1147,113 @@
       ]
     },
     {
+      "type": "product_accordion",
+      "name": "Product information",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Product Description"
+        },
+        {
+          "type": "text",
+          "id": "description_heading",
+          "label": "Heading",
+          "default": "Product Description"
+        },
+        {
+          "type": "checkbox",
+          "id": "description_open",
+          "label": "Open by default",
+          "default": true
+        },
+        {
+          "type": "paragraph",
+          "content": "Reads product metafield custom.product_description (Multi-line text). Line breaks are preserved. Empty or incorrectly typed fields are hidden."
+        },
+        {
+          "type": "header",
+          "content": "Shipping Policy"
+        },
+        {
+          "type": "text",
+          "id": "shipping_heading",
+          "label": "Heading",
+          "default": "Shipping Policy"
+        },
+        {
+          "type": "checkbox",
+          "id": "shipping_open",
+          "label": "Open by default",
+          "default": false
+        },
+        {
+          "type": "paragraph",
+          "content": "Reads product metafield custom.shipping_policy (Rich text). Empty or incorrectly typed fields are hidden on the storefront."
+        },
+        {
+          "type": "header",
+          "content": "Return Policy"
+        },
+        {
+          "type": "text",
+          "id": "returns_heading",
+          "label": "Heading",
+          "default": "Return Policy"
+        },
+        {
+          "type": "checkbox",
+          "id": "returns_open",
+          "label": "Open by default",
+          "default": false
+        },
+        {
+          "type": "paragraph",
+          "content": "Reads product metafield custom.return_policy (Rich text). Empty or incorrectly typed fields are hidden on the storefront."
+        },
+        {
+          "type": "header",
+          "content": "Payment"
+        },
+        {
+          "type": "text",
+          "id": "payment_heading",
+          "label": "Heading",
+          "default": "Payment"
+        },
+        {
+          "type": "checkbox",
+          "id": "payment_open",
+          "label": "Open by default",
+          "default": true
+        },
+        {
+          "type": "paragraph",
+          "content": "Reads product metafield custom.payment (List of single line text). Use payment codes such as paypal, visa, master, american_express. Empty fields are hidden."
+        },
+        {
+          "type": "header",
+          "content": "Animation"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_animation",
+          "label": "Enable animation",
+          "default": true
+        },
+        {
+          "type": "range",
+          "id": "animation_duration",
+          "label": "Duration",
+          "min": 100,
+          "max": 600,
+          "step": 50,
+          "unit": "ms",
+          "default": 300
+        }
+      ]
+    },
+    {
       "type": "service_promises",
       "name": "Product service promises",
       "limit": 1,

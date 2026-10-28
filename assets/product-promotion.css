@@ -9,7 +9,7 @@
 .product-promotion__offer,.product-promotion__coupon{display:flex;flex-direction:column;gap:4px;min-width:0;line-height:normal}
 .product-promotion__offer p,.product-promotion__coupon p{margin:0}
 .product-promotion__offer-title,.product-promotion__code{color:rgb(var(--product-purchase-accent,237 28 36));font-size:18px;font-weight:700;line-height:normal;overflow-wrap:anywhere}
-.product-promotion__description,.product-promotion__code-label{font-size:14px;font-weight:400;line-height:normal}
+.product-promotion__description,.product-promotion__code-label{font-size:14px;font-weight:600;line-height:normal}
 .product-promotion__divider{display:flex;flex:0 0 1px;align-items:center;justify-content:center}
 .product-promotion__divider img{flex:none;max-width:none}
 .product-promotion__coupon{flex:0 1 auto;padding-inline:8px}

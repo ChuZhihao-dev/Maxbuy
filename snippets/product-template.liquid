@@ -872,6 +872,8 @@
                 </div>
               {% endif %}
             </collapsible-tab>
+          {%- when 'product_accordion' -%}
+            {% render 'product-accordion', product: product, section: section, block: block %}
           {%- when 'service_promises' -%}
             {% render 'product-service-promises', block: block %}
           {%- when 'promotion_countdown' -%}

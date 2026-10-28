@@ -138,43 +138,19 @@
             "animation_delay": 0
           }
         },
-        "collapsible_tab_1": {
-          "type": "collapsible_tab",
+        "product_accordion": {
+          "type": "product_accordion",
           "settings": {
-            "open_by_default": false,
-            "icon": "none",
-            "another_icon": "",
-            "use_secondary_background": false,
-            "heading": "Description",
-            "tab_content": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
-            "highlight_effect": "underline",
-            "text_transform": "none"
-          }
-        },
-        "collapsible_tab_HXkwRD": {
-          "type": "collapsible_tab",
-          "settings": {
-            "open_by_default": false,
-            "icon": "none",
-            "another_icon": "",
-            "use_secondary_background": false,
-            "heading": "Additional Information",
-            "tab_content": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
-            "highlight_effect": "underline",
-            "text_transform": "none"
-          }
-        },
-        "collapsible_tab_2": {
-          "type": "collapsible_tab",
-          "settings": {
-            "open_by_default": false,
-            "icon": "none",
-            "another_icon": "",
-            "use_secondary_background": false,
-            "heading": "Shipping and Returns",
-            "tab_content": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
-            "highlight_effect": "underline",
-            "text_transform": "none"
+            "description_heading": "Product Description",
+            "description_open": true,
+            "shipping_heading": "Shipping Policy",
+            "shipping_open": false,
+            "returns_heading": "Return Policy",
+            "returns_open": false,
+            "payment_heading": "Payment",
+            "payment_open": true,
+            "enable_animation": true,
+            "animation_duration": 300
           }
         }
       },
@@ -192,9 +168,7 @@
         "buy_buttons",
         "space_KKnHzV",
         "service_promises",
-        "collapsible_tab_1",
-        "collapsible_tab_HXkwRD",
-        "collapsible_tab_2"
+        "product_accordion"
       ],
       "settings": {
         "enable_sticky_content": true,
@@ -251,10 +225,52 @@
         "color_scheme_light": "",
         "color_scheme_dark": ""
       }
+    },
+    "product_overview": {
+      "type": "product-overview",
+      "settings": {
+        "section_width": "page-width",
+        "specification_columns": "2",
+        "specification_font": "outfit_n4",
+        "show_product_details": true,
+        "sku_label": "SKU",
+        "categories_label": "Categories",
+        "tags_label": "Tags",
+        "brand_label": "Brand",
+        "padding_top": 32,
+        "padding_bottom": 0,
+        "enable_animation": false,
+        "animation_duration": 300,
+        "animation_delay": 0
+      }
+    },
+    "product_description_overview": {
+      "type": "product-description-overview",
+      "settings": {
+        "section_width": "page-width",
+        "specification_columns": "2",
+        "specification_font": "outfit_n4",
+        "show_product_details": true,
+        "sku_label": "SKU",
+        "categories_label": "Categories",
+        "tags_label": "Tags",
+        "brand_label": "Brand",
+        "padding_top": 32,
+        "padding_bottom": 0,
+        "enable_animation": false,
+        "animation_duration": 300,
+        "animation_delay": 0,
+        "promote_bold_titles": true,
+        "table_odd_color": "#efefef",
+        "table_even_color": "#ffffff",
+        "table_text_color": "#003521"
+      }
     }
   },
   "order": [
     "main",
+    "product_overview",
+    "product_description_overview",
     "product_recommendations_hcJBTH"
   ]
 }

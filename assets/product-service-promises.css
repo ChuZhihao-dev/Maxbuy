@@ -10,7 +10,7 @@
 .product-service-promises__icon--payment .product-service-promises__sprite{left:-23.31%;top:-387.33%}
 .product-service-promises__icon--trust .product-service-promises__crop{left:calc(50% + .5px);top:50%;width:37px;height:33.967px}
 .product-service-promises__icon--trust .product-service-promises__sprite{height:390.33%;left:-244.17%;top:-266.16%}
-.product-service-promises__label{min-width:0;margin:0;font-size:18px;font-weight:400;line-height:normal;overflow-wrap:anywhere}
+.product-service-promises__label{min-width:0;margin:0;font-size:18px;font-weight:600;line-height:normal;overflow-wrap:anywhere}
 .product-service-promises__label a{color:inherit;text-decoration:none;transition:color var(--service-promises-duration,150ms) ease var(--service-promises-delay,0ms)}
 .product-service-promises__label a:hover{color:rgb(var(--product-purchase-text,0 0 0))}
 .product-service-promises__label a:focus-visible{outline:2px solid currentColor;outline-offset:3px}
