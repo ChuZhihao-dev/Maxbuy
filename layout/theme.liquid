@@ -100,6 +100,7 @@
     render 'font-face'
     echo 'theme.css' | asset_url | stylesheet_tag: preload: true
     render 'css-variables'
+    echo 'maxbuy-motion.css' | asset_url | stylesheet_tag
     render 'theme-mode-control'
   %}
   <script>

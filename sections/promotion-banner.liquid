@@ -73,7 +73,7 @@
     {% endif %}
     {% if has_content %}
       <div class="promotion-banner__content">
-        <div class="promotion-banner__copy">
+        <div class="promotion-banner__copy" data-maxbuy-reveal="text">
           {% if section.settings.subheading != blank %}<p class="promotion-banner__subheading">{{ section.settings.subheading | escape }}</p>{% endif %}
           {% if section.settings.heading != blank %}<h2 class="promotion-banner__heading">{{ section.settings.heading | escape }}</h2>{% endif %}
           {% if section.settings.text != blank %}<div class="rte">{{ section.settings.text }}</div>{% endif %}

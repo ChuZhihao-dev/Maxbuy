@@ -20,7 +20,7 @@
 <div class="flash-deals-section" style="--deals-padding-top: {{ section.settings.padding_top }}px; --deals-padding-bottom: {{ section.settings.padding_bottom }}px">
   <flash-deals class="best-sellers flash-deals" style="--deals-background: {{ section.settings.background }}; --best-sellers-button-font: 'Maxbuy Public Sans', sans-serif" data-step="{{ section.settings.navigation_step }}" data-countdown="{{ section.settings.enable_countdown }}" data-end-date="{{ section.settings.end_date | escape }}" data-end-time="{{ section.settings.end_time | escape }}" data-timezone="{{ section.settings.timezone }}" data-expired="{{ section.settings.expiry_behavior }}" aria-label="{{ section.settings.heading | escape }}" role="region">
     <div class="flash-deals__inner">
-      <div class="flash-deals__copy">
+      <div class="flash-deals__copy" data-maxbuy-reveal="text">
         {% if section.settings.heading != blank %}<h2 class="flash-deals__heading">{{ section.settings.heading | escape }}</h2>{% endif %}
         {% if section.settings.description != blank %}<p class="flash-deals__description">{{ section.settings.description | escape | newline_to_br }}</p>{% endif %}
         {% if section.settings.enable_countdown %}

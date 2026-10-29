@@ -27,10 +27,10 @@
     {% endif %}
   </div>
   <div class="store-showcase__inner">
-    <h2 id="StoreLocatorHeading-{{ section.id }}" class="store-showcase__heading">{{ section.settings.heading | escape }}</h2>
+    <h2 id="StoreLocatorHeading-{{ section.id }}" class="store-showcase__heading" data-maxbuy-reveal="text">{{ section.settings.heading | escape }}</h2>
     <div class="store-showcase__grid">
       <div class="store-showcase__directory">
-        <form class="store-showcase__search" role="search" aria-label="{{ section.settings.heading | escape }}">
+        <form class="store-showcase__search" data-maxbuy-reveal="text" role="search" aria-label="{{ section.settings.heading | escape }}">
           <label class="store-showcase__sr-only" for="StoreLocatorSearch-{{ section.id }}">{{ section.settings.search_placeholder | escape }}</label>
           <input id="StoreLocatorSearch-{{ section.id }}" name="store-search" type="search" placeholder="{{ section.settings.search_placeholder | escape }}" autocomplete="off" aria-controls="StoreLocatorResults-{{ section.id }}">
           <button type="submit">{{ section.settings.search_label | escape }}</button>
@@ -59,7 +59,7 @@
         </p>
         <noscript><p class="store-showcase__empty">{{ section.settings.noscript_text | escape }}</p></noscript>
       </div>
-      <div class="store-showcase__map-column">
+      <div class="store-showcase__map-column" data-maxbuy-reveal="card">
         <div class="store-showcase__map" data-map-container>
           <iframe id="StoreLocatorMap-{{ section.id }}" data-store-map title="{{ section.settings.map_label | escape }}" referrerpolicy="no-referrer-when-downgrade" allowfullscreen hidden></iframe>
           <div class="store-showcase__map-placeholder" data-map-placeholder>

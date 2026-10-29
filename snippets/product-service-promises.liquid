@@ -14,7 +14,7 @@
     %}
     {% if label == blank %}{% continue %}{% endif %}
     {% assign promise_count = promise_count | plus: 1 %}
-    <div class="product-service-promises__item" role="listitem">
+    <div class="product-service-promises__item" data-maxbuy-reveal="card" data-maxbuy-order="{{ promise_count | minus: 1 }}" role="listitem">
       <span class="product-service-promises__icon product-service-promises__icon--{{ promise }}" aria-hidden="true">
         {% if icon != blank %}
           <img class="product-service-promises__custom-icon" src="{{ icon | image_url: width: 92 }}" width="46" height="46" loading="lazy" alt="">

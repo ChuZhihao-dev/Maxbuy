@@ -1,0 +1,60 @@
+/* Reuse the theme fade states, easing and duration tokens. */
+[data-maxbuy-reveal="card"].anm-fade-element {
+  transition-duration: var(--reveal-transition-duration), var(--reveal-transition-duration);
+  transition-timing-function: cubic-bezier(.445, .05, .55, .95);
+  transition-delay: var(--maxbuy-reveal-delay, 0ms), calc(var(--maxbuy-reveal-delay, 0ms) + 100ms);
+}
+
+/* The initial viewport and disabled animations must appear immediately. */
+[data-maxbuy-reveal].transition-none,
+[data-animation="false"] [data-maxbuy-reveal],
+[data-maxbuy-reveal][data-animation="false"] {
+  transition: none;
+}
+
+/* Native theme buttons keep their existing hover handling; custom controls
+   retain their design and use the same timing tokens. */
+.best-sellers__shop,
+.best-sellers__card :is(.main-price, .price-wrapper > .price),
+.favorite-products__button,
+.store-showcase__card-select {
+  transition: color var(--button-animation-duration) ease, background-color var(--button-animation-duration) ease;
+}
+@media (hover: hover) and (min-width: 1024px) {
+  .promotion-banner .promotion-banner__button:not([aria-disabled="true"]):hover {
+    background-color: #ededed;
+  }
+  .favorite-products__tile:hover .favorite-products__button {
+    background-color: #ed1c24;
+    color: #fff;
+  }
+}
+
+/* Keep content readable immediately when the OS requests reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  .maxbuy-mega-menu {
+    transition: none !important;
+  }
+  .anm-fade-element,
+  .anm-reveal-item,
+  .anm-reveal-item-collection {
+    visibility: visible !important;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+  .media-hyperlink .anm-image-hover,
+  .media-hyperlink:hover .anm-image-hover {
+    transform: none !important;
+    transition: none !important;
+  }
+  :is(.dual-hero, .shop-by-brand, .best-sellers, .favorite-products, .promotion-banner, .store-showcase, .feature-strip, .product-accessories, .product-accordion, .product-promotion, .product-service-promises, .product-section-nav, .maxbuy-mega-menu, #x-footer, .wa-cta) *,
+  :is(.dual-hero, .shop-by-brand, .best-sellers, .favorite-products, .promotion-banner, .store-showcase, .feature-strip, .product-accessories, .product-accordion, .product-promotion, .product-service-promises, .product-section-nav, .maxbuy-mega-menu, #x-footer, .wa-cta) *::before,
+  :is(.dual-hero, .shop-by-brand, .best-sellers, .favorite-products, .promotion-banner, .store-showcase, .feature-strip, .product-accessories, .product-accordion, .product-promotion, .product-service-promises, .product-section-nav, .maxbuy-mega-menu, #x-footer, .wa-cta) *::after {
+    transition-duration: 0s !important;
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+    scroll-behavior: auto !important;
+  }
+}

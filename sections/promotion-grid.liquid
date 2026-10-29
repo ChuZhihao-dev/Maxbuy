@@ -70,7 +70,7 @@
 
 <div class="promotion-grid{% if section.settings.favorite_products_style %} favorite-products{% endif %} section--{{ section.id }} {{ section.settings.section_width }} rounded-corners-container color-{{ section.settings.color_scheme_light }} dark-color-{{ section.settings.color_scheme_dark }}">
   {%- if section.settings.heading != blank -%}
-    <{{ section.settings.heading_tag }} class="promotion-grid__heading heading-{{ section.settings.heading_size }} block text-{{ section.settings.heading_alignment }} heading-content-spacing p-break-words">
+    <{{ section.settings.heading_tag }} class="promotion-grid__heading heading-{{ section.settings.heading_size }} block text-{{ section.settings.heading_alignment }} heading-content-spacing p-break-words"{% if section.settings.favorite_products_style %} data-maxbuy-reveal="text"{% endif %}>
       {% if section.settings.favorite_products_style %}
         {{ section.settings.heading | escape }}
       {% else %}

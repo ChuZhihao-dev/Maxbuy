@@ -32,13 +32,13 @@
                 assign mobile_title = block.settings.mobile_title | default: title
                 assign image = block.settings.image | default: collection.featured_image
               %}
-              <a class="slide-item dual-hero__category" href="{{ collection.url }}" {{ block.shopify_attributes }}>
-                <span class="dual-hero__category-text">
+              <a class="slide-item dual-hero__category media-hyperlink" href="{{ collection.url }}" {{ block.shopify_attributes }}>
+                <span class="dual-hero__category-text" data-maxbuy-reveal="text">
                   <span class="dual-hero__category-title dual-hero__desktop-title">{{ title | escape }}</span>
                   <span class="dual-hero__category-title dual-hero__mobile-title">{{ mobile_title | escape }}</span>
                   <span class="dual-hero__category-count">{{ collection.all_products_count }} {% if collection.all_products_count == 1 %}Item{% else %}Items{% endif %}</span>
                 </span>
-                <span class="dual-hero__thumbnail">{% if image != blank %}{{ image | image_url: width: 144 | image_tag: widths: '48, 96, 144', sizes: '(max-width: 767px) 24px, 44px', loading: 'lazy', alt: '' }}{% endif %}</span>
+                <span class="dual-hero__thumbnail">{% if image != blank %}{{ image | image_url: width: 144 | image_tag: class: 'anm-image-hover', widths: '48, 96, 144', sizes: '(max-width: 767px) 24px, 44px', loading: 'lazy', alt: '' }}{% endif %}</span>
               </a>
             {% elsif request.design_mode %}
               <span class="dual-hero__editor-note" {{ block.shopify_attributes }}>Select a collection for this category.</span>
@@ -70,7 +70,7 @@
                 {{ desktop_image | image_url: width: 2880 | image_tag: widths: '768, 1440, 1920, 2880', sizes: '100vw', loading: loading, fetchpriority: priority, alt: '' }}
               </picture>
             {% endif %}
-            <div class="dual-hero__content">
+            <div class="dual-hero__content" data-maxbuy-reveal="text">
               {% if block.settings.badge != blank %}<span class="dual-hero__badge">{{ block.settings.badge | escape }}<img class="dual-hero__desktop-icon" src="{{ 'hero-badge-tail.svg' | asset_url }}" width="6" height="6" alt=""><img class="dual-hero__mobile-icon" src="{{ 'hero-badge-tail-mobile.svg' | asset_url }}" width="4.157" height="4.157" alt=""></span>{% endif %}
               {% if block.settings.title != blank %}<h2 class="dual-hero__heading">{{ block.settings.title | escape }}</h2>{% endif %}
               {% if block.settings.description != blank %}<p class="dual-hero__description">{{ block.settings.description | escape }}</p>{% endif %}

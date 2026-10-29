@@ -15,7 +15,7 @@
 
   .maxbuy-mega-menu__trigger .icon-caret svg {
     transform-origin: center;
-    transition: transform 220ms ease;
+    transition: transform var(--header-menu-transition-duration) ease;
   }
 
   .maxbuy-mega-menu__trigger[aria-expanded='true'] .icon-caret svg {
@@ -39,7 +39,7 @@
     visibility: hidden;
     pointer-events: none;
     transform: translateY(-10px);
-    transition: opacity 220ms ease, transform 260ms ease, visibility 0s linear 260ms;
+    transition: opacity var(--header-menu-transition-duration) ease, transform var(--header-menu-transition-duration) ease, visibility 0s linear var(--header-menu-transition-duration);
   }
 
   .maxbuy-mega-menu.is-open {
@@ -47,7 +47,7 @@
     visibility: visible;
     pointer-events: auto;
     transform: translateY(0);
-    transition: opacity 220ms ease, transform 260ms ease, visibility 0s;
+    transition: opacity var(--header-menu-transition-duration) ease, transform var(--header-menu-transition-duration) ease, visibility 0s;
   }
 
   .maxbuy-mega-menu__inner {

@@ -23,7 +23,7 @@
   <span id="product-overview" class="product-description-overview__anchor" aria-hidden="true"></span>
   {%- if section.settings.heading != blank -%}
     <div class="product-description-overview__heading-wrap {{ section.settings.section_width }}">
-      <h2 class="product-description-overview__heading">{{ section.settings.heading | escape }}</h2>
+      <h2 class="product-description-overview__heading"{% if section.settings.enable_animation %} data-maxbuy-reveal="text"{% endif %}>{{ section.settings.heading | escape }}</h2>
     </div>
   {%- endif -%}
   <product-description-overview

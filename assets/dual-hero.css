@@ -13,6 +13,7 @@ dual-hero { display: block; position: relative; isolation: isolate; width: 100%;
 .dual-hero__thumbnail { display: flex; align-items: center; justify-content: center; flex: none; width: 48px; height: 48px; padding: 2px; border-radius: 6px; background: #f0f0f0; }
 .dual-hero__thumbnail img { width: 44px; height: 44px; object-fit: contain; }
 .dual-hero button { appearance: none; border: 0; padding: 0; cursor: pointer; font-family: inherit; }
+.dual-hero [data-direction][hidden] { display: none; }
 .dual-hero__category-arrow { position: relative; display: flex; align-items: center; justify-content: center; width: 36px; height: 64px; flex: none; background: transparent; }
 .dual-hero__category-arrow img { flex: none; max-width: none; }
 .dual-hero__category-arrow[data-direction="1"] img { transform: scaleX(-1); }

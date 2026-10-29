@@ -4,7 +4,7 @@
   assign name_id = 'StoreName-' | append: section.id | append: '-' | append: block.id
   assign address_id = 'StoreAddress-' | append: section.id | append: '-' | append: block.id
 -%}
-<div class="store-showcase__card" role="listitem" data-store-card data-store-id="{{ block.id }}" {{ block.shopify_attributes }}>
+<div class="store-showcase__card" data-maxbuy-reveal="card" role="listitem" data-store-card data-store-id="{{ block.id }}" {{ block.shopify_attributes }}>
   <button type="button" class="store-showcase__card-select" data-store-id="{{ block.id }}" aria-controls="StoreLocatorMap-{{ section.id }}" aria-labelledby="{{ name_id }}" aria-describedby="{{ address_id }}" aria-pressed="false"></button>
   <h3 id="{{ name_id }}" class="store-showcase__name" data-store-name>{{ store_name | escape }}</h3>
   <p class="store-showcase__row" data-address-row{% if block.settings.location_address == blank %} hidden{% endif %}>

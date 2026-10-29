@@ -9,7 +9,7 @@
     assign on_sale = true
   endif
 %}
-<div class="best-sellers__card">
+<div class="best-sellers__card" data-maxbuy-reveal="card" data-maxbuy-order="{{ index | minus: 1 | modulo: 4 }}">
   {% render 'product-card', show_discount_percentage: show_price_discount, product: product, section_id: product_id, index: index, index_param: index, columns_desktop: section.settings.desktop_products_per_row, column_mobile: section.settings.mobile_products_per_row, collection: collection, show_vendor: false, show_rating: false, show_quickview: false, disable_badges: true, is_always_active: true %}
   {% if deals_card %}
     {% if on_sale and section.settings.show_discount_percentage %}<span class="flash-deals__badge">{{ product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round }}%OFF<img class="flash-deals__badge-desktop" src="{{ 'best-sellers-badge-tail.svg' | asset_url }}" width="4" height="4" alt=""><img class="flash-deals__badge-mobile" src="{{ 'best-sellers-badge-tail-mobile.svg' | asset_url }}" width="2.41882" height="2.41882" alt=""></span>{% endif %}

@@ -2264,7 +2264,24 @@ function getValueCssVariable(varName, element = document.documentElement, should
 //       → adds 'is-visible' class (triggers CSS fade-in animation)
 // =============================================================================
 (function setupHighlightObserver() {
-  let SELECTOR = '[data-highlight-class],[data-fade-on-intersect]';
+  let SELECTOR = '[data-highlight-class],[data-fade-on-intersect],[data-maxbuy-reveal]';
+
+  // Custom sections share the theme's observer and fade classes. Apply the
+  // hidden state in JS so their content also remains readable without JS.
+  // HTML caches copy data attributes, but not observer registrations. Track
+  // actual nodes so cloned collection tabs are registered independently.
+  const observedElements = new WeakSet();
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  function prepareReveal(el) {
+    if (!el.hasAttribute('data-maxbuy-reveal')) return;
+    el.classList.add('anm-fade-element');
+    el.setAttribute('data-fade-on-intersect', '');
+    const order = Math.max(0, Math.min(5, Number(el.dataset.maxbuyOrder) || 0));
+    el.style.setProperty('--maxbuy-reveal-delay', `${order * 100}ms`);
+    if (reducedMotion.matches || el.closest('[data-animation="false"]')) {
+      el.classList.add('is-visible', 'transition-none');
+    }
+  }
 
   let observer = new IntersectionObserver(function(entries, obs) {
     entries.forEach(function(entry) {
@@ -2298,11 +2315,13 @@ function getValueCssVariable(varName, element = document.documentElement, should
   function applyInViewport(root) {
     let vh = window.innerHeight;
     let toShow = [], toObserve = [];
+    (root || document).querySelectorAll('[data-maxbuy-reveal]').forEach(prepareReveal);
     // Pass 1: batch-read all rects — NO dataset writes, zero DOM mutations
     (root || document).querySelectorAll(SELECTOR).forEach(function(el) {
-      if (el.dataset.fadeObserved) return;
+      if (observedElements.has(el)) return;
       let rect = el.getBoundingClientRect();
-      if (rect.top < vh && rect.bottom > 0) {
+      const horizontallyVisible = !el.hasAttribute('data-maxbuy-reveal') || (rect.left < window.innerWidth && rect.right > 0);
+      if (rect.top < vh && rect.bottom > 0 && horizontallyVisible) {
         toShow.push(el);
       } else {
         toObserve.push(el);
@@ -2310,6 +2329,7 @@ function getValueCssVariable(varName, element = document.documentElement, should
     });
     // Pass 2: batch-write all DOM mutations — single style recalculation
     toShow.forEach(function(el) {
+      observedElements.add(el);
       el.dataset.fadeObserved = '1';
       el.classList.add('is-visible', 'transition-none');
       if (el.dataset.highlightClass) {
@@ -2317,6 +2337,7 @@ function getValueCssVariable(varName, element = document.documentElement, should
       }
     });
     toObserve.forEach(function(el) {
+      observedElements.add(el);
       el.dataset.fadeObserved = '1';
       observer.observe(el);
     });
@@ -2324,7 +2345,9 @@ function getValueCssVariable(varName, element = document.documentElement, should
 
   function observeAll(root) {
     (root || document).querySelectorAll(SELECTOR).forEach(function(el) {
-      if (!el.dataset.fadeObserved) {
+      if (!observedElements.has(el)) {
+        prepareReveal(el);
+        observedElements.add(el);
         el.dataset.fadeObserved = '1';
         observer.observe(el);
       }
@@ -2360,13 +2383,17 @@ function getValueCssVariable(varName, element = document.documentElement, should
       for (let j = 0; j < added.length; j++) {
         let node = added[j];
         if (node.nodeType !== 1) continue;
-        if (node.matches(SELECTOR) && !node.dataset.fadeObserved) {
+        if (node.matches(SELECTOR) && !observedElements.has(node)) {
+          prepareReveal(node);
+          observedElements.add(node);
           node.dataset.fadeObserved = '1';
           observer.observe(node);
         }
         if (node.firstElementChild) {
           node.querySelectorAll(SELECTOR).forEach(function(el) {
-            if (!el.dataset.fadeObserved) {
+            if (!observedElements.has(el)) {
+              prepareReveal(el);
+              observedElements.add(el);
               el.dataset.fadeObserved = '1';
               observer.observe(el);
             }

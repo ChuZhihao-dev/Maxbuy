@@ -1,6 +1,7 @@
 {{ 'product-accordion.css' | asset_url | stylesheet_tag }}
 <div
   class="product-accordion"
+  data-maxbuy-reveal="text"
   data-animation="{{ block.settings.enable_animation }}"
   style="--product-accordion-duration: {{ block.settings.animation_duration }}ms"
   {{ block.shopify_attributes }}

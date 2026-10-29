@@ -35,7 +35,7 @@
 #x-footer .maxbuy-footer__social { grid-column: 2; grid-row: 1; min-width: 0; }
 #x-footer .maxbuy-footer__social .social { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-start; gap: 25.714px; margin: 0; padding: 0; color: #000; }
 #x-footer .maxbuy-footer__social .social-link { width: auto; height: auto; margin: 0; padding: 0; line-height: 0; }
-#x-footer .maxbuy-footer__social .social a { display: flex; align-items: center; justify-content: center; width: auto; height: 20px; color: #000; transition: color .2s; }
+#x-footer .maxbuy-footer__social .social a { display: flex; align-items: center; justify-content: center; width: auto; height: 20px; color: #000; transition: color var(--text-link-and-title-link-animation-duration) ease; }
 #x-footer .maxbuy-footer__social-icon { display: block; background-color: currentColor; -webkit-mask: var(--footer-social-icon) center / contain no-repeat; mask: var(--footer-social-icon) center / contain no-repeat; }
 #x-footer .maxbuy-footer__social-icon img { visibility: hidden; }
 #x-footer .maxbuy-footer__social img { display: block; }
@@ -126,7 +126,7 @@
   #x-footer .footer-main { grid-template-columns: minmax(0, 1fr); gap: 30px; }
   #x-footer .footer-col-link_list .footer-collapse__label { display: flex; align-items: center; justify-content: space-between; pointer-events: auto; margin: 0 0 20px; padding: 0; cursor: pointer; }
   #x-footer .footer-col-link_list .h5 { display: block; font-size: 18px; line-height: 18px; }
-  #x-footer .maxbuy-footer__chevron { display: block; flex: 0 0 auto; transform: rotate(0deg); transition: transform .2s; }
+  #x-footer .maxbuy-footer__chevron { display: block; flex: 0 0 auto; transform: rotate(0deg); transition: transform var(--dropdown-animation-duration) ease; }
   #x-footer .maxbuy-footer__chevron.is-open { transform: rotate(90deg); }
   #x-footer .footer-menu-links { margin: 0; padding: 0; gap: 24px; }
   #x-footer .footer-menu-links :is(a,span), #x-footer .maxbuy-footer__menu-labels .maxbuy-footer__highlight { font-size: 16px; font-weight: 400; line-height: 20px; color: rgb(0 0 0 / 80%); }

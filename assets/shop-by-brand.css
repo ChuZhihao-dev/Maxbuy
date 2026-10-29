@@ -40,7 +40,7 @@ shop-by-brand { color: #000; font-family: var(--brand-font); font-style: normal;
   .shop-by-brand > .page-width { padding-left: 12px; padding-right: 12px; }
   .shop-by-brand__heading { font-size: 20px; margin-bottom: 24px; }
   .shop-by-brand__carousel { padding: 0; max-width: 329px; margin: 0 auto; }
-  .shop-by-brand__page { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px 16px; align-content: start; }
+  .shop-by-brand__page { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-content: start; }
   .shop-by-brand__link { gap: 14px; }
   .shop-by-brand__circle { width: 72px; height: 72px; }
   .shop-by-brand__name { color: #000; font-family: var(--brand-font); font-size: 12px; }
@@ -52,3 +52,4 @@ shop-by-brand { color: #000; font-family: var(--brand-font); font-style: normal;
 @media (prefers-reduced-motion: no-preference) { .shop-by-brand__track { scroll-behavior: smooth; } }
 
 .shop-by-brand__navigation button[data-direction="1"] img { transform: scaleX(-1); }
+.shop-by-brand__navigation[hidden] { display: none; }

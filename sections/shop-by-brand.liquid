@@ -11,32 +11,32 @@
 <shop-by-brand class="shop-by-brand" style="--brand-font: {{ section.settings.font.family | escape }}, {{ section.settings.font.fallback_families | escape }}; --brand-padding-top: {{ section.settings.padding_top }}px; --brand-padding-bottom: {{ section.settings.padding_bottom }}px;{% if section.settings.background_color != blank and section.settings.background_color.alpha != 0 %} background-color: {{ section.settings.background_color }};{% endif %}">
   <div class="page-width">
     {% if section.settings.heading != blank %}
-      <h2 class="shop-by-brand__heading">{{ section.settings.heading | escape }}</h2>
+      <h2 class="shop-by-brand__heading" data-maxbuy-reveal="text">{{ section.settings.heading | escape }}</h2>
     {% endif %}
     <div class="shop-by-brand__carousel">
       <div id="BrandTrack-{{ section.id }}" class="shop-by-brand__track" tabindex="0" role="region" aria-label="{{ section.settings.heading | default: 'Brands' | escape }}">
         {% for block in section.blocks %}
-          {% assign page_position = forloop.index0 | modulo: 6 %}
+          {% assign page_position = forloop.index0 | modulo: 3 %}
           {% if page_position == 0 %}<div class="shop-by-brand__page">{% endif %}
-          <div class="shop-by-brand__item" {{ block.shopify_attributes }}>
-            {% if block.settings.link != blank %}<a class="shop-by-brand__link" href="{{ block.settings.link }}">{% else %}<div class="shop-by-brand__link">{% endif %}
+          <div class="shop-by-brand__item" data-maxbuy-reveal="card" data-maxbuy-order="{{ page_position }}" {{ block.shopify_attributes }}>
+            {% if block.settings.link != blank %}<a class="shop-by-brand__link media-hyperlink" href="{{ block.settings.link }}">{% else %}<div class="shop-by-brand__link">{% endif %}
               <span class="shop-by-brand__circle">
                 {% if block.settings.svg_url != blank %}
-                  <img src="{{ block.settings.svg_url | escape }}" width="110" height="110" alt="" loading="lazy">
+                  <img class="anm-image-hover" src="{{ block.settings.svg_url | escape }}" width="110" height="110" alt="" loading="lazy">
                 {% elsif block.settings.image != blank %}
-                  {{ block.settings.image | image_url: width: 240 | image_tag: widths: '72, 120, 144, 240', sizes: '(max-width: 767px) 72px, (max-width: 1199px) 88px, 110px', loading: 'lazy', alt: '' }}
+                  {{ block.settings.image | image_url: width: 240 | image_tag: class: 'anm-image-hover', widths: '72, 120, 144, 240', sizes: '(max-width: 767px) 72px, (max-width: 1199px) 88px, 110px', loading: 'lazy', alt: '' }}
                 {% endif %}
               </span>
               <span class="shop-by-brand__name">{{ block.settings.name | escape }}</span>
             {% if block.settings.link != blank %}</a>{% else %}</div>{% endif %}
           </div>
-          {% if page_position == 5 or forloop.last %}</div>{% endif %}
+          {% if page_position == 2 or forloop.last %}</div>{% endif %}
         {% endfor %}
       </div>
       {% if section.blocks.size > 0 %}
         <div class="shop-by-brand__navigation">
           <button type="button" data-direction="-1" aria-label="Previous brands" aria-controls="BrandTrack-{{ section.id }}" disabled>{% render 'brand-design-svg', asset: 'arrow-prev', width: 36, height: 36, mobile_width: 24, mobile_height: 24 %}</button>
-          <button type="button" data-direction="1" aria-label="Next brands" aria-controls="BrandTrack-{{ section.id }}"{% if section.blocks.size <= 6 %} disabled{% endif %}>{% render 'brand-design-svg', asset: 'arrow-next', width: 36, height: 36, mobile_width: 24, mobile_height: 24 %}</button>
+          <button type="button" data-direction="1" aria-label="Next brands" aria-controls="BrandTrack-{{ section.id }}"{% if section.blocks.size <= 3 %} disabled{% endif %}>{% render 'brand-design-svg', asset: 'arrow-next', width: 36, height: 36, mobile_width: 24, mobile_height: 24 %}</button>
         </div>
       {% endif %}
     </div>

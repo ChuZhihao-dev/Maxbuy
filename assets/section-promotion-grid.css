@@ -366,9 +366,6 @@
   }
 }
 
-.promotion-grid .anm-reveal-item[data-active="true"] {
-  transition-property: none;
-}
 
 .promotion-grid__item__content:not(:has(> *)) {
   display: none;

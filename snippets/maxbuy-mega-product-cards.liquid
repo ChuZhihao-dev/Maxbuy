@@ -12,10 +12,10 @@
         endfor
       %}
       <li class="maxbuy-mega-menu__product-card">
-        <a class="maxbuy-mega-menu__product-link" href="{{ product.url }}">
+        <a class="maxbuy-mega-menu__product-link media-hyperlink" href="{{ product.url }}">
           <span class="maxbuy-mega-menu__product-image-wrap">
             {% if product.featured_image != blank %}
-              {{ product.featured_image | image_url: width: 440 | image_tag: class: 'maxbuy-mega-menu__product-image', loading: 'lazy', widths: '220, 330, 440', sizes: '220px', alt: product.featured_image.alt | default: product.title }}
+              {{ product.featured_image | image_url: width: 440 | image_tag: class: 'maxbuy-mega-menu__product-image anm-image-hover', loading: 'lazy', widths: '220, 330, 440', sizes: '220px', alt: product.featured_image.alt | default: product.title }}
             {% else %}
               {{ 'product-1' | placeholder_svg_tag: 'maxbuy-mega-menu__product-image' }}
             {% endif %}

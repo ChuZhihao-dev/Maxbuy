@@ -3,7 +3,6 @@
 .best-sellers .promotional-collections__heading { margin: 0; color: #000; font-family: var(--heading-font-family); font-size: 32px; font-weight: 600; line-height: normal; text-align: center; }
 .best-sellers .promotional-collections__heading-and-view-all { justify-content: center; }
 .best-sellers .promotional-collections__heading-block { text-align: center; }
-.best-sellers .promotional-collections__heading .anm-fade-element { opacity: 1; transform: none; }
 .best-sellers .link-list { gap: 8px; padding: 0; }
 .best-sellers .promotional-collections__tab { min-height: 0; height: auto; padding: 8px 16px; border: 0; border-radius: 8px; background: transparent; color: #0009; font-size: 14px; font-weight: 500; line-height: 1.3; }
 .best-sellers .promotional-collections__tab::before, .best-sellers .promotional-collections__tab::after { display: none; }
@@ -49,6 +48,7 @@
 .best-sellers__badge { position: relative; max-width: 100%; overflow-wrap: anywhere; padding: 2px 4px; background: #ed1c24; color: #fff; font-size: 10px; font-weight: 600; line-height: 1.06; }
 .best-sellers__badge img { position: absolute; left: 0; top: 100%; }
 .best-sellers__navigation { display: flex; justify-content: center; gap: 12px; margin-top: 40px; }
+.best-sellers__navigation[hidden] { display: none; }
 .best-sellers__navigation button { border: 0; background: transparent; padding: 0; cursor: pointer; }
 .best-sellers .dual-hero__desktop-icon { display: block; max-width: none; }
 .best-sellers .dual-hero__mobile-icon { display: none; max-width: none; }

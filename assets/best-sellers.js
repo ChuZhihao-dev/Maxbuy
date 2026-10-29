@@ -33,6 +33,8 @@ if (!customElements.get('best-sellers-carousel')) {
           this.pages[this.pages.length - 1].append(card);
         });
         this.track.replaceChildren(fragment);
+        const navigation = this.querySelector('.best-sellers__navigation');
+        if (navigation) navigation.hidden = this.pages.length <= 1;
         this.classList.add('is-ready');
         const index = Math.floor(first / count);
         requestAnimationFrame(() => {

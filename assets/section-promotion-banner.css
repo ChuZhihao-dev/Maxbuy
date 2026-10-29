@@ -74,7 +74,7 @@
   text-decoration: none;
   transform: none;
   animation: none;
-  transition: none;
+  transition: background-color var(--button-animation-duration) ease, color var(--button-animation-duration) ease;
   white-space: normal;
 }
 .promotion-banner .promotion-banner__button::before,

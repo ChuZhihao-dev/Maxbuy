@@ -77,7 +77,10 @@ if (!customElements.get('dual-hero')) {
           this.updateActiveSlide(index);
           const position = Math.abs(this.container.scrollLeft);
           const maximum = this.container.scrollWidth - this.container.clientWidth;
-          this.buttons.forEach(button => { button.disabled = Number(button.dataset.direction) < 0 ? position <= 1 : position >= maximum - 1; });
+          this.buttons.forEach(button => {
+            button.hidden = maximum <= 1;
+            button.disabled = Number(button.dataset.direction) < 0 ? position <= 1 : position >= maximum - 1;
+          });
           this.dots.forEach((dot, dotIndex) => {
             if (dotIndex === index) dot.setAttribute('aria-current', 'true');
             else dot.removeAttribute('aria-current');

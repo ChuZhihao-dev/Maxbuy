@@ -2,7 +2,7 @@
 .product-section-nav{width:100%;background:#fff;backdrop-filter:blur(15px)}
 .product-section-nav__links{display:flex;align-items:center;justify-content:center;gap:50px;min-height:82px;padding:24px;overflow-x:auto;scrollbar-width:none}
 .product-section-nav__links::-webkit-scrollbar{display:none}
-.product-section-nav__link{display:inline-grid;flex:none;color:#000;font-family:var(--heading-font-family,var(--body-font-family));font-size:16px;font-weight:400;line-height:1.5;letter-spacing:-.02em;text-decoration:none;opacity:.6;white-space:nowrap;transition:opacity .2s ease}
+.product-section-nav__link{display:inline-grid;flex:none;color:#000;font-family:var(--heading-font-family,var(--body-font-family));font-size:16px;font-weight:400;line-height:1.5;letter-spacing:-.02em;text-decoration:none;opacity:.6;white-space:nowrap;transition:opacity var(--text-link-and-title-link-animation-duration) ease}
 .product-section-nav__link>span,.product-section-nav__link::after{grid-area:1/1}
 .product-section-nav__link::after{content:attr(data-label);font-weight:700;letter-spacing:normal;visibility:hidden}
 .product-section-nav__link:hover,.product-section-nav__link[aria-current="location"]{opacity:1}

@@ -10,7 +10,7 @@
     assign mobile_cart_asset = 'favorite-products-cart-mobile-small.svg'
   endif
 -%}
-<article class="favorite-products__tile favorite-products__tile--{{ index }}" {{ block.shopify_attributes }}>
+<article class="favorite-products__tile favorite-products__tile--{{ index }} media-hyperlink" data-maxbuy-reveal="card" data-maxbuy-order="{{ index | minus: 1 | modulo: 3 }}" {{ block.shopify_attributes }}>
   {% if tile_link != blank %}
     <a class="favorite-products__link" href="{{ tile_link }}" aria-labelledby="FavoriteProductTitle-{{ section.id }}-{{ block.id }}"></a>
   {% endif %}
@@ -31,7 +31,7 @@
     {% endif %}
   </div>
   {% if tile_image != blank %}
-    <div class="favorite-products__image">{{ tile_image | image_url: width: 900 | image_tag: widths: '200,300,450,600,900', sizes: '(min-width: 1200px) 300px, (min-width: 768px) 25vw, 50vw', loading: 'lazy', alt: tile_image.alt }}</div>
+    <div class="favorite-products__image">{{ tile_image | image_url: width: 900 | image_tag: class: 'anm-image-hover', widths: '200,300,450,600,900', sizes: '(min-width: 1200px) 300px, (min-width: 768px) 25vw, 50vw', loading: 'lazy', alt: tile_image.alt }}</div>
   {% elsif request.design_mode %}
     <div class="favorite-products__image favorite-products__placeholder">{{ 'product-1' | placeholder_svg_tag }}</div>
   {% endif %}

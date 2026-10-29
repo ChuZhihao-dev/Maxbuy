@@ -5,6 +5,7 @@ if (!customElements.get('shop-by-brand')) {
       const options = { signal: this.controller.signal };
       const track = this.querySelector('.shop-by-brand__track');
       const buttons = this.querySelectorAll('[data-direction]');
+      const navigation = this.querySelector('.shop-by-brand__navigation');
       const pages = [...track.children];
       const items = [...track.querySelectorAll('.shop-by-brand__item')];
       const desktop = window.matchMedia('(min-width: 768px)');
@@ -15,6 +16,7 @@ if (!customElements.get('shop-by-brand')) {
       const update = () => {
         const position = Math.abs(track.scrollLeft);
         const maximum = track.scrollWidth - track.clientWidth;
+        if (navigation) navigation.hidden = maximum <= 1;
         buttons.forEach(button => { button.disabled = Number(button.dataset.direction) < 0 ? position <= 1 : position >= maximum - 1; });
       };
       buttons.forEach(button => button.addEventListener('click', () => {
