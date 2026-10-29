@@ -63,7 +63,8 @@
           "type": "tree_menu",
           "settings": {
             "heading": "Series",
-            "menu": "customer-account-main-menu",
+            "menu": "series",
+            "desktop_layout": "mega",
             "menu_item_link": "",
             "open_new_window": false,
             "enable_on_mobile": true,
@@ -166,7 +167,7 @@
           "settings": {
             "heading": "About Us",
             "menu": "",
-            "menu_item_link": "",
+            "menu_item_link": "shopify://pages/about-us",
             "open_new_window": false,
             "enable_on_mobile": true,
             "label": "",

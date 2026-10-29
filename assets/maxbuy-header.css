@@ -1,7 +1,7 @@
 .maxbuy-header__desktop-art { display: none; }
 @media (min-width: 1024px) {
   .section-header .x-header { background: #fff; color: #000; font-family: 'Maxbuy Footer Montserrat', Montserrat, sans-serif; }
-  .section-header .header-top, .section-header .header-bottom { max-width: 1232px; margin-inline: auto; }
+  .section-header .header-top, .section-header .header-bottom { margin-inline: auto; }
   .section-header .header-top { grid-template-columns: 234px minmax(0, 594px) auto; column-gap: clamp(24px, 3vw, 48px); }
   .section-header .header-bottom { margin-top: 28px; }
   .section-header .main-menu-nav { width: 100%; }

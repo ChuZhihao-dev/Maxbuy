@@ -1,0 +1,12 @@
+<div data-maxbuy-mega-products-fragment>
+  {% render 'maxbuy-mega-product-cards', collection: collection %}
+</div>
+
+{% schema %}
+{
+  "name": "Mega menu products",
+  "enabled_on": {
+    "templates": ["collection"]
+  }
+}
+{% endschema %}

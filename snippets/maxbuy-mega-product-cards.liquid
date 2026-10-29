@@ -1,0 +1,39 @@
+{% if collection != blank and collection.products_count > 0 %}
+  <ul class="maxbuy-mega-menu__product-grid" role="list">
+    {% for product in collection.products limit: 6 %}
+      {% liquid
+        assign product_badge = ''
+        for product_tag in product.tags
+          assign product_tag_key = product_tag | strip | downcase
+          if product_tag_key == 'special offer' or product_tag_key == 'new' or product_tag_key == 'hot'
+            assign product_badge = product_tag
+            break
+          endif
+        endfor
+      %}
+      <li class="maxbuy-mega-menu__product-card">
+        <a class="maxbuy-mega-menu__product-link" href="{{ product.url }}">
+          <span class="maxbuy-mega-menu__product-image-wrap">
+            {% if product.featured_image != blank %}
+              {{ product.featured_image | image_url: width: 440 | image_tag: class: 'maxbuy-mega-menu__product-image', loading: 'lazy', widths: '220, 330, 440', sizes: '220px', alt: product.featured_image.alt | default: product.title }}
+            {% else %}
+              {{ 'product-1' | placeholder_svg_tag: 'maxbuy-mega-menu__product-image' }}
+            {% endif %}
+          </span>
+          {% if product_badge != blank %}
+            <span class="maxbuy-mega-menu__sale-badge">{{ product_badge | escape }}<img src="{{ 'best-sellers-badge-tail.svg' | asset_url }}" width="4" height="4" alt=""></span>
+          {% endif %}
+          <span class="maxbuy-mega-menu__product-title">{{ product.title | escape }}</span>
+          <span class="maxbuy-mega-menu__product-prices">
+            <strong>{{ product.price | money }}</strong>
+            {% if product.compare_at_price > product.price %}
+              <s>{{ product.compare_at_price | money }}</s>
+            {% endif %}
+          </span>
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p class="maxbuy-mega-menu__empty">No products in this collection yet.</p>
+{% endif %}

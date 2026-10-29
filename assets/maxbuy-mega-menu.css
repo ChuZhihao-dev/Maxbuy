@@ -1,0 +1,291 @@
+.maxbuy-mega-menu[hidden],
+.maxbuy-mega-menu__child-group[hidden],
+.maxbuy-mega-menu__view-more[hidden] {
+  display: none !important;
+}
+
+@media (min-width: 1024px) {
+  .section-header .maxbuy-mega-menu__trigger {
+    cursor: pointer;
+  }
+
+  .section-header .maxbuy-mega-menu__trigger[aria-expanded='true'] {
+    color: #ed1c24;
+  }
+
+  .maxbuy-mega-menu__trigger .icon-caret svg {
+    transform-origin: center;
+    transition: transform 220ms ease;
+  }
+
+  .maxbuy-mega-menu__trigger[aria-expanded='true'] .icon-caret svg {
+    transform: rotate(180deg);
+  }
+
+  .maxbuy-mega-menu {
+    position: fixed;
+    top: var(--maxbuy-mega-top, 180px);
+    left: 0;
+    z-index: 90;
+    width: 100%;
+    height: min(782px, calc(100dvh - var(--maxbuy-mega-top, 180px)));
+    min-height: 320px;
+    border: 1px solid rgb(0 0 0 / 10%);
+    background: #fff;
+    box-shadow: 0 16px 28px rgb(0 0 0 / 8%);
+    color: #000;
+    font-family: 'Maxbuy Footer Montserrat', Montserrat, sans-serif;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-10px);
+    transition: opacity 220ms ease, transform 260ms ease, visibility 0s linear 260ms;
+  }
+
+  .maxbuy-mega-menu.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+    transition: opacity 220ms ease, transform 260ms ease, visibility 0s;
+  }
+
+  .maxbuy-mega-menu__inner {
+    display: grid;
+    grid-template-columns: 231px 231px minmax(0, 1fr);
+    gap: 40px;
+    width: min(1232px, calc(100% - 48px));
+    height: 100%;
+    margin-inline: auto;
+    padding-block: 24px 32px;
+  }
+
+  .maxbuy-mega-menu__parents,
+  .maxbuy-mega-menu__children,
+  .maxbuy-mega-menu__results {
+    min-width: 0;
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+
+  .maxbuy-mega-menu__parents,
+  .maxbuy-mega-menu__children {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    border-right: 1px solid rgb(0 0 0 / 8%);
+    padding-right: 20px;
+  }
+
+  .maxbuy-mega-menu__child-group {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .maxbuy-mega-menu__category {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    min-height: 32px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    color: #000;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.25;
+    text-decoration: none;
+  }
+
+  .maxbuy-mega-menu__category:hover,
+  .maxbuy-mega-menu__category:focus-visible,
+  .maxbuy-mega-menu__category.is-active {
+    background: #e6e6e6;
+    color: #000;
+    font-weight: 700;
+  }
+
+  .maxbuy-mega-menu__category:focus-visible,
+  .maxbuy-mega-menu__trigger:focus-visible,
+  .maxbuy-mega-menu__product-link:focus-visible,
+  .maxbuy-mega-menu__view-more:focus-visible {
+    outline: 2px solid #ed1c24;
+    outline-offset: 2px;
+  }
+
+  .maxbuy-mega-menu__child-name {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px;
+    min-width: 0;
+  }
+
+  .maxbuy-mega-menu__child-name small {
+    color: rgb(0 0 0 / 60%);
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .maxbuy-mega-menu__chevron {
+    flex: none;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 12px;
+  }
+
+  .maxbuy-mega-menu__results {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .maxbuy-mega-menu__products {
+    flex: 1;
+  }
+
+  .maxbuy-mega-menu__product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px 13px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .maxbuy-mega-menu__product-card {
+    min-width: 0;
+  }
+
+  .maxbuy-mega-menu__product-link {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0 10px 12px;
+    border-radius: 8px;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .maxbuy-mega-menu__product-image-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    aspect-ratio: 1;
+    background: #fff;
+  }
+
+  .maxbuy-mega-menu__product-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .maxbuy-mega-menu__sale-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 2px 4px;
+    background: #ed1c24;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.06;
+  }
+
+  .maxbuy-mega-menu__sale-badge img {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: block;
+  }
+
+  .maxbuy-mega-menu__product-title {
+    display: -webkit-box;
+    min-height: 44px;
+    overflow: hidden;
+    color: #666;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 22px;
+    text-align: center;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .maxbuy-mega-menu__product-prices {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: center;
+    gap: 8px;
+    white-space: nowrap;
+  }
+
+  .maxbuy-mega-menu__product-prices strong {
+    color: #ed1c24;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .maxbuy-mega-menu__product-prices s {
+    color: #666;
+    font-size: 12px;
+    line-height: 24px;
+  }
+
+  .maxbuy-mega-menu__view-more {
+    align-self: flex-end;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #666;
+    font-size: 14px;
+    text-decoration: none;
+  }
+
+  .maxbuy-mega-menu__view-more:hover {
+    color: #ed1c24;
+  }
+
+  .maxbuy-mega-menu__loading,
+  .maxbuy-mega-menu__empty {
+    margin: 20px 0;
+    color: #666;
+    font-size: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .maxbuy-mega-menu,
+  .maxbuy-mega-menu__trigger .icon-caret svg {
+    transition: none !important;
+  }
+}
+
+@media (max-width: 1199px) and (min-width: 1024px) {
+  .maxbuy-mega-menu__inner {
+    grid-template-columns: 190px 190px minmax(0, 1fr);
+    gap: 28px;
+  }
+
+  .maxbuy-mega-menu__parents,
+  .maxbuy-mega-menu__children {
+    padding-right: 14px;
+  }
+
+  .maxbuy-mega-menu__product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1023px) {
+  .maxbuy-mega-menu,
+  .maxbuy-mega-menu__trigger {
+    display: none !important;
+  }
+}

@@ -1,4 +1,17 @@
 {{ 'maxbuy-header.css' | asset_url | stylesheet_tag }}
+{% liquid
+  assign has_mega_tree_menu = false
+  for block in section.blocks
+    if block.type == 'tree_menu' and block.settings.desktop_layout == 'mega' and block.settings.menu.links != blank
+      assign has_mega_tree_menu = true
+      break
+    endif
+  endfor
+%}
+{% if has_mega_tree_menu %}
+  {{ 'maxbuy-mega-menu.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'maxbuy-mega-menu.js' | asset_url }}" defer></script>
+{% endif %}
 {%- liquid
   assign rtl = false
   if settings.lang_direction contains request.locale.iso_code
@@ -4307,6 +4320,16 @@
           "id": "menu",
           "label": "t:global.menu.menu",
           "info": "t:header.blocks.tree_menu.settings.menu_info"
+        },
+        {
+          "type": "select",
+          "id": "desktop_layout",
+          "label": "Desktop menu layout",
+          "options": [
+            { "value": "dropdown", "label": "Tree dropdown" },
+            { "value": "mega", "label": "Three-column mega menu" }
+          ],
+          "default": "dropdown"
         },
         {
           "type": "url",

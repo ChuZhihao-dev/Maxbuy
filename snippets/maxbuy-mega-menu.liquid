@@ -1,0 +1,77 @@
+<div
+  id="MaxbuyMegaMenu-{{ block_id }}"
+  class="maxbuy-mega-menu"
+  data-maxbuy-mega-menu
+  inert
+  hidden
+>
+  <div class="maxbuy-mega-menu__inner">
+    <nav class="maxbuy-mega-menu__parents" aria-label="Product categories">
+      {% for parent_link in menu.links %}
+        <a
+          class="maxbuy-mega-menu__category{% if forloop.first %} is-active{% endif %}"
+          href="{{ parent_link.url }}"
+          data-maxbuy-mega-parent="{{ forloop.index0 }}"
+          {% if forloop.first %}aria-current="true"{% endif %}
+        >
+          <span>{{ parent_link.title | escape }}</span>
+          <span class="maxbuy-mega-menu__chevron" aria-hidden="true">›</span>
+        </a>
+      {% endfor %}
+    </nav>
+
+    <nav class="maxbuy-mega-menu__children" aria-label="Subcategories">
+      {% for parent_link in menu.links %}
+        <div
+          class="maxbuy-mega-menu__child-group"
+          data-maxbuy-mega-group="{{ forloop.index0 }}"
+          {% unless forloop.first %}hidden{% endunless %}
+        >
+          {% if parent_link.links != blank %}
+            {% for child_link in parent_link.links %}
+              {% assign child_collection = child_link.object %}
+              <a
+                class="maxbuy-mega-menu__category{% if forloop.first and forloop.parentloop.first %} is-active{% endif %}"
+                href="{{ child_link.url }}"
+                data-maxbuy-mega-child
+                data-collection="{% if child_link.type == 'collection_link' %}true{% else %}false{% endif %}"
+                {% if forloop.first and forloop.parentloop.first %}aria-current="true"{% endif %}
+              >
+                <span class="maxbuy-mega-menu__child-name">
+                  <span>{{ child_link.title | escape }}</span>
+                  {% if child_link.type == 'collection_link' %}
+                    <small>({{ child_collection.products_count }} Items)</small>
+                  {% endif %}
+                </span>
+                <span class="maxbuy-mega-menu__chevron" aria-hidden="true">›</span>
+              </a>
+            {% endfor %}
+          {% else %}
+            {% assign parent_collection = parent_link.object %}
+            <a
+              class="maxbuy-mega-menu__category"
+              href="{{ parent_link.url }}"
+              data-maxbuy-mega-child
+              data-collection="{% if parent_link.type == 'collection_link' %}true{% else %}false{% endif %}"
+            >
+              <span class="maxbuy-mega-menu__child-name">
+                <span>{{ parent_link.title | escape }}</span>
+                {% if parent_link.type == 'collection_link' %}
+                  <small>({{ parent_collection.products_count }} Items)</small>
+                {% endif %}
+              </span>
+              <span class="maxbuy-mega-menu__chevron" aria-hidden="true">›</span>
+            </a>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </nav>
+
+    <div class="maxbuy-mega-menu__results">
+      <div class="maxbuy-mega-menu__products" data-maxbuy-mega-products aria-live="polite"></div>
+      <a class="maxbuy-mega-menu__view-more" data-maxbuy-mega-view-more href="#" hidden>
+        View more <span aria-hidden="true">›</span>
+      </a>
+    </div>
+  </div>
+</div>

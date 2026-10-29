@@ -1,6 +1,10 @@
 {% liquid
   assign menu_font_weight = settings.menu_font.weight | plus: 0
   assign font_weight_class = ' font-weight-menu'
+  assign is_mega_tree = false
+  if block.type == 'tree_menu' and block.settings.desktop_layout == 'mega' and block.settings.menu.links != blank
+    assign is_mega_tree = true
+  endif
   if menu_font_weight < 600
     assign font_weight_class = ' !font-semibold'
   endif
@@ -185,17 +189,23 @@
     {% endcase %}
 
     <a
-      {% if block.settings.menu_item_link %}
+      {% if is_mega_tree %}
+        href="#MaxbuyMegaMenu-{{ block.id }}"
+        role="button"
+        aria-controls="MaxbuyMegaMenu-{{ block.id }}"
+        aria-expanded="false"
+        data-maxbuy-mega-trigger
+      {% elsif block.settings.menu_item_link %}
         href="{{ block.settings.menu_item_link }}"
       {% else %}
         role="link"
       {% endif %}
       aria-label="{{ block.settings.heading | escape }}"
-      class="link whitespace-nowrap is-focus:color-text-[rgba(var(--color-highlight))] item-spacing pl-[15px] pr-[15px] cursor-pointer x-break-words{% if show_menu_content %} menu-parent-link flex items-center{% else %} inline-block{% endif %} relative{% if is_active or request.path == block.settings.menu_item_link %} active{% endif %}"
-      {% if show_menu_content %}
+      class="link whitespace-nowrap is-focus:color-text-[rgba(var(--color-highlight))] item-spacing pl-[15px] pr-[15px] cursor-pointer x-break-words{% if show_menu_content %} menu-parent-link flex items-center{% else %} inline-block{% endif %} relative{% if is_mega_tree %} maxbuy-mega-menu__trigger{% endif %}{% if is_active or request.path == block.settings.menu_item_link %} active{% endif %}"
+      {% if show_menu_content and is_mega_tree == false %}
         x-init="$store.xHeaderMenu.isTouch && $store.xHeaderMenu.touchItem($el, 'menu')"
       {% endif %}
-      {% if desktop_motion == 'click' and show_menu_content %}
+      {% if desktop_motion == 'click' and show_menu_content and is_mega_tree == false %}
         @click="
           () => {
             {% unless block.type == "tree_menu" %} firstLoad(); {% endunless %}
@@ -276,8 +286,12 @@
 
 {% case block.type %}
   {% when 'tree_menu' %}
-    {% assign link = block.settings.menu %}
-    {% render 'tree-menu', link: link, is_link: show_menu_content, desktop_motion: desktop_motion %}
+    {% if is_mega_tree %}
+      {% render 'maxbuy-mega-menu', menu: block.settings.menu, block_id: block.id %}
+    {% else %}
+      {% assign link = block.settings.menu %}
+      {% render 'tree-menu', link: link, is_link: show_menu_content, desktop_motion: desktop_motion %}
+    {% endif %}
   {% when 'column_menu' %}
     {% if show_menu_content %}
       <div
