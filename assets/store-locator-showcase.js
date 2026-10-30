@@ -11,11 +11,13 @@
     const lines = template.content.textContent.split('\n').map(line => line.trim()).filter(Boolean);
     const phoneLine = lines.find(line => /^[+()\d\s.-]+$/.test(line) && line.replace(/\D/g, '').length >= 6);
     const hoursStart = lines.findIndex(line => /^store hours\s*:?$/i.test(line));
+    const isHoursLine = line => /^(?:mon(?:day)?|tue(?:sday)?|wed(?:nesday)?|thu(?:rsday)?|fri(?:day)?|sat(?:urday)?|sun(?:day)?|weekdays?|weekends?|daily|every day)\b/i.test(line);
+    const legacyHours = hoursStart >= 0 ? lines.slice(hoursStart + 1).filter(isHoursLine) : [];
     return {
       ...store,
       phone: store.phone || phoneLine || '',
-      hours: store.hours || (hoursStart >= 0 ? lines.slice(hoursStart + 1).join(' / ') : ''),
-      otherDetails: !store.phone && !store.hours && !phoneLine && hoursStart < 0 ? lines.join('\n') : ''
+      hours: store.hours || legacyHours.join(' / '),
+      otherDetails: lines.filter((line, index) => line !== phoneLine && index !== hoursStart && !legacyHours.includes(line)).join(' ')
     };
   }
 
@@ -48,7 +50,7 @@
       }, { signal });
       this.mobileQuery.addEventListener('change', () => this.filterStores(), { signal });
       this.map.addEventListener('load', () => {
-        if (!this.map.getAttribute('src') || !this.activeStore?.address) return;
+        if (!this.map.getAttribute('src') || !this.getMapLocation(this.activeStore)) return;
         clearTimeout(this.mapTimeout);
         this.map.hidden = false;
         this.placeholder.hidden = true;
@@ -122,7 +124,8 @@
         card.querySelector('[data-phone-row]').hidden = !store.phone;
         const details = card.querySelector('[data-store-details]');
         details.textContent = store.otherDetails;
-        details.hidden = !store.otherDetails;
+        card.querySelector('[data-details-row]').hidden = !store.otherDetails;
+        card.classList.toggle('store-showcase__card--with-details', Boolean(store.otherDetails));
       }
       this.filterStores();
     }
@@ -165,9 +168,23 @@
       this.updateActions();
     }
 
+    getMapLocation(store) {
+      if (!store) return '';
+      const latitude = String(store.latitude ?? '').trim();
+      const longitude = String(store.longitude ?? '').trim();
+      const lat = Number(latitude);
+      const lng = Number(longitude);
+      // Both coordinates must be valid; an empty field must not become zero.
+      if (latitude && longitude && Number.isFinite(lat) && Number.isFinite(lng) && Math.abs(lat) <= 90 && Math.abs(lng) <= 180) {
+        return `${lat},${lng}`;
+      }
+      return store.address || '';
+    }
+
     updateMap() {
       const store = this.activeStore;
-      if (!store?.address) {
+      const location = this.getMapLocation(store);
+      if (!location) {
         clearTimeout(this.mapTimeout);
         this.map.removeAttribute('src');
         this.map.hidden = true;
@@ -178,7 +195,7 @@
         return;
       }
       if (!this.mapVisible) return;
-      const url = window.MaxbuyMapUrl(store.address);
+      const url = window.MaxbuyMapUrl(location);
       this.map.title = `${this.dataset.mapLabel}: ${store.name}`;
       if (this.map.getAttribute('src') !== url) {
         clearTimeout(this.mapTimeout);
@@ -188,14 +205,14 @@
         this.placeholder.classList.add('is-loading');
         this.mapMessage.textContent = this.dataset.mapLoading;
         this.mapFallback.hidden = true;
-        this.mapFallback.href = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(store.address)}`;
+        this.mapFallback.href = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(location)}`;
         this.map.setAttribute('src', url);
         this.mapTimeout = setTimeout(() => this.showMapFallback(), 12000);
       }
     }
 
     showMapFallback() {
-      if (!this.activeStore?.address) return;
+      if (!this.getMapLocation(this.activeStore)) return;
       this.mapMessage.textContent = this.dataset.mapFailed;
       this.mapFallback.hidden = false;
       this.placeholder.hidden = false;
@@ -208,8 +225,9 @@
       actions.hidden = !store;
       if (!store) return;
       const directions = this.querySelector('[data-directions]');
-      directions.hidden = !store.address;
-      directions.href = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(store.address || '')}`;
+      const location = this.getMapLocation(store);
+      directions.hidden = !location;
+      directions.href = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(location)}`;
       const selected = store.id === this.selectedId;
       this.selectButton.disabled = selected;
       this.selectButton.textContent = selected ? this.selectButton.dataset.selectedLabel : this.selectButton.dataset.defaultLabel;
