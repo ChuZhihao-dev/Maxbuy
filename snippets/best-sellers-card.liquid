@@ -2,18 +2,23 @@
   assign product_id = section.id | append: '-' | append: block.id
   assign on_sale = false
   assign show_price_discount = section.settings.show_discount_percentage
-  if deals_card
+  assign show_card_badges = block.settings.show_label_badges
+  if collection_card
+    assign show_card_badges = section.settings.show_label_badges
+    assign card_eager_loading = false
+  endif
+  if deals_card or collection_card
     assign show_price_discount = false
   endif
   if product.compare_at_price > product.price
     assign on_sale = true
   endif
 %}
-<div class="best-sellers__card" data-maxbuy-reveal="card" data-maxbuy-order="{{ index | minus: 1 | modulo: 4 }}">
-  {% render 'product-card', show_discount_percentage: show_price_discount, product: product, section_id: product_id, index: index, index_param: index, columns_desktop: section.settings.desktop_products_per_row, column_mobile: section.settings.mobile_products_per_row, collection: collection, show_vendor: false, show_rating: false, show_quickview: false, disable_badges: true, is_always_active: true %}
+<div class="best-sellers__card"{% unless collection_card %} data-maxbuy-reveal="card" data-maxbuy-order="{{ index | minus: 1 | modulo: 4 }}"{% endunless %}>
+  {% render 'product-card', card_eager_loading: card_eager_loading, show_discount_percentage: show_price_discount, product: product, section_id: product_id, index: index, index_param: index, columns_desktop: section.settings.desktop_products_per_row, column_mobile: section.settings.mobile_products_per_row, collection: collection, show_vendor: false, show_rating: false, show_quickview: false, disable_badges: true, is_always_active: true %}
   {% if deals_card %}
     {% if on_sale and section.settings.show_discount_percentage %}<span class="flash-deals__badge">{{ product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round }}%OFF<img class="flash-deals__badge-desktop" src="{{ 'best-sellers-badge-tail.svg' | asset_url }}" width="4" height="4" alt=""><img class="flash-deals__badge-mobile" src="{{ 'best-sellers-badge-tail-mobile.svg' | asset_url }}" width="2.41882" height="2.41882" alt=""></span>{% endif %}
-  {% elsif block.settings.show_label_badges and product.tags != blank %}
+  {% elsif show_card_badges and product.tags != blank %}
     {% assign badge_tags = section.settings.best_sellers_badge_label | newline_to_br | strip_newlines | split: '<br />' %}
     {%- capture product_badges -%}
       {%- for product_tag in product.tags -%}
@@ -39,6 +44,7 @@
     {%- endcapture -%}
     {% if product_badges != blank %}<div class="best-sellers__badges">{{ product_badges }}</div>{% endif %}
   {% endif %}
+  {% unless collection_card %}
   {% if product != blank %}
     <a class="best-sellers__shop" href="{{ product.url | within: collection }}" aria-label="{{ section.settings.best_sellers_button_label | escape }}: {{ product.title | escape }}">
   {% else %}
@@ -46,4 +52,5 @@
   {% endif %}
     <img class="best-sellers__cart-desktop" src="{{ 'best-sellers-cart.svg' | asset_url }}" width="16" height="16" alt=""><img class="best-sellers__cart-mobile" src="{{ 'best-sellers-cart-mobile.svg' | asset_url }}" width="8.22184" height="8.22184" alt=""><span>{{ section.settings.best_sellers_button_label | escape }}</span>
   {% if product != blank %}</a>{% else %}</span>{% endif %}
+  {% endunless %}
 </div>

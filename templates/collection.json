@@ -43,7 +43,8 @@
         "padding_bottom": 28,
         "color_scheme_light": "",
         "color_scheme_dark": ""
-      }
+      },
+      "disabled": true
     },
     "product-grid": {
       "type": "main-collection-product-grid",
@@ -144,7 +145,8 @@
         "show_section_divider": false,
         "color_scheme_light": "",
         "color_scheme_dark": ""
-      }
+      },
+      "disabled": true
     },
     "flash_deals_kWQRjC": {
       "type": "flash-deals",
@@ -423,11 +425,44 @@
         "color_scheme_light": "",
         "color_scheme_dark": ""
       }
+    },
+    "maxbuy_collection": {
+      "type": "main-maxbuy-collection",
+      "settings": {
+        "products_per_page": 16,
+        "desktop_products_per_row": 4,
+        "mobile_products_per_row": "2",
+        "show_description": true,
+        "show_label_badges": true,
+        "best_sellers_badge_label": "Special Offer\nNew\nHOT",
+        "show_promotion": true,
+        "promotion_eyebrow": "Get ready for the new term",
+        "promotion_heading": "Up to 30% off",
+        "promotion_button": "Shop Now",
+        "enable_filtering": true,
+        "enable_sorting": true,
+        "expand_filters": true,
+        "filters_heading": "Filters",
+        "category_heading": "Product Categories",
+        "apply_label": "Apply filters",
+        "results_label": "Show results",
+        "enable_motion": true,
+        "motion_duration": 260,
+        "motion_delay": 0,
+        "background": "#f7f7f7",
+        "error_label": "We couldn't update the products. Please try again.",
+        "retry_label": "Try again",
+        "reload_label": "Reload page",
+        "category_menu": "series",
+        "brand_menu": "brands",
+        "brand_heading": "Brands"
+      }
     }
   },
   "order": [
     "main_collection_banner_qCnyfN",
     "product-grid",
+    "maxbuy_collection",
     "flash_deals_kWQRjC",
     "promotional_collections_aikhhg"
   ]

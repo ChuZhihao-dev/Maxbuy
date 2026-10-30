@@ -1,0 +1,50 @@
+{% comment %}Native Shopify filter. A single form is shared by desktop and mobile.{% endcomment %}
+{% liquid
+  assign filter_key = section.id | append: '-' | append: index
+  assign has_active_price = false
+  if filter.min_value.value != nil or filter.max_value.value != nil
+    assign has_active_price = true
+  endif
+%}
+<details class="maxbuy-collection__filter" data-filter-key="{{ filter.param_name | escape }}" {% if section.settings.expand_filters or filter.active_values.size > 0 or has_active_price %}open{% endif %}>
+  <summary><span>{{ filter.label | escape }}{% if filter.active_values.size > 0 %} <span class="maxbuy-collection__selected-count">({{ filter.active_values.size }})</span>{% endif %}</span><span class="maxbuy-collection__plus" aria-hidden="true"></span></summary>
+  <div class="maxbuy-collection__filter-content">
+    {% case filter.type %}
+      {% when 'price_range' %}
+        {% liquid
+          assign range_max = filter.range_max | divided_by: 100.0
+          assign range_min_value = filter.min_value.value | default: 0 | divided_by: 100.0
+          assign range_max_value = filter.max_value.value | default: filter.range_max | divided_by: 100.0
+        %}
+        <div class="maxbuy-collection__price" data-price-filter data-range-max="{{ range_max }}">
+          <div class="maxbuy-collection__ranges">
+            <input type="range" min="0" max="{{ range_max }}" step="0.01" value="{{ range_min_value }}" data-range="min" aria-label="{{ section.settings.price_from_label | escape }} ({{ cart.currency.iso_code }})">
+            <input type="range" min="0" max="{{ range_max }}" step="0.01" value="{{ range_max_value }}" data-range="max" aria-label="{{ section.settings.price_to_label | escape }} ({{ cart.currency.iso_code }})">
+          </div>
+          <div class="maxbuy-collection__price-fields">
+            <label for="PriceMin-{{ filter_key }}">{{ section.settings.price_from_label }} <span>{{ cart.currency.symbol }}<input id="PriceMin-{{ filter_key }}" name="{{ filter.min_value.param_name }}" type="number" inputmode="decimal" min="0" max="{{ range_max }}" step="0.01" placeholder="0" {% if filter.min_value.value != nil %}value="{{ range_min_value }}"{% endif %} data-price="min"></span></label>
+            <label for="PriceMax-{{ filter_key }}">{{ section.settings.price_to_label }} <span>{{ cart.currency.symbol }}<input id="PriceMax-{{ filter_key }}" name="{{ filter.max_value.param_name }}" type="number" inputmode="decimal" min="0" max="{{ range_max }}" step="0.01" placeholder="{{ range_max }}" {% if filter.max_value.value != nil %}value="{{ range_max_value }}"{% endif %} data-price="max"></span></label>
+          </div>
+        </div>
+      {% when 'boolean', 'list' %}
+        {% if filter.operator == 'AND' %}<p class="maxbuy-collection__filter-hint">{{ 'products.facets.match_all' | t }}</p>{% endif %}
+        <ul class="maxbuy-collection__values{% if filter.presentation == 'swatch' %} maxbuy-collection__values--swatches{% endif %}" role="list">
+          {% for value in filter.values %}
+            <li>
+              <label class="maxbuy-collection__value{% if value.count == 0 and value.active == false %} is-disabled{% endif %}" for="Filter-{{ filter_key }}-{{ forloop.index }}">
+                <input id="Filter-{{ filter_key }}-{{ forloop.index }}" type="checkbox" name="{{ value.param_name }}" value="{{ value.value | escape }}" {% if value.active %}checked{% endif %} {% if value.count == 0 and value.active == false %}disabled{% endif %}>
+                {% if filter.presentation == 'swatch' and value.swatch != blank %}
+                  <span class="maxbuy-collection__swatch" {% if value.swatch.color != blank %}style="--swatch-color: {{ value.swatch.color }}"{% endif %}>
+                    {% if value.swatch.image %}{{ value.swatch.image | image_url: width: 64 | image_tag: loading: 'lazy', alt: value.label, width: 28, height: 28 }}{% endif %}
+                  </span>
+                {% elsif filter.presentation == 'image' and value.image %}
+                  {{ value.image | image_url: width: 64 | image_tag: loading: 'lazy', alt: value.label, width: 28, height: 28 }}
+                {% endif %}
+                <span class="maxbuy-collection__value-label">{{ value.label | escape }} <span class="maxbuy-collection__value-count">({{ value.count }})</span></span>
+              </label>
+            </li>
+          {% endfor %}
+        </ul>
+    {% endcase %}
+  </div>
+</details>

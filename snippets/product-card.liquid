@@ -296,12 +296,14 @@
               if section.index == 1 and section.location == 'template'
                 assign eager_loading = true
               endif
+              assign eager_loading = card_eager_loading | default: eager_loading, allow_false: true
+              assign card_image_alt = product.featured_media.alt | default: product.title
             %}
             <div
               class="slide-item{% if show_carousel_image_when_hover %} pointer-events-none{% endif %} h-full is-active {% if show_secondary_image_when_hover %} transition-opacity duration-300 first-hover-image{% endif %}"
               {{ attributes_first_image }}
             >
-              {% render 'image', img_class: img_first_class, img: product_card_image, alt: product.featured_media.alt, img_width: 500, sizes: sizes, eager_loading: eager_loading %}
+              {% render 'image', img_class: img_first_class, img: product_card_image, alt: card_image_alt, img_width: 500, sizes: sizes, eager_loading: eager_loading %}
             </div>
             {% if settings.pc_effect_to_mouse_hover != 'none' %}
               {% for media in product.media limit: 4 %}

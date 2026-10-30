@@ -1,0 +1,19 @@
+{% comment %}Collection navigation is intentionally separate from attribute filters.{% endcomment %}
+{% for link in links %}
+  {% capture children %}{% if link.links != blank %}{% render 'maxbuy-collection-categories', links: link.links %}{% endif %}{% endcapture %}
+  {% assign children = children | strip %}
+  {% liquid
+    assign valid_link = false
+    if link.url != blank and link.url != '#'
+      assign valid_link = true
+    endif
+  %}
+  {% if valid_link or children != blank %}
+    <li>
+      {% if link.url != blank and link.url != '#' %}
+        <a href="{{ link.url }}" {% if link.current %}aria-current="page"{% endif %}>{{ link.title | escape }}{% if link.type == 'collection_link' %} <span>({{ link.object.all_products_count }})</span>{% endif %}</a>
+      {% else %}<span class="maxbuy-collection__category-group">{{ link.title | escape }}</span>{% endif %}
+      {% if children != blank %}<ul role="list">{{ children }}</ul>{% endif %}
+    </li>
+  {% endif %}
+{% endfor %}

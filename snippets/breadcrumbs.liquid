@@ -26,7 +26,7 @@
   assign icon_breadcrumbs = settings.breadcrumbs_separator
 
   assign enable_microdata_schema = false
-  if settings.enable_schema_breadcrumb
+  if settings.enable_schema_breadcrumb and complete_collection_schema != true
     assign enable_microdata_schema = true
   endif
 %}

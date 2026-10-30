@@ -1,0 +1,176 @@
+{{ 'best-sellers.css' | asset_url | stylesheet_tag }}
+{{ 'main-maxbuy-collection.min.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'main-maxbuy-collection.min.js' | asset_url }}" defer></script>
+{% liquid
+  assign sort_by = collection.sort_by | default: collection.default_sort_by
+  assign form_id = 'CollectionFilters-' | append: section.id
+  assign filter_count = 0
+  for filter in collection.filters
+    assign filter_count = filter_count | plus: filter.active_values.size
+    if filter.type == 'price_range'
+      if filter.min_value.value != nil or filter.max_value.value != nil
+        assign filter_count = filter_count | plus: 1
+      endif
+    endif
+  endfor
+  assign has_sidebar = false
+  if section.settings.enable_filtering and collection.filters.size > 0
+    assign has_sidebar = true
+  endif
+  if section.settings.category_menu != blank
+    assign has_sidebar = true
+  endif
+  if section.settings.brand_menu != blank
+    assign has_sidebar = true
+  endif
+  assign clear_url = collection.url | append: '?sort_by=' | append: sort_by
+  assign promotion_link = section.settings.promotion_link
+  if promotion_link == blank
+    assign promotion_link = '#CollectionHeading-' | append: section.id
+  endif
+%}
+{% style %}
+  #shopify-section-{{ section.id }} { background: {{ section.settings.background }}; }
+  #Collection-{{ section.id }} { --collection-columns: {{ section.settings.desktop_products_per_row }}; --collection-mobile-columns: {{ section.settings.mobile_products_per_row }}; --collection-motion: {% if section.settings.enable_motion %}{{ section.settings.motion_duration }}ms{% else %}0ms{% endif %}; --collection-delay: {{ section.settings.motion_delay }}ms; --collection-background: {{ section.settings.background }}; }
+{% endstyle %}
+<maxbuy-collection id="Collection-{{ section.id }}" class="maxbuy-collection best-sellers" data-section-id="{{ section.id }}" data-collection-url="{{ collection.url }}" data-collection-handle="{{ collection.handle }}" data-product-count="{{ collection.all_products_count }}">
+  <div class="maxbuy-collection__intro">
+    {% render 'breadcrumbs', complete_collection_schema: true %}
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":{{ 'general.breadcrumbs.home' | t | json }},"item":{{ request.origin | append: routes.root_url | json }}},{"@type":"ListItem","position":2,"name":{{ collection.title | json }},"item":{{ request.origin | append: collection.url | json }}}]}</script>
+    {% if section.settings.show_promotion %}
+      <div class="maxbuy-collection__promotion">
+        {% if section.settings.promotion_image %}
+          <picture>
+            {% if section.settings.promotion_image_mobile %}<source media="(max-width: 767px)" srcset="{{ section.settings.promotion_image_mobile | image_url: width: 900 }}">{% endif %}
+            {{ section.settings.promotion_image | image_url: width: 2464 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '600, 900, 1232, 1848, 2464', sizes: '(min-width: 1312px) 1232px, calc(100vw - 40px)', alt: section.settings.promotion_image.alt }}
+          </picture>
+        {% else %}
+          <img src="{{ 'maxbuy-collection-promotion.png' | asset_url }}" alt="" width="2048" height="454" loading="eager" fetchpriority="high">
+        {% endif %}
+        <div class="maxbuy-collection__promotion-copy">
+          {% if section.settings.promotion_eyebrow != blank %}<p>{{ section.settings.promotion_eyebrow | escape }}</p>{% endif %}
+          {% if section.settings.promotion_heading != blank %}<h2>{{ section.settings.promotion_heading | escape }}</h2>{% endif %}
+          {% if section.settings.promotion_button != blank %}<a href="{{ promotion_link }}">{{ section.settings.promotion_button | escape }}</a>{% endif %}
+        </div>
+      </div>
+    {% endif %}
+    {% if section.settings.show_description and collection.description != blank %}<div class="maxbuy-collection__description rte">{{ collection.description }}</div>{% endif %}
+  </div>
+  <div data-collection-results>
+    <div class="maxbuy-collection__layout{% unless has_sidebar %} maxbuy-collection__layout--full{% endunless %}">
+      {% if has_sidebar %}
+        <dialog class="maxbuy-collection__sidebar" id="CollectionFiltersDialog-{{ section.id }}" aria-labelledby="FiltersTitle-{{ section.id }}" open>
+          <div class="maxbuy-collection__filter-header"><h2 id="FiltersTitle-{{ section.id }}">{{ section.settings.filters_heading | escape }}</h2><button type="button" data-filters-close aria-label="{{ 'accessibility.close' | t | escape }}">×</button></div>
+          {% if section.settings.category_menu != blank %}
+            <details class="maxbuy-collection__filter" data-filter-key="categories" open>
+              <summary><span>{{ section.settings.category_heading | escape }}</span><span class="maxbuy-collection__plus" aria-hidden="true"></span></summary>
+              <div class="maxbuy-collection__filter-content"><ul class="maxbuy-collection__categories" role="list">
+                {% render 'maxbuy-collection-categories', links: section.settings.category_menu.links %}
+              </ul></div>
+            </details>
+          {% endif %}
+          {% if section.settings.brand_menu != blank %}
+            <details class="maxbuy-collection__filter" data-filter-key="brands" open>
+              <summary><span>{{ section.settings.brand_heading | escape }}</span><span class="maxbuy-collection__plus" aria-hidden="true"></span></summary>
+              <div class="maxbuy-collection__filter-content"><ul class="maxbuy-collection__categories" role="list">
+                {% render 'maxbuy-collection-categories', links: section.settings.brand_menu.links %}
+              </ul></div>
+            </details>
+          {% endif %}
+          <form id="{{ form_id }}" action="{{ collection.url }}" method="get" data-collection-form>
+            {% if section.settings.enable_filtering %}{% for filter in collection.filters %}{% render 'maxbuy-collection-filter', filter: filter, section: section, index: forloop.index %}{% endfor %}{% endif %}
+            <button class="maxbuy-collection__apply" type="submit">{{ section.settings.apply_label | escape }}</button>
+          </form>
+          <button class="maxbuy-collection__show-results" type="button" data-filters-close>{{ section.settings.results_label | escape }} ({{ collection.products_count }})</button>
+        </dialog>
+      {% else %}
+        <form id="{{ form_id }}" action="{{ collection.url }}" method="get" data-collection-form hidden></form>
+      {% endif %}
+      <div class="maxbuy-collection__main">
+        <div class="maxbuy-collection__toolbar">
+          <h1 id="CollectionHeading-{{ section.id }}" tabindex="-1">{{ collection.title | escape }}</h1>
+          <div class="maxbuy-collection__controls">
+            {% if has_sidebar %}<button type="button" data-filters-open aria-controls="CollectionFiltersDialog-{{ section.id }}">{{ section.settings.filters_heading | escape }}{% if filter_count > 0 %} ({{ filter_count }}){% endif %}</button>{% endif %}
+            {% if section.settings.enable_sorting %}
+              <label class="maxbuy-collection__sort" for="CollectionSort-{{ section.id }}"><span>{{ 'products.facets.sort_by_label' | t }}</span><select id="CollectionSort-{{ section.id }}" name="sort_by" form="{{ form_id }}" data-collection-sort>{% for option in collection.sort_options %}<option value="{{ option.value | escape }}" {% if option.value == sort_by %}selected{% endif %}>{{ option.name | escape }}</option>{% endfor %}</select></label>
+            {% else %}<input type="hidden" name="sort_by" form="{{ form_id }}" value="{{ sort_by }}">{% endif %}
+          </div>
+          <noscript><button class="maxbuy-collection__apply" type="submit" form="{{ form_id }}">{{ section.settings.apply_label | escape }}</button></noscript>
+        </div>
+        <div class="maxbuy-collection__result-meta"><p data-result-count data-count="{{ collection.products_count }}">{{ 'products.facets.product_count_simple' | t: count: collection.products_count }}</p>{% if filter_count > 0 %}<a href="{{ clear_url }}" data-collection-link>{{ 'templates.search.clear_all' | t }}</a>{% endif %}</div>
+        {% if filter_count > 0 %}
+          <ul class="maxbuy-collection__active" aria-label="{{ 'products.facets.filter_by_label' | t | escape }}" role="list">
+            {% for filter in collection.filters %}
+              {% for value in filter.active_values %}<li><a href="{{ value.url_to_remove }}" data-collection-link>{{ filter.label | escape }}: {{ value.label | escape }} <span aria-hidden="true">×</span><span class="sr-only">{{ section.settings.remove_filter_label | escape }}</span></a></li>{% endfor %}
+              {% if filter.type == 'price_range' %}{% if filter.min_value.value != nil or filter.max_value.value != nil %}<li><a href="{{ filter.url_to_remove }}" data-collection-link>{{ filter.min_value.value | default: 0 | money }} – {{ filter.max_value.value | default: filter.range_max | money }} <span aria-hidden="true">×</span></a></li>{% endif %}{% endif %}
+            {% endfor %}
+          </ul>
+        {% endif %}
+        {% paginate collection.products by section.settings.products_per_page %}
+          <div class="maxbuy-collection__grid" data-collection-grid x-intersect.once="$store.xCustomerEvent.fire('list_product_viewed', $el, { list: { id: 'collection', title: {{ collection.title | json | escape }} } })">
+            {% for product in collection.products %}
+              {% render 'best-sellers-card', product: product, section: section, collection: collection, index: forloop.index, collection_card: true %}
+            {% else %}
+              <div class="maxbuy-collection__empty"><p>{{ 'sections.collection_template.empty' | t }}</p>{% if filter_count > 0 %}<a href="{{ clear_url }}" data-collection-link>{{ 'templates.search.clear_all' | t }}</a>{% endif %}</div>
+            {% endfor %}
+          </div>
+          {% if paginate.pages > 1 %}
+            <nav class="maxbuy-collection__pagination" aria-label="{{ 'general.pagination.label' | t | escape }}">
+              {% if paginate.previous %}<a href="{{ paginate.previous.url }}" data-collection-link data-page-link aria-label="{{ 'general.pagination.previous' | t | escape }}">‹</a>{% endif %}
+              {% for part in paginate.parts %}{% if part.is_link %}<a href="{{ part.url }}" data-collection-link data-page-link aria-label="{{ 'general.pagination.page' | t: number: part.title | escape }}">{{ part.title }}</a>{% elsif part.title == paginate.current_page %}<span aria-current="page">{{ part.title }}</span>{% else %}<span>{{ part.title }}</span>{% endif %}{% endfor %}
+              {% if paginate.next %}<a href="{{ paginate.next.url }}" data-collection-link data-page-link aria-label="{{ 'general.pagination.next' | t | escape }}">›</a>{% endif %}
+            </nav>
+          {% endif %}
+        {% endpaginate %}
+      </div>
+    </div>
+  </div>
+  <p class="maxbuy-collection__status sr-only" role="status" aria-live="polite" data-collection-status></p>
+  <div class="maxbuy-collection__error" role="alert" hidden><p>{{ section.settings.error_label | escape }}</p><button type="button" data-collection-retry>{{ section.settings.retry_label | escape }}</button><a href="{{ collection.url }}" data-collection-reload>{{ section.settings.reload_label | escape }}</a></div>
+</maxbuy-collection>
+{% schema %}
+{
+  "name": "Maxbuy collection",
+  "tag": "section",
+  "class": "maxbuy-collection-section",
+  "settings": [
+    {"type":"header","content":"Layout"},
+    {"type":"color","id":"background","label":"Background","default":"#f7f7f7"},
+    {"type":"range","id":"products_per_page","label":"Products per page","min":6,"max":48,"step":2,"default":16},
+    {"type":"range","id":"desktop_products_per_row","label":"Desktop columns","min":2,"max":4,"step":1,"default":4},
+    {"type":"select","id":"mobile_products_per_row","label":"Mobile columns","options":[{"value":"1","label":"1"},{"value":"2","label":"2"}],"default":"2"},
+    {"type":"checkbox","id":"show_description","label":"Show collection description","default":true},
+    {"type":"checkbox","id":"show_label_badges","label":"Show product tag badges","default":true},
+    {"type":"textarea","id":"best_sellers_badge_label","label":"Badge tags (one per line)","default":"Special Offer\nNew\nHOT"},
+    {"type":"header","content":"Promotion banner"},
+    {"type":"checkbox","id":"show_promotion","label":"Show promotion","default":true},
+    {"type":"image_picker","id":"promotion_image","label":"Desktop image","info":"Recommended: 2464 × 486. Leave empty to use the design image."},
+    {"type":"image_picker","id":"promotion_image_mobile","label":"Mobile image"},
+    {"type":"text","id":"promotion_eyebrow","label":"Intro text","default":"Get ready for the new term"},
+    {"type":"text","id":"promotion_heading","label":"Heading","default":"Up to 30% off"},
+    {"type":"text","id":"promotion_button","label":"Button label","default":"Shop Now"},
+    {"type":"url","id":"promotion_link","label":"Button link","info":"Defaults to this collection's product list."},
+    {"type":"header","content":"Filters and sorting"},
+    {"type":"checkbox","id":"enable_filtering","label":"Enable Shopify filters","default":true,"info":"Configure filter types and values in Shopify Search & Discovery."},
+    {"type":"checkbox","id":"enable_sorting","label":"Enable sorting","default":true},
+    {"type":"checkbox","id":"expand_filters","label":"Expand filter groups by default","default":true},
+    {"type":"link_list","id":"category_menu","label":"Collection navigation menu","info":"Optional category links, separate from product attribute filters."},
+    {"type":"text","id":"category_heading","label":"Category heading","default":"Product Categories"},
+    {"type":"link_list","id":"brand_menu","label":"Brands collection menu","info":"Shows all valid menu links in their saved order, including collections with no products."},
+    {"type":"text","id":"brand_heading","label":"Brands heading","default":"Brands"},
+    {"type":"text","id":"price_from_label","label":"Price from label","default":"From"},
+    {"type":"text","id":"price_to_label","label":"Price to label","default":"To"},
+    {"type":"text","id":"remove_filter_label","label":"Remove filter label","default":"Remove filter"},
+    {"type":"text","id":"filters_heading","label":"Filters heading","default":"Filters"},
+    {"type":"text","id":"apply_label","label":"Apply button","default":"Apply filters"},
+    {"type":"text","id":"results_label","label":"Mobile results button","default":"Show results"},
+    {"type":"header","content":"Interaction"},
+    {"type":"checkbox","id":"enable_motion","label":"Enable transitions","default":true},
+    {"type":"range","id":"motion_duration","label":"Transition duration","min":100,"max":500,"step":20,"unit":"ms","default":260},
+    {"type":"range","id":"motion_delay","label":"Transition delay","min":0,"max":200,"step":20,"unit":"ms","default":0},
+    {"type":"text","id":"error_label","label":"Loading error","default":"We couldn't update the products. Please try again."},
+    {"type":"text","id":"retry_label","label":"Retry label","default":"Try again"},
+    {"type":"text","id":"reload_label","label":"Reload label","default":"Reload page"}
+  ]
+}
+{% endschema %}
