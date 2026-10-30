@@ -81,7 +81,8 @@
           "type": "tree_menu",
           "settings": {
             "heading": "Brands",
-            "menu": "customer-account-main-menu",
+            "menu": "brands",
+            "desktop_layout": "brands",
             "menu_item_link": "",
             "open_new_window": false,
             "enable_on_mobile": true,

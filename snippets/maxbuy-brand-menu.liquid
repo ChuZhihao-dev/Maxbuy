@@ -1,0 +1,36 @@
+{% comment %}
+  Reads the selected header menu in its saved order. Collection cover images are
+  intentionally used instead of product images or hardcoded brand assets.
+{% endcomment %}
+<div
+  id="MaxbuyMegaMenu-{{ block_id }}"
+  class="maxbuy-mega-menu maxbuy-brand-menu"
+  data-maxbuy-mega-menu
+  data-maxbuy-brand-menu
+  inert
+  hidden
+>
+  <nav class="maxbuy-brand-menu__inner" aria-label="{{ heading | escape }}">
+    <ul class="maxbuy-brand-menu__grid" role="list">
+      {% for brand_link in menu.links %}
+        {% liquid
+          assign brand_image = nil
+          if brand_link.type == 'collection_link'
+            assign brand_image = brand_link.object.image
+          endif
+          assign brand_alt = brand_image.alt | default: brand_link.object.title | default: brand_link.title
+        %}
+        <li class="maxbuy-brand-menu__item">
+          <a class="maxbuy-brand-menu__link" href="{{ brand_link.url }}" aria-label="{{ brand_link.title | escape }}"{% if brand_link.current %} aria-current="page"{% endif %}>
+            <span class="maxbuy-brand-menu__logo">
+              {% if brand_image != blank %}
+                {{ brand_image | image_url: width: 162 | image_tag: widths: '54, 108, 162', sizes: '54px', width: 54, height: 54, loading: 'lazy', alt: brand_alt, class: 'maxbuy-brand-menu__image' }}
+              {% endif %}
+            </span>
+            <span class="maxbuy-brand-menu__name">{{ brand_link.title | escape }}</span>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </nav>
+</div>

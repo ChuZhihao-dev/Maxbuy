@@ -4,6 +4,7 @@
   display: none !important;
 }
 
+
 @media (min-width: 1024px) {
   .section-header .maxbuy-mega-menu__trigger {
     cursor: pointer;
@@ -287,5 +288,74 @@
   .maxbuy-mega-menu,
   .maxbuy-mega-menu__trigger {
     display: none !important;
+  }
+}
+
+/* Collection logos stay inside the 54px design slot without cropping. */
+@media (min-width: 1024px) {
+  .maxbuy-brand-menu {
+    height: min(624px, calc(100dvh - var(--maxbuy-mega-top, 180px)));
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .maxbuy-brand-menu__inner {
+    width: min(1232px, calc(100% - 48px));
+    margin-inline: auto;
+    padding-block: 40px;
+  }
+
+  .maxbuy-brand-menu__grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 40px 16px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .maxbuy-brand-menu__item { min-width: 0; }
+
+  .maxbuy-brand-menu__link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    border-radius: 8px;
+    color: #000;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.25;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .maxbuy-brand-menu__logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    width: 54px;
+    height: 54px;
+  }
+
+  .maxbuy-brand-menu__image {
+    display: block;
+  }
+
+  .maxbuy-brand-menu__name { overflow-wrap: anywhere; }
+
+  .maxbuy-brand-menu__link:hover .maxbuy-brand-menu__name,
+  .maxbuy-brand-menu__link:focus-visible .maxbuy-brand-menu__name,
+  .maxbuy-brand-menu__link[aria-current='page'] .maxbuy-brand-menu__name {
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .maxbuy-brand-menu__link:focus-visible {
+    outline: 2px solid #ed1c24;
+    outline-offset: 6px;
   }
 }

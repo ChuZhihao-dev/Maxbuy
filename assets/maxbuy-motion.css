@@ -5,6 +5,14 @@
   transition-delay: var(--maxbuy-reveal-delay, 0ms), calc(var(--maxbuy-reveal-delay, 0ms) + 100ms);
 }
 
+/* Translated cards enlarge a scroll container's vertical overflow by 20px.
+   Fade these cards in place so vertical gestures can continue to the page. */
+.shop-by-brand__track [data-maxbuy-reveal].anm-fade-element,
+.best-sellers__track [data-maxbuy-reveal].anm-fade-element,
+.store-showcase__results [data-maxbuy-reveal].anm-fade-element {
+  transform: none;
+}
+
 /* The initial viewport and disabled animations must appear immediately. */
 [data-maxbuy-reveal].transition-none,
 [data-animation="false"] [data-maxbuy-reveal],

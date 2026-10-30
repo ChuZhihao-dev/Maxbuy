@@ -13,7 +13,8 @@
     const viewMore = menu.querySelector('[data-maxbuy-mega-view-more]');
     const parents = Array.from(menu.querySelectorAll('[data-maxbuy-mega-parent]'));
     const groups = Array.from(menu.querySelectorAll('[data-maxbuy-mega-group]'));
-    if (!header || !trigger || !products || !viewMore || !parents.length) return;
+    const isBrandMenu = menu.hasAttribute('data-maxbuy-brand-menu');
+    if (!header || !trigger || (!isBrandMenu && (!products || !viewMore || !parents.length))) return;
 
     const listeners = new AbortController();
     const cache = new Map();
@@ -116,15 +117,25 @@
       menu.getBoundingClientRect();
       menu.classList.add('is-open');
       trigger.setAttribute('aria-expanded', 'true');
-      if (selectedParent < 0) selectParent(0);
-      else selectChild(groups[selectedParent]?.querySelector('.is-active[data-maxbuy-mega-child], [data-maxbuy-mega-child]'));
+      if (!isBrandMenu) {
+        if (selectedParent < 0) selectParent(0);
+        else selectChild(groups[selectedParent]?.querySelector('.is-active[data-maxbuy-mega-child], [data-maxbuy-mega-child]'));
+      }
     }
 
     trigger.addEventListener('click', (event) => {
       event.preventDefault();
       event.stopPropagation();
-      if (menu.hidden) open();
+      if (trigger.getAttribute('aria-expanded') !== 'true') open();
       else if (event.pointerType === 'touch' || event.detail === 0) close();
+    }, { signal: listeners.signal });
+
+    trigger.addEventListener('keydown', (event) => {
+      if (event.key === ' ' || event.key === 'ArrowDown') {
+        event.preventDefault();
+        open();
+        if (event.key === 'ArrowDown') menu.querySelector('a[href]')?.focus();
+      }
     }, { signal: listeners.signal });
 
     trigger.addEventListener('pointerenter', (event) => {
@@ -164,11 +175,14 @@
     }, { signal: listeners.signal });
 
     document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && !menu.hidden) {
+      // Handle this before the theme's header Escape handler stops bubbling.
+      if (event.key === 'Escape' && trigger.getAttribute('aria-expanded') === 'true') {
+        event.preventDefault();
+        event.stopPropagation();
         close();
         trigger.focus();
       }
-    }, { signal: listeners.signal });
+    }, { capture: true, signal: listeners.signal });
 
     window.addEventListener('resize', () => {
       if (window.innerWidth < 1024) close();
@@ -182,6 +196,7 @@
     document.addEventListener('shopify:section:unload', (event) => {
       if (event.target !== header) return;
       listeners.abort();
+      clearTimeout(closeAnimationTimer);
       productRequest?.abort();
       menu.dataset.initialized = '';
     }, { signal: listeners.signal });

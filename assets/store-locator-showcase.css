@@ -84,7 +84,7 @@
   gap: 17px;
   max-height: 400px;
   overflow-y: auto;
-  overscroll-behavior-y: contain;
+  overscroll-behavior-y: auto;
   scrollbar-width: thin;
   scrollbar-color: #aaa transparent;
 }

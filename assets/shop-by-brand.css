@@ -1,7 +1,7 @@
 shop-by-brand { color: #000; font-family: var(--brand-font); font-style: normal; display: block; padding: var(--brand-padding-top) 0 var(--brand-padding-bottom); }
 .shop-by-brand__heading { margin: 0 0 40px; text-align: center; color: #000; font-family: var(--brand-font); font-size: 32px; font-weight: 600; line-height: normal; }
 .shop-by-brand__carousel { position: relative; padding: 0 44px; }
-.shop-by-brand__track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.shop-by-brand__track { display: flex; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none; }
 .shop-by-brand__track::-webkit-scrollbar { display: none; }
 .shop-by-brand__page { flex: 0 0 100%; min-width: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 24px; scroll-snap-align: start; }
 @media (min-width: 768px) {

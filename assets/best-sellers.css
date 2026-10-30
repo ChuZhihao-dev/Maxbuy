@@ -11,7 +11,7 @@
 .best-sellers .promotional-collections__tab > .w-9 { display: none; }
 .best-sellers__carousel { display: block; }
 .best-sellers__track { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 40px 20px; }
-.best-sellers__carousel.is-ready .best-sellers__track { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.best-sellers__carousel.is-ready .best-sellers__track { display: flex; gap: 20px; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none; }
 .best-sellers__track::-webkit-scrollbar { display: none; }
 .best-sellers__page { display: grid; grid-template-columns: repeat(var(--best-sellers-columns, 4), minmax(0, 1fr)); align-content: start; gap: 40px 20px; flex: 0 0 100%; min-width: 0; scroll-snap-align: start; }
 .best-sellers__card { position: relative; min-width: 0; display: flex; flex-direction: column; align-items: stretch; }

@@ -2,8 +2,14 @@
   assign menu_font_weight = settings.menu_font.weight | plus: 0
   assign font_weight_class = ' font-weight-menu'
   assign is_mega_tree = false
-  if block.type == 'tree_menu' and block.settings.desktop_layout == 'mega' and block.settings.menu.links != blank
-    assign is_mega_tree = true
+  assign is_brand_menu = false
+  if block.type == 'tree_menu' and block.settings.menu.links != blank
+    if block.settings.desktop_layout == 'mega' or block.settings.desktop_layout == 'brands'
+      assign is_mega_tree = true
+    endif
+    if block.settings.desktop_layout == 'brands'
+      assign is_brand_menu = true
+    endif
   endif
   if menu_font_weight < 600
     assign font_weight_class = ' !font-semibold'
@@ -225,8 +231,10 @@
       {% if show_menu_content %}
         <span
           class="icon-caret inline-block w-5 h-5 ps-2"
+          {% unless is_mega_tree %}
           tabindex="0"
           @keyup.enter="{% unless block.type == "tree_menu" %} firstLoad(); {% endunless %} $store.xHeaderMenu.handleKeyupElement($el.closest('li'));"
+          {% endunless %}
         >
           {%- render 'icon-all', icon: 'icon-caret' -%}
         </span>
@@ -286,7 +294,9 @@
 
 {% case block.type %}
   {% when 'tree_menu' %}
-    {% if is_mega_tree %}
+    {% if is_brand_menu %}
+      {% render 'maxbuy-brand-menu', menu: block.settings.menu, block_id: block.id, heading: block.settings.heading %}
+    {% elsif is_mega_tree %}
       {% render 'maxbuy-mega-menu', menu: block.settings.menu, block_id: block.id %}
     {% else %}
       {% assign link = block.settings.menu %}

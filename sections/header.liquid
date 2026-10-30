@@ -2,9 +2,11 @@
 {% liquid
   assign has_mega_tree_menu = false
   for block in section.blocks
-    if block.type == 'tree_menu' and block.settings.desktop_layout == 'mega' and block.settings.menu.links != blank
-      assign has_mega_tree_menu = true
-      break
+    if block.type == 'tree_menu' and block.settings.menu.links != blank
+      if block.settings.desktop_layout == 'mega' or block.settings.desktop_layout == 'brands'
+        assign has_mega_tree_menu = true
+        break
+      endif
     endif
   endfor
 %}
@@ -4327,7 +4329,8 @@
           "label": "Desktop menu layout",
           "options": [
             { "value": "dropdown", "label": "Tree dropdown" },
-            { "value": "mega", "label": "Three-column mega menu" }
+            { "value": "mega", "label": "Three-column mega menu" },
+            { "value": "brands", "label": "Brand logo grid (collection images)" }
           ],
           "default": "dropdown"
         },
