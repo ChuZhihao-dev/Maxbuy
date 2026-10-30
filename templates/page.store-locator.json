@@ -65,6 +65,8 @@
           "settings": {
             "title": "MAXBUY ACHIMOTA MALL STORE",
             "location_address": "JQQ5+2H Achimota Mall, Accra, Ghana",
+            "latitude": "",
+            "longitude": "",
             "phone": "+233 0544019552 , +233 0594091122",
             "opening_hours": "Mon-Sun  9:30AM-9:00PM",
             "search_keywords": "Accra",
@@ -76,6 +78,8 @@
           "settings": {
             "title": "MAXBUY WESTHILLS STORE",
             "location_address": "GMV4+QC, Mile 11, Ghana",
+            "latitude": "",
+            "longitude": "",
             "phone": "+233 0544019552 , +233 0594091122",
             "opening_hours": "Mon-Sun  9:30AM-9:00PM",
             "search_keywords": "Accra",
@@ -87,6 +91,8 @@
           "settings": {
             "title": "MAXBUY JUNCTION MALL STORE",
             "location_address": "JW7H+88M, Accra, Ghana",
+            "latitude": "",
+            "longitude": "",
             "phone": "+233 0544019552 , +233 0594091122",
             "opening_hours": "Mon-Sun  9:30AM-9:00PM",
             "search_keywords": "Accra",
@@ -98,6 +104,8 @@
           "settings": {
             "title": "MAXBUY EAST LEGON STORE",
             "location_address": "JRRP+VV9 Accra, Ghana",
+            "latitude": "",
+            "longitude": "",
             "phone": "+233 0544019552 , +233 0594091122",
             "opening_hours": "Mon-Sat 8:00AM-6:00PM",
             "search_keywords": "Accra",
@@ -109,6 +117,8 @@
           "settings": {
             "title": "MAXBUY CIRCLE ELECTRONIC STORE",
             "location_address": "HQFM+4H4, Accra, Ghana",
+            "latitude": "",
+            "longitude": "",
             "phone": "+233 0544019552 , +233 0594091122",
             "opening_hours": "Mon-Sat 8:00AM-6:00PM",
             "search_keywords": "Accra",
@@ -120,6 +130,8 @@
           "settings": {
             "title": "MAXBUY MADINA STORE",
             "location_address": "MRGG+9MJ Madina, Ghana",
+            "latitude": "",
+            "longitude": "",
             "phone": "+233 0544019552 , +233 0594091122",
             "opening_hours": "Mon-Sat 8:00AM-6:00PM",
             "search_keywords": "Accra",
@@ -131,6 +143,8 @@
           "settings": {
             "title": "MAXBUY KASOA STORE",
             "location_address": "GHMC+PWF, Kasoa, Ghana",
+            "latitude": "",
+            "longitude": "",
             "phone": "+233 0544019552 , +233 0594091122",
             "opening_hours": "Mon-Sat 8:00AM-6:00PM",
             "search_keywords": "Accra",
@@ -142,6 +156,8 @@
           "settings": {
             "title": "MAXBUY LAPAZ STORE",
             "location_address": "JQ53+43P, Lapaz, Ghana",
+            "latitude": "",
+            "longitude": "",
             "phone": "+233 0544019552 , +233 0594091122",
             "opening_hours": "Mon-Sat 8:00AM-6:00PM",
             "search_keywords": "Accra",
@@ -153,6 +169,8 @@
           "settings": {
             "title": "MAXBUY DARKUMAN ELCETRONIC STORE",
             "location_address": "HPGV+MP7, Accra, Ghana",
+            "latitude": "",
+            "longitude": "",
             "phone": "+233 0544019552 , +233 0594091122",
             "opening_hours": "Mon-Sat 8:00AM-6:00PM",
             "search_keywords": "Accra",
@@ -164,10 +182,25 @@
           "settings": {
             "title": "MAXBUY KANESHIE STORE",
             "location_address": "HQ79+44F, Accra, Ghana",
+            "latitude": "",
+            "longitude": "",
             "phone": "+233 0544019552 , +233 0594091122",
             "opening_hours": "Mon-Sat 8:00AM-6:00PM",
             "search_keywords": "Accra",
             "text": "<p>Kaneshie, Pamprom</p>"
+          }
+        },
+        "store_location_gVmM9j": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY CIRCLE SMART STORE",
+            "location_address": "HQFM+7P8 Accra, Ghana",
+            "latitude": "5.5731667",
+            "longitude": "-0.2156667",
+            "phone": "+233 0544019552,  +233 0594091122",
+            "opening_hours": "Mon-Sat 8:00AM-6:00PM",
+            "search_keywords": "Accra",
+            "text": "<p>Circle Odo Rise Lane</p>"
           }
         },
         "store_location_mLNFKd": {
@@ -175,6 +208,8 @@
           "settings": {
             "title": "MAXBUY VVIP BUS STATION STORE",
             "location_address": "HQCP+33P Accra, Ghana",
+            "latitude": "",
+            "longitude": "",
             "phone": "+233 0544019552 , +233 0594091122",
             "opening_hours": "Mon-Sat 8:00AM-6:00PM",
             "search_keywords": "Accra",
@@ -186,6 +221,8 @@
           "settings": {
             "title": "MAXBUY CIRCLE EXPERIENCE STORE",
             "location_address": "HQFM+9V4 Accra, Ghana",
+            "latitude": "",
+            "longitude": "",
             "phone": "+233 0544019552 , +233 0594091122",
             "opening_hours": "Mon-Sat 8:00AM-6:00PM",
             "search_keywords": "Accra",
@@ -197,6 +234,8 @@
           "settings": {
             "title": "MAXBUY DARKUMAN STORE",
             "location_address": "79 Darkuman Rd, Accra, Ghana",
+            "latitude": "",
+            "longitude": "",
             "phone": "+233 0544019552 , +233 0594091122",
             "opening_hours": "Mon-Sat 8:00AM-6:00PM",
             "search_keywords": "Accra",
@@ -208,6 +247,8 @@
           "settings": {
             "title": "MAXBUY ONLINE STORE",
             "location_address": "HPFX+R33, Dansoman Junction, Dr. Busia Hwy, Accra, Ghana",
+            "latitude": "",
+            "longitude": "",
             "phone": "+233 0544019552 , +233 0594091122",
             "opening_hours": "Mon-Sat 8:00AM-6:00PM",
             "search_keywords": "Accra",
@@ -219,6 +260,8 @@
           "settings": {
             "title": "MAXBUY HO STORE",
             "location_address": "JF6H+3C3, Ho, Ghana",
+            "latitude": "",
+            "longitude": "",
             "phone": "+233 0544019552 , +233 0594091122",
             "opening_hours": "Mon-Sat 8:00AM-6:00PM",
             "search_keywords": "HO",
@@ -230,6 +273,8 @@
           "settings": {
             "title": "MAXBUY SWEDRU STORE",
             "location_address": "73 Mandela Market Rd, Agona Swedru, Ghana",
+            "latitude": "",
+            "longitude": "",
             "phone": "+233 0544019552 , +233 0594091122",
             "opening_hours": "Mon-Sat 8:00AM-6:00PM",
             "search_keywords": "Swedru",
@@ -241,10 +286,12 @@
           "settings": {
             "title": "MAXBUY CAPE COAST STORE",
             "location_address": "4P6X+WV3 Cape Coast, Ghana",
+            "latitude": "5.11225",
+            "longitude": "-1.2503333",
             "phone": "+233 0544019552 , +233 0594091122",
             "opening_hours": "Mon-Sat 8:00AM-6:00PM",
             "search_keywords": "Capecoast",
-            "text": "<p>cape coast Aboom mfantsipim junction</p>"
+            "text": "<p>&nbsp;cape coast Aboom mfantsipim junction</p>"
           }
         },
         "store_location_iJPpXc": {
@@ -252,6 +299,8 @@
           "settings": {
             "title": "MAXBUY TAKORADI ELECTRONIC STORE",
             "location_address": "34 Old John Sarbah Rd, Takoradi, Ghana",
+            "latitude": "",
+            "longitude": "",
             "phone": "+233 0544019552 , +233 0594091122",
             "opening_hours": "Mon-Sat 8:00AM-6:00PM",
             "search_keywords": "Takoradi",
@@ -263,6 +312,8 @@
           "settings": {
             "title": "MAXBUY KOFORIDUA STORE",
             "location_address": "3P5R+G8P, Koforidua, Ghana",
+            "latitude": "",
+            "longitude": "",
             "phone": "+233 0544019552 , +233 0594091122",
             "opening_hours": "Mon-Sat 8:00AM-6:00PM",
             "search_keywords": "Koforidua",
@@ -274,6 +325,8 @@
           "settings": {
             "title": "MAXBUY KUMASI ADUM STORE",
             "location_address": "Adum Road, Kumasi, Ghana",
+            "latitude": "",
+            "longitude": "",
             "phone": "+233 0544019552 , +233 0594091122",
             "opening_hours": "Mon-Sat 8:00AM-6:00PM",
             "search_keywords": "Koforidua",
@@ -285,6 +338,8 @@
           "settings": {
             "title": "MAXBUY PZ STORE",
             "location_address": "14 Prempen II Avenue, Kumasi, Ghana",
+            "latitude": "",
+            "longitude": "",
             "phone": "+233 0544019552 , +233 0594091122",
             "opening_hours": "Mon-Sat 8:00AM-6:00PM",
             "search_keywords": "Koforidua",
@@ -296,6 +351,8 @@
           "settings": {
             "title": "MAXBUY SUNYANI STORE",
             "location_address": "Melcom, Adjacent, Sunyani, Ghana",
+            "latitude": "7.3316268",
+            "longitude": "-2.3250033",
             "phone": "+233 0544019552 , +233 0594091122",
             "opening_hours": "Mon-Sat 8:00AM-6:00PM",
             "search_keywords": "Sunyani",
@@ -307,6 +364,8 @@
           "settings": {
             "title": "MAXBUY BEREKUM STORE (New)",
             "location_address": "CCX8+VJC Berekum, Ghana",
+            "latitude": "",
+            "longitude": "",
             "phone": "+233 0544019552 , +233 0594091122",
             "opening_hours": "Mon-Sat 8:00AM-6:00PM",
             "search_keywords": "Berekum",
@@ -318,6 +377,8 @@
           "settings": {
             "title": "MAXBUY TAMALE STORE",
             "location_address": "C535+HG7, Tamale, Ghana",
+            "latitude": "",
+            "longitude": "",
             "phone": "+233 0544019552 , +233 0594091122",
             "opening_hours": "Mon-Sat 8:00AM-6:00PM",
             "search_keywords": "Tamale",
@@ -329,6 +390,8 @@
           "settings": {
             "title": "MAXBUY HQ EXCLUSIVE STORE",
             "location_address": "Tecno House, Darkuman junction Opposite Total Filling Station, Darkuman Rd, Accra, Ghana",
+            "latitude": "",
+            "longitude": "",
             "phone": "+233 0544019552 , +233 0594091122",
             "opening_hours": "Mon-Sat 8:00AM-6:00PM",
             "search_keywords": "Accra",
@@ -340,6 +403,8 @@
           "settings": {
             "title": "MAXBUY TECNO FLAGSHIP STORE",
             "location_address": "HQFM+9VQ, Accra, Ghana",
+            "latitude": "",
+            "longitude": "",
             "phone": "+233 0544019552 , +233 0594091122",
             "opening_hours": "Mon-Sat 8:00AM-6:00PM",
             "search_keywords": "Accra",
@@ -351,6 +416,8 @@
           "settings": {
             "title": "MAXBUY JUNCTION MALL EXCLUSIVE STORE",
             "location_address": "JW7H+88M, Accra, Ghana",
+            "latitude": "",
+            "longitude": "",
             "phone": "+233 0544019552 , +233 0594091122",
             "opening_hours": "Mon-Sun 9:30AM-9:00PM",
             "search_keywords": "Accra",
@@ -362,10 +429,25 @@
           "settings": {
             "title": "MAXBUY TEMA EXCLUSIVE STORE",
             "location_address": "1 Baba Yara Rd, Tema, Ghana",
+            "latitude": "",
+            "longitude": "",
             "phone": "+233 0544019552 , +233 0594091122",
             "opening_hours": "Mon-Sat 8:00AM-6:00PM",
             "search_keywords": "Accra",
             "text": "<p>Tema Comm. 1, Opposite Ghana Water</p>"
+          }
+        },
+        "store_location_fxFBAL": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY CIRCLE TECNO EXCLUSIVE STORE",
+            "location_address": "Kuffour Lab, 21 Tip Toe Ln, Accra, Ghana",
+            "latitude": "5.572545",
+            "longitude": "-0.2153722",
+            "phone": "+233 0544019552 , +233 0594091122",
+            "opening_hours": "Mon-Sat 8:00AM-6:00PM",
+            "search_keywords": "Accra",
+            "text": "<p>Circle Tiptoe Lane<br/><br/></p>"
           }
         },
         "store_location_6ECJtT": {
@@ -373,6 +455,8 @@
           "settings": {
             "title": "MAXBUY LAPAZ EXCLUSIVE STORE",
             "location_address": "JQ53+43C Lapaz, Ghana",
+            "latitude": "",
+            "longitude": "",
             "phone": "+233 0544019552 , +233 0594091122",
             "opening_hours": "Mon-Sat 8:00AM-6:00PM",
             "search_keywords": "Accra",
@@ -384,6 +468,8 @@
           "settings": {
             "title": "MAXBUY HO EXCLUSIVE STORE",
             "location_address": "V4 Asogli Rd, Ho, Ghana",
+            "latitude": "",
+            "longitude": "",
             "phone": "+233 0544019552 , +233 0594091122",
             "opening_hours": "Mon-Sat 8:00AM-6:00PM",
             "search_keywords": "HO",
@@ -395,6 +481,8 @@
           "settings": {
             "title": "MAXBUY TAKORADI EXCLUSIVE STORE",
             "location_address": "V6XQ+PXV Takoradi, Ghana",
+            "latitude": "",
+            "longitude": "",
             "phone": "+233 0544019552 , +233 0594091122",
             "opening_hours": "Mon-Sat 8:00AM-6:00PM",
             "search_keywords": "Takoradi",
@@ -406,6 +494,8 @@
           "settings": {
             "title": "MAXBUY KUMASI EXCLUSIVE STORE",
             "location_address": "204 Prempen II Avenue, Kumasi, Ghana",
+            "latitude": "6.6926008",
+            "longitude": "-1.6222341",
             "phone": "+233 0544019552 , +233 0594091122",
             "opening_hours": "Mon-Sat 8:00AM-6:00PM",
             "search_keywords": "Kumasi",
@@ -417,6 +507,8 @@
           "settings": {
             "title": "MAXBUY TAMALE EXCLUSIVE STORE",
             "location_address": "C545+6FH Tamale, Ghana",
+            "latitude": "",
+            "longitude": "",
             "phone": "+233 0544019552 , +233 0594091122",
             "opening_hours": "Mon-Sat 8:00AM-6:00PM",
             "search_keywords": "Tamale",
@@ -428,6 +520,8 @@
           "settings": {
             "title": "MAXBUY ODORKOR EXCLUSIVE STORE",
             "location_address": "Accra, Ghana",
+            "latitude": "5.5801198",
+            "longitude": "-0.2634909",
             "phone": "+233 0544019552 , +233 0594091122",
             "opening_hours": "Mon-Sat 8:00AM-6:00PM",
             "search_keywords": "Accra",
@@ -439,6 +533,8 @@
           "settings": {
             "title": "MAXBUY INFINIX EXCLUSIVE STORE",
             "location_address": "7-9 New Town Rd, Accra, Ghana",
+            "latitude": "5.573391",
+            "longitude": "-0.2150742",
             "phone": "+233 0544019552 , +233 0594091122",
             "opening_hours": "Mon-Sat 8:00AM-6:00PM",
             "search_keywords": "Accra",
@@ -457,6 +553,7 @@
         "store_location_KbWyNL",
         "store_location_6FwPrB",
         "store_location_LgV4jT",
+        "store_location_gVmM9j",
         "store_location_mLNFKd",
         "store_location_AUBfAb",
         "store_location_fDYCMq",
@@ -475,6 +572,7 @@
         "store_location_LfXGpE",
         "store_location_rkncze",
         "store_location_zWrUCd",
+        "store_location_fxFBAL",
         "store_location_6ECJtT",
         "store_location_trVM3n",
         "store_location_hyMq7c",
