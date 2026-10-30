@@ -12,6 +12,8 @@
 %}
 {% if has_mega_tree_menu %}
   {{ 'maxbuy-mega-menu.css' | asset_url | stylesheet_tag }}
+  {{ 'maxbuy-mobile-menu.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'maxbuy-mobile-menu.js' | asset_url }}" defer></script>
   <script src="{{ 'maxbuy-mega-menu.js' | asset_url }}" defer></script>
 {% endif %}
 {%- liquid
@@ -465,7 +467,7 @@
         {%- comment -%} Mobile navigation drawer {%- endcomment -%}
         <div
           id="x-header-mobile"
-          class="x-header-mobile lg:hidden w-full h-full"
+          class="x-header-mobile lg:hidden w-full h-full{% if has_mega_tree_menu %} maxbuy-mobile-nav{% endif %}"
           :class="$store.xMobileNav.show && 'active'"
           x-intersect.once="$store.xHelper.setPosition('#DrawerMenuMobilePosition', '#DrawerMenuMobile')"
         >
@@ -521,6 +523,10 @@
                   <div id="menu-level-0" class="menu-parent w-full h-full">
                     <div id="DrawerMenuMobilePosition"></div>
 
+                    {% if has_mega_tree_menu %}
+                      {% render 'maxbuy-mobile-search', section_id: section.id %}
+                    {% endif %}
+
                     {%- if has_menu -%}
                       <div class="main-menu-lv0 py-5 px-4 border-b">
                         {%- if section.settings.display_menu_title -%}
@@ -542,7 +548,11 @@
                             {%- if block.settings.enable_on_mobile -%}
                               {%- if block.type != 'button' and block.type != 'withdrawal_request' and block.settings.heading != blank -%}
                                 <li>
+                                  {% if has_mega_tree_menu and block.type == 'tree_menu' %}
+                                    {% render 'maxbuy-mobile-menu', block: block %}
+                                  {% else %}
                                   {%- render 'mobile-mega-menu', block: block, start_level: 0, rtl: rtl -%}
+                                  {% endif %}
                                 </li>
                               {%- elsif block.type == 'button' and block.settings.button_label != blank -%}
                                 <li>
@@ -589,6 +599,9 @@
                     </div>
                   </div>
                 </div>
+                {% if has_mega_tree_menu %}
+                  {% render 'maxbuy-mobile-products-drawer', section_id: section.id %}
+                {% endif %}
               </div>
             </nav>
           </div>

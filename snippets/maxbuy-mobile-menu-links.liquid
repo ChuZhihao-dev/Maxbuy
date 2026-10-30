@@ -1,0 +1,22 @@
+<ul class="maxbuy-mobile-menu__links{% if depth > 0 %} maxbuy-mobile-menu__links--nested{% endif %}" role="list">
+  {% for menu_link in links %}
+    <li>
+      {% if menu_link.links != blank and depth < 2 %}
+        <details class="maxbuy-mobile-menu__category"{% if forloop.first or menu_link.child_active %} open{% endif %}>
+          <summary class="maxbuy-mobile-menu__category-heading">
+            <span>{{ menu_link.title | escape }}</span>
+            <img class="maxbuy-mobile-menu__caret" src="{{ 'maxbuy-mobile-caret.svg' | asset_url }}" width="10" height="6" alt="">
+          </summary>
+          {% assign next_depth = depth | plus: 1 %}
+          {% render 'maxbuy-mobile-menu-links', links: menu_link.links, depth: next_depth %}
+        </details>
+      {% else %}
+        {% if menu_link.url == '#' or menu_link.url == blank %}
+          <span class="maxbuy-mobile-menu__category-heading" aria-disabled="true">{{ menu_link.title | escape }}</span>
+        {% else %}
+          <a class="maxbuy-mobile-menu__category-heading" href="{{ menu_link.url }}"{% if menu_link.type == 'collection_link' %} data-maxbuy-mobile-collection data-title="{{ menu_link.title | escape }}" data-count="{{ menu_link.object.products_count }}"{% endif %}{% if menu_link.current %} aria-current="page"{% endif %}>{{ menu_link.title | escape }}</a>
+        {% endif %}
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>

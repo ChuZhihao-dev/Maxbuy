@@ -1,8 +1,9 @@
 {% if collection != blank and collection.products_count > 0 %}
-  <ul class="maxbuy-mega-menu__product-grid" role="list">
+  <ul class="maxbuy-mega-menu__product-grid{% if mobile %} maxbuy-mobile-products__grid{% endif %}" role="list">
     {% for product in collection.products limit: 6 %}
       {% liquid
         assign product_badge = ''
+        assign product_alt = product.featured_image.alt | default: product.title
         for product_tag in product.tags
           assign product_tag_key = product_tag | strip | downcase
           if product_tag_key == 'special offer' or product_tag_key == 'new' or product_tag_key == 'hot'
@@ -10,18 +11,25 @@
             break
           endif
         endfor
+        if mobile
+          assign product_badge = ''
+          if product.compare_at_price > product.price
+            assign discount = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round
+            assign product_badge = discount | append: '%OFF'
+          endif
+        endif
       %}
       <li class="maxbuy-mega-menu__product-card">
         <a class="maxbuy-mega-menu__product-link media-hyperlink" href="{{ product.url }}">
           <span class="maxbuy-mega-menu__product-image-wrap">
             {% if product.featured_image != blank %}
-              {{ product.featured_image | image_url: width: 440 | image_tag: class: 'maxbuy-mega-menu__product-image anm-image-hover', loading: 'lazy', widths: '220, 330, 440', sizes: '220px', alt: product.featured_image.alt | default: product.title }}
+              {{ product.featured_image | image_url: width: 440 | image_tag: class: 'maxbuy-mega-menu__product-image anm-image-hover', loading: 'lazy', widths: '220, 330, 440', sizes: '220px', alt: product_alt }}
             {% else %}
               {{ 'product-1' | placeholder_svg_tag: 'maxbuy-mega-menu__product-image' }}
             {% endif %}
           </span>
           {% if product_badge != blank %}
-            <span class="maxbuy-mega-menu__sale-badge">{{ product_badge | escape }}<img src="{{ 'best-sellers-badge-tail.svg' | asset_url }}" width="4" height="4" alt=""></span>
+            <span class="maxbuy-mega-menu__sale-badge">{{ product_badge | escape }}{% if mobile %}<img src="{{ 'maxbuy-mobile-badge-tail.svg' | asset_url }}" width="2.419" height="2.419" alt="">{% else %}<img src="{{ 'best-sellers-badge-tail.svg' | asset_url }}" width="4" height="4" alt="">{% endif %}</span>
           {% endif %}
           <span class="maxbuy-mega-menu__product-title">{{ product.title | escape }}</span>
           <span class="maxbuy-mega-menu__product-prices">
@@ -31,6 +39,11 @@
             {% endif %}
           </span>
         </a>
+        {% if mobile %}
+          <a class="maxbuy-mobile-products__shop" href="{{ product.url }}" aria-label="Shop Now: {{ product.title | escape }}">
+            <img src="{{ 'maxbuy-mobile-cart.svg' | asset_url }}" width="8.222" height="8.222" alt=""><span>Shop Now</span>
+          </a>
+        {% endif %}
       </li>
     {% endfor %}
   </ul>

@@ -1,5 +1,7 @@
 # Brands 超级菜单
 
+移动端后续已按设计稿改为一级手风琴与两列品牌卡片，最新行为和验收记录见 [移动导航说明](mobile-navigation.md)。下方为桌面版实施时的记录。
+
 页首的 Brands 树状菜单区块使用 `Brand logo grid (collection images)` 桌面布局，当前选择后台 `Brands` 菜单（handle：`brands`）。
 
 - 在 Shopify 内容 → 菜单 → Brands 中调整品牌名称、链接和顺序。每个一级菜单项链接到对应的产品系列。

@@ -1,0 +1,17 @@
+<div class="maxbuy-mobile-products" data-maxbuy-mobile-products hidden inert role="region" aria-labelledby="MaxbuyMobileProductsTitle-{{ section_id }}">
+  <div class="maxbuy-mobile-products__heading">
+    <button class="maxbuy-mobile-products__back" type="button" data-maxbuy-mobile-back aria-label="{{ 'accessibility.back' | t }}">
+      <img src="{{ 'maxbuy-mobile-back.svg' | asset_url }}" width="10" height="6" alt="">
+    </button>
+    <div class="maxbuy-mobile-products__heading-text">
+      <span id="MaxbuyMobileProductsTitle-{{ section_id }}" data-maxbuy-mobile-title></span>
+      <span class="maxbuy-mobile-products__count" data-maxbuy-mobile-count></span>
+    </div>
+  </div>
+  <div class="maxbuy-mobile-products__results" data-maxbuy-mobile-results aria-live="polite"></div>
+  <div class="maxbuy-mobile-menu__more-row">
+    <a class="maxbuy-mobile-menu__more" data-maxbuy-mobile-view-more href="{{ routes.all_products_collection_url }}">
+      <span>View More</span><img src="{{ 'maxbuy-mobile-more.svg' | asset_url }}" width="5" height="3" alt="">
+    </a>
+  </div>
+</div>

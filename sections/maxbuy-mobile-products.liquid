@@ -1,0 +1,10 @@
+<div data-maxbuy-mobile-products-fragment>
+  {% render 'maxbuy-mega-product-cards', collection: collection, mobile: true %}
+</div>
+
+{% schema %}
+{
+  "name": "Mobile menu products",
+  "enabled_on": { "templates": ["collection"] }
+}
+{% endschema %}

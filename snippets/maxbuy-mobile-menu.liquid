@@ -1,0 +1,61 @@
+{% liquid
+  assign is_brand_menu = false
+  if block.settings.desktop_layout == 'brands'
+    assign is_brand_menu = true
+  endif
+%}
+{% if block.settings.menu.links != blank %}
+  <details class="maxbuy-mobile-menu__section" open {{ block.shopify_attributes }}>
+    <summary class="maxbuy-mobile-menu__heading">
+      <span>{{ block.settings.heading | escape }}</span>
+      <img class="maxbuy-mobile-menu__caret" src="{{ 'maxbuy-mobile-caret.svg' | asset_url }}" width="10" height="6" alt="">
+    </summary>
+    {% if is_brand_menu %}
+      <div class="maxbuy-mobile-menu__brands" data-maxbuy-mobile-brands>
+        <ul id="MaxbuyMobileBrands-{{ block.id }}" class="maxbuy-mobile-menu__brand-grid" role="list">
+          {% for brand_link in block.settings.menu.links %}
+            {% liquid
+              assign brand_image = nil
+              if brand_link.type == 'collection_link'
+                assign brand_image = brand_link.object.image
+              endif
+              assign brand_alt = brand_image.alt | default: brand_link.object.title | default: brand_link.title
+            %}
+            <li{% if forloop.index > 4 %} data-maxbuy-extra-brand hidden{% endif %}>
+              <a class="maxbuy-mobile-menu__brand" href="{{ brand_link.url }}" aria-label="{{ brand_link.title | escape }}"{% if brand_link.current %} aria-current="page"{% endif %}>
+                <span class="maxbuy-mobile-menu__brand-logo">
+                  {% if brand_image != blank %}
+                    {{ brand_image | image_url: width: 162 | image_tag: widths: '54, 108, 162', sizes: '54px', width: 54, height: 54, loading: 'lazy', alt: brand_alt }}
+                  {% endif %}
+                </span>
+                <span>{{ brand_link.title | escape }}</span>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+        {% if block.settings.menu.links.size > 4 %}
+          <div class="maxbuy-mobile-menu__more-row">
+            <button class="maxbuy-mobile-menu__more" type="button" data-maxbuy-mobile-brands-toggle aria-expanded="false" aria-controls="MaxbuyMobileBrands-{{ block.id }}">
+              <span>View More</span>
+              <img src="{{ 'maxbuy-mobile-more.svg' | asset_url }}" width="5" height="3" alt="">
+            </button>
+          </div>
+        {% endif %}
+      </div>
+    {% else %}
+      {% render 'maxbuy-mobile-menu-links', links: block.settings.menu.links, depth: 0 %}
+    {% endif %}
+  </details>
+{% else %}
+  {% if block.settings.menu_item_link != blank %}
+    <a class="maxbuy-mobile-menu__heading maxbuy-mobile-menu__destination" href="{{ block.settings.menu_item_link }}"{% if block.settings.open_new_window %} target="_blank" rel="noopener"{% endif %} {{ block.shopify_attributes }}>
+      <span>{{ block.settings.heading | escape }}</span>
+      <img class="maxbuy-mobile-menu__caret" src="{{ 'maxbuy-mobile-caret.svg' | asset_url }}" width="10" height="6" alt="">
+    </a>
+  {% else %}
+    <span class="maxbuy-mobile-menu__heading maxbuy-mobile-menu__destination" aria-disabled="true" {{ block.shopify_attributes }}>
+      <span>{{ block.settings.heading | escape }}</span>
+      <img class="maxbuy-mobile-menu__caret" src="{{ 'maxbuy-mobile-caret.svg' | asset_url }}" width="10" height="6" alt="">
+    </span>
+  {% endif %}
+{% endif %}

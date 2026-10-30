@@ -1,0 +1,294 @@
+@font-face {
+  font-family: 'Maxbuy Drawer League Spartan';
+  src: url('maxbuy-league-spartan.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+.maxbuy-mobile-products[hidden] { display: none !important; }
+.maxbuy-mobile-menu__brand-grid > li[hidden] { display: none !important; }
+
+@font-face {
+  font-family: 'Maxbuy Drawer Public Sans';
+  src: url('deals-public-sans-regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@media (max-width: 1023px) {
+  #x-header-mobile.maxbuy-mobile-nav {
+    --maxbuy-mobile-motion-duration: 320ms;
+    --maxbuy-mobile-motion-easing: cubic-bezier(.22, .68, 0, 1);
+    --menu-font-family: 'Maxbuy Footer Montserrat', Montserrat, sans-serif;
+    --color-background: 247 247 247;
+    --gradient-background: #f7f7f7;
+    --color-text: 0 0 0;
+  }
+
+  #x-header-mobile.maxbuy-mobile-nav .main-nav-mobile {
+    padding: 0;
+    background: #f7f7f7;
+  }
+
+  #x-header-mobile.maxbuy-mobile-nav .modal-container { max-width: none; }
+
+  #x-header-mobile.maxbuy-mobile-nav #menu-level-0 {
+    display: flow-root;
+    height: auto;
+    min-height: 100%;
+  }
+
+  #x-header-mobile.maxbuy-mobile-nav #menu-navigation > div { overscroll-behavior: contain; }
+
+  #x-header-mobile.maxbuy-mobile-nav :is(#menu-navigation, #menu-navigation > div, .maxbuy-mobile-products) { scrollbar-width: none; }
+  #x-header-mobile.maxbuy-mobile-nav :is(#menu-navigation, #menu-navigation > div, .maxbuy-mobile-products)::-webkit-scrollbar { display: none; width: 0; height: 0; }
+
+  .maxbuy-mobile-menu__first-level {
+    transform: translateX(0);
+    opacity: 1;
+    transition: transform var(--maxbuy-mobile-motion-duration) var(--maxbuy-mobile-motion-easing), opacity var(--maxbuy-mobile-motion-duration) ease;
+  }
+  .maxbuy-mobile-menu__first-level.is-behind { transform: translateX(-22%); opacity: .35; }
+  [dir='rtl'] .maxbuy-mobile-menu__first-level.is-behind { transform: translateX(22%); }
+
+  #x-header-mobile.maxbuy-mobile-nav .mobile-header-toolbar,
+  #x-header-mobile.maxbuy-mobile-nav .mobile-main-menu-title,
+  #x-header-mobile.maxbuy-mobile-nav .main-nav-mobile-bottom { display: none; }
+
+  #x-header-mobile.maxbuy-mobile-nav .main-menu-lv0 {
+    padding: 8px 13px max(20px, env(safe-area-inset-bottom));
+    border: 0;
+  }
+
+  .maxbuy-mobile-menu__search {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    height: 38px;
+    margin: 13px 13px 0;
+    padding-inline: 14px;
+    border: 1px solid rgb(0 0 0 / 20%);
+    border-radius: 30px;
+    background: #fff;
+  }
+
+  .maxbuy-mobile-menu__search-submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+
+  #x-header-mobile.maxbuy-mobile-nav .maxbuy-mobile-menu__search-input {
+    width: 100%;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    font: 400 12px/1.2 'Maxbuy Drawer Public Sans', sans-serif;
+    color: #000;
+  }
+
+  .maxbuy-mobile-menu__search-input::placeholder { color: rgb(0 0 0 / 60%); opacity: 1; }
+
+  .maxbuy-mobile-menu__all-categories {
+    flex: none;
+    color: #ed1c24;
+    font-size: 11.76px;
+    font-weight: 600;
+    line-height: 1.06;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .maxbuy-mobile-menu__section { margin: 0 0 8px; }
+
+  .maxbuy-mobile-menu__heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 44px;
+    padding: 12px 12px 12px 8px;
+    border-bottom: 1px solid rgb(0 0 0 / 10%);
+    color: #000;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    list-style: none;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .maxbuy-mobile-menu__destination { margin-bottom: 8px; }
+  .maxbuy-mobile-menu__destination[aria-disabled] { cursor: default; }
+
+  .maxbuy-mobile-menu__caret { display: block; flex: none; transition: transform 260ms var(--maxbuy-mobile-motion-easing); }
+  .maxbuy-mobile-menu__section[open] > summary .maxbuy-mobile-menu__caret,
+  .maxbuy-mobile-menu__category[open] > summary .maxbuy-mobile-menu__caret { transform: rotate(180deg); }
+  .maxbuy-mobile-menu__section[data-collapsing] > summary .maxbuy-mobile-menu__caret,
+  .maxbuy-mobile-menu__category[data-collapsing] > summary .maxbuy-mobile-menu__caret { transform: rotate(0); }
+  .maxbuy-mobile-menu__destination .maxbuy-mobile-menu__caret { transform: rotate(-90deg); }
+  [dir='rtl'] .maxbuy-mobile-menu__destination .maxbuy-mobile-menu__caret { transform: rotate(90deg); }
+
+  .maxbuy-mobile-menu__section > summary::-webkit-details-marker,
+  .maxbuy-mobile-menu__category > summary::-webkit-details-marker { display: none; }
+
+  .maxbuy-mobile-menu__links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 0;
+    padding: 12px 12px 8px;
+    list-style: none;
+  }
+
+  .maxbuy-mobile-menu__links--nested { padding: 6px 10px 0; }
+
+  #x-header-mobile.maxbuy-mobile-nav .maxbuy-mobile-menu__category-heading,
+  #x-header-mobile.maxbuy-mobile-nav .maxbuy-mobile-menu__category-heading span,
+  #x-header-mobile.maxbuy-mobile-nav .maxbuy-mobile-menu__brand,
+  #x-header-mobile.maxbuy-mobile-nav .maxbuy-mobile-menu__brand span {
+    font-family: 'Maxbuy Drawer League Spartan', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+  }
+
+  .maxbuy-mobile-menu__category-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 14px;
+    color: #000;
+    text-decoration: none;
+    list-style: none;
+    overflow-wrap: anywhere;
+    cursor: pointer;
+  }
+
+  .maxbuy-mobile-menu__brands { padding-top: 12px; }
+
+  .maxbuy-mobile-menu__brand-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 11px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .maxbuy-mobile-menu__brand-grid > li { min-width: 0; }
+
+  .maxbuy-mobile-menu__brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 54px;
+    padding-inline-end: 12px;
+    border-radius: 8px;
+    background: #fff;
+    color: #000;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+  }
+
+  .maxbuy-mobile-menu__brand-logo {
+    display: flex;
+    flex: 0 0 54px;
+    align-items: center;
+    justify-content: center;
+    width: 54px;
+    height: 54px;
+  }
+
+  .maxbuy-mobile-menu__brand-logo img { display: block; width: 54px; height: 54px; object-fit: contain; }
+  .maxbuy-mobile-menu__more-row { display: flex; justify-content: flex-end; padding-top: 12px; }
+
+  #x-header-mobile.maxbuy-mobile-nav .maxbuy-mobile-menu__more {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4.8px;
+    min-height: 20px;
+    padding: 4px 4px 5px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    color: #000;
+    font-size: 8px;
+    font-weight: 400;
+    line-height: 10.277px;
+    text-decoration: none;
+  }
+
+  #x-header-mobile.maxbuy-mobile-nav .maxbuy-mobile-menu__more::before { content: none; }
+  #x-header-mobile.maxbuy-mobile-nav .maxbuy-mobile-menu__more::after { content: ''; position: absolute; inset-inline: 0; bottom: 0; height: 1px; background: currentColor; }
+
+  .maxbuy-mobile-menu__more img { transform: rotate(-90deg); }
+  .maxbuy-mobile-menu__category-heading[aria-current='page'] { font-weight: 600; text-decoration: underline; }
+  .maxbuy-mobile-nav :is(summary, a, button):focus-visible { outline: 2px solid #ed1c24; outline-offset: 3px; }
+  #x-header-mobile.maxbuy-mobile-nav .maxbuy-mobile-menu__search,
+  #x-header-mobile.maxbuy-mobile-nav .maxbuy-mobile-menu__search:focus-within,
+  #x-header-mobile.maxbuy-mobile-nav .maxbuy-mobile-menu__search :is(input, button, a):is(:focus, :focus-visible) { outline: none; box-shadow: none; }
+
+  #x-header-mobile.maxbuy-mobile-nav .maxbuy-mobile-products {
+    position: absolute;
+    inset: 0;
+    z-index: 35;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 12px 13px max(60px, env(safe-area-inset-bottom));
+    background: #f7f7f7;
+    transform: translateX(100%);
+    transition: transform var(--maxbuy-mobile-motion-duration) var(--maxbuy-mobile-motion-easing);
+  }
+  #x-header-mobile.maxbuy-mobile-nav .maxbuy-mobile-products.is-open { transform: translateX(0); }
+  [dir='rtl'] #x-header-mobile.maxbuy-mobile-nav .maxbuy-mobile-products { transform: translateX(-100%); }
+  [dir='rtl'] #x-header-mobile.maxbuy-mobile-nav .maxbuy-mobile-products.is-open { transform: translateX(0); }
+
+  .maxbuy-mobile-products__heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    min-height: 39px;
+    padding: 0 12px 0 0;
+    border-radius: 8px;
+    background: #e6e6e6;
+  }
+
+  .maxbuy-mobile-products__back { display: flex; align-items: center; justify-content: center; flex: none; width: 39px; height: 39px; }
+  .maxbuy-mobile-products__back img { transform: rotate(90deg); }
+  .maxbuy-mobile-products__heading-text { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: flex-end; gap: 5px; }
+  #x-header-mobile.maxbuy-mobile-nav .maxbuy-mobile-products__heading-text span { font: 700 16px/1 'Maxbuy Drawer League Spartan', sans-serif; }
+  #x-header-mobile.maxbuy-mobile-nav .maxbuy-mobile-products__heading-text .maxbuy-mobile-products__count { color: #666; font-size: 14px; font-weight: 400; }
+  .maxbuy-mobile-products__results { margin-top: 30px; color: #666; font-size: 12px; }
+  .maxbuy-mobile-products__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 13px; margin: 0; padding: 0; list-style: none; }
+  .maxbuy-mobile-products__grid .maxbuy-mega-menu__product-card { position: relative; display: flex; flex-direction: column; align-items: center; min-width: 0; padding: 3px 8px 14px; border-radius: 6px; background: #fff; }
+  .maxbuy-mobile-products__grid .maxbuy-mega-menu__product-link { display: flex; flex-direction: column; align-items: center; gap: 5.19px; width: 100%; color: #000; text-decoration: none; }
+  .maxbuy-mobile-products__grid .maxbuy-mega-menu__product-image-wrap { position: relative; display: block; flex: none; width: 100%; max-width: 146px; aspect-ratio: 1; overflow: hidden; }
+  .maxbuy-mobile-products__grid .maxbuy-mega-menu__product-image { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: contain; }
+  .maxbuy-mobile-products__grid .maxbuy-mega-menu__product-title { display: -webkit-box; min-height: 28.546px; overflow: hidden; color: #666; font-size: 10px; font-weight: 500; line-height: 14.273px; text-align: center; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+  .maxbuy-mobile-products__grid .maxbuy-mega-menu__product-prices { display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; gap: 5.19px; line-height: 15.57px; }
+  .maxbuy-mobile-products__grid .maxbuy-mega-menu__product-prices strong { color: #000; font-size: 12px; font-weight: 700; }
+  .maxbuy-mobile-products__grid .maxbuy-mega-menu__product-prices s { color: #666; font-size: 10px; font-weight: 400; }
+  .maxbuy-mobile-products__grid .maxbuy-mega-menu__sale-badge { position: absolute; top: 7px; left: 8px; padding: 1px 1.412px 0; background: #ed1c24; color: #fff; font-size: 5.649px; font-weight: 600; line-height: 1; }
+  .maxbuy-mobile-products__grid .maxbuy-mega-menu__sale-badge img { position: absolute; top: 100%; left: 0; }
+  .maxbuy-mobile-products__shop { display: inline-flex; justify-content: center; align-items: center; gap: 4.8px; margin-top: 5.19px; padding: 3.6px 7.2px; border-radius: 4.111px; background: #000; color: #fff; font-size: 8px; font-weight: 700; line-height: 10.277px; text-decoration: none; }
+  .maxbuy-mobile-products > .maxbuy-mobile-menu__more-row { padding-top: 24px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #x-header-mobile.maxbuy-mobile-nav { --maxbuy-mobile-motion-duration: 0ms; }
+  .maxbuy-mobile-menu__caret { transition: none; }
+}
