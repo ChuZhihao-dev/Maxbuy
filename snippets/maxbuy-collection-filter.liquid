@@ -1,13 +1,19 @@
 {% comment %}Native Shopify filter. A single form is shared by desktop and mobile.{% endcomment %}
 {% liquid
   assign filter_key = section.id | append: '-' | append: index
+  assign filter_heading = filter.label
+  if filter.param_name == 'filter.p.product_type' or filter.param_name == 'filter.p.t.category'
+    assign filter_heading = section.settings.category_heading
+  elsif filter.param_name == 'filter.p.vendor'
+    assign filter_heading = section.settings.brand_heading
+  endif
   assign has_active_price = false
   if filter.min_value.value != nil or filter.max_value.value != nil
     assign has_active_price = true
   endif
 %}
 <details class="maxbuy-collection__filter" data-filter-key="{{ filter.param_name | escape }}" {% if section.settings.expand_filters or filter.active_values.size > 0 or has_active_price %}open{% endif %}>
-  <summary><span>{{ filter.label | escape }}{% if filter.active_values.size > 0 %} <span class="maxbuy-collection__selected-count">({{ filter.active_values.size }})</span>{% endif %}</span><span class="maxbuy-collection__plus" aria-hidden="true"></span></summary>
+  <summary><span>{{ filter_heading | escape }}{% if filter.active_values.size > 0 %} <span class="maxbuy-collection__selected-count">({{ filter.active_values.size }})</span>{% endif %}</span><span class="maxbuy-collection__plus" aria-hidden="true"></span></summary>
   <div class="maxbuy-collection__filter-content">
     {% case filter.type %}
       {% when 'price_range' %}

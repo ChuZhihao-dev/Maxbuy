@@ -20,9 +20,18 @@
   if section.settings.category_menu != blank
     assign has_sidebar = true
   endif
-  if section.settings.brand_menu != blank
-    assign has_sidebar = true
-  endif
+  capture category_query
+    echo 'sort_by='
+    echo sort_by | url_encode
+    for filter in collection.filters
+      if filter.param_name == 'filter.p.vendor'
+        for value in filter.active_values
+          echo '&filter.p.vendor='
+          echo value.value | url_encode
+        endfor
+      endif
+    endfor
+  endcapture
   assign clear_url = collection.url | append: '?sort_by=' | append: sort_by
   assign promotion_link = section.settings.promotion_link
   if promotion_link == blank
@@ -65,15 +74,7 @@
             <details class="maxbuy-collection__filter" data-filter-key="categories" open>
               <summary><span>{{ section.settings.category_heading | escape }}</span><span class="maxbuy-collection__plus" aria-hidden="true"></span></summary>
               <div class="maxbuy-collection__filter-content"><ul class="maxbuy-collection__categories" role="list">
-                {% render 'maxbuy-collection-categories', links: section.settings.category_menu.links %}
-              </ul></div>
-            </details>
-          {% endif %}
-          {% if section.settings.brand_menu != blank %}
-            <details class="maxbuy-collection__filter" data-filter-key="brands" open>
-              <summary><span>{{ section.settings.brand_heading | escape }}</span><span class="maxbuy-collection__plus" aria-hidden="true"></span></summary>
-              <div class="maxbuy-collection__filter-content"><ul class="maxbuy-collection__categories" role="list">
-                {% render 'maxbuy-collection-categories', links: section.settings.brand_menu.links %}
+                {% render 'maxbuy-collection-categories', links: section.settings.category_menu.links, category_query: category_query %}
               </ul></div>
             </details>
           {% endif %}
@@ -154,9 +155,9 @@
     {"type":"checkbox","id":"enable_filtering","label":"Enable Shopify filters","default":true,"info":"Configure filter types and values in Shopify Search & Discovery."},
     {"type":"checkbox","id":"enable_sorting","label":"Enable sorting","default":true},
     {"type":"checkbox","id":"expand_filters","label":"Expand filter groups by default","default":true},
-    {"type":"link_list","id":"category_menu","label":"Collection navigation menu","info":"Optional category links, separate from product attribute filters."},
+    {"type":"link_list","id":"category_menu","label":"Collection navigation menu","info":"Category collection links. Groups are flattened; selected Vendor filters are preserved when switching collections."},
     {"type":"text","id":"category_heading","label":"Category heading","default":"Product Categories"},
-    {"type":"link_list","id":"brand_menu","label":"Brands collection menu","info":"Shows all valid menu links in their saved order, including collections with no products."},
+    {"type":"link_list","id":"brand_menu","label":"Brands collection menu","info":"Legacy navigation setting. Brands now use the Vendor filter configured in Search & Discovery."},
     {"type":"text","id":"brand_heading","label":"Brands heading","default":"Brands"},
     {"type":"text","id":"price_from_label","label":"Price from label","default":"From"},
     {"type":"text","id":"price_to_label","label":"Price to label","default":"To"},

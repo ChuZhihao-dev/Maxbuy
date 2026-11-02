@@ -2,6 +2,17 @@
   assign highlight_field = product.metafields.custom.highlight_features
   assign highlight_images = highlight_field.value
   assign has_highlight_images = false
+  assign mobile_field = product.metafields.custom.highlight_features_mobile
+  assign mobile_images = mobile_field.value
+  assign has_mobile_images = false
+  if mobile_field.type == 'list.file_reference'
+    for mobile_image in mobile_images
+      if mobile_image.media_type == 'image'
+        assign has_mobile_images = true
+        break
+      endif
+    endfor
+  endif
 
   if highlight_field.type == 'list.file_reference'
     for highlight_image in highlight_images
@@ -13,9 +24,10 @@
   endif
 -%}
 
-{%- if has_highlight_images -%}
+{%- if has_highlight_images or has_mobile_images -%}
   {{ 'product-highlight-features.css' | asset_url | stylesheet_tag }}
-  <div id="highlight-features" class="product-highlight-features">
+  <div id="highlight-features" class="product-highlight-features{% if has_mobile_images and has_highlight_images %} product-highlight-features--responsive{% endif %}">
+    {% if has_highlight_images %}<div class="product-highlight-features__desktop">
     {%- for highlight_image in highlight_images -%}
       {%- if highlight_image.media_type == 'image' -%}
         {%- assign highlight_alt = highlight_image.alt | default: product.title -%}
@@ -24,6 +36,19 @@
         </div>
       {%- endif -%}
     {%- endfor -%}
+    </div>{% endif %}
+    {% if has_mobile_images %}
+      <div class="{% if has_highlight_images %}product-highlight-features__mobile{% endif %}">
+        {% for mobile_image in mobile_images %}
+          {% if mobile_image.media_type == 'image' %}
+            {% assign mobile_alt = mobile_image.alt | default: product.title %}
+            <div data-maxbuy-reveal="card">
+              {{ mobile_image | image_url: width: 1500 | image_tag: class: 'product-highlight-features__image', widths: '375, 550, 750, 990, 1200, 1500', sizes: '(max-width: 767px) 100vw, 1500px', loading: 'lazy', alt: mobile_alt }}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
   </div>
 {%- elsif request.design_mode -%}
   <div class="page-width product-highlight-features__empty">
@@ -40,7 +65,7 @@
   "settings": [
     {
       "type": "paragraph",
-      "content": "Reads the current product's custom.highlight_features list of image files. Images appear full width in the order saved on the product."
+      "content": "Reads custom.highlight_features for desktop and custom.highlight_features_mobile for mobile (below 768px). Each image list uses its own order. Empty mobile lists fall back to desktop images. If only mobile images exist, they display on both devices."
     }
   ],
   "presets": [

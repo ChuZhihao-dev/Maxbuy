@@ -286,7 +286,7 @@
                   id="Price__{{ section.id }}"
                   class="{% if product != blank %}quick-view:mt-0{% endif %}"
                 >
-                  <div>
+                  <div class="{% if is_product_page %}maxbuy-product-mobile__price-row{% endif %}">
                     {% assign price_id = section.id | append: '-' | append: product.id %}
                     {%- render 'price',
                       product: product,
@@ -307,6 +307,9 @@
                       price_group: section.id,
                       show_b2b_price_label: block.settings.show_b2b_price_label
                     -%}
+                    {% if is_product_page and current_variant.compare_at_price > current_variant.price %}
+                      <span class="maxbuy-product-mobile__saving">{{ 'general.global.save' | t }} {{ current_variant.compare_at_price | minus: current_variant.price | money }}</span>
+                    {% endif %}
                   </div>
                   {% if product != blank %}
                     {%- form 'product', product %}

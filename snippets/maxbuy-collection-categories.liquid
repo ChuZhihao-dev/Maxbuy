@@ -1,6 +1,6 @@
 {% comment %}Collection navigation is intentionally separate from attribute filters.{% endcomment %}
 {% for link in links %}
-  {% capture children %}{% if link.links != blank %}{% render 'maxbuy-collection-categories', links: link.links %}{% endif %}{% endcapture %}
+  {% capture children %}{% if link.links != blank %}{% render 'maxbuy-collection-categories', links: link.links, category_query: category_query %}{% endif %}{% endcapture %}
   {% assign children = children | strip %}
   {% liquid
     assign valid_link = false
@@ -8,10 +8,12 @@
       assign valid_link = true
     endif
   %}
-  {% if valid_link or children != blank %}
+  {% if children != blank %}
+    {{ children }}
+  {% elsif valid_link %}
     <li>
       {% if link.url != blank and link.url != '#' %}
-        <a href="{{ link.url }}" {% if link.current %}aria-current="page"{% endif %}>{{ link.title | escape }}{% if link.type == 'collection_link' %} <span>({{ link.object.all_products_count }})</span>{% endif %}</a>
+        <a href="{{ link.url }}{% if link.type == 'collection_link' and category_query != blank %}{% if link.url contains '?' %}&amp;{% else %}?{% endif %}{{ category_query | escape }}{% endif %}" {% if link.current %}aria-current="page"{% endif %}><span class="maxbuy-collection__category-checkbox" aria-hidden="true"></span><span class="maxbuy-collection__category-label">{{ link.title | escape }}{% if link.type == 'collection_link' %} <span>({{ link.object.all_products_count }})</span>{% endif %}</span></a>
       {% else %}<span class="maxbuy-collection__category-group">{{ link.title | escape }}</span>{% endif %}
       {% if children != blank %}<ul role="list">{{ children }}</ul>{% endif %}
     </li>

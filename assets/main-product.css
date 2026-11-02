@@ -991,7 +991,7 @@ shopify-accelerated-checkout.disabled {
 .section-main-product .product-info__price-wrapper .compare-at-price {
   font-family: var(--body-font-family);
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 500;
   line-height: normal;
   color: rgb(var(--product-purchase-muted));
 }
@@ -1013,7 +1013,7 @@ shopify-accelerated-checkout.disabled {
 .section-main-product .product-info__stock-heading {
   margin: 0 0 10px;
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 1.4;
 }
 
@@ -1034,7 +1034,7 @@ shopify-accelerated-checkout.disabled {
 .section-main-product .product-info__stock-message {
   margin: 0;
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.4;
 }
 
@@ -1175,6 +1175,10 @@ shopify-accelerated-checkout.disabled {
 @media (max-width: 767px) {
   .section-main-product .product-title {
     font-size: 20px;
+  }
+  .section-main-product .product-form__purchase-row .product-info__quantity-control [role="button"] > span{
+    width: 9px;
+    height: 9px;
   }
 
   .section-main-product .product-form__btn-add-to-cart {

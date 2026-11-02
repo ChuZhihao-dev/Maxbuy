@@ -633,7 +633,7 @@ if(window.Maximize.checkFileNotLoaded()) {
         },
         __scrollThumbnail: function () {
           if (this.thumbnailContainer && this.thumbnailWrapper) {
-            const gap = parseInt(this.thumbnailContainer.dataset.gap) || 0;
+            const gap = parseFloat(getComputedStyle(this.thumbnailContainer).gap) || 0;
             const desktopThumbnailPosition = this.thumbnailContainer.dataset?.desktopThumbnailPosition
             this.thumbnailItems.forEach((item, index) => {
               if (item.dataset.mediaId === this.activeMediaId) {
@@ -842,7 +842,7 @@ if(window.Maximize.checkFileNotLoaded()) {
             requestAnimationFrame(() => {
               if (window.innerWidth < MIN_DEVICE_WIDTH.tablet) {
                 const thumbnailNavWrapperWidth = this.$refs.thumbnail_wrapper.getBoundingClientRect().width;
-                const thumbnailWrapperWidth = this.thumbnailItemsShow[0]?.getBoundingClientRect().width * this.thumbnailItemsShow.length + parseFloat(this.thumbnailContainer.dataset.gap) * (this.thumbnailItems.length - 1);
+                const thumbnailWrapperWidth = this.thumbnailItemsShow[0]?.getBoundingClientRect().width * this.thumbnailItemsShow.length + parseFloat(getComputedStyle(this.thumbnailContainer).gap) * (this.thumbnailItems.length - 1);
   
                 const isHidden = thumbnailWrapperWidth <= thumbnailNavWrapperWidth - 32;
 
@@ -855,7 +855,7 @@ if(window.Maximize.checkFileNotLoaded()) {
                 this.thumbnailItemsShow.forEach(item => {
                   thumbnailItemsHeight += item.offsetHeight;
                 });
-                thumbnailItemsHeight += parseFloat(this.thumbnailContainer.dataset.gap) * (this.thumbnailItemsShow.length - 1);
+                thumbnailItemsHeight += parseFloat(getComputedStyle(this.thumbnailContainer).gap) * (this.thumbnailItemsShow.length - 1);
                 
                 const isHiddenDesktop = thumbnailItemsHeight <= thumbnailNavWrapperHeight - 32 * 2;
 

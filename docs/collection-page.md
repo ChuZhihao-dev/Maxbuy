@@ -119,3 +119,11 @@ npx --yes esbuild@0.28.1 assets/main-maxbuy-collection.css --minify --outfile=as
 - 当前品牌集合返回的商品数均为0，照实显示；这与所有商品列表有15件商品是不同的后台集合归属数据。
 - Theme Check与上次基线同为1527 errors / 208 warnings，忽略行号位移后无新增诊断；git diff --check通过。
 - 本次只修改新Collection Section及模板配置与本说明；同步开发主题，未发布正式主题。截图：`/private/tmp/maxbuy-collection-brands-full.png`。
+
+## 分类与品牌组合筛选（2026-11-02，最终方案）
+
+- Category 沿用 `category_menu` 的 Collections 导航，展开父级后直接显示末级产品系列，不显示 Home appliances 分组。
+- Brand 使用 `collection.filters` 中的 Vendor 真正复选框，品牌 Collections 仍可作为品牌落地页保留。无需新增 Product type 或元字段。
+- 分类链接由 Liquid 附带当前所有已选 Vendor 和排序参数，切换集合时保留品牌；不沿用分页、价格或库存条件。无 JavaScript 时也可通过链接保留品牌。
+- 后台商品填写 Vendor，并在 Search & Discovery 中启用 Vendor。品牌系列可按 Vendor 设为自动系列，避免手工维护归属。
+- 当前预览仅返回 Availability 和 Price；Vendor 未启用时不生成虚构品牌选项，组合结果待后台配置后验证。

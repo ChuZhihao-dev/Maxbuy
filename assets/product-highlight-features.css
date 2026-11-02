@@ -1,3 +1,6 @@
 .product-highlight-features{width:100%;scroll-margin-top:120px}
 .product-highlight-features__image{display:block;width:100%;height:auto}
 .product-highlight-features__empty{padding-block:32px}
+
+.product-highlight-features__mobile{display:none}
+@media(max-width:767px){.product-highlight-features--responsive .product-highlight-features__desktop{display:none}.product-highlight-features__mobile{display:block}}
