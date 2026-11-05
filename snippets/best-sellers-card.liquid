@@ -44,7 +44,6 @@
     {%- endcapture -%}
     {% if product_badges != blank %}<div class="best-sellers__badges">{{ product_badges }}</div>{% endif %}
   {% endif %}
-  {% unless collection_card %}
   {% if product != blank %}
     <a class="best-sellers__shop" href="{{ product.url | within: collection }}" aria-label="{{ section.settings.best_sellers_button_label | escape }}: {{ product.title | escape }}">
   {% else %}
@@ -52,5 +51,4 @@
   {% endif %}
     <img class="best-sellers__cart-desktop" src="{{ 'best-sellers-cart.svg' | asset_url }}" width="16" height="16" alt=""><img class="best-sellers__cart-mobile" src="{{ 'best-sellers-cart-mobile.svg' | asset_url }}" width="8.22184" height="8.22184" alt=""><span>{{ section.settings.best_sellers_button_label | escape }}</span>
   {% if product != blank %}</a>{% else %}</span>{% endif %}
-  {% endunless %}
 </div>

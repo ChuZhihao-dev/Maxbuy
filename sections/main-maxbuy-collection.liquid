@@ -66,8 +66,10 @@
 <maxbuy-collection id="Collection-{{ section.id }}" class="maxbuy-collection best-sellers" data-section-id="{{ section.id }}" data-pool-url="{{ pool_url }}" data-catalog-mode="{{ catalog_mode }}" data-price-error="{{ 'maxbuy_catalog.price_error' | t | escape }}" data-collection-url="{{ collection.url }}" data-collection-handle="{{ collection.handle }}" data-product-count="{{ collection.all_products_count }}">
   <div data-collection-results>
   <div class="maxbuy-collection__intro">
-    {% render 'breadcrumbs', complete_collection_schema: true %}
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":{{ 'general.breadcrumbs.home' | t | json }},"item":{{ request.origin | append: routes.root_url | json }}},{"@type":"ListItem","position":2,"name":{{ collection.title | json }},"item":{{ request.origin | append: collection.url | json }}}]}</script>
+    {% assign collection_breadcrumb_label = collection.title %}
+    {% if collection.handle == 'all' %}{% assign collection_breadcrumb_label = 'All' %}{% endif %}
+    {% render 'breadcrumbs', complete_collection_schema: true, collection_breadcrumb_label: collection_breadcrumb_label %}
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":{{ 'general.breadcrumbs.home' | t | json }},"item":{{ request.origin | append: routes.root_url | json }}},{"@type":"ListItem","position":2,"name":"Collections","item":{{ request.origin | append: routes.collections_url | json }}},{"@type":"ListItem","position":3,"name":{{ collection_breadcrumb_label | json }},"item":{{ request.origin | append: collection.url | json }}}]}</script>
     {% if section.settings.show_promotion %}
       <div class="maxbuy-collection__promotion">
         {% if section.settings.promotion_image %}
@@ -76,12 +78,18 @@
             {{ section.settings.promotion_image | image_url: width: 2464 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '600, 900, 1232, 1848, 2464', sizes: '(min-width: 1312px) 1232px, calc(100vw - 40px)', alt: section.settings.promotion_image.alt }}
           </picture>
         {% else %}
-          <img src="{{ 'maxbuy-collection-promotion.png' | asset_url }}" alt="" width="2048" height="454" loading="eager" fetchpriority="high">
+          <img class="maxbuy-collection__promotion-desktop" src="{{ 'maxbuy-collection-promotion.png' | asset_url }}" alt="" width="2048" height="454" loading="eager" fetchpriority="high">
+          <div class="maxbuy-collection__promotion-mobile" aria-hidden="true">
+            <div class="maxbuy-collection__promotion-art maxbuy-collection__promotion-art--middle"><img src="{{ 'maxbuy-collection-promotion-mobile-art.png' | asset_url }}" width="2528" height="560" alt="" loading="eager"></div>
+            <div class="maxbuy-collection__promotion-art maxbuy-collection__promotion-art--top"><img src="{{ 'maxbuy-collection-promotion-mobile-art.png' | asset_url }}" width="2528" height="560" alt="" loading="eager"></div>
+            <div class="maxbuy-collection__promotion-art maxbuy-collection__promotion-art--bottom"><img src="{{ 'maxbuy-collection-promotion-mobile-art.png' | asset_url }}" width="2528" height="560" alt="" loading="eager"></div>
+            <div class="maxbuy-collection__promotion-glow"><img src="{{ 'maxbuy-collection-promotion-mobile-glow.svg' | asset_url }}" width="631" height="460.238" alt=""></div>
+          </div>
         {% endif %}
         <div class="maxbuy-collection__promotion-copy">
           {% if section.settings.promotion_eyebrow != blank %}<p>{{ section.settings.promotion_eyebrow | escape }}</p>{% endif %}
           {% if section.settings.promotion_heading != blank %}<h2>{{ section.settings.promotion_heading | escape }}</h2>{% endif %}
-          {% if section.settings.promotion_button != blank %}<a href="{{ promotion_link }}">{{ section.settings.promotion_button | escape }}</a>{% endif %}
+          {% if section.settings.promotion_button != blank %}<a href="{{ promotion_link }}"><img class="maxbuy-collection__promotion-cart" src="{{ 'maxbuy-collection-promotion-cart.svg' | asset_url }}" width="8.22184" height="8.22184" alt="">{{ section.settings.promotion_button | escape }}</a>{% endif %}
         </div>
       </div>
     {% endif %}
@@ -90,7 +98,7 @@
     <div class="maxbuy-collection__layout{% unless has_sidebar %} maxbuy-collection__layout--full{% endunless %}">
       {% if has_sidebar %}
         <dialog class="maxbuy-collection__sidebar" id="CollectionFiltersDialog-{{ section.id }}" aria-labelledby="FiltersTitle-{{ section.id }}" open>
-          <div class="maxbuy-collection__filter-header"><h2 id="FiltersTitle-{{ section.id }}">{{ section.settings.filters_heading | escape }}</h2><button type="button" data-filters-close aria-label="{{ 'accessibility.close' | t | escape }}">×</button></div>
+          <div class="maxbuy-collection__filter-header"><h2 id="FiltersTitle-{{ section.id }}"><img class="maxbuy-collection__filter-icon" src="{{ 'maxbuy-collection-filter.svg' | asset_url }}" width="16" height="16" alt="">{{ section.settings.filters_heading | escape }}</h2><button type="button" data-filters-close aria-label="{{ 'accessibility.close' | t | escape }}"><img src="{{ 'maxbuy-collection-close.svg' | asset_url }}" width="22.0002" height="22" alt=""></button></div>
           <form id="{{ form_id }}" action="{{ form_action }}" method="get" data-collection-form>
             {% if catalog_mode %}
               {% if is_pool %}
@@ -123,8 +131,10 @@
               </details>
             {% endif %}
             <a href="{{ pool_url }}">{{ 'quick_order_list.all_products' | t }}</a>{% endunless %}
-          <button class="maxbuy-collection__show-results" type="submit" form="{{ form_id }}">{{ 'products.facets.apply' | t }}</button>
-          <button class="maxbuy-collection__cancel" type="button" data-filters-close>{{ 'general.global.cancel' | t }}</button>
+          <div class="maxbuy-collection__filter-actions">
+            <button class="maxbuy-collection__show-results" type="submit" form="{{ form_id }}">{{ section.settings.apply_label | escape }}</button>
+            <a class="maxbuy-collection__clear" href="{{ clear_url }}" data-filters-clear>{{ 'templates.search.clear_all' | t }}</a>
+          </div>
         </dialog>
       {% else %}
         <form id="{{ form_id }}" action="{{ form_action }}" method="get" data-collection-form hidden></form>
@@ -133,9 +143,18 @@
         <div class="maxbuy-collection__toolbar" {% if is_pool %}data-document-title="{{ catalog_heading | strip | escape }} – {{ shop.name | escape }}"{% endif %}>
           <h1 id="CollectionHeading-{{ section.id }}" tabindex="-1">{{ catalog_heading | strip | escape }}</h1>
           <div class="maxbuy-collection__controls">
-            {% if has_sidebar %}<button type="button" data-filters-open aria-controls="CollectionFiltersDialog-{{ section.id }}">{{ section.settings.filters_heading | escape }}{% if filter_count > 0 %} ({{ filter_count }}){% endif %}</button>{% endif %}
+            {% if has_sidebar %}<button type="button" data-filters-open aria-controls="CollectionFiltersDialog-{{ section.id }}" aria-expanded="false"><img src="{{ 'maxbuy-collection-filter.svg' | asset_url }}" width="16" height="16" alt="">{{ section.settings.filters_heading | escape }}{% if filter_count > 0 %} ({{ filter_count }}){% endif %}</button>{% endif %}
             {% if section.settings.enable_sorting %}
-              <label class="maxbuy-collection__sort" for="CollectionSort-{{ section.id }}"><span>{{ 'products.facets.sort_by_label' | t }}</span><select id="CollectionSort-{{ section.id }}" name="sort_by" form="{{ form_id }}" data-collection-sort>{% for option in collection.sort_options %}<option value="{{ option.value | escape }}" {% if option.value == sort_by %}selected{% endif %}>{{ option.name | escape }}</option>{% endfor %}</select></label>
+              <div class="maxbuy-collection__sort">
+                <label for="CollectionSort-{{ section.id }}" id="CollectionSortLabel-{{ section.id }}">{{ 'products.facets.sort_by_label' | t }}</label>
+                <select id="CollectionSort-{{ section.id }}" name="sort_by" form="{{ form_id }}" data-collection-sort>{% for option in collection.sort_options %}<option value="{{ option.value | escape }}" {% if option.value == sort_by %}selected{% endif %}>{{ option.name | escape }}</option>{% endfor %}</select>
+                <details class="maxbuy-collection__sort-dropdown" data-sort-dropdown>
+                  <summary aria-labelledby="CollectionSortLabel-{{ section.id }} CollectionSortValue-{{ section.id }}"><span id="CollectionSortValue-{{ section.id }}" data-sort-value>{% for option in collection.sort_options %}{% if option.value == sort_by %}{{ option.name | escape }}{% endif %}{% endfor %}</span><span class="maxbuy-collection__sort-arrow" aria-hidden="true"></span></summary>
+                  <div class="maxbuy-collection__sort-options" role="group" aria-labelledby="CollectionSortLabel-{{ section.id }}">
+                    {% for option in collection.sort_options %}<button type="button" data-sort-option="{{ option.value | escape }}" aria-pressed="{% if option.value == sort_by %}true{% else %}false{% endif %}"><span>{{ option.name | escape }}</span><span class="maxbuy-collection__sort-check" aria-hidden="true">✓</span></button>{% endfor %}
+                  </div>
+                </details>
+              </div>
             {% else %}<input type="hidden" name="sort_by" form="{{ form_id }}" value="{{ sort_by }}">{% endif %}
           </div>
           <noscript><button class="maxbuy-collection__apply" type="submit" form="{{ form_id }}">{{ section.settings.apply_label | escape }}</button></noscript>
@@ -414,9 +433,15 @@
     },
     {
       "type": "text",
+      "id": "best_sellers_button_label",
+      "label": "Product card button",
+      "default": "Shop Now"
+    },
+    {
+      "type": "text",
       "id": "apply_label",
       "label": "Apply button",
-      "default": "Apply filters"
+      "default": "Apply Filter"
     },
     {
       "type": "text",

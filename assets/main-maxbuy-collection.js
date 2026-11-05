@@ -13,6 +13,24 @@
       const options = { signal: this.life.signal };
       this.addEventListener('click', event => this.onClick(event), options);
       this.addEventListener('input', event => this.onInput(event), options);
+      document.addEventListener('click', event => {
+        const dropdown = this.querySelector('[data-sort-dropdown][open]');
+        if (dropdown && !dropdown.contains(event.target)) dropdown.open = false;
+      }, options);
+      this.addEventListener('keydown', event => {
+        const dropdown = event.target.closest('[data-sort-dropdown]');
+        if (!dropdown) return;
+        const trigger = dropdown.querySelector('summary');
+        if (event.key === 'Escape') {
+          event.preventDefault(); dropdown.open = false; trigger.focus(); return;
+        }
+        if (!['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) return;
+        event.preventDefault(); dropdown.open = true;
+        const buttons = [...dropdown.querySelectorAll('[data-sort-option]')];
+        const index = buttons.indexOf(document.activeElement);
+        const next = event.key === 'Home' ? 0 : event.key === 'End' ? buttons.length - 1 : event.key === 'ArrowDown' ? (index + 1) % buttons.length : (index < 0 ? buttons.length - 1 : (index - 1 + buttons.length) % buttons.length);
+        buttons[next]?.focus();
+      }, options);
       this.addEventListener('change', event => this.onChange(event), options);
       this.addEventListener('submit', event => {
         if (!event.target.matches('[data-collection-form]')) return;
@@ -87,6 +105,7 @@
       this.discardDraft();
       if (!this.dialog.open) this.dialog.showModal();
       this.lockBody();
+      this.querySelector('[data-filters-open]')?.setAttribute('aria-expanded', 'true');
       if (animate && this.duration) this.dialog.animate([{ transform: 'translateX(100%)', opacity: .6 }, { transform: 'translateX(0)', opacity: 1 }], { duration: this.duration, easing: 'cubic-bezier(.2,.7,.2,1)' });
     }
     async closePanel(animate = true) {
@@ -101,12 +120,36 @@
       this.closingPanel = false;
       this.unlockBody();
       this.discardDraft();
+      this.querySelector('[data-filters-open]')?.setAttribute('aria-expanded', 'false');
       this.querySelector('[data-filters-open]')?.focus({ preventScroll: true });
     }
     onClick(event) {
       const target = event.target;
       if (!(target instanceof Element)) return;
+      const sortOption = target.closest('[data-sort-option]');
+      if (sortOption) {
+        const select = this.querySelector('[data-collection-sort]');
+        const dropdown = sortOption.closest('[data-sort-dropdown]');
+        const changed = select.value !== sortOption.dataset.sortOption;
+        select.value = sortOption.dataset.sortOption;
+        dropdown.querySelector('[data-sort-value]').textContent = sortOption.querySelector('span').textContent;
+        dropdown.querySelectorAll('[data-sort-option]').forEach(button => button.setAttribute('aria-pressed', String(button === sortOption)));
+        dropdown.open = false;
+        dropdown.querySelector('summary').focus();
+        if (changed) this.onChange({ target: select });
+        return;
+      }
       if (target.closest('[data-filters-open]')) { this.openPanel(); return; }
+      if (target.closest('[data-filters-clear]') && !this.media.matches) {
+        event.preventDefault();
+        const form = this.querySelector('[data-collection-form]');
+        form.querySelectorAll('input').forEach(input => {
+          if (input.type === 'checkbox') input.checked = false;
+          else if (input.name) input.value = '';
+        });
+        form.querySelectorAll('[data-price-filter]').forEach(price => this.syncPrice(price));
+        return;
+      }
       const reset = target.closest('[data-filter-reset]');
       if (reset) {
         const group = reset.closest('[data-filter-key]');
@@ -221,6 +264,7 @@
       const form = this.querySelector('[data-collection-form]');
       if (!form || !form.reportValidity()) return;
       const url = this.buildURL(new FormData(form), form.action);
+      if (this.dialog?.matches(':modal')) this.closePanel(false);
       this.navigate(url, { focusHeading: true });
     }
     cacheKey(url) {

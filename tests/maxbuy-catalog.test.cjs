@@ -115,3 +115,21 @@ test('discarding mobile drafts restores the server form without submitting', () 
   instance.discardDraft();
   assert.equal(reset, 1);
 });
+test('mobile Clear all clears the draft without committing or resetting sort', () => {
+  const { instance, context } = component();
+  context.Element = class {};
+  const input = { type: 'checkbox', checked: true };
+  const price = { type: 'number', name: 'filter.v.price.gte', value: '50' };
+  const form = { querySelectorAll: selector => selector === 'input' ? [input, price] : [] };
+  instance.media = { matches: false };
+  instance.querySelector = () => form;
+  let submitted = false, prevented = false;
+  instance.submit = () => { submitted = true; };
+  const target = new context.Element();
+  target.closest = selector => selector === '[data-filters-clear]' ? {} : null;
+  instance.onClick({ target, preventDefault() { prevented = true; } });
+  assert.equal(prevented, true);
+  assert.equal(input.checked, false);
+  assert.equal(price.value, '');
+  assert.equal(submitted, false);
+});

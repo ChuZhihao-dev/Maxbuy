@@ -492,7 +492,7 @@
         "expand_filters": true,
         "filters_heading": "Filters",
         "category_heading": "Product Categories",
-        "apply_label": "Apply filters",
+        "apply_label": "Apply Filter",
         "results_label": "Show results",
         "enable_motion": true,
         "motion_duration": 260,
