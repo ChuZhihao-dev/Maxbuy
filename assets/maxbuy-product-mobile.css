@@ -1,7 +1,4 @@
 /* Product detail mobile layout — Figma 136:230. Desktop and quick view keep their existing layout. */
-.maxbuy-product-mobile__saving {
-  display: none;
-}
 
 @media (max-width: 767px) {
   .section-main-product {
@@ -110,19 +107,15 @@
   }
 
   .section-main-product .maxbuy-product-mobile__price-row {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
     gap: 8px;
   }
 
   .section-main-product .maxbuy-product-mobile__saving {
-    display: inline-flex;
     padding: 4px 6px;
     border-radius: 100px;
-    background: #ed1c24;
-    color: #fff;
-    font: 500 8px/10px var(--body-font-family);
+    min-height: 0;
+    font-size: 8px;
+    line-height: 10px;
   }
 
   .section-main-product .product-info__stock-heading {
@@ -295,6 +288,11 @@
     flex-basis: 24px;
     height: 28px;
     padding: 7px;
+  }
+
+  .section-main-product .product-form__purchase-row .product-info__quantity-control [role="button"]>span {
+    width: 9px;
+    height: 9px;
   }
 
   .section-main-product .product-form__purchase-row .product-info__quantity-control input {

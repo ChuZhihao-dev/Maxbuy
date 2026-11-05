@@ -628,6 +628,10 @@
       "name": "t:main_product.blocks.labels_and_badges.name",
       "limit": 1,
       "settings": [
+        {"type":"checkbox","id":"show_new_badge","label":"Show New Arrival for recently published products","default":true},
+        {"type":"range","id":"new_badge_days","label":"New Arrival duration","min":1,"max":90,"step":1,"unit":"d","default":30},
+        {"type":"text","id":"new_badge_label","label":"New Arrival text","default":"New Arrival"},
+        {"type":"checkbox","id":"show_discount_badge","label":"Show selected variant discount percentage","default":true},
         {
           "type": "select",
           "id": "label_position",
@@ -680,6 +684,7 @@
       "name": "t:main_product.blocks.variant_picker.name",
       "limit": 1,
       "settings": [
+        {"type":"text","id":"color_label","label":"Color option heading","default":"Select color"},
         {
           "type": "select",
           "id": "picker_type",
@@ -1720,7 +1725,17 @@
     {
       "type": "social_sharing",
       "name": "t:main_product.blocks.social_sharing.name",
-      "limit": 1
+      "limit": 1,
+      "settings": [
+        {"type": "select", "id": "share_style", "label": "Style", "default": "standard", "options": [{"value": "standard", "label": "Standard"}, {"value": "maxbuy", "label": "Maxbuy icons"}]},
+        {"type": "checkbox", "id": "show_facebook", "label": "Facebook", "default": true},
+        {"type": "checkbox", "id": "show_youtube", "label": "Youtube", "default": true},
+        {"type": "checkbox", "id": "show_instagram", "label": "Instagram", "default": true},
+        {"type": "checkbox", "id": "show_tiktok", "label": "Tiktok", "default": true},
+        {"type": "checkbox", "id": "show_linkedin", "label": "Linkedin", "default": true},
+        {"type": "checkbox", "id": "show_whatsapp", "label": "Whatsapp", "default": true},
+        {"type": "checkbox", "id": "show_pinterest", "label": "Pinterest", "default": true}
+      ]
     },
     {
       "type": "text",

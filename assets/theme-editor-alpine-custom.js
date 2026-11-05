@@ -5271,42 +5271,34 @@ requestAnimationFrame(() => {
         this.mediaItemsShow = this.sectionContainer.querySelectorAll(".media-gallery__media-item.is-show-media-item");
 
         this.updateActiveMediaInTwoColumns();
-        let timeoutHiddenActiveMedia;
-
         document.addEventListener(`${PRODUCT_EVENT.updatedVariant}${sectionId}`, (event) => {
-          const { currentVariant } = event.detail;
-          this.currentVariant = currentVariant;
+          if (!document.contains(mediaGalleryWrapperEle)) return;
 
+          const previousMediaId = this.activeMediaId;
+          this.currentVariant = event.detail.currentVariant;
           this.handleChangeVariant(event);
 
-          // Handle scroll to selected variant media on grid layout desktop
-          if ((!Alpine.store("stickyATC") || !Alpine.store("stickyATC").isOpen) && desktopLayout == PRODUCT_MEDIA_DESKTOP_LAYOUT.grid2Columns && window.innerWidth >= MIN_DEVICE_WIDTH.tablet) {
-            const activeMediaItem = Array.from(this.mediaItems).find((item) => item.dataset.mediaId == this.activeMediaId);
-            this.mediaItems.forEach((item) => {
-              item.classList.remove("active-product-in-grid", "shadow-medium");
-            });
-            if (timeoutHiddenActiveMedia) {
-              clearTimeout(timeoutHiddenActiveMedia);
+          // Grid variants may scroll to a different image, without pulsing or highlighting it.
+          if (String(previousMediaId) === String(this.activeMediaId) ||
+              desktopLayout !== PRODUCT_MEDIA_DESKTOP_LAYOUT.grid2Columns ||
+              window.innerWidth < MIN_DEVICE_WIDTH.tablet ||
+              Alpine.store('stickyATC')?.isOpen) return;
+
+          const activeMediaItem = Array.from(this.mediaItems).find(item => String(item.dataset.mediaId) === String(this.activeMediaId));
+          if (!activeMediaItem) return;
+
+          requestAnimationFrame(() => {
+            if (!document.contains(mediaGalleryWrapperEle) || String(activeMediaItem.dataset.mediaId) !== String(this.activeMediaId)) return;
+            if (this.heightHeaderAndAnnouncementBar === 0) {
+              const sectionAnnouncementEl = document.getElementsByClassName('section-announcement')[0];
+              const sectionHeaderEl = document.getElementsByClassName('section-header')[0];
+              this.heightHeaderAndAnnouncementBar = (sectionAnnouncementEl?.getBoundingClientRect().height || 0) + (sectionHeaderEl?.getBoundingClientRect().height || 0);
             }
-            requestAnimationFrame(() => {
-              if (activeMediaItem && this.mediaItemsShow.length > 1) {
-                activeMediaItem.classList.add("active-product-in-grid", "shadow-medium");
-                timeoutHiddenActiveMedia = setTimeout(() => {
-                  activeMediaItem.classList.remove("active-product-in-grid", "shadow-medium");
-                }, 2000);
-              }
-              if (this.heightHeaderAndAnnouncementBar == 0) {
-                const sectionAnnouncementEl = document.getElementsByClassName("section-announcement")[0];
-                const sectionHeaderEl = document.getElementsByClassName("section-header")[0];
-                this.heightHeaderAndAnnouncementBar = (sectionAnnouncementEl?.getBoundingClientRect().height || 0) + (sectionHeaderEl?.getBoundingClientRect().height || 0);
-              }
-              const scrollPosition = activeMediaItem.getBoundingClientRect().top + window.scrollY - this.heightHeaderAndAnnouncementBar;
-              window.scrollTo({
-                top: scrollPosition,
-                behavior: "smooth",
-              });
+            window.scrollTo({
+              top: activeMediaItem.getBoundingClientRect().top + window.scrollY - this.heightHeaderAndAnnouncementBar,
+              behavior: 'smooth'
             });
-          }
+          });
         });
 
         el.addEventListener(`${SWIFFY_SLIDER_EVENT.slide}`, (event) => {

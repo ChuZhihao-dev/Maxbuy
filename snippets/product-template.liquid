@@ -134,7 +134,7 @@
 {% liquid
   assign is_show_compare_button = false
 %}
-{{ 'main-product.css' | asset_url | stylesheet_tag }}
+{{ 'main-product.min.css' | asset_url | stylesheet_tag }}
 <product-info
   class="product-template__wrapper{% unless is_product_page %} flex flex-col md:flex-row gap-10 quick-view:gap-x-0 quick-view:gap-y-3 quick-view:md:h-full{% endunless %}"
   data-enabled-sticky-content="{{ enable_sticky_content }}"
@@ -307,7 +307,7 @@
                       price_group: section.id,
                       show_b2b_price_label: block.settings.show_b2b_price_label
                     -%}
-                    {% if is_product_page and current_variant.compare_at_price > current_variant.price %}
+                    {% if is_product_page and current_variant.compare_at_price > current_variant.price and current_variant.quantity_price_breaks.size == 0 %}
                       <span class="maxbuy-product-mobile__saving">{{ 'general.global.save' | t }} {{ current_variant.compare_at_price | minus: current_variant.price | money }}</span>
                     {% endif %}
                   </div>
@@ -599,7 +599,9 @@
               </div>
             </div>
           {% when 'labels_and_badges' %}
-            {% if block.settings.label_position == 'content_inline' %}
+            {% if is_product_page and block.settings.label_position == 'content_inline' %}
+              {% render 'maxbuy-product-badges', product: product, current_variant: current_variant, block: block, login_hide_price: login_hide_price %}
+            {% elsif block.settings.label_position == 'content_inline' %}
               <div
                 class="product-info__content-inline"
                 {{ block.shopify_attributes }}
@@ -979,6 +981,9 @@
               </collapsible-tab>
             {%- endif -%}
           {%- when 'social_sharing' -%}
+            {%- if is_product_page and block.settings.share_style == 'maxbuy' -%}
+              {% render 'product-social-sharing', product: product, block: block %}
+            {%- else -%}
             {%- if settings.share_facebook or settings.share_twitter or settings.share_twitter or settings.share_email or settings.share_pinterest or settings.share_whatsapp or settings.share_sms -%}
               <div
                 class="product-info__social-sharing-wrapper flex anm-fade-element{% if show_content_center %} justify-center{% endif %} w-full items-center mb-[var(--padding-bottom-product-template-block)]"
@@ -989,6 +994,7 @@
                 {% render 'social-sharing', share_title: product.title, share_permalink: product.url, share_image: product %}
               </div>
             {% endif %}
+            {%- endif -%}
           {%- when 'text' -%}
             {%- if block.settings.text != blank -%}
               <div

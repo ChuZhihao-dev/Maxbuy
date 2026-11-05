@@ -1,0 +1,52 @@
+{%- liquid
+  assign share_url = shop.url | append: product.url
+  assign encoded_url = share_url | url_encode
+  assign encoded_title = product.title | url_encode
+  assign whatsapp_text = product.title | append: ' ' | append: share_url | url_encode
+  assign share_image = ''
+  if product.featured_image
+    assign share_image = product.featured_image | image_url: width: 1200 | prepend: 'https:' | url_encode
+  endif
+  assign platforms = 'facebook,youtube,instagram,tiktok,linkedin,whatsapp,pinterest' | split: ','
+-%}
+<div class="product-social-sharing" {{ block.shopify_attributes }}>
+  <p class="product-social-sharing__label">{{ 'products.product.share_social' | t }}</p>
+  <ul class="product-social-sharing__links" role="list">
+    {%- for platform in platforms -%}
+      {%- liquid
+        assign enabled_key = 'show_' | append: platform
+        assign platform_key = 'general.social.links.' | append: platform
+        assign platform_name = platform_key | t
+        assign link = ''
+        capture accessible_label
+          echo 'products.product.share_social' | t
+          echo ' '
+          echo platform_name
+        endcapture
+        case platform
+          when 'facebook'
+            assign link = 'https://www.facebook.com/sharer/sharer.php?u=' | append: encoded_url
+          when 'linkedin'
+            assign link = 'https://www.linkedin.com/sharing/share-offsite/?url=' | append: encoded_url
+          when 'whatsapp'
+            assign accessible_label = 'general.social.alt_text.share_on_whatsapp' | t
+            assign link = 'https://wa.me/?text=' | append: whatsapp_text
+          when 'pinterest'
+            assign link = 'https://www.pinterest.com/pin/create/button/?url=' | append: encoded_url | append: '&media=' | append: share_image | append: '&description=' | append: encoded_title
+          else
+            assign profile_key = 'social_' | append: platform | append: '_link'
+            assign link = settings[profile_key] | replace_first: 'http://', 'https://'
+            assign accessible_label = shop.name | append: ' — ' | append: platform_name
+        endcase
+        assign icon_asset = 'product-share-' | append: platform | append: '.svg'
+      -%}
+      {%- if block.settings[enabled_key] and link != blank -%}
+        <li>
+          <a class="product-social-sharing__link" href="{{ link | escape }}" target="_blank" rel="noopener noreferrer" aria-label="{{ accessible_label | strip | escape }}">
+            <img src="{{ icon_asset | asset_url }}" width="32" height="32" alt="" loading="lazy">
+          </a>
+        </li>
+      {%- endif -%}
+    {%- endfor -%}
+  </ul>
+</div>

@@ -29,3 +29,21 @@
 正式主题的后台编辑器会修改 JSON 模板或 `config/settings_data.json`。拉取或推送前先检查 `git status`。将正式主题拉到独立临时目录，对比后合并需要保留的后台修改；不要在有本地改动的工作目录直接全量拉取。推送正式主题前，预览受影响页面，并再次核对线上配置。
 
 相关检查命令：`shopify theme check`、`git diff --check`。Theme Check 目前有历史告警及错误；整理文件时应确认没有引入新的问题，不能把全量检查视为已通过。
+
+## 产品详情页 CSS
+
+只编辑 `assets/main-product.css` 和 `assets/maxbuy-product-mobile.css`。主文件维护通用与桌面样式，移动文件集中维护小于 768px 的尺寸差异；`.min.css` 是页面加载的生成文件，不手动修改。
+
+一次生成两份压缩文件：
+
+```sh
+sh scripts/build-product-css.sh
+```
+
+开发时持续监听并自动更新：
+
+```sh
+sh scripts/build-product-css.sh --watch=forever
+```
+
+脚本使用固定版本 esbuild 0.28.1；首次通过 npx 使用时需要网络下载工具。已有 esbuild 可通过 `ESBUILD_BIN` 指定可执行文件。

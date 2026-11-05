@@ -12,6 +12,16 @@
     "main": {
       "type": "main-product",
       "blocks": {
+        "labels_and_badges": {
+          "type": "labels_and_badges",
+          "settings": {
+            "show_new_badge": true,
+            "new_badge_days": 30,
+            "new_badge_label": "New Arrival",
+            "show_discount_badge": true,
+            "label_position": "content_inline"
+          }
+        },
         "vendor": {
           "type": "vendor",
           "settings": {
@@ -54,19 +64,6 @@
           "type": "separator",
           "settings": {}
         },
-        "variant_picker": {
-          "type": "variant_picker",
-          "settings": {
-            "picker_type": "button",
-            "enable_color_swatches": false,
-            "swatch_size": "small",
-            "show_variant_label": true,
-            "enable_size_chart": false,
-            "size_chart_label": "Size chart",
-            "associated_option_name": "Size",
-            "size_chart_page": ""
-          }
-        },
         "inventory_status_8LgeE4": {
           "type": "inventory_status",
           "settings": {
@@ -84,6 +81,20 @@
             "enable_animation": true,
             "animation_duration": 150,
             "animation_delay": 0
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "color_label": "Select color",
+            "picker_type": "button",
+            "enable_color_swatches": true,
+            "swatch_size": "small",
+            "show_variant_label": true,
+            "enable_size_chart": false,
+            "size_chart_label": "Size chart",
+            "associated_option_name": "Size",
+            "size_chart_page": ""
           }
         },
         "accessories": {
@@ -156,23 +167,38 @@
             "enable_animation": true,
             "animation_duration": 300
           }
+        },
+        "product_social_sharing": {
+          "type": "social_sharing",
+          "settings": {
+            "share_style": "maxbuy",
+            "show_facebook": true,
+            "show_youtube": true,
+            "show_instagram": true,
+            "show_tiktok": true,
+            "show_linkedin": true,
+            "show_whatsapp": true,
+            "show_pinterest": true
+          }
         }
       },
       "block_order": [
+        "labels_and_badges",
         "vendor",
         "product_title",
         "rating_J9ax4R",
         "identifier",
         "price",
         "separator_nUa9hN",
-        "variant_picker",
         "inventory_status_8LgeE4",
         "promotion_countdown",
+        "variant_picker",
         "accessories",
         "buy_buttons",
         "space_KKnHzV",
         "service_promises",
-        "product_accordion"
+        "product_accordion",
+        "product_social_sharing"
       ],
       "settings": {
         "enable_sticky_content": true,
@@ -195,7 +221,7 @@
         "sticky_add_to_cart_style": "bottom_bar",
         "sticky_add_to_cart_show_quantity": false,
         "section_width": "page-width",
-        "padding_top": 28,
+        "padding_top": 0,
         "padding_bottom": 0,
         "show_section_divider": false
       }

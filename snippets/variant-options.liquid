@@ -141,6 +141,7 @@
       <input
         class="swatch-option__value variant-option w-0 h-0 hidden{% if is_selected_option %} selected{% endif %}{% unless is_available_option %} disabled{% endunless %}"
         type="radio"
+        {% if show_swatch_label and is_selected_option %}checked{% endif %}
         id="{{ option_id }}"
         name="VariantPicker-{{ product_option.name |  escape }}"
         value="{{ option_value | escape }}"
@@ -168,7 +169,9 @@
         tabindex="0"
         {% comment %}@keyup.enter="$el.previousElementSibling?.click()"{% endcomment %}
       >
-        {% if label_text != blank -%}
+        {% if show_swatch_label %}
+          <span class="swatch-option__label-text">{{ option_value.name | escape }}</span>
+        {% elsif label_text != blank -%}
           <span class="swatch-option__label-text">{{ label_text }}</span>
         {%- endif %}
       </label>

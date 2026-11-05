@@ -2,6 +2,10 @@
   assign accessories = product.metafields.custom.accessories.value
   assign accessories_count = 0
   assign max_products = block.settings.max_products | default: 2
+  assign more_accessories_link = block.settings.more_link
+  if more_accessories_link == blank and collections['accessories'] != blank
+    assign more_accessories_link = collections['accessories'].url
+  endif
 %}
 
 {% capture accessory_cards %}
@@ -42,8 +46,8 @@
     <legend class="product-accessories__legend">{{ block.settings.heading | default: 'Accessories' | escape }}</legend>
     <div class="product-accessories__header">
       <h2 class="product-accessories__heading">{{ block.settings.heading | default: 'Accessories' | escape }}</h2>
-      {% if block.settings.more_link != blank and block.settings.more_label != blank %}
-        <a class="product-accessories__more" href="{{ block.settings.more_link }}">
+      {% if more_accessories_link != blank and block.settings.more_label != blank %}
+        <a class="product-accessories__more" href="{{ more_accessories_link }}">
           {{ block.settings.more_label | escape }}
           <span class="product-accessories__arrow" aria-hidden="true">
             <img src="{{ 'product-accessories-arrow.svg' | asset_url }}" width="10" height="6.41421" alt="">

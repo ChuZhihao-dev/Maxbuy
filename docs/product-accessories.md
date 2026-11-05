@@ -7,6 +7,9 @@ The product template includes an **Accessories** block above the purchase button
 - Display order follows the metafield. The block displays two products by default;
   the limit, heading, More Accessories link, mobile text layout,
   and selection animation are configurable in the theme editor.
+- More Accessories uses the block's explicit link first. If it is empty, it uses
+  the existing `accessories` collection's URL. If that collection does not exist,
+  no fallback link is rendered; a blank link label also keeps the link hidden.
 - Accessories start unchecked; shoppers choose which ones to include.
 - Product images, titles, prices, compare-at prices and availability come from
   the referenced products. The first available variant is used; its option name

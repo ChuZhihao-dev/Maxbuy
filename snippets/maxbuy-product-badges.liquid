@@ -1,0 +1,38 @@
+{% comment %}Product-page badges use actual publish age and the selected variant's prices.{% endcomment %}
+{% liquid
+  assign show_new = false
+  if block.settings.show_new_badge and block.settings.new_badge_label != blank
+    assign published_timestamp = product.published_at | default: product.created_at | date: '%s' | plus: 0
+    assign now_timestamp = 'now' | date: '%s' | plus: 0
+    assign age_seconds = now_timestamp | minus: published_timestamp
+    assign age_limit = block.settings.new_badge_days | default: 30 | times: 86400
+    if age_seconds >= 0 and age_seconds < age_limit
+      assign show_new = true
+    endif
+  endif
+  assign show_discount = false
+  if block.settings.show_discount_badge and login_hide_price != 'true'
+    if current_variant.compare_at_price > current_variant.price and current_variant.quantity_price_breaks.size == 0
+      assign discount_percent = current_variant.compare_at_price | minus: current_variant.price | times: 100.0 | divided_by: current_variant.compare_at_price | round
+      if discount_percent > 0
+        assign show_discount = true
+      endif
+    endif
+  endif
+%}
+<div class="product-info__content-inline" data-block-id="{{ block.id }}" {{ block.shopify_attributes }}>
+  <div class="product-info__label-wrapper maxbuy-product-badges{% if current_variant == blank %} is-unavailable{% endif %}">
+    {%- if show_new -%}
+      <span class="maxbuy-product-badges__badge maxbuy-product-badges__badge--new">
+        <span class="maxbuy-product-badges__text">{{ block.settings.new_badge_label | escape }}</span>
+        <img src="{{ 'product-badge-new-tail.svg' | asset_url }}" width="4" height="4" alt="">
+      </span>
+    {%- endif -%}
+    {%- if show_discount -%}
+      <span class="maxbuy-product-badges__badge maxbuy-product-badges__badge--sale">
+        <span class="maxbuy-product-badges__text">-{{ discount_percent }}%</span>
+        <img src="{{ 'product-badge-sale-tail.svg' | asset_url }}" width="4" height="4" alt="">
+      </span>
+    {%- endif -%}
+  </div>
+</div>
