@@ -8,6 +8,7 @@
  * ------------------------------------------------------------
  */
 {
+  "maxbuy_catalog": {"price_error": "Ievadiet derīgas cenas. Minimums nedrīkst pārsniegt maksimumu."},
   "general": {
     "continue_shopping": "Turpināt iepirkties",
     "pagination": {

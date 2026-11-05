@@ -8,6 +8,7 @@
  * ------------------------------------------------------------
  */
 {
+  "maxbuy_catalog": {"price_error": "Zadajte platné ceny. Minimum nesmie byť vyššie ako maximum."},
   "general": {
     "continue_shopping": "Pokračovať v nákupe",
     "pagination": {

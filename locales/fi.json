@@ -8,6 +8,7 @@
  * ------------------------------------------------------------
  */
 {
+  "maxbuy_catalog": {"price_error": "Anna kelvolliset hinnat. Vähimmäishinta ei saa ylittää enimmäishintaa."},
   "general": {
     "continue_shopping": "Jatka ostoksia",
     "pagination": {

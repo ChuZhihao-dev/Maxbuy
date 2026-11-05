@@ -4,6 +4,16 @@
 {% liquid
   assign sort_by = collection.sort_by | default: collection.default_sort_by
   assign form_id = 'CollectionFilters-' | append: section.id
+  assign category_param = section.settings.category_param | default: 'filter.p.product_type'
+  assign category_filter = collection.filters | where: 'param_name', category_param | first
+  assign brand_param = section.settings.brand_param | default: 'filter.p.vendor'
+  assign vendor_filter = collection.filters | where: 'param_name', brand_param | first
+  assign pool_handle = section.settings.pool_collection.handle | default: 'all'
+  assign pool_url = routes.collections_url | append: '/' | append: pool_handle
+  assign is_pool = false
+  if collection.handle == pool_handle
+    assign is_pool = true
+  endif
   assign filter_count = 0
   for filter in collection.filters
     assign filter_count = filter_count | plus: filter.active_values.size
@@ -13,26 +23,37 @@
       endif
     endif
   endfor
-  assign has_sidebar = false
-  if section.settings.enable_filtering and collection.filters.size > 0
-    assign has_sidebar = true
+  assign entry = nil
+  unless is_pool
+    if filter_count == 0
+      for block in section.blocks
+        if block.type == 'entry' and block.settings.enable_pool_transition
+          if block.settings.source_collection.handle == collection.handle and block.settings.value != blank
+            assign entry = block
+            break
+          endif
+        endif
+      endfor
+    endif
+  endunless
+  assign catalog_mode = is_pool
+  assign form_action = collection.url
+  if is_pool or entry != nil
+    assign catalog_mode = true
+    assign form_action = pool_url
   endif
-  if section.settings.category_menu != blank
-    assign has_sidebar = true
+  if entry != nil
+    assign filter_count = filter_count | plus: 1
   endif
-  capture category_query
-    echo 'sort_by='
-    echo sort_by | url_encode
-    for filter in collection.filters
-      if filter.param_name == 'filter.p.vendor'
-        for value in filter.active_values
-          echo '&filter.p.vendor='
-          echo value.value | url_encode
-        endfor
-      endif
-    endfor
+  assign has_sidebar = section.settings.enable_filtering
+  assign clear_url = form_action | append: '?sort_by=' | append: sort_by
+  capture catalog_heading
+    if is_pool
+      render 'maxbuy-catalog-heading', category_filter: category_filter, vendor_filter: vendor_filter
+    else
+      echo collection.title
+    endif
   endcapture
-  assign clear_url = collection.url | append: '?sort_by=' | append: sort_by
   assign promotion_link = section.settings.promotion_link
   if promotion_link == blank
     assign promotion_link = '#CollectionHeading-' | append: section.id
@@ -42,7 +63,8 @@
   #shopify-section-{{ section.id }} { background: {{ section.settings.background }}; }
   #Collection-{{ section.id }} { --collection-columns: {{ section.settings.desktop_products_per_row }}; --collection-mobile-columns: {{ section.settings.mobile_products_per_row }}; --collection-motion: {% if section.settings.enable_motion %}{{ section.settings.motion_duration }}ms{% else %}0ms{% endif %}; --collection-delay: {{ section.settings.motion_delay }}ms; --collection-background: {{ section.settings.background }}; }
 {% endstyle %}
-<maxbuy-collection id="Collection-{{ section.id }}" class="maxbuy-collection best-sellers" data-section-id="{{ section.id }}" data-collection-url="{{ collection.url }}" data-collection-handle="{{ collection.handle }}" data-product-count="{{ collection.all_products_count }}">
+<maxbuy-collection id="Collection-{{ section.id }}" class="maxbuy-collection best-sellers" data-section-id="{{ section.id }}" data-pool-url="{{ pool_url }}" data-catalog-mode="{{ catalog_mode }}" data-price-error="{{ 'maxbuy_catalog.price_error' | t | escape }}" data-collection-url="{{ collection.url }}" data-collection-handle="{{ collection.handle }}" data-product-count="{{ collection.all_products_count }}">
+  <div data-collection-results>
   <div class="maxbuy-collection__intro">
     {% render 'breadcrumbs', complete_collection_schema: true %}
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":{{ 'general.breadcrumbs.home' | t | json }},"item":{{ request.origin | append: routes.root_url | json }}},{"@type":"ListItem","position":2,"name":{{ collection.title | json }},"item":{{ request.origin | append: collection.url | json }}}]}</script>
@@ -65,31 +87,51 @@
     {% endif %}
     {% if section.settings.show_description and collection.description != blank %}<div class="maxbuy-collection__description rte">{{ collection.description }}</div>{% endif %}
   </div>
-  <div data-collection-results>
     <div class="maxbuy-collection__layout{% unless has_sidebar %} maxbuy-collection__layout--full{% endunless %}">
       {% if has_sidebar %}
         <dialog class="maxbuy-collection__sidebar" id="CollectionFiltersDialog-{{ section.id }}" aria-labelledby="FiltersTitle-{{ section.id }}" open>
           <div class="maxbuy-collection__filter-header"><h2 id="FiltersTitle-{{ section.id }}">{{ section.settings.filters_heading | escape }}</h2><button type="button" data-filters-close aria-label="{{ 'accessibility.close' | t | escape }}">×</button></div>
-          {% if section.settings.category_menu != blank %}
-            <details class="maxbuy-collection__filter" data-filter-key="categories" open>
-              <summary><span>{{ section.settings.category_heading | escape }}</span><span class="maxbuy-collection__plus" aria-hidden="true"></span></summary>
-              <div class="maxbuy-collection__filter-content"><ul class="maxbuy-collection__categories" role="list">
-                {% render 'maxbuy-collection-categories', links: section.settings.category_menu.links, category_query: category_query %}
-              </ul></div>
-            </details>
-          {% endif %}
-          <form id="{{ form_id }}" action="{{ collection.url }}" method="get" data-collection-form>
-            {% if section.settings.enable_filtering %}{% for filter in collection.filters %}{% render 'maxbuy-collection-filter', filter: filter, section: section, index: forloop.index %}{% endfor %}{% endif %}
-            <button class="maxbuy-collection__apply" type="submit">{{ section.settings.apply_label | escape }}</button>
+          <form id="{{ form_id }}" action="{{ form_action }}" method="get" data-collection-form>
+            {% if catalog_mode %}
+              {% if is_pool %}
+                {% if category_filter %}{% render 'maxbuy-collection-filter', filter: category_filter, section: section, index: 'category' %}{% endif %}
+              {% else %}
+                {% render 'maxbuy-catalog-dimension', dimension: 'category', filter: category_filter, param_name: category_param, heading: section.settings.category_heading, section: section, entry: entry, is_pool: is_pool %}
+              {% endif %}
+              {% render 'maxbuy-catalog-dimension', dimension: 'brand', directory_links: section.settings.brand_menu.links, filter: vendor_filter, param_name: brand_param, heading: section.settings.brand_heading, section: section, entry: entry, is_pool: is_pool %}
+            {% else %}
+              {% if category_filter %}{% render 'maxbuy-collection-filter', filter: category_filter, section: section, index: 'category', hide_count: true %}{% endif %}
+              {% if vendor_filter %}{% render 'maxbuy-collection-filter', filter: vendor_filter, section: section, index: 'brand', hide_count: true %}{% endif %}
+            {% endif %}
+            {% comment %}Keep platform data, but present the main groups in a stable order.{% endcomment %}
+            {% for filter in collection.filters %}{% if filter.type == 'price_range' %}{% render 'maxbuy-collection-filter', filter: filter, section: section, index: forloop.index %}{% endif %}{% endfor %}
+            {% for filter in collection.filters %}{% if filter.param_name == section.settings.color_param %}{% render 'maxbuy-collection-filter', filter: filter, section: section, index: forloop.index %}{% endif %}{% endfor %}
+            {% for filter in collection.filters %}{% if filter.param_name == 'filter.v.availability' %}{% render 'maxbuy-collection-filter', filter: filter, section: section, index: forloop.index %}{% endif %}{% endfor %}
+            {% for filter in collection.filters %}
+              {% if filter.param_name == category_param or filter.param_name == brand_param or filter.param_name == section.settings.color_param or filter.param_name == 'filter.v.availability' or filter.type == 'price_range' %}{% continue %}{% endif %}
+              {% render 'maxbuy-collection-filter', filter: filter, section: section, index: forloop.index %}
+            {% endfor %}
+            <button class="maxbuy-collection__apply" type="submit">{{ 'products.facets.apply' | t }}</button>
           </form>
-          <button class="maxbuy-collection__show-results" type="button" data-filters-close>{{ section.settings.results_label | escape }} ({{ collection.products_count }})</button>
+          {% unless catalog_mode %}
+            {% if section.settings.category_menu != blank or section.settings.brand_menu != blank %}
+              <details class="maxbuy-collection__filter"><summary>{{ 'sections.collection_list.view_collection' | t }}</summary>
+                <nav aria-label="{{ 'sections.collection_list.view_collection' | t | escape }}"><ul class="maxbuy-collection__categories" role="list">
+                  {% render 'maxbuy-collection-categories', links: section.settings.category_menu.links %}
+                  {% render 'maxbuy-collection-categories', links: section.settings.brand_menu.links %}
+                </ul></nav>
+              </details>
+            {% endif %}
+            <a href="{{ pool_url }}">{{ 'quick_order_list.all_products' | t }}</a>{% endunless %}
+          <button class="maxbuy-collection__show-results" type="submit" form="{{ form_id }}">{{ 'products.facets.apply' | t }}</button>
+          <button class="maxbuy-collection__cancel" type="button" data-filters-close>{{ 'general.global.cancel' | t }}</button>
         </dialog>
       {% else %}
-        <form id="{{ form_id }}" action="{{ collection.url }}" method="get" data-collection-form hidden></form>
+        <form id="{{ form_id }}" action="{{ form_action }}" method="get" data-collection-form hidden></form>
       {% endif %}
       <div class="maxbuy-collection__main">
-        <div class="maxbuy-collection__toolbar">
-          <h1 id="CollectionHeading-{{ section.id }}" tabindex="-1">{{ collection.title | escape }}</h1>
+        <div class="maxbuy-collection__toolbar" {% if is_pool %}data-document-title="{{ catalog_heading | strip | escape }} – {{ shop.name | escape }}"{% endif %}>
+          <h1 id="CollectionHeading-{{ section.id }}" tabindex="-1">{{ catalog_heading | strip | escape }}</h1>
           <div class="maxbuy-collection__controls">
             {% if has_sidebar %}<button type="button" data-filters-open aria-controls="CollectionFiltersDialog-{{ section.id }}">{{ section.settings.filters_heading | escape }}{% if filter_count > 0 %} ({{ filter_count }}){% endif %}</button>{% endif %}
             {% if section.settings.enable_sorting %}
@@ -98,9 +140,10 @@
           </div>
           <noscript><button class="maxbuy-collection__apply" type="submit" form="{{ form_id }}">{{ section.settings.apply_label | escape }}</button></noscript>
         </div>
-        <div class="maxbuy-collection__result-meta"><p data-result-count data-count="{{ collection.products_count }}">{{ 'products.facets.product_count_simple' | t: count: collection.products_count }}</p>{% if filter_count > 0 %}<a href="{{ clear_url }}" data-collection-link>{{ 'templates.search.clear_all' | t }}</a>{% endif %}</div>
+        <div class="maxbuy-collection__result-meta"><p data-result-count data-count="{{ collection.products_count }}">{{ 'products.facets.product_count_simple' | t: count: collection.products_count }}</p>{% if filter_count > 0 or collection.products_count == 0 %}<a href="{{ clear_url }}" data-collection-link>{{ 'templates.search.clear_all' | t }}</a>{% endif %}</div>
         {% if filter_count > 0 %}
           <ul class="maxbuy-collection__active" aria-label="{{ 'products.facets.filter_by_label' | t | escape }}" role="list">
+            {% if entry != nil %}<li><a href="{{ clear_url }}" data-collection-link>{{ entry.settings.label | default: entry.settings.value | escape }} <span aria-hidden="true">×</span><span class="sr-only">{{ 'accessibility.remove' | t }}</span></a></li>{% endif %}
             {% for filter in collection.filters %}
               {% for value in filter.active_values %}<li><a href="{{ value.url_to_remove }}" data-collection-link>{{ filter.label | escape }}: {{ value.label | escape }} <span aria-hidden="true">×</span><span class="sr-only">{{ section.settings.remove_filter_label | escape }}</span></a></li>{% endfor %}
               {% if filter.type == 'price_range' %}{% if filter.min_value.value != nil or filter.max_value.value != nil %}<li><a href="{{ filter.url_to_remove }}" data-collection-link>{{ filter.min_value.value | default: 0 | money }} – {{ filter.max_value.value | default: filter.range_max | money }} <span aria-hidden="true">×</span></a></li>{% endif %}{% endif %}
@@ -112,7 +155,7 @@
             {% for product in collection.products %}
               {% render 'best-sellers-card', product: product, section: section, collection: collection, index: forloop.index, collection_card: true %}
             {% else %}
-              <div class="maxbuy-collection__empty"><p>{{ 'sections.collection_template.empty' | t }}</p>{% if filter_count > 0 %}<a href="{{ clear_url }}" data-collection-link>{{ 'templates.search.clear_all' | t }}</a>{% endif %}</div>
+              <div class="maxbuy-collection__empty"><p>{{ 'sections.collection_template.empty' | t }}</p>{% if filter_count > 0 or collection.products_count == 0 %}<a href="{{ clear_url }}" data-collection-link>{{ 'templates.search.clear_all' | t }}</a>{% endif %}</div>
             {% endfor %}
           </div>
           {% if paginate.pages > 1 %}
@@ -135,43 +178,347 @@
   "tag": "section",
   "class": "maxbuy-collection-section",
   "settings": [
-    {"type":"header","content":"Layout"},
-    {"type":"color","id":"background","label":"Background","default":"#f7f7f7"},
-    {"type":"range","id":"products_per_page","label":"Products per page","min":6,"max":48,"step":2,"default":16},
-    {"type":"range","id":"desktop_products_per_row","label":"Desktop columns","min":2,"max":4,"step":1,"default":4},
-    {"type":"select","id":"mobile_products_per_row","label":"Mobile columns","options":[{"value":"1","label":"1"},{"value":"2","label":"2"}],"default":"2"},
-    {"type":"checkbox","id":"show_description","label":"Show collection description","default":true},
-    {"type":"checkbox","id":"show_label_badges","label":"Show product tag badges","default":true},
-    {"type":"textarea","id":"best_sellers_badge_label","label":"Badge tags (one per line)","default":"Special Offer\nNew\nHOT"},
-    {"type":"header","content":"Promotion banner"},
-    {"type":"checkbox","id":"show_promotion","label":"Show promotion","default":true},
-    {"type":"image_picker","id":"promotion_image","label":"Desktop image","info":"Recommended: 2464 × 486. Leave empty to use the design image."},
-    {"type":"image_picker","id":"promotion_image_mobile","label":"Mobile image"},
-    {"type":"text","id":"promotion_eyebrow","label":"Intro text","default":"Get ready for the new term"},
-    {"type":"text","id":"promotion_heading","label":"Heading","default":"Up to 30% off"},
-    {"type":"text","id":"promotion_button","label":"Button label","default":"Shop Now"},
-    {"type":"url","id":"promotion_link","label":"Button link","info":"Defaults to this collection's product list."},
-    {"type":"header","content":"Filters and sorting"},
-    {"type":"checkbox","id":"enable_filtering","label":"Enable Shopify filters","default":true,"info":"Configure filter types and values in Shopify Search & Discovery."},
-    {"type":"checkbox","id":"enable_sorting","label":"Enable sorting","default":true},
-    {"type":"checkbox","id":"expand_filters","label":"Expand filter groups by default","default":true},
-    {"type":"link_list","id":"category_menu","label":"Collection navigation menu","info":"Category collection links. Groups are flattened; selected Vendor filters are preserved when switching collections."},
-    {"type":"text","id":"category_heading","label":"Category heading","default":"Product Categories"},
-    {"type":"link_list","id":"brand_menu","label":"Brands collection menu","info":"Legacy navigation setting. Brands now use the Vendor filter configured in Search & Discovery."},
-    {"type":"text","id":"brand_heading","label":"Brands heading","default":"Brands"},
-    {"type":"text","id":"price_from_label","label":"Price from label","default":"From"},
-    {"type":"text","id":"price_to_label","label":"Price to label","default":"To"},
-    {"type":"text","id":"remove_filter_label","label":"Remove filter label","default":"Remove filter"},
-    {"type":"text","id":"filters_heading","label":"Filters heading","default":"Filters"},
-    {"type":"text","id":"apply_label","label":"Apply button","default":"Apply filters"},
-    {"type":"text","id":"results_label","label":"Mobile results button","default":"Show results"},
-    {"type":"header","content":"Interaction"},
-    {"type":"checkbox","id":"enable_motion","label":"Enable transitions","default":true},
-    {"type":"range","id":"motion_duration","label":"Transition duration","min":100,"max":500,"step":20,"unit":"ms","default":260},
-    {"type":"range","id":"motion_delay","label":"Transition delay","min":0,"max":200,"step":20,"unit":"ms","default":0},
-    {"type":"text","id":"error_label","label":"Loading error","default":"We couldn't update the products. Please try again."},
-    {"type":"text","id":"retry_label","label":"Retry label","default":"Try again"},
-    {"type":"text","id":"reload_label","label":"Reload label","default":"Reload page"}
+    {
+      "type": "header",
+      "content": "Unified catalog"
+    },
+    {
+      "type": "collection",
+      "id": "pool_collection",
+      "label": "Unified product pool",
+      "info": "Defaults to /collections/all. Verify collection rules and market visibility before use."
+    },
+    {
+      "type": "select",
+      "id": "category_param",
+      "label": "Category source",
+      "default": "filter.p.product_type",
+      "options": [
+        {
+          "value": "filter.p.product_type",
+          "label": "Product type"
+        },
+        {
+          "value": "filter.p.m.custom.catalog_categories",
+          "label": "custom.catalog_categories (list text)"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "brand_param",
+      "label": "Brand source",
+      "default": "filter.p.vendor",
+      "options": [
+        {
+          "value": "filter.p.vendor",
+          "label": "Vendor"
+        },
+        {
+          "value": "filter.p.m.custom.brand",
+          "label": "custom.brand (single line text)"
+        }
+      ],
+      "info": "If Vendor represents a supplier, use a dedicated brand field. Recheck entry mappings after changing sources."
+    },
+    {
+      "type": "text",
+      "id": "color_param",
+      "label": "Color filter parameter",
+      "default": "filter.v.option.color",
+      "info": "Use the exact native parameter for the existing color source."
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#f7f7f7"
+    },
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "label": "Products per page",
+      "min": 6,
+      "max": 48,
+      "step": 2,
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "desktop_products_per_row",
+      "label": "Desktop columns",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "mobile_products_per_row",
+      "label": "Mobile columns",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_description",
+      "label": "Show collection description",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_label_badges",
+      "label": "Show product tag badges",
+      "default": true
+    },
+    {
+      "type": "textarea",
+      "id": "best_sellers_badge_label",
+      "label": "Badge tags (one per line)",
+      "default": "Special Offer\nNew\nHOT"
+    },
+    {
+      "type": "header",
+      "content": "Promotion banner"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_promotion",
+      "label": "Show promotion",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "promotion_image",
+      "label": "Desktop image",
+      "info": "Recommended: 2464 × 486. Leave empty to use the design image."
+    },
+    {
+      "type": "image_picker",
+      "id": "promotion_image_mobile",
+      "label": "Mobile image"
+    },
+    {
+      "type": "text",
+      "id": "promotion_eyebrow",
+      "label": "Intro text",
+      "default": "Get ready for the new term"
+    },
+    {
+      "type": "text",
+      "id": "promotion_heading",
+      "label": "Heading",
+      "default": "Up to 30% off"
+    },
+    {
+      "type": "text",
+      "id": "promotion_button",
+      "label": "Button label",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "promotion_link",
+      "label": "Button link",
+      "info": "Defaults to this collection's product list."
+    },
+    {
+      "type": "header",
+      "content": "Filters and sorting"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_filtering",
+      "label": "Enable Shopify filters",
+      "default": true,
+      "info": "Configure filter types and values in Shopify Search & Discovery."
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sorting",
+      "label": "Enable sorting",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "expand_filters",
+      "label": "Expand filter groups by default",
+      "default": true
+    },
+    {
+      "type": "link_list",
+      "id": "category_menu",
+      "label": "Collection navigation menu",
+      "info": "Legacy collection links on unmapped landing pages. Product Categories uses the native Search & Discovery source; this menu is not duplicated as filter options."
+    },
+    {
+      "type": "text",
+      "id": "category_heading",
+      "label": "Category heading",
+      "default": "Product Categories"
+    },
+    {
+      "type": "link_list",
+      "id": "brand_menu",
+      "label": "Brands collection menu",
+      "info": "Complete menu directory shown on every catalog page. Entry mapping blocks connect menu collections to exact native filter values; unmapped items stay visible but disabled."
+    },
+    {
+      "type": "text",
+      "id": "brand_unavailable_label",
+      "label": "Brand filter unavailable message",
+      "default": "Brand filtering is currently unavailable."
+    },
+    {
+      "type": "text",
+      "id": "brand_heading",
+      "label": "Brands heading",
+      "default": "Brands"
+    },
+    {
+      "type": "text",
+      "id": "price_from_label",
+      "label": "Price from label",
+      "default": "From"
+    },
+    {
+      "type": "text",
+      "id": "price_to_label",
+      "label": "Price to label",
+      "default": "To"
+    },
+    {
+      "type": "text",
+      "id": "remove_filter_label",
+      "label": "Remove filter label",
+      "default": "Remove filter"
+    },
+    {
+      "type": "text",
+      "id": "filters_heading",
+      "label": "Filters heading",
+      "default": "Filters"
+    },
+    {
+      "type": "text",
+      "id": "apply_label",
+      "label": "Apply button",
+      "default": "Apply filters"
+    },
+    {
+      "type": "text",
+      "id": "results_label",
+      "label": "Mobile results button",
+      "default": "Show results"
+    },
+    {
+      "type": "header",
+      "content": "Interaction"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_motion",
+      "label": "Enable transitions",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "motion_duration",
+      "label": "Transition duration",
+      "min": 100,
+      "max": 500,
+      "step": 20,
+      "unit": "ms",
+      "default": 260
+    },
+    {
+      "type": "range",
+      "id": "motion_delay",
+      "label": "Transition delay",
+      "min": 0,
+      "max": 200,
+      "step": 20,
+      "unit": "ms",
+      "default": 0
+    },
+    {
+      "type": "text",
+      "id": "error_label",
+      "label": "Loading error",
+      "default": "We couldn't update the products. Please try again."
+    },
+    {
+      "type": "text",
+      "id": "retry_label",
+      "label": "Retry label",
+      "default": "Try again"
+    },
+    {
+      "type": "text",
+      "id": "reload_label",
+      "label": "Reload label",
+      "default": "Reload page"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "entry",
+      "name": "Entry mapping",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "source_collection",
+          "label": "Original landing collection"
+        },
+        {
+          "type": "select",
+          "id": "dimension",
+          "label": "Dimension",
+          "options": [
+            {
+              "value": "category",
+              "label": "Category"
+            },
+            {
+              "value": "brand",
+              "label": "Brand / Vendor"
+            }
+          ],
+          "default": "category"
+        },
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Exact native filter value",
+          "info": "Copy the Product type / category metafield value or Vendor exactly. Never infer from a collection title."
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Display label"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_pool_transition",
+          "label": "Enable landing page transition",
+          "default": false,
+          "info": "Enable only after verifying that the collection membership equals this filter in the same market."
+        }
+      ]
+    }
   ]
 }
 {% endschema %}

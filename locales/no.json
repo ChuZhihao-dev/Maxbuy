@@ -8,6 +8,7 @@
  * ------------------------------------------------------------
  */
 {
+  "maxbuy_catalog": {"price_error": "Angi gyldige priser. Minimum kan ikke overstige maksimum."},
   "general": {
     "continue_shopping": "Fortsett å handle",
     "pagination": {

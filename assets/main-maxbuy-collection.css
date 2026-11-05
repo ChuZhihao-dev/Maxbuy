@@ -150,3 +150,11 @@ maxbuy-collection:defined .maxbuy-collection__apply { display: none; }
 
 .maxbuy-collection__categories ul { list-style: none; padding: 0 0 0 16px; margin: 0; }
 .maxbuy-collection__category-group { display: block; padding: 10px 0 4px; font-size: 14px; font-weight: 600; }
+
+.maxbuy-collection__fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+.maxbuy-collection [data-filter-reset] { margin-top: 12px; text-decoration: underline; text-underline-offset: 3px; font-size: 13px; }
+.maxbuy-collection__cancel { display: block; margin: 12px auto 0; padding: 10px 20px; text-decoration: underline; }
+@media (min-width: 768px) { .maxbuy-collection__cancel { display: none; } }
+.maxbuy-collection [data-filter-reset], .maxbuy-collection__cancel { display: none; }
+maxbuy-collection:defined [data-filter-reset] { display: inline-block; }
+@media (max-width: 767px) { maxbuy-collection:defined .maxbuy-collection__cancel { display: block; } }

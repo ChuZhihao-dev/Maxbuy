@@ -8,6 +8,7 @@
  * ------------------------------------------------------------
  */
 {
+  "maxbuy_catalog": {"price_error": "Zadejte platné ceny. Minimum nesmí být vyšší než maximum."},
   "general": {
     "continue_shopping": "Pokračovat v nákupu",
     "pagination": {

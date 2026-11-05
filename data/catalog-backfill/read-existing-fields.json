@@ -1,0 +1,22 @@
+{
+  "query": "query ReadExistingCatalogData($ids: [ID!]!) { nodes(ids: $ids) { ... on Product { id title handle vendor productType category { id fullName } brand: metafield(namespace: \"custom\", key: \"brand\") { id type value compareDigest } catalogCategories: metafield(namespace: \"custom\", key: \"catalog_categories\") { id type value compareDigest } collections(first: 50) { nodes { id handle title } } } } }",
+  "variables": {
+    "ids": [
+      "gid://shopify/Product/10278009045095",
+      "gid://shopify/Product/10278007308391",
+      "gid://shopify/Product/10272211468391",
+      "gid://shopify/Product/10266632355943",
+      "gid://shopify/Product/10266632061031",
+      "gid://shopify/Product/10266631274599",
+      "gid://shopify/Product/10266629374055",
+      "gid://shopify/Product/10266584055911",
+      "gid://shopify/Product/10266583367783",
+      "gid://shopify/Product/10266582745191",
+      "gid://shopify/Product/10266582024295",
+      "gid://shopify/Product/10266581008487",
+      "gid://shopify/Product/10266580418663",
+      "gid://shopify/Product/10266579566695",
+      "gid://shopify/Product/10266335838311"
+    ]
+  }
+}

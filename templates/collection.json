@@ -428,6 +428,54 @@
     },
     "maxbuy_collection": {
       "type": "main-maxbuy-collection",
+        "blocks": {
+          "entry_tecno": {
+            "type": "entry",
+            "settings": {
+              "source_collection": "tecno",
+              "dimension": "brand",
+              "value": "TECNO",
+              "label": "TECNO",
+              "enable_pool_transition": true
+            }
+          },
+          "entry_apple": {
+            "type": "entry",
+            "settings": {
+              "source_collection": "apple",
+              "dimension": "brand",
+              "value": "Apple",
+              "label": "Apple",
+              "enable_pool_transition": true
+            }
+          },
+          "entry_lg": {
+            "type": "entry",
+            "settings": {
+              "source_collection": "lg",
+              "dimension": "brand",
+              "value": "LG",
+              "label": "LG",
+              "enable_pool_transition": true
+            }
+          },
+          "entry_samsung": {
+            "type": "entry",
+            "settings": {
+              "source_collection": "samsung",
+              "dimension": "brand",
+              "value": "Samsung",
+              "label": "Samsung",
+              "enable_pool_transition": true
+            }
+          }
+        },
+        "block_order": [
+          "entry_tecno",
+          "entry_apple",
+          "entry_lg",
+          "entry_samsung"
+        ],
       "settings": {
         "products_per_page": 16,
         "desktop_products_per_row": 4,

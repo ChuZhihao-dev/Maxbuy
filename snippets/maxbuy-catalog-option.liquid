@@ -1,0 +1,4 @@
+<li><label class="maxbuy-collection__value{% if disabled %} is-disabled{% endif %}" for="{{ id }}">
+  <input id="{{ id }}" type="checkbox" name="{{ param_name | escape }}" value="{{ value | escape }}" {% if selected %}checked{% endif %} {% if disabled %}disabled{% endif %}>
+  <span class="maxbuy-collection__value-label">{{ label | escape }}{% if show_count and native_value != nil %} <span class="maxbuy-collection__value-count">({{ native_value.count }})</span>{% endif %}</span>
+</label></li>

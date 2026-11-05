@@ -8,6 +8,7 @@
  * ------------------------------------------------------------
  */
 {
+  "maxbuy_catalog": {"price_error": "Adjon meg érvényes árakat. A minimum nem lehet nagyobb a maximumnál."},
   "general": {
     "continue_shopping": "Folytatás a vásárláshoz",
     "pagination": {

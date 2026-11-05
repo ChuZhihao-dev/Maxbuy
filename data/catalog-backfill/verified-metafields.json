@@ -1,0 +1,87 @@
+{
+  "query": "mutation SetVerifiedCatalogFields($metafields: [MetafieldsSetInput!]!) { metafieldsSet(metafields: $metafields) { metafields { id namespace key type value compareDigest } userErrors { field message code } } }",
+  "variables": {
+    "metafields": [
+      {
+        "ownerId": "gid://shopify/Product/10278009045095",
+        "namespace": "custom",
+        "key": "catalog_categories",
+        "type": "list.single_line_text_field",
+        "value": "[\"Accessories\"]",
+        "compareDigest": null
+      },
+      {
+        "ownerId": "gid://shopify/Product/10278007308391",
+        "namespace": "custom",
+        "key": "catalog_categories",
+        "type": "list.single_line_text_field",
+        "value": "[\"Accessories\"]",
+        "compareDigest": null
+      },
+      {
+        "ownerId": "gid://shopify/Product/10272211468391",
+        "namespace": "custom",
+        "key": "brand",
+        "type": "single_line_text_field",
+        "value": "TECNO",
+        "compareDigest": null
+      },
+      {
+        "ownerId": "gid://shopify/Product/10266632355943",
+        "namespace": "custom",
+        "key": "brand",
+        "type": "single_line_text_field",
+        "value": "Apple",
+        "compareDigest": null
+      },
+      {
+        "ownerId": "gid://shopify/Product/10266632061031",
+        "namespace": "custom",
+        "key": "catalog_categories",
+        "type": "list.single_line_text_field",
+        "value": "[\"TVs\"]",
+        "compareDigest": null
+      },
+      {
+        "ownerId": "gid://shopify/Product/10266631274599",
+        "namespace": "custom",
+        "key": "brand",
+        "type": "single_line_text_field",
+        "value": "LG",
+        "compareDigest": null
+      },
+      {
+        "ownerId": "gid://shopify/Product/10266631274599",
+        "namespace": "custom",
+        "key": "catalog_categories",
+        "type": "list.single_line_text_field",
+        "value": "[\"Fridges\"]",
+        "compareDigest": null
+      },
+      {
+        "ownerId": "gid://shopify/Product/10266582745191",
+        "namespace": "custom",
+        "key": "brand",
+        "type": "single_line_text_field",
+        "value": "TECNO",
+        "compareDigest": null
+      },
+      {
+        "ownerId": "gid://shopify/Product/10266581008487",
+        "namespace": "custom",
+        "key": "brand",
+        "type": "single_line_text_field",
+        "value": "Samsung",
+        "compareDigest": null
+      },
+      {
+        "ownerId": "gid://shopify/Product/10266335838311",
+        "namespace": "custom",
+        "key": "catalog_categories",
+        "type": "list.single_line_text_field",
+        "value": "[\"Smart Phones\"]",
+        "compareDigest": null
+      }
+    ]
+  }
+}

@@ -8,6 +8,8 @@
  * ------------------------------------------------------------
  */
 {
+  "maxbuy_catalog": {"price_error": "请输入有效价格，最低价不能高于最高价。"},
+
   "general": {
     "continue_shopping": "繼續購物",
     "pagination": {

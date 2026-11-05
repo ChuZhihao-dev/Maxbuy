@@ -1,0 +1,472 @@
+{
+  "created_local_date": "2026-11-04",
+  "environment": "http://127.0.0.1:9292 default visible market",
+  "policy": "Read-only proposal; no live writes. Only existing collection memberships establish assignments. Product titles are displayed solely for reviewer identification, never interpreted. Existing Vendor and Product type unchanged. Null means do not write or clear existing metafield.",
+  "definitions": [
+    {
+      "namespace": "custom",
+      "key": "catalog_categories",
+      "type": "list.single_line_text_field",
+      "filter_param": "filter.p.m.custom.catalog_categories"
+    },
+    {
+      "namespace": "custom",
+      "key": "brand",
+      "type": "single_line_text_field",
+      "filter_param": "filter.p.m.custom.brand"
+    }
+  ],
+  "collections": [
+    {
+      "handle": "tecno",
+      "title": "Tecno",
+      "dimension": "brand",
+      "count": 2,
+      "product_ids": [
+        10266582745191,
+        10272211468391
+      ]
+    },
+    {
+      "handle": "haier",
+      "title": "Haier",
+      "dimension": "brand",
+      "count": 0,
+      "product_ids": []
+    },
+    {
+      "handle": "samsung",
+      "title": "Samsung",
+      "dimension": "brand",
+      "count": 1,
+      "product_ids": [
+        10266581008487
+      ]
+    },
+    {
+      "handle": "infinix",
+      "title": "Infinix",
+      "dimension": "brand",
+      "count": 0,
+      "product_ids": []
+    },
+    {
+      "handle": "lg",
+      "title": "LG",
+      "dimension": "brand",
+      "count": 1,
+      "product_ids": [
+        10266631274599
+      ]
+    },
+    {
+      "handle": "apple",
+      "title": "Apple",
+      "dimension": "brand",
+      "count": 1,
+      "product_ids": [
+        10266632355943
+      ]
+    },
+    {
+      "handle": "itel",
+      "title": "itel",
+      "dimension": "brand",
+      "count": 0,
+      "product_ids": []
+    },
+    {
+      "handle": "syinix",
+      "title": "Syinix",
+      "dimension": "brand",
+      "count": 0,
+      "product_ids": []
+    },
+    {
+      "handle": "binatone",
+      "title": "Binatone",
+      "dimension": "brand",
+      "count": 0,
+      "product_ids": []
+    },
+    {
+      "handle": "oraimo",
+      "title": "Oraimo",
+      "dimension": "brand",
+      "count": 0,
+      "product_ids": []
+    },
+    {
+      "handle": "philips",
+      "title": "Philips",
+      "dimension": "brand",
+      "count": 0,
+      "product_ids": []
+    },
+    {
+      "handle": "tcl",
+      "title": "TCL",
+      "dimension": "brand",
+      "count": 0,
+      "product_ids": []
+    },
+    {
+      "handle": "chigo",
+      "title": "Chigo",
+      "dimension": "brand",
+      "count": 0,
+      "product_ids": []
+    },
+    {
+      "handle": "asano",
+      "title": "Asano",
+      "dimension": "brand",
+      "count": 0,
+      "product_ids": []
+    },
+    {
+      "handle": "midea",
+      "title": "Midea",
+      "dimension": "brand",
+      "count": 0,
+      "product_ids": []
+    },
+    {
+      "handle": "smart-phones",
+      "title": "Smart Phones",
+      "dimension": "category",
+      "count": 1,
+      "product_ids": [
+        10266335838311
+      ]
+    },
+    {
+      "handle": "televisions",
+      "title": "Televisions",
+      "dimension": "category",
+      "count": 0,
+      "product_ids": []
+    },
+    {
+      "handle": "tvs",
+      "title": "TVs",
+      "dimension": "category",
+      "count": 1,
+      "product_ids": [
+        10266632061031
+      ]
+    },
+    {
+      "handle": "fridges",
+      "title": "Fridges",
+      "dimension": "category",
+      "count": 1,
+      "product_ids": [
+        10266631274599
+      ]
+    },
+    {
+      "handle": "home-appliances",
+      "title": "Home Appliances",
+      "dimension": "category",
+      "count": 0,
+      "product_ids": []
+    },
+    {
+      "handle": "kitchen-appliances",
+      "title": "Kitchen Appliances",
+      "dimension": "category",
+      "count": 0,
+      "product_ids": []
+    },
+    {
+      "handle": "fans",
+      "title": "Fans",
+      "dimension": "category",
+      "count": 0,
+      "product_ids": []
+    },
+    {
+      "handle": "accessories",
+      "title": "Accessories",
+      "dimension": "category",
+      "count": 2,
+      "product_ids": [
+        10278007308391,
+        10278009045095
+      ]
+    }
+  ],
+  "products": [
+    {
+      "product_id": 10278009045095,
+      "product_gid": "gid://shopify/Product/10278009045095",
+      "handle": "10000mah-45w-fast-charging-portable-charger",
+      "title_for_review_only": "10000mAh 45W Fast Charging Portable Charger",
+      "existing_vendor": "Maxbuy Ghana Ltd",
+      "existing_product_type": "",
+      "source_brand_collection_handles": [],
+      "source_category_collection_handles": [
+        "accessories"
+      ],
+      "proposed_custom_brand": null,
+      "proposed_custom_catalog_categories": [
+        "Accessories"
+      ],
+      "brand_status": "unassigned_no_membership",
+      "category_status": "verified_collection_membership"
+    },
+    {
+      "product_id": 10278007308391,
+      "product_gid": "gid://shopify/Product/10278007308391",
+      "handle": "sandisk-extreme-pro-sd-uhs-ii-v90-card",
+      "title_for_review_only": "SANDISK Extreme PRO SD UHS-II V90 Card",
+      "existing_vendor": "Maxbuy Ghana Ltd",
+      "existing_product_type": "",
+      "source_brand_collection_handles": [],
+      "source_category_collection_handles": [
+        "accessories"
+      ],
+      "proposed_custom_brand": null,
+      "proposed_custom_catalog_categories": [
+        "Accessories"
+      ],
+      "brand_status": "unassigned_no_membership",
+      "category_status": "verified_collection_membership"
+    },
+    {
+      "product_id": 10272211468391,
+      "product_gid": "gid://shopify/Product/10272211468391",
+      "handle": "tecno-camon-50-ultra-5g-8gb-256gb-black-dual-sim-unlocked-android-cell-phone",
+      "title_for_review_only": "TECNO Camon 50 Ultra 5G 8GB+256GB",
+      "existing_vendor": "TECNO",
+      "existing_product_type": "",
+      "source_brand_collection_handles": [
+        "tecno"
+      ],
+      "source_category_collection_handles": [],
+      "proposed_custom_brand": "TECNO",
+      "proposed_custom_catalog_categories": null,
+      "brand_status": "verified_collection_membership",
+      "category_status": "unassigned_no_membership"
+    },
+    {
+      "product_id": 10266632355943,
+      "product_gid": "gid://shopify/Product/10266632355943",
+      "handle": "apple-iphone-17-pro-max-2tb-cosmic-orange",
+      "title_for_review_only": "Apple iPhone 17 Pro Max 2TB Cosmic Orange",
+      "existing_vendor": "Apple",
+      "existing_product_type": "",
+      "source_brand_collection_handles": [
+        "apple"
+      ],
+      "source_category_collection_handles": [],
+      "proposed_custom_brand": "Apple",
+      "proposed_custom_catalog_categories": null,
+      "brand_status": "verified_collection_membership",
+      "category_status": "unassigned_no_membership"
+    },
+    {
+      "product_id": 10266632061031,
+      "product_gid": "gid://shopify/Product/10266632061031",
+      "handle": "syinix-50-4k-smart-tv",
+      "title_for_review_only": "Syinix 50″ 4K Smart TV",
+      "existing_vendor": "Maxbuy Ghana Ltd",
+      "existing_product_type": "",
+      "source_brand_collection_handles": [],
+      "source_category_collection_handles": [
+        "tvs"
+      ],
+      "proposed_custom_brand": null,
+      "proposed_custom_catalog_categories": [
+        "TVs"
+      ],
+      "brand_status": "unassigned_no_membership",
+      "category_status": "verified_collection_membership"
+    },
+    {
+      "product_id": 10266631274599,
+      "product_gid": "gid://shopify/Product/10266631274599",
+      "handle": "lg-674l-side-by-side-refrigerator",
+      "title_for_review_only": "LG 674L Side-by-Side Refrigerator",
+      "existing_vendor": "LG",
+      "existing_product_type": "",
+      "source_brand_collection_handles": [
+        "lg"
+      ],
+      "source_category_collection_handles": [
+        "fridges"
+      ],
+      "proposed_custom_brand": "LG",
+      "proposed_custom_catalog_categories": [
+        "Fridges"
+      ],
+      "brand_status": "verified_collection_membership",
+      "category_status": "verified_collection_membership"
+    },
+    {
+      "product_id": 10266629374055,
+      "product_gid": "gid://shopify/Product/10266629374055",
+      "handle": "binatone-kettle-cej-1799dw",
+      "title_for_review_only": "Binatone Kettle CEJ-1799DW",
+      "existing_vendor": "Maxbuy Ghana Ltd",
+      "existing_product_type": "",
+      "source_brand_collection_handles": [],
+      "source_category_collection_handles": [],
+      "proposed_custom_brand": null,
+      "proposed_custom_catalog_categories": null,
+      "brand_status": "unassigned_no_membership",
+      "category_status": "unassigned_no_membership"
+    },
+    {
+      "product_id": 10266584055911,
+      "product_gid": "gid://shopify/Product/10266584055911",
+      "handle": "samsung-galaxy-a06-6-128gb-6",
+      "title_for_review_only": "Samsung Galaxy A06 – 6+128GB",
+      "existing_vendor": "Maxbuy Ghana Ltd",
+      "existing_product_type": "",
+      "source_brand_collection_handles": [],
+      "source_category_collection_handles": [],
+      "proposed_custom_brand": null,
+      "proposed_custom_catalog_categories": null,
+      "brand_status": "unassigned_no_membership",
+      "category_status": "unassigned_no_membership"
+    },
+    {
+      "product_id": 10266583367783,
+      "product_gid": "gid://shopify/Product/10266583367783",
+      "handle": "samsung-galaxy-a06-6-128gb-5",
+      "title_for_review_only": "Binatone Microwave Solo 20L",
+      "existing_vendor": "Maxbuy Ghana Ltd",
+      "existing_product_type": "",
+      "source_brand_collection_handles": [],
+      "source_category_collection_handles": [],
+      "proposed_custom_brand": null,
+      "proposed_custom_catalog_categories": null,
+      "brand_status": "unassigned_no_membership",
+      "category_status": "unassigned_no_membership"
+    },
+    {
+      "product_id": 10266582745191,
+      "product_gid": "gid://shopify/Product/10266582745191",
+      "handle": "samsung-galaxy-a06-6-128gb-4",
+      "title_for_review_only": "Tecno Spark 50",
+      "existing_vendor": "TECNO",
+      "existing_product_type": "",
+      "source_brand_collection_handles": [
+        "tecno"
+      ],
+      "source_category_collection_handles": [],
+      "proposed_custom_brand": "TECNO",
+      "proposed_custom_catalog_categories": null,
+      "brand_status": "verified_collection_membership",
+      "category_status": "unassigned_no_membership"
+    },
+    {
+      "product_id": 10266582024295,
+      "product_gid": "gid://shopify/Product/10266582024295",
+      "handle": "oraimo-kettle-1-7l",
+      "title_for_review_only": "Oraimo Kettle 1.7L",
+      "existing_vendor": "Maxbuy Ghana Ltd",
+      "existing_product_type": "",
+      "source_brand_collection_handles": [],
+      "source_category_collection_handles": [],
+      "proposed_custom_brand": null,
+      "proposed_custom_catalog_categories": null,
+      "brand_status": "unassigned_no_membership",
+      "category_status": "unassigned_no_membership"
+    },
+    {
+      "product_id": 10266581008487,
+      "product_gid": "gid://shopify/Product/10266581008487",
+      "handle": "samsung-galaxy-a06-6-128gb-3",
+      "title_for_review_only": "Samsung Galaxy A06 – 6+128GB",
+      "existing_vendor": "Samsung",
+      "existing_product_type": "",
+      "source_brand_collection_handles": [
+        "samsung"
+      ],
+      "source_category_collection_handles": [],
+      "proposed_custom_brand": "Samsung",
+      "proposed_custom_catalog_categories": null,
+      "brand_status": "verified_collection_membership",
+      "category_status": "unassigned_no_membership"
+    },
+    {
+      "product_id": 10266580418663,
+      "product_gid": "gid://shopify/Product/10266580418663",
+      "handle": "samsung-galaxy-a06-6-128gb-2",
+      "title_for_review_only": "Samsung Galaxy A06 – 6+128GB",
+      "existing_vendor": "Maxbuy Ghana Ltd",
+      "existing_product_type": "",
+      "source_brand_collection_handles": [],
+      "source_category_collection_handles": [],
+      "proposed_custom_brand": null,
+      "proposed_custom_catalog_categories": null,
+      "brand_status": "unassigned_no_membership",
+      "category_status": "unassigned_no_membership"
+    },
+    {
+      "product_id": 10266579566695,
+      "product_gid": "gid://shopify/Product/10266579566695",
+      "handle": "samsung-galaxy-a06-6-128gb-1",
+      "title_for_review_only": "Samsung Galaxy A06 – 6+128GB",
+      "existing_vendor": "Maxbuy Ghana Ltd",
+      "existing_product_type": "",
+      "source_brand_collection_handles": [],
+      "source_category_collection_handles": [],
+      "proposed_custom_brand": null,
+      "proposed_custom_catalog_categories": null,
+      "brand_status": "unassigned_no_membership",
+      "category_status": "unassigned_no_membership"
+    },
+    {
+      "product_id": 10266335838311,
+      "product_gid": "gid://shopify/Product/10266335838311",
+      "handle": "samsung-galaxy-a06-6-128gb",
+      "title_for_review_only": "Samsung Galaxy A06 – 6+128GB",
+      "existing_vendor": "Maxbuy Ghana Ltd",
+      "existing_product_type": "",
+      "source_brand_collection_handles": [],
+      "source_category_collection_handles": [
+        "smart-phones"
+      ],
+      "proposed_custom_brand": null,
+      "proposed_custom_catalog_categories": [
+        "Smart Phones"
+      ],
+      "brand_status": "unassigned_no_membership",
+      "category_status": "verified_collection_membership"
+    }
+  ],
+  "summary": {
+    "products": 15,
+    "verified_brand_assignments": 5,
+    "verified_category_assignments": 5,
+    "brand_conflicts": 0,
+    "unassigned_brand_ids": [
+      10278009045095,
+      10278007308391,
+      10266632061031,
+      10266629374055,
+      10266584055911,
+      10266583367783,
+      10266582024295,
+      10266580418663,
+      10266579566695,
+      10266335838311
+    ],
+    "unassigned_category_ids": [
+      10272211468391,
+      10266632355943,
+      10266629374055,
+      10266584055911,
+      10266583367783,
+      10266582745191,
+      10266582024295,
+      10266581008487,
+      10266580418663,
+      10266579566695
+    ]
+  }
+}

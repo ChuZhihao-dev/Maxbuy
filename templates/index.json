@@ -16,7 +16,7 @@
           "type": "category",
           "settings": {
             "collection": "smart-phones",
-            "title": "",
+            "title": "Phones & Tablets",
             "mobile_title": "",
             "image": "shopify://shop_images/Group_2090050802.webp"
           }
@@ -25,7 +25,7 @@
           "type": "category",
           "settings": {
             "collection": "televisions",
-            "title": "",
+            "title": "Sound System",
             "mobile_title": "",
             "image": "shopify://shop_images/Frame_2090050801.webp"
           }
@@ -55,6 +55,15 @@
             "title": "",
             "mobile_title": "",
             "image": "shopify://shop_images/Frame_2090050801_2.webp"
+          }
+        },
+        "category_gmJdRp": {
+          "type": "category",
+          "settings": {
+            "collection": "kitchen-appliances",
+            "title": "",
+            "mobile_title": "",
+            "image": "shopify://shop_images/Group_2090050802_1.webp"
           }
         },
         "hero_banner_1": {
@@ -124,6 +133,7 @@
         "hero_category_3",
         "hero_category_4",
         "hero_category_5",
+        "category_gmJdRp",
         "hero_banner_1",
         "banner_pGkrMN",
         "banner_8yqyWY",
@@ -145,37 +155,19 @@
         "logo_NDJmY3": {
           "type": "brand",
           "settings": {
-            "name": "Haier",
-            "image": "shopify://shop_images/Group_2090050803_1.png",
+            "name": "TECNO",
+            "image": "shopify://shop_images/tecno_jpg.jpg",
             "svg_url": "",
-            "link": ""
+            "link": "shopify://collections/tecno"
           }
         },
         "logo_4PyeKN": {
           "type": "brand",
           "settings": {
-            "name": "TECNO",
-            "image": "shopify://shop_images/Group_2090050803_2.png",
+            "name": "Haier",
+            "image": "shopify://shop_images/haier_jpg.jpg",
             "svg_url": "",
-            "link": ""
-          }
-        },
-        "logo_GKnJ8R": {
-          "type": "brand",
-          "settings": {
-            "name": "LG",
-            "image": "shopify://shop_images/Group_2090050803_3.png",
-            "svg_url": "",
-            "link": ""
-          }
-        },
-        "logo_F9RWMP": {
-          "type": "brand",
-          "settings": {
-            "name": "Binatone",
-            "image": "shopify://shop_images/Group_2090050803_4.png",
-            "svg_url": "",
-            "link": ""
+            "link": "shopify://collections/haier"
           }
         },
         "logo_VYzRjE": {
@@ -184,7 +176,25 @@
             "name": "Samsung",
             "image": "shopify://shop_images/Group_2090050803_1.svg",
             "svg_url": "",
-            "link": ""
+            "link": "shopify://collections/samsung"
+          }
+        },
+        "logo_GKnJ8R": {
+          "type": "brand",
+          "settings": {
+            "name": "Infinix",
+            "image": "shopify://shop_images/infinix_jpg.jpg",
+            "svg_url": "",
+            "link": "shopify://collections/infinix"
+          }
+        },
+        "logo_F9RWMP": {
+          "type": "brand",
+          "settings": {
+            "name": "LG",
+            "image": "shopify://shop_images/lg_jpg.jpg",
+            "svg_url": "",
+            "link": "shopify://collections/lg"
           }
         },
         "logo_P37fmY": {
@@ -193,27 +203,107 @@
             "name": "Apple",
             "image": "shopify://shop_images/Group_2090050803_2.svg",
             "svg_url": "",
-            "link": ""
+            "link": "shopify://collections/apple"
           }
         },
-        "brand_yYGrYL": {
+        "brand_MDXKhX": {
           "type": "brand",
           "settings": {
-            "name": "Apple",
-            "image": "shopify://shop_images/Group_2090050803_2.svg",
+            "name": "Itel",
+            "image": "shopify://shop_images/itel_jpg.jpg",
             "svg_url": "",
-            "link": ""
+            "link": "shopify://collections/itel"
+          }
+        },
+        "brand_BAzPyt": {
+          "type": "brand",
+          "settings": {
+            "name": "Syinix",
+            "image": "shopify://shop_images/syinix_jpg.jpg",
+            "svg_url": "",
+            "link": "shopify://collections/syinix"
+          }
+        },
+        "brand_bgLG6D": {
+          "type": "brand",
+          "settings": {
+            "name": "Binatone",
+            "image": "shopify://shop_images/binatone_jpg.jpg",
+            "svg_url": "",
+            "link": "shopify://collections/binatone"
+          }
+        },
+        "brand_mHgnMg": {
+          "type": "brand",
+          "settings": {
+            "name": "Oraimo",
+            "image": "shopify://shop_images/ORAIMO_jpg.jpg",
+            "svg_url": "",
+            "link": "shopify://collections/oraimo"
+          }
+        },
+        "brand_eNEyPK": {
+          "type": "brand",
+          "settings": {
+            "name": "Philips",
+            "image": "shopify://shop_images/philips_jpg.jpg",
+            "svg_url": "",
+            "link": "shopify://collections/philips"
+          }
+        },
+        "brand_RdpDzR": {
+          "type": "brand",
+          "settings": {
+            "name": "TCL",
+            "image": "shopify://shop_images/tcl_jpg.jpg",
+            "svg_url": "",
+            "link": "shopify://collections/tcl"
+          }
+        },
+        "brand_89XJmX": {
+          "type": "brand",
+          "settings": {
+            "name": "Chigo",
+            "image": "shopify://shop_images/chigo_jpg.jpg",
+            "svg_url": "",
+            "link": "shopify://collections/chigo"
+          }
+        },
+        "brand_U8jUTE": {
+          "type": "brand",
+          "settings": {
+            "name": "Asano",
+            "image": "shopify://shop_images/asano_jpg.jpg",
+            "svg_url": "",
+            "link": "shopify://collections/asano"
+          }
+        },
+        "brand_kAhLcq": {
+          "type": "brand",
+          "settings": {
+            "name": "Midea",
+            "image": "shopify://shop_images/midea_jpg.jpg",
+            "svg_url": "",
+            "link": "shopify://collections/midea"
           }
         }
       },
       "block_order": [
         "logo_NDJmY3",
         "logo_4PyeKN",
+        "logo_VYzRjE",
         "logo_GKnJ8R",
         "logo_F9RWMP",
-        "logo_VYzRjE",
         "logo_P37fmY",
-        "brand_yYGrYL"
+        "brand_MDXKhX",
+        "brand_BAzPyt",
+        "brand_bgLG6D",
+        "brand_mHgnMg",
+        "brand_eNEyPK",
+        "brand_RdpDzR",
+        "brand_89XJmX",
+        "brand_U8jUTE",
+        "brand_kAhLcq"
       ],
       "name": "Shop by Brand",
       "settings": {
@@ -868,47 +958,529 @@
         "banner_text_font": "montserrat_n4"
       }
     },
-    "store_locator_maxbuy": {
+    "store_locator_showcase_7rabz6": {
       "type": "store-locator-showcase",
       "blocks": {
-        "store_location_RNBcrU": {
+        "store_location_T8iNj9": {
           "type": "store_location",
           "settings": {
-            "title": "Store branch",
-            "location_address": "75 9th Ave, New York, NY 10011-7006",
-            "phone": "",
-            "opening_hours": "",
-            "search_keywords": "",
-            "text": "<p>(+84) 123 456 789<br/><br/>Store hours<br/>Mon - Fri, 8:30am - 10:30pm,<br/>Saturday, 8:30am - 10:30pm,<br/>Sunday, Closed</p>"
+            "title": "MAXBUY ACHIMOTA MALL STORE",
+            "location_address": "JQQ5+2H Achimota Mall, Accra, Ghana",
+            "latitude": "",
+            "longitude": "",
+            "phone": "+233 0544019552 , +233 0594091122",
+            "opening_hours": "Mon-Sun  9:30AM-9:00PM",
+            "search_keywords": "Accra",
+            "text": "<p>Achimota mall oppsite to Hisense</p>"
           }
         },
-        "store_location_qtCaQB": {
+        "store_location_Cmfg8w": {
           "type": "store_location",
           "settings": {
-            "title": "Store branch",
-            "location_address": "1842 Maple Avenue, Apt 305, Los Angeles, CA 90017, United States",
-            "phone": "",
-            "opening_hours": "",
-            "search_keywords": "",
-            "text": "<p>(+84) 123 456 789<br/><br/>Store hours<br/>Mon - Fri, 8:30am - 10:30pm,<br/>Saturday, 8:30am - 10:30pm,<br/>Sunday, Closed</p>"
+            "title": "MAXBUY WESTHILLS STORE",
+            "location_address": "GMV4+QC, Mile 11, Ghana",
+            "latitude": "",
+            "longitude": "",
+            "phone": "+233 0544019552 , +233 0594091122",
+            "opening_hours": "Mon-Sun  9:30AM-9:00PM",
+            "search_keywords": "Accra",
+            "text": "<p>West Hills Mall</p>"
           }
         },
-        "store_location_pdnLT4": {
+        "store_location_C66nF6": {
           "type": "store_location",
           "settings": {
-            "title": "Store branch",
-            "location_address": "2756 Oak Street, Apt 402, San Francisco, CA 94103, United States",
-            "phone": "",
-            "opening_hours": "",
-            "search_keywords": "",
-            "text": "<p>(+84) 123 456 789<br/><br/>Store hours<br/>Mon - Fri, 8:30am - 10:30pm,<br/>Saturday, 8:30am - 10:30pm,<br/>Sunday, Closed</p>"
+            "title": "MAXBUY JUNCTION MALL STORE",
+            "location_address": "JW7H+88M, Accra, Ghana",
+            "latitude": "",
+            "longitude": "",
+            "phone": "+233 0544019552 , +233 0594091122",
+            "opening_hours": "Mon-Sun  9:30AM-9:00PM",
+            "search_keywords": "Accra",
+            "text": "<p>Junction Mall</p>"
+          }
+        },
+        "store_location_ycj6Nt": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY EAST LEGON STORE",
+            "location_address": "JRRP+VV9 Accra, Ghana",
+            "latitude": "",
+            "longitude": "",
+            "phone": "+233 0544019552 , +233 0594091122",
+            "opening_hours": "Mon-Sat 8:00AM-6:00PM",
+            "search_keywords": "Accra",
+            "text": "<p>La-Bawaleshi Rd, opposite Allied Oil Fuel Station</p>"
+          }
+        },
+        "store_location_Y9mhJM": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY CIRCLE ELECTRONIC STORE",
+            "location_address": "HQFM+4H4, Accra, Ghana",
+            "latitude": "",
+            "longitude": "",
+            "phone": "+233 0544019552 , +233 0594091122",
+            "opening_hours": "Mon-Sat 8:00AM-6:00PM",
+            "search_keywords": "Accra",
+            "text": "<p>Accra, Circle Opposite Vodafone</p>"
+          }
+        },
+        "store_location_9wNeNX": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY MADINA STORE",
+            "location_address": "MRGG+9MJ Madina, Ghana",
+            "latitude": "",
+            "longitude": "",
+            "phone": "+233 0544019552 , +233 0594091122",
+            "opening_hours": "Mon-Sat 8:00AM-6:00PM",
+            "search_keywords": "Accra",
+            "text": "<p>Madina, Opposite Zongo Junction, Near Goil Fuel Station</p>"
+          }
+        },
+        "store_location_46aYVy": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY KASOA STORE",
+            "location_address": "GHMC+PWF, Kasoa, Ghana",
+            "latitude": "",
+            "longitude": "",
+            "phone": "+233 0544019552 , +233 0594091122",
+            "opening_hours": "Mon-Sat 8:00AM-6:00PM",
+            "search_keywords": "Accra",
+            "text": "<p>Kasoa, Takoradi Station</p>"
+          }
+        },
+        "store_location_ff49BP": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY LAPAZ STORE",
+            "location_address": "JQ53+43P, Lapaz, Ghana",
+            "latitude": "",
+            "longitude": "",
+            "phone": "+233 0544019552 , +233 0594091122",
+            "opening_hours": "Mon-Sat 8:00AM-6:00PM",
+            "search_keywords": "Accra",
+            "text": "<p>Lapaz, Opposite Tema Station&nbsp;</p>"
+          }
+        },
+        "store_location_6DjbTw": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY DARKUMAN ELCETRONIC STORE",
+            "location_address": "HPGV+MP7, Accra, Ghana",
+            "latitude": "",
+            "longitude": "",
+            "phone": "+233 0544019552 , +233 0594091122",
+            "opening_hours": "Mon-Sat 8:00AM-6:00PM",
+            "search_keywords": "Accra",
+            "text": "<p>Darkuman Junction, Adjacent Enterprise</p>"
+          }
+        },
+        "store_location_Cje7A8": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY KANESHIE STORE",
+            "location_address": "HQ79+44F, Accra, Ghana",
+            "latitude": "",
+            "longitude": "",
+            "phone": "+233 0544019552 , +233 0594091122",
+            "opening_hours": "Mon-Sat 8:00AM-6:00PM",
+            "search_keywords": "Accra",
+            "text": "<p>Kaneshie, Pamprom</p>"
+          }
+        },
+        "store_location_ex87gy": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY CIRCLE SMART STORE",
+            "location_address": "HQFM+7P8 Accra, Ghana",
+            "latitude": "5.5731667",
+            "longitude": "-0.2156667",
+            "phone": "+233 0544019552,  +233 0594091122",
+            "opening_hours": "Mon-Sat 8:00AM-6:00PM",
+            "search_keywords": "Accra",
+            "text": "<p>Circle Odo Rise Lane</p>"
+          }
+        },
+        "store_location_CfNXbi": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY VVIP BUS STATION STORE",
+            "location_address": "HQCP+33P Accra, Ghana",
+            "latitude": "",
+            "longitude": "",
+            "phone": "+233 0544019552 , +233 0594091122",
+            "opening_hours": "Mon-Sat 8:00AM-6:00PM",
+            "search_keywords": "Accra",
+            "text": "<p>Circle, VVIP Bus Station</p>"
+          }
+        },
+        "store_location_g8RzEK": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY CIRCLE EXPERIENCE STORE",
+            "location_address": "HQFM+9V4 Accra, Ghana",
+            "latitude": "",
+            "longitude": "",
+            "phone": "+233 0544019552 , +233 0594091122",
+            "opening_hours": "Mon-Sat 8:00AM-6:00PM",
+            "search_keywords": "Accra",
+            "text": "<p>Near Circle American Mall</p>"
+          }
+        },
+        "store_location_DTpHg8": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY DARKUMAN STORE",
+            "location_address": "79 Darkuman Rd, Accra, Ghana",
+            "latitude": "",
+            "longitude": "",
+            "phone": "+233 0544019552 , +233 0594091122",
+            "opening_hours": "Mon-Sat 8:00AM-6:00PM",
+            "search_keywords": "Accra",
+            "text": "<p>Darkuman, Opposite Circle Station</p>"
+          }
+        },
+        "store_location_AzyGRL": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY ONLINE STORE",
+            "location_address": "HPFX+R33, Dansoman Junction, Dr. Busia Hwy, Accra, Ghana",
+            "latitude": "",
+            "longitude": "",
+            "phone": "+233 0544019552 , +233 0594091122",
+            "opening_hours": "Mon-Sat 8:00AM-6:00PM",
+            "search_keywords": "Accra",
+            "text": "<p>Dansoman Junction, Adjacent FBN</p>"
+          }
+        },
+        "store_location_3tYyih": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY HO STORE",
+            "location_address": "JF6H+3C3, Ho, Ghana",
+            "latitude": "",
+            "longitude": "",
+            "phone": "+233 0544019552 , +233 0594091122",
+            "opening_hours": "Mon-Sat 8:00AM-6:00PM",
+            "search_keywords": "HO",
+            "text": "<p>Opposite HO main Lorry station , in gate under Soccer Bet</p>"
+          }
+        },
+        "store_location_Wcx8RF": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY SWEDRU STORE",
+            "location_address": "73 Mandela Market Rd, Agona Swedru, Ghana",
+            "latitude": "",
+            "longitude": "",
+            "phone": "+233 0544019552 , +233 0594091122",
+            "opening_hours": "Mon-Sat 8:00AM-6:00PM",
+            "search_keywords": "Swedru",
+            "text": "<p>AGONA SWEDRU (MANDELA) OPPOSITE MELCOM</p>"
+          }
+        },
+        "store_location_nyiXdN": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY CAPE COAST STORE",
+            "location_address": "4P6X+WV3 Cape Coast, Ghana",
+            "latitude": "5.11225",
+            "longitude": "-1.2503333",
+            "phone": "+233 0544019552 , +233 0594091122",
+            "opening_hours": "Mon-Sat 8:00AM-6:00PM",
+            "search_keywords": "Capecoast",
+            "text": "<p>&nbsp;cape coast Aboom mfantsipim junction</p>"
+          }
+        },
+        "store_location_f4GMUW": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY TAKORADI ELECTRONIC STORE",
+            "location_address": "34 Old John Sarbah Rd, Takoradi, Ghana",
+            "latitude": "",
+            "longitude": "",
+            "phone": "+233 0544019552 , +233 0594091122",
+            "opening_hours": "Mon-Sat 8:00AM-6:00PM",
+            "search_keywords": "Takoradi",
+            "text": "<p>Takoradi Market circle, After Post Office</p>"
+          }
+        },
+        "store_location_P3UnFf": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY KOFORIDUA STORE",
+            "location_address": "3P5R+G8P, Koforidua, Ghana",
+            "latitude": "",
+            "longitude": "",
+            "phone": "+233 0544019552 , +233 0594091122",
+            "opening_hours": "Mon-Sat 8:00AM-6:00PM",
+            "search_keywords": "Koforidua",
+            "text": "<p>Adweso opposite total six</p>"
+          }
+        },
+        "store_location_9RkNBN": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY KUMASI ADUM STORE",
+            "location_address": "Adum Road, Kumasi, Ghana",
+            "latitude": "",
+            "longitude": "",
+            "phone": "+233 0544019552 , +233 0594091122",
+            "opening_hours": "Mon-Sat 8:00AM-6:00PM",
+            "search_keywords": "Koforidua",
+            "text": "<p>Adum in the same building as Access bank - Nana Wiafe building</p>"
+          }
+        },
+        "store_location_EtaLgm": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY PZ STORE",
+            "location_address": "14 Prempen II Avenue, Kumasi, Ghana",
+            "latitude": "",
+            "longitude": "",
+            "phone": "+233 0544019552 , +233 0594091122",
+            "opening_hours": "Mon-Sat 8:00AM-6:00PM",
+            "search_keywords": "Koforidua",
+            "text": "<p>Kumasi</p>"
+          }
+        },
+        "store_location_tkVVbg": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY SUNYANI STORE",
+            "location_address": "Melcom, Adjacent, Sunyani, Ghana",
+            "latitude": "7.3316268",
+            "longitude": "-2.3250033",
+            "phone": "+233 0544019552 , +233 0594091122",
+            "opening_hours": "Mon-Sat 8:00AM-6:00PM",
+            "search_keywords": "Sunyani",
+            "text": "<p>Down floor at the OA travel and tour building</p>"
+          }
+        },
+        "store_location_UEezeN": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY BEREKUM STORE (New)",
+            "location_address": "CCX8+VJC Berekum, Ghana",
+            "latitude": "",
+            "longitude": "",
+            "phone": "+233 0544019552 , +233 0594091122",
+            "opening_hours": "Mon-Sat 8:00AM-6:00PM",
+            "search_keywords": "Berekum",
+            "text": "<p>Suyani-berekum road, opposite CBG bank under the multi credit bank</p>"
+          }
+        },
+        "store_location_frKnEg": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY TAMALE STORE",
+            "location_address": "C535+HG7, Tamale, Ghana",
+            "latitude": "",
+            "longitude": "",
+            "phone": "+233 0544019552 , +233 0594091122",
+            "opening_hours": "Mon-Sat 8:00AM-6:00PM",
+            "search_keywords": "Tamale",
+            "text": "<p>First floor of Quality first shopping centerOpposite Taxi Rank</p>"
+          }
+        },
+        "store_location_JKKtng": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY HQ EXCLUSIVE STORE",
+            "location_address": "Tecno House, Darkuman junction Opposite Total Filling Station, Darkuman Rd, Accra, Ghana",
+            "latitude": "",
+            "longitude": "",
+            "phone": "+233 0544019552 , +233 0594091122",
+            "opening_hours": "Mon-Sat 8:00AM-6:00PM",
+            "search_keywords": "Accra",
+            "text": "<p>Darkuman Junction, Adjacent CBG&nbsp;</p>"
+          }
+        },
+        "store_location_YnqxHf": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY TECNO FLAGSHIP STORE",
+            "location_address": "HQFM+9VQ, Accra, Ghana",
+            "latitude": "",
+            "longitude": "",
+            "phone": "+233 0544019552 , +233 0594091122",
+            "opening_hours": "Mon-Sat 8:00AM-6:00PM",
+            "search_keywords": "Accra",
+            "text": "<p>Circle, Opposite Odo Rise</p>"
+          }
+        },
+        "store_location_t9yxRW": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY JUNCTION MALL EXCLUSIVE STORE",
+            "location_address": "JW7H+88M, Accra, Ghana",
+            "latitude": "",
+            "longitude": "",
+            "phone": "+233 0544019552 , +233 0594091122",
+            "opening_hours": "Mon-Sun 9:30AM-9:00PM",
+            "search_keywords": "Accra",
+            "text": "<p>Junction Mall</p>"
+          }
+        },
+        "store_location_txiXai": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY TEMA EXCLUSIVE STORE",
+            "location_address": "1 Baba Yara Rd, Tema, Ghana",
+            "latitude": "",
+            "longitude": "",
+            "phone": "+233 0544019552 , +233 0594091122",
+            "opening_hours": "Mon-Sat 8:00AM-6:00PM",
+            "search_keywords": "Accra",
+            "text": "<p>Tema Comm. 1, Opposite Ghana Water</p>"
+          }
+        },
+        "store_location_KmB9Ef": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY CIRCLE TECNO EXCLUSIVE STORE",
+            "location_address": "Kuffour Lab, 21 Tip Toe Ln, Accra, Ghana",
+            "latitude": "5.572545",
+            "longitude": "-0.2153722",
+            "phone": "+233 0544019552 , +233 0594091122",
+            "opening_hours": "Mon-Sat 8:00AM-6:00PM",
+            "search_keywords": "Accra",
+            "text": "<p>Circle Tiptoe Lane<br/><br/></p>"
+          }
+        },
+        "store_location_b6Re67": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY LAPAZ EXCLUSIVE STORE",
+            "location_address": "JQ53+43C Lapaz, Ghana",
+            "latitude": "",
+            "longitude": "",
+            "phone": "+233 0544019552 , +233 0594091122",
+            "opening_hours": "Mon-Sat 8:00AM-6:00PM",
+            "search_keywords": "Accra",
+            "text": "<p>Lapaz, Opposite Tema Station&nbsp;</p>"
+          }
+        },
+        "store_location_KtmbET": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY HO EXCLUSIVE STORE",
+            "location_address": "V4 Asogli Rd, Ho, Ghana",
+            "latitude": "",
+            "longitude": "",
+            "phone": "+233 0544019552 , +233 0594091122",
+            "opening_hours": "Mon-Sat 8:00AM-6:00PM",
+            "search_keywords": "HO",
+            "text": "<p>Opposite Ho Main Station In-gate</p>"
+          }
+        },
+        "store_location_tDGyDP": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY TAKORADI EXCLUSIVE STORE",
+            "location_address": "V6XQ+PXV Takoradi, Ghana",
+            "latitude": "",
+            "longitude": "",
+            "phone": "+233 0544019552 , +233 0594091122",
+            "opening_hours": "Mon-Sat 8:00AM-6:00PM",
+            "search_keywords": "Takoradi",
+            "text": "<p>Takoradi Market circle, before post office</p>"
+          }
+        },
+        "store_location_LrW7KF": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY KUMASI EXCLUSIVE STORE",
+            "location_address": "204 Prempen II Avenue, Kumasi, Ghana",
+            "latitude": "6.6926008",
+            "longitude": "-1.6222341",
+            "phone": "+233 0544019552 , +233 0594091122",
+            "opening_hours": "Mon-Sat 8:00AM-6:00PM",
+            "search_keywords": "Kumasi",
+            "text": "<p>Adum, near old melcom</p>"
+          }
+        },
+        "store_location_WqbB4G": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY TAMALE EXCLUSIVE STORE",
+            "location_address": "C545+6FH Tamale, Ghana",
+            "latitude": "",
+            "longitude": "",
+            "phone": "+233 0544019552 , +233 0594091122",
+            "opening_hours": "Mon-Sat 8:00AM-6:00PM",
+            "search_keywords": "Tamale",
+            "text": "<p>Tamale,opposite Airtel-tigo office,same lane as DStv office</p>"
+          }
+        },
+        "store_location_wA48Cx": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY ODORKOR EXCLUSIVE STORE",
+            "location_address": "Accra, Ghana",
+            "latitude": "5.5801198",
+            "longitude": "-0.2634909",
+            "phone": "+233 0544019552 , +233 0594091122",
+            "opening_hours": "Mon-Sat 8:00AM-6:00PM",
+            "search_keywords": "Accra",
+            "text": "<p>Odorkor Traffic Light</p>"
+          }
+        },
+        "store_location_diMxAD": {
+          "type": "store_location",
+          "settings": {
+            "title": "MAXBUY INFINIX EXCLUSIVE STORE",
+            "location_address": "7-9 New Town Rd, Accra, Ghana",
+            "latitude": "5.573391",
+            "longitude": "-0.2150742",
+            "phone": "+233 0544019552 , +233 0594091122",
+            "opening_hours": "Mon-Sat 8:00AM-6:00PM",
+            "search_keywords": "Accra",
+            "text": "<p>Near Circle American Mall</p>"
           }
         }
       },
       "block_order": [
-        "store_location_RNBcrU",
-        "store_location_qtCaQB",
-        "store_location_pdnLT4"
+        "store_location_T8iNj9",
+        "store_location_Cmfg8w",
+        "store_location_C66nF6",
+        "store_location_ycj6Nt",
+        "store_location_Y9mhJM",
+        "store_location_9wNeNX",
+        "store_location_46aYVy",
+        "store_location_ff49BP",
+        "store_location_6DjbTw",
+        "store_location_Cje7A8",
+        "store_location_ex87gy",
+        "store_location_CfNXbi",
+        "store_location_g8RzEK",
+        "store_location_DTpHg8",
+        "store_location_AzyGRL",
+        "store_location_3tYyih",
+        "store_location_Wcx8RF",
+        "store_location_nyiXdN",
+        "store_location_f4GMUW",
+        "store_location_P3UnFf",
+        "store_location_9RkNBN",
+        "store_location_EtaLgm",
+        "store_location_tkVVbg",
+        "store_location_UEezeN",
+        "store_location_frKnEg",
+        "store_location_JKKtng",
+        "store_location_YnqxHf",
+        "store_location_t9yxRW",
+        "store_location_txiXai",
+        "store_location_KmB9Ef",
+        "store_location_b6Re67",
+        "store_location_KtmbET",
+        "store_location_tDGyDP",
+        "store_location_LrW7KF",
+        "store_location_WqbB4G",
+        "store_location_wA48Cx",
+        "store_location_diMxAD"
       ],
       "name": "Store locator showcase",
       "settings": {
@@ -946,6 +1518,6 @@
     "1791795658c8e5d01d",
     "promotion_grid_rGJcga",
     "promotion_banner_f983xT",
-    "store_locator_maxbuy"
+    "store_locator_showcase_7rabz6"
   ]
 }

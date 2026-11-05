@@ -8,6 +8,7 @@
  * ------------------------------------------------------------
  */
 {
+  "maxbuy_catalog": {"price_error": "Masukkan harga yang valid. Minimum tidak boleh melebihi maksimum."},
   "general": {
     "continue_shopping": "Lanjutkan belanja",
     "pagination": {

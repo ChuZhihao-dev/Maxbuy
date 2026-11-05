@@ -100,6 +100,7 @@
           "settings": {
             "heading": "New Arrivals",
             "menu": "",
+            "desktop_layout": "dropdown",
             "menu_item_link": "",
             "open_new_window": false,
             "enable_on_mobile": true,
@@ -117,6 +118,7 @@
           "settings": {
             "heading": "Super Deals",
             "menu": "",
+            "desktop_layout": "dropdown",
             "menu_item_link": "",
             "open_new_window": false,
             "enable_on_mobile": true,
@@ -134,6 +136,7 @@
           "settings": {
             "heading": "Best Sellers",
             "menu": "",
+            "desktop_layout": "dropdown",
             "menu_item_link": "",
             "open_new_window": false,
             "enable_on_mobile": true,
@@ -151,7 +154,8 @@
           "settings": {
             "heading": "Our Branches",
             "menu": "",
-            "menu_item_link": "",
+            "desktop_layout": "dropdown",
+            "menu_item_link": "shopify://pages/store-locator",
             "open_new_window": false,
             "enable_on_mobile": true,
             "label": "",
@@ -168,6 +172,7 @@
           "settings": {
             "heading": "About Us",
             "menu": "",
+            "desktop_layout": "dropdown",
             "menu_item_link": "shopify://pages/about-us",
             "open_new_window": false,
             "enable_on_mobile": true,

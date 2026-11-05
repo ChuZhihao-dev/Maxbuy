@@ -8,6 +8,7 @@
  * ------------------------------------------------------------
  */
 {
+  "maxbuy_catalog": {"price_error": "Унесите исправне цене. Минимум не сме бити већи од максимума."},
   "general": {
     "continue_shopping": "Nastavi kupovinu",
     "pagination": {

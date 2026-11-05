@@ -1,0 +1,165 @@
+{% comment %}
+  The complete merchant menu is the directory, independent of native facet values.
+  A collection's filter value is taken only from an explicit Entry mapping. Missing
+  mappings stay visible without submitting a guessed title, URL, or collection ID.
+{% endcomment %}
+{% liquid
+  assign seen_values = '|'
+  assign seen_handles = '|'
+  assign mapping_count = 0
+  for block in section.blocks
+    if block.type == 'entry' and block.settings.dimension == dimension and block.settings.value != blank
+      assign mapping_count = mapping_count | plus: 1
+    endif
+  endfor
+  capture menu_records_encoded
+    render 'maxbuy-catalog-menu-options', links: directory_links, dimension: dimension
+  endcapture
+  assign menu_records = menu_records_encoded | split: ';'
+%}
+{% if filter or mapping_count > 0 or directory_links != blank %}
+<details class="maxbuy-collection__filter" data-filter-key="{{ param_name | escape }}" {% if section.settings.expand_filters or filter.active_values.size > 0 or entry.settings.dimension == dimension %}open{% endif %}>
+  <summary><span>{{ heading | escape }}</span><span class="maxbuy-collection__plus" aria-hidden="true"></span></summary>
+  <div class="maxbuy-collection__filter-content">
+    <fieldset class="maxbuy-collection__fieldset"><legend class="sr-only">{{ heading | escape }}</legend>
+      <ul class="maxbuy-collection__values" role="list">
+        {% for menu_record in menu_records %}
+          {% liquid
+            if menu_record == blank
+              continue
+            endif
+            assign record_fields = menu_record | split: '|'
+            assign directory_handle = record_fields[0] | url_decode
+            assign directory_label = record_fields[1] | url_decode
+            assign directory_depth = record_fields[2] | plus: 0
+            assign directory_kind = record_fields[3]
+            assign directory_mapping = nil
+            if directory_handle != blank
+              assign normalized_handle = directory_handle | downcase
+              assign handle_key = normalized_handle | url_encode | prepend: '|' | append: '|'
+              if seen_handles contains handle_key
+                continue
+              endif
+              assign seen_handles = seen_handles | append: handle_key
+              for block in section.blocks
+                assign source_handle = block.settings.source_collection.handle | downcase
+                if block.type == 'entry' and block.settings.dimension == dimension and block.settings.value != blank and source_handle == normalized_handle
+                  assign directory_mapping = block
+                  break
+                endif
+              endfor
+            endif
+            assign native_value = nil
+            assign selected = false
+            assign disabled = true
+            assign option_value = ''
+            if directory_mapping != nil
+              assign option_value = directory_mapping.settings.value
+              assign value_key = option_value | url_encode | prepend: '|' | append: '|'
+              if seen_values contains value_key
+                continue
+              endif
+              assign seen_values = seen_values | append: value_key
+              for value in filter.values
+                if value.value == option_value
+                  assign native_value = value
+                  break
+                endif
+              endfor
+              for value in filter.active_values
+                if value.value == option_value
+                  assign native_value = value
+                  break
+                endif
+              endfor
+              assign selected = native_value.active | default: false
+              if entry.settings.dimension == dimension and entry.settings.value == option_value
+                assign selected = true
+              endif
+              assign disabled = false
+              if is_pool and native_value != nil and native_value.count == 0 and selected == false
+                assign disabled = true
+              endif
+              assign directory_label = directory_mapping.settings.label | default: directory_label
+            endif
+            assign input_id = 'Catalog-' | append: section.id | append: '-' | append: dimension | append: '-menu-' | append: forloop.index
+          %}
+          <li {% if directory_mapping == nil and directory_kind != 'group' %}data-directory-unmapped{% endif %} data-directory-handle="{{ directory_handle | escape }}" {% if directory_kind == 'group' %}data-directory-group{% endif %} style="margin-inline-start: {{ directory_depth | times: 16 }}px;">
+            {% if directory_kind == 'group' and directory_handle == blank %}
+              <span class="maxbuy-collection__category-group">{{ directory_label | escape }}</span>
+            {% else %}
+              <label class="maxbuy-collection__value{% if disabled %} is-disabled{% endif %}" for="{{ input_id }}">
+                <input id="{{ input_id }}" type="checkbox" {% if directory_mapping != nil %}name="{{ param_name | escape }}" value="{{ option_value | escape }}"{% endif %} {% if selected %}checked{% endif %} {% if disabled %}disabled{% endif %}>
+                <span class="maxbuy-collection__value-label">{{ directory_label | escape }}{% if is_pool and native_value != nil %} <span class="maxbuy-collection__value-count">({{ native_value.count }})</span>{% endif %}</span>
+              </label>
+            {% endif %}
+          </li>
+        {% endfor %}
+        {% comment %}Keep explicit directory entries even when absent from the selected menu.{% endcomment %}
+        {% for block in section.blocks %}
+          {% if block.type != 'entry' or block.settings.dimension != dimension or block.settings.value == blank %}{% continue %}{% endif %}
+          {% liquid
+            assign value_key = block.settings.value | url_encode | prepend: '|' | append: '|'
+            assign source_handle = block.settings.source_collection.handle | downcase
+            assign handle_key = source_handle | url_encode | prepend: '|' | append: '|'
+            if seen_values contains value_key
+              continue
+            endif
+            if source_handle != blank and seen_handles contains handle_key
+              continue
+            endif
+            assign seen_values = seen_values | append: value_key
+            if source_handle != blank
+              assign seen_handles = seen_handles | append: handle_key
+            endif
+            assign native_value = nil
+            for value in filter.values
+              if value.value == block.settings.value
+                assign native_value = value
+                break
+              endif
+            endfor
+            for value in filter.active_values
+              if value.value == block.settings.value
+                assign native_value = value
+                break
+              endif
+            endfor
+            assign selected = native_value.active | default: false
+            if entry.settings.dimension == dimension and entry.settings.value == block.settings.value
+              assign selected = true
+            endif
+            assign disabled = false
+            if is_pool and native_value != nil and native_value.count == 0 and selected == false
+              assign disabled = true
+            endif
+            assign option_label = block.settings.label | default: block.settings.value
+            assign input_id = 'Catalog-' | append: section.id | append: '-' | append: block.id
+          %}
+          {% render 'maxbuy-catalog-option', id: input_id, param_name: param_name, value: block.settings.value, label: option_label, selected: selected, disabled: disabled, native_value: native_value, show_count: is_pool %}
+        {% endfor %}
+        {% for value in filter.values %}
+          {% liquid
+            assign value_key = value.value | url_encode | prepend: '|' | append: '|'
+            if seen_values contains value_key
+              continue
+            endif
+            assign seen_values = seen_values | append: value_key
+            assign selected = value.active
+            if entry.settings.dimension == dimension and entry.settings.value == value.value
+              assign selected = true
+            endif
+            assign disabled = false
+            if is_pool and value.count == 0 and selected == false
+              assign disabled = true
+            endif
+            assign input_id = 'Catalog-' | append: section.id | append: '-' | append: dimension | append: '-' | append: forloop.index
+          %}
+          {% render 'maxbuy-catalog-option', id: input_id, param_name: param_name, value: value.value, label: value.label, selected: selected, disabled: disabled, native_value: value, show_count: is_pool %}
+        {% endfor %}
+      </ul>
+    </fieldset>
+    <button type="button" data-filter-reset="{{ param_name | escape }}">{{ 'products.facets.reset' | t }}</button>
+  </div>
+</details>
+{% endif %}

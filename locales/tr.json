@@ -8,6 +8,7 @@
  * ------------------------------------------------------------
  */
 {
+  "maxbuy_catalog": {"price_error": "Geçerli fiyatlar girin. Minimum fiyat maksimum fiyatı aşamaz."},
   "general": {
     "continue_shopping": "Alışverişe devam et",
     "pagination": {

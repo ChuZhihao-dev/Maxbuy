@@ -28,9 +28,10 @@
       this.media.addEventListener('change', () => this.initPanel(), options);
       window.addEventListener('popstate', () => {
         clearTimeout(this.timer);
-        this.navigate(new URL(location.href), { history: false, scroll: true });
+        location.reload();
       }, options);
       this.initContent();
+      this.updateTitle();
       this.cache.set(this.cacheKey(new URL(location.href)), this.results.innerHTML);
     }
     disconnectedCallback() {
@@ -55,7 +56,7 @@
       if (!this.dialog) return;
       this.dialog.getAnimations().forEach(animation => animation.cancel());
       if (this.media.matches) {
-        if (this.dialog.matches(':modal')) this.dialog.close();
+        if (this.dialog.matches(':modal')) { this.discardDraft(); this.dialog.close(); }
         if (!this.dialog.open) this.dialog.show();
         this.unlockBody();
       } else if (!this.dialog.matches(':modal')) {
@@ -73,8 +74,17 @@
       document.body.style.overflow = this.previousOverflow;
       this.previousOverflow = undefined;
     }
+    updateTitle() {
+      const title = this.querySelector('[data-document-title]')?.dataset.documentTitle;
+      if (title) document.title = title;
+    }
+    discardDraft() {
+      this.querySelector('[data-collection-form]')?.reset();
+      this.querySelectorAll('[data-price-filter]').forEach(price => this.syncPrice(price));
+    }
     openPanel(animate = true) {
       if (!this.dialog || this.media.matches) return;
+      this.discardDraft();
       if (!this.dialog.open) this.dialog.showModal();
       this.lockBody();
       if (animate && this.duration) this.dialog.animate([{ transform: 'translateX(100%)', opacity: .6 }, { transform: 'translateX(0)', opacity: 1 }], { duration: this.duration, easing: 'cubic-bezier(.2,.7,.2,1)' });
@@ -90,12 +100,24 @@
       if (!this.media.matches) dialog.close();
       this.closingPanel = false;
       this.unlockBody();
+      this.discardDraft();
       this.querySelector('[data-filters-open]')?.focus({ preventScroll: true });
     }
     onClick(event) {
       const target = event.target;
       if (!(target instanceof Element)) return;
       if (target.closest('[data-filters-open]')) { this.openPanel(); return; }
+      const reset = target.closest('[data-filter-reset]');
+      if (reset) {
+        const group = reset.closest('[data-filter-key]');
+        group.querySelectorAll('input').forEach(input => {
+          if (input.type === 'checkbox') input.checked = false;
+          else if (input.name) input.value = '';
+        });
+        group.querySelectorAll('[data-price-filter]').forEach(price => this.syncPrice(price));
+        if (this.media.matches) this.submit();
+        return;
+      }
       if (target.closest('[data-filters-close]')) { this.closePanel(); return; }
       if (target === this.dialog && this.dialog.matches(':modal')) {
         const rect = this.dialog.getBoundingClientRect();
@@ -111,7 +133,11 @@
       const link = target.closest('a[data-collection-link]');
       if (!link || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
       const url = new URL(link.href);
-      if (url.origin !== location.origin || url.pathname !== this.dataset.collectionUrl) return;
+      if (url.origin !== location.origin) return;
+      const current = new URL(location.href);
+      current.searchParams.forEach((value, key) => {
+        if (!key.startsWith('filter.') && !['sort_by', 'page', 'section_id', 'sections'].includes(key) && !key.startsWith('page_') && !url.searchParams.has(key)) url.searchParams.append(key, value);
+      });
       event.preventDefault();
       clearTimeout(this.timer);
       this.navigate(url, { scroll: link.hasAttribute('data-page-link'), focusHeading: true });
@@ -142,13 +168,13 @@
       const target = event.target;
       if (target.matches('[data-range], [data-price]')) {
         this.syncPrice(target.closest('[data-price-filter]'), target);
-        if (target.matches('[data-price]')) this.schedule(650);
+        if (target.matches('[data-price]') && this.media.matches) this.schedule(300);
       }
     }
     onChange(event) {
       if (event.target.matches('[data-collection-sort], [data-collection-form] input')) {
         if (event.target.closest('[data-price-filter]')) this.syncPrice(event.target.closest('[data-price-filter]'), event.target);
-        this.schedule(event.target.type === 'checkbox' ? 100 : 0);
+        if (this.media.matches || event.target.matches('[data-collection-sort]')) this.schedule(event.target.type === 'checkbox' ? 100 : 0);
       }
     }
     syncPrice(price, source) {
@@ -156,20 +182,13 @@
       const fields = { min: price.querySelector('[data-price="min"]'), max: price.querySelector('[data-price="max"]') };
       const ranges = { min: price.querySelector('[data-range="min"]'), max: price.querySelector('[data-range="max"]') };
       if (source?.dataset.range) fields[source.dataset.range].value = source.value;
-      let minValue = fields.min.value === '' ? 0 : Number(fields.min.value);
-      let maxValue = fields.max.value === '' ? max : Number(fields.max.value);
-      minValue = Math.min(max, Math.max(0, Number.isFinite(minValue) ? minValue : 0));
-      maxValue = Math.min(max, Math.max(0, Number.isFinite(maxValue) ? maxValue : max));
-      if (minValue > maxValue) {
-        if ((source?.dataset.price || source?.dataset.range) === 'max') maxValue = minValue;
-        else minValue = maxValue;
-      }
-      ranges.min.value = minValue;
-      ranges.max.value = maxValue;
-      if (fields.min.value !== '') fields.min.value = minValue;
-      if (fields.max.value !== '') fields.max.value = maxValue;
-      fields.min.max = maxValue;
-      fields.max.min = minValue;
+      const minValue = fields.min.value === '' ? 0 : Number(fields.min.value);
+      const maxValue = fields.max.value === '' ? max : Number(fields.max.value);
+      const invalid = fields.min.validity.badInput || fields.max.validity.badInput || !Number.isFinite(minValue) || !Number.isFinite(maxValue) || minValue < 0 || maxValue < 0 || minValue > maxValue;
+      fields.min.setCustomValidity(invalid ? this.dataset.priceError : '');
+      fields.max.setCustomValidity(invalid ? this.dataset.priceError : '');
+      ranges.min.value = Math.min(max, Math.max(0, minValue || 0));
+      ranges.max.value = Math.min(max, Math.max(0, Number.isFinite(maxValue) ? maxValue : max));
       price.style.setProperty('--range-min', `${max ? minValue / max * 100 : 0}%`);
       price.style.setProperty('--range-max', `${max ? maxValue / max * 100 : 100}%`);
     }
@@ -181,19 +200,33 @@
       this.sequence++;
       this.timer = setTimeout(() => this.submit(), wait);
     }
+    buildURL(entries, action) {
+      const current = new URL(location.href);
+      const target = new URL(action, current);
+      if (target.origin !== current.origin) throw new Error('Invalid collection target');
+      // Preserve market/locale in the configured action and preview context from this page.
+      target.search = current.search;
+      [...target.searchParams.keys()].forEach(key => {
+        if (key.startsWith('filter.') || key === 'sort_by' || key === 'page' || key.startsWith('page_') || key === 'section_id' || key === 'sections' || key.startsWith('sections[')) target.searchParams.delete(key);
+      });
+      const seen = new Set();
+      for (const [key, value] of entries) {
+        if (value === '' || (key !== 'sort_by' && !key.startsWith('filter.'))) continue;
+        const pair = JSON.stringify([key, String(value)]);
+        if (!seen.has(pair)) { target.searchParams.append(key, value); seen.add(pair); }
+      }
+      return target;
+    }
     submit() {
       const form = this.querySelector('[data-collection-form]');
       if (!form || !form.reportValidity()) return;
-      const url = new URL(location.href);
-      [...url.searchParams.keys()].forEach(key => {
-        if (key.startsWith('filter.') || key === 'sort_by' || key === 'page' || key.startsWith('page_') || key === 'section_id') url.searchParams.delete(key);
-      });
-      new FormData(form).forEach((value, key) => { if (value !== '') url.searchParams.append(key, value); });
-      this.navigate(url);
+      const url = this.buildURL(new FormData(form), form.action);
+      this.navigate(url, { focusHeading: true });
     }
     cacheKey(url) {
       const key = new URL(url);
       key.searchParams.delete('section_id');
+      key.searchParams.delete('sections');
       return key.pathname + key.search;
     }
     collectionEvent(url) {
@@ -220,6 +253,10 @@
     }
     async navigate(url, options = {}) {
       clearTimeout(this.timer);
+      if (url.origin !== location.origin) return;
+      if (url.pathname !== location.pathname) { location.assign(url.href); return; }
+      url.searchParams.delete('section_id');
+      url.searchParams.delete('sections');
       const token = ++this.sequence;
       this.request?.abort();
       this.request = new AbortController();
@@ -229,6 +266,8 @@
       error.hidden = true;
       this.setAttribute('aria-busy', 'true');
       const updateEvent = this.collectionEvent(url);
+      const request = this.request;
+      const timeout = setTimeout(() => request.abort(new DOMException('Collection request timed out', 'TimeoutError')), 15000);
       try {
         const key = this.cacheKey(url);
         let html = this.cache.get(key);
@@ -240,13 +279,13 @@
           const documentHTML = new DOMParser().parseFromString(await response.text(), 'text/html');
           const section = documentHTML.getElementById(this.id);
           const results = section?.querySelector('[data-collection-results]');
-          if (!results) throw new Error('Collection section missing');
+          if (!results?.querySelector('h1') || !results.querySelector('[data-collection-grid]') || !results.querySelector('[data-collection-form]')) throw new Error('Collection section missing');
           html = results.innerHTML;
           if (this.cache.size >= 12) this.cache.delete(this.cache.keys().next().value);
           this.cache.set(key, html);
         }
         if (token !== this.sequence || !this.isConnected) { updateEvent?.reject(new DOMException('Superseded collection request', 'AbortError')); return; }
-        const modalOpen = !!this.dialog?.matches(':modal');
+        const modalOpen = false;
         const panelScroll = this.dialog?.scrollTop || 0;
         const focusedID = this.contains(document.activeElement) ? document.activeElement.id : '';
         const opened = new Map([...this.querySelectorAll('[data-filter-key]')].map(details => [details.dataset.filterKey, details.dataset.motionTarget ? details.dataset.motionTarget === 'open' : details.open]));
@@ -257,6 +296,7 @@
         this.dialog?.close();
         this.results.innerHTML = html;
         this.initContent();
+        this.updateTitle();
         this.querySelectorAll('[data-filter-key]').forEach(details => {
           if (opened.has(details.dataset.filterKey)) details.open = opened.get(details.dataset.filterKey);
         });
@@ -280,13 +320,15 @@
         this.dispatchEvent(new CustomEvent('maxbuy:collection:updated', { bubbles: true }));
       } catch (failure) {
         updateEvent?.reject(failure);
-        if (failure.name !== 'AbortError' && token === this.sequence) {
+        if (token === this.sequence && (failure.name !== 'AbortError' || this.request.signal.reason?.name === 'TimeoutError')) {
+          location.assign(url.href);
           error.hidden = false;
           this.querySelector('[data-collection-reload]').href = url.href;
           // Keep an error actionable while the modal makes the background inert.
           if (this.dialog?.matches(':modal')) await this.closePanel(false);
         }
       } finally {
+        clearTimeout(timeout);
         if (token === this.sequence) this.removeAttribute('aria-busy');
       }
     }

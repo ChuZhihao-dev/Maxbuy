@@ -1,0 +1,26 @@
+[
+  {
+    "query": "mutation CreateCatalogDefinition($definition: MetafieldDefinitionInput!) { metafieldDefinitionCreate(definition: $definition) { createdDefinition { id name namespace key } userErrors { field message code } } }",
+    "variables": {
+      "definition": {
+        "name": "Catalog brand",
+        "namespace": "custom",
+        "key": "brand",
+        "ownerType": "PRODUCT",
+        "type": "single_line_text_field"
+      }
+    }
+  },
+  {
+    "query": "mutation CreateCatalogDefinition($definition: MetafieldDefinitionInput!) { metafieldDefinitionCreate(definition: $definition) { createdDefinition { id name namespace key } userErrors { field message code } } }",
+    "variables": {
+      "definition": {
+        "name": "Catalog categories",
+        "namespace": "custom",
+        "key": "catalog_categories",
+        "ownerType": "PRODUCT",
+        "type": "list.single_line_text_field"
+      }
+    }
+  }
+]

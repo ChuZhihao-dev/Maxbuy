@@ -8,6 +8,7 @@
  * ------------------------------------------------------------
  */
 {
+  "maxbuy_catalog": {"price_error": "Wpisz prawidłowe ceny. Minimum nie może przekraczać maksimum."},
   "general": {
     "continue_shopping": "Kontynuuj zakupy",
     "pagination": {

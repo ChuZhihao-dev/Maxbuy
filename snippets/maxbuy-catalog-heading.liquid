@@ -1,0 +1,17 @@
+{%- liquid
+  assign category_size = category_filter.active_values.size | default: 0
+  assign brand_size = vendor_filter.active_values.size | default: 0
+  if category_size > 1 or brand_size > 1
+    echo 'templates.search.products' | t
+  elsif category_size == 1 and brand_size == 1
+    echo vendor_filter.active_values.first.label
+    echo ' '
+    echo category_filter.active_values.first.label
+  elsif category_size == 1
+    echo category_filter.active_values.first.label
+  elsif brand_size == 1
+    echo vendor_filter.active_values.first.label
+  else
+    echo 'quick_order_list.all_products' | t
+  endif
+-%}

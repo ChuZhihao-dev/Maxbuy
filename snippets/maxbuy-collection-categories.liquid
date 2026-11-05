@@ -2,15 +2,20 @@
 {% for link in links %}
   {% capture children %}{% if link.links != blank %}{% render 'maxbuy-collection-categories', links: link.links, category_query: category_query %}{% endif %}{% endcapture %}
   {% assign children = children | strip %}
+  {% assign category_title_key = link.title | handleize %}
+  {% if children != blank %}
+    {% if category_title_key == 'home-appliances' or category_title_key == 'home-appliance' %}
+      {{ children }}
+      {% continue %}
+    {% endif %}
+  {% endif %}
   {% liquid
     assign valid_link = false
     if link.url != blank and link.url != '#'
       assign valid_link = true
     endif
   %}
-  {% if children != blank %}
-    {{ children }}
-  {% elsif valid_link %}
+  {% if valid_link or children != blank %}
     <li>
       {% if link.url != blank and link.url != '#' %}
         <a href="{{ link.url }}{% if link.type == 'collection_link' and category_query != blank %}{% if link.url contains '?' %}&amp;{% else %}?{% endif %}{{ category_query | escape }}{% endif %}" {% if link.current %}aria-current="page"{% endif %}><span class="maxbuy-collection__category-checkbox" aria-hidden="true"></span><span class="maxbuy-collection__category-label">{{ link.title | escape }}{% if link.type == 'collection_link' %} <span>({{ link.object.all_products_count }})</span>{% endif %}</span></a>

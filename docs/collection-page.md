@@ -1,5 +1,9 @@
 # Collection 页面：设计对比、开发方案与验收
 
+## 当前方案
+
+统一商品池和入口映射的最终实现、后台数据差异与验收结果，见 [Collection Catalog 实施记录](collection-catalog-implementation.md)。下文保留早期设计与历史验证记录，关于分类单选导航、品牌来源及缺失项数量的旧方案已被新方案取代。
+
 设计：Figma `YEns4cYyY3b6TNRFRds9Ql`，节点 `86:3995`（1440 × 4189）。
 
 ## 1. 逐项对比与复用决策

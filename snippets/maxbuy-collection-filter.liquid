@@ -2,9 +2,9 @@
 {% liquid
   assign filter_key = section.id | append: '-' | append: index
   assign filter_heading = filter.label
-  if filter.param_name == 'filter.p.product_type' or filter.param_name == 'filter.p.t.category'
+  if filter.param_name == section.settings.category_param or filter.param_name == 'filter.p.product_type' or filter.param_name == 'filter.p.t.category'
     assign filter_heading = section.settings.category_heading
-  elsif filter.param_name == 'filter.p.vendor'
+  elsif filter.param_name == section.settings.brand_param or filter.param_name == 'filter.p.vendor'
     assign filter_heading = section.settings.brand_heading
   endif
   assign has_active_price = false
@@ -15,6 +15,7 @@
 <details class="maxbuy-collection__filter" data-filter-key="{{ filter.param_name | escape }}" {% if section.settings.expand_filters or filter.active_values.size > 0 or has_active_price %}open{% endif %}>
   <summary><span>{{ filter_heading | escape }}{% if filter.active_values.size > 0 %} <span class="maxbuy-collection__selected-count">({{ filter.active_values.size }})</span>{% endif %}</span><span class="maxbuy-collection__plus" aria-hidden="true"></span></summary>
   <div class="maxbuy-collection__filter-content">
+    <fieldset class="maxbuy-collection__fieldset"><legend class="sr-only">{{ filter_heading | escape }}</legend>
     {% case filter.type %}
       {% when 'price_range' %}
         {% liquid
@@ -46,11 +47,13 @@
                 {% elsif filter.presentation == 'image' and value.image %}
                   {{ value.image | image_url: width: 64 | image_tag: loading: 'lazy', alt: value.label, width: 28, height: 28 }}
                 {% endif %}
-                <span class="maxbuy-collection__value-label">{{ value.label | escape }} <span class="maxbuy-collection__value-count">({{ value.count }})</span></span>
+                <span class="maxbuy-collection__value-label">{{ value.label | escape }} {% unless hide_count %}<span class="maxbuy-collection__value-count">({{ value.count }})</span>{% endunless %}</span>
               </label>
             </li>
           {% endfor %}
         </ul>
     {% endcase %}
+    </fieldset>
+    <button type="button" data-filter-reset="{{ filter.param_name | escape }}">{{ 'products.facets.reset' | t }}</button>
   </div>
 </details>

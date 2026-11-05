@@ -1,0 +1,24 @@
+{%- comment -%}
+  Serialize menu records before rendering. A single caller loop can then deduplicate
+  handles and mapped native values across every nested branch. Each field is URL
+  encoded before using delimiters; placeholders remain valid directory records.
+{%- endcomment -%}
+{%- assign menu_depth = depth | default: 0 -%}
+{%- for directory_link in links -%}
+  {%- assign directory_handle = '' -%}
+  {%- if directory_link.type == 'collection_link' -%}
+    {%- assign directory_handle = directory_link.object.handle -%}
+  {%- endif -%}
+  {%- assign directory_title_key = directory_link.title | handleize -%}
+  {%- if dimension == 'category' and directory_link.links != blank -%}
+    {%- if directory_title_key == 'home-appliances' or directory_title_key == 'home-appliance' -%}
+      {%- render 'maxbuy-catalog-menu-options', links: directory_link.links, depth: menu_depth, dimension: dimension -%}
+      {%- continue -%}
+    {%- endif -%}
+  {%- endif -%}
+  {{- directory_handle | url_encode -}}|{{- directory_link.title | url_encode -}}|{{- menu_depth -}}|{%- if directory_link.links != blank -%}group{%- else -%}item{%- endif -%};
+  {%- if directory_link.links != blank -%}
+    {%- assign child_depth = menu_depth | plus: 1 -%}
+    {%- render 'maxbuy-catalog-menu-options', links: directory_link.links, depth: child_depth, dimension: dimension -%}
+  {%- endif -%}
+{%- endfor -%}
