@@ -1294,3 +1294,23 @@ shopify-accelerated-checkout.disabled {
     column-gap: 8px;
   }
 }
+
+/* Desktop product columns: 606px media + 38px gap + 588px information. */
+@media (min-width: 768px) {
+  .section-main-product .main-product__container .product-template__wrapper {
+    display: grid;
+    grid-template-columns: minmax(0, 606fr) minmax(0, 588fr);
+    column-gap: 38px;
+    align-items: start;
+    max-width: 1232px;
+    margin-inline: auto;
+  }
+
+  .section-main-product .main-product__container .product-template__media-wrapper,
+  .section-main-product .main-product__container .product-template__content-wrapper {
+    float: none;
+    width: 100%;
+    min-width: 0;
+    padding-inline: 0;
+  }
+}
