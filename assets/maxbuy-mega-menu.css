@@ -171,15 +171,20 @@
   }
 
   .maxbuy-mega-menu__product-image-wrap {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
+    flex: none;
     aspect-ratio: 1;
+    overflow: hidden;
     background: #fff;
   }
 
   .maxbuy-mega-menu__product-image {
+    position: absolute;
+    inset: 0;
     display: block;
     width: 100%;
     height: 100%;

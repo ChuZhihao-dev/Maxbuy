@@ -21,6 +21,7 @@
   .section-header .header-account-icon, .section-header .header-icon-cart > a > .icon { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; padding: 0; }
   .section-header .maxbuy-header__desktop-art { display: block; max-width: none; }
   .section-header .header-account-icon > svg, .section-header .header-icon-cart > a > .icon > svg { display: none; }
+  .section-header #FormSearch__desktop:not(.is-open) .header-search__bar--compact { padding-block: 0; }
   .section-header #FormSearch__desktop:not(.is-open) .header-search-inner { height: 47px; padding: 0; border: 0; border-radius: 8px; background: #fff; }
   .section-header #FormSearch__desktop:not(.is-open) .header-search-refined { margin: 0; flex-shrink: 0; }
   .section-header #FormSearch__desktop:not(.is-open) .select-button { height: 47px; width: 172px; padding: 0 20px; gap: 12px; border-radius: 8px 0 0 8px; background: rgb(0 0 0 / 10%); color: #000; font-size: 14px; font-weight: 600; }

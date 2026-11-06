@@ -430,7 +430,7 @@
   },
   "templates": {
     "search": {
-      "product_type_default": "All categories",
+      "product_type_default": "All Categories",
       "blog": "Blog",
       "clear_all": "Clear all",
       "no_results": "No results found for “{{ terms }}”. Check the spelling or use a different word or phrase.",

@@ -38,6 +38,35 @@
   }
 }
 
+/* Product cards share one image zoom, including cards without theme animation classes. */
+:is(.product-card__image-wrapper .product-card__image,
+  a[href*="/products/"] .anm-image-hover,
+  .maxbuy-mega-menu__product-image,
+  .favorite-products__image > img,
+  .product-accessories__image > img,
+  .product-card-complementary__image__first,
+  .product-card-complementary__image__second,
+  .product-card-drawer-upsell__image,
+  .card-product-slideshow .anm-image-hover,
+  .card-highlight-product-set .anm-image-hover) {
+  transform: scale(1);
+  transition: transform var(--image-transition-duration, 300ms) ease-out;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .product-card__image-wrapper:hover .product-card__image,
+  a[href*="/products/"].media-hyperlink:hover .anm-image-hover,
+  a[href*="/products/"]:hover .media-hyperlink .anm-image-hover,
+  .maxbuy-mega-menu__product-link:hover .maxbuy-mega-menu__product-image,
+  .favorite-products__tile:hover .favorite-products__image > img,
+  .product-accessories__card:hover .product-accessories__image > img,
+  .media-hyperlink:hover :is(.product-card-complementary__image__first, .product-card-complementary__image__second, .product-card-drawer-upsell__image),
+  .card-product-slideshow .media-hyperlink:hover .anm-image-hover,
+  .card-highlight-product-set .media-hyperlink:hover .anm-image-hover {
+    transform: scale(1.05);
+  }
+}
+
 /* Keep content readable immediately when the OS requests reduced motion. */
 @media (prefers-reduced-motion: reduce) {
   .maxbuy-mega-menu {

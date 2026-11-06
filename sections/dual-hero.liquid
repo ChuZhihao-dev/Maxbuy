@@ -38,7 +38,7 @@
                   <span class="dual-hero__category-title dual-hero__mobile-title">{{ mobile_title | escape }}</span>
                   <span class="dual-hero__category-count">{{ collection.all_products_count }} {% if collection.all_products_count == 1 %}Item{% else %}Items{% endif %}</span>
                 </span>
-                <span class="dual-hero__thumbnail">{% if image != blank %}{{ image | image_url: width: 144 | image_tag: class: 'anm-image-hover', widths: '48, 96, 144', sizes: '(max-width: 767px) 24px, 44px', loading: 'lazy', alt: '' }}{% endif %}</span>
+                <span class="dual-hero__thumbnail">{% if image != blank %}{{ image | image_url: width: 144 | image_tag: widths: '48, 96, 144', sizes: '(max-width: 767px) 24px, 44px', loading: 'lazy', alt: '' }}{% endif %}</span>
               </a>
             {% elsif request.design_mode %}
               <span class="dual-hero__editor-note" {{ block.shopify_attributes }}>Select a collection for this category.</span>

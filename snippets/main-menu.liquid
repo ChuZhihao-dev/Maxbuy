@@ -112,7 +112,7 @@
         <span class="rotate-180">{% render 'icon-all', icon: 'icon-nav-arrow' %}</span>
       </button>
       <nav
-        class="main-menu-nav overflow-x-auto scrollbar-hidden px-0.5 {{ padding_classes }}"
+        class="main-menu-nav overflow-x-auto scrollbar-hidden {{ padding_classes }}"
         x-ref="menuList"
         @scroll="checkScroll()"
         {% if desktop_motion == 'click' %}
