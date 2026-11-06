@@ -23,7 +23,6 @@
   if settings.show_breadcrumbs_border
     assign class_border = "border-b border-t"
   endif
-  assign icon_breadcrumbs = settings.breadcrumbs_separator
 
   assign enable_microdata_schema = false
   if settings.enable_schema_breadcrumb and complete_collection_schema != true
@@ -57,6 +56,39 @@
     --color-text: var(--color-breadcrumb-text);
     --color-link: var(--color-breadcrumb-text-link);
   }
+  .breadcrumbs-{{ section.id }} .maxbuy-breadcrumbs[role="navigation"] {
+    color: rgba(0, 0, 0, 0.4);
+  }
+  .breadcrumbs-{{ section.id }} .maxbuy-breadcrumbs[role="navigation"] a,
+  .breadcrumbs-{{ section.id }} .maxbuy-breadcrumbs[role="navigation"] .breadcrumb__divider {
+    color: rgba(0, 0, 0, 0.4);
+    border-color: currentColor;
+    text-decoration: none;
+  }
+  .breadcrumbs-{{ section.id }} .breadcrumb__divider {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 5px;
+    height: 8px;
+    margin-inline: 16px;
+    vertical-align: middle;
+  }
+  .breadcrumbs-{{ section.id }} .breadcrumb__divider svg {
+    display: block;
+    flex: none;
+  }
+  .breadcrumbs-{{ section.id }} .maxbuy-breadcrumbs[role="navigation"] a {
+    background-image: none;
+  }
+  .breadcrumbs-{{ section.id }} .maxbuy-breadcrumbs[role="navigation"] a::before,
+  .breadcrumbs-{{ section.id }} .maxbuy-breadcrumbs[role="navigation"] a::after {
+    content: none;
+  }
+  .breadcrumbs-{{ section.id }} .maxbuy-breadcrumbs[role="navigation"] > span:last-child,
+  .breadcrumbs-{{ section.id }} .maxbuy-breadcrumbs[role="navigation"] [aria-current="page"] {
+    color: #000;
+  }
 {%- endstyle -%}
 <div class="breadcrumbs-{{ section.id }} ml-0 mr-0 color-bg-[rgba(var(--color-breadcrumb-background))] color-text-[rgba(var(--color-breadcrumb-text))] ltr {{ class_border -}}
   {%- if settings.edges_type == 'rounded_corners' %} my-1{% endif -%}
@@ -65,17 +97,15 @@
 >
   <div class="py-3 md:py-4 px-4 md:px-8">
     {% unless template == 'index' or template == 'cart' %}
-      <div class="capitalize text-small {{ settings.breadcrumbs_mobile_alignment }} md:{{ settings.breadcrumbs_desktop_alignment }}" 
+      <div class="maxbuy-breadcrumbs capitalize text-small {{ settings.breadcrumbs_mobile_alignment }} md:{{ settings.breadcrumbs_desktop_alignment }}"
         role="navigation" aria-label="breadcrumbs"
       >
         <a 
-          class="color-text-[rgba(var(--color-breadcrumb-text-link))] relative h-fit{% unless collection_breadcrumb_label != blank %} before-link text-link inline-text-link{% endunless %}"
+          class="color-text-[rgba(var(--color-breadcrumb-text-link))] relative h-fit"
           href="{{ routes.root_url }}" 
           title="Home"
         >{{ 'general.breadcrumbs.home' | t }}</a>
-        <span class="breadcrumb__divider color-border-[rgba(var(--color-breadcrumb-text))] color-text-[rgba(var(--color-breadcrumb-text))]{% if icon_breadcrumbs == "—" %} w-2.5 border-b{% endif %} inline-block bottom-1 ml-1 mr-1" aria-hidden="true">
-          {% if icon_breadcrumbs != "—" %}{{ icon_breadcrumbs  }}{% endif %}
-        </span>
+        <span class="breadcrumb__divider" aria-hidden="true">{% render 'maxbuy-breadcrumb-separator' %}</span>
         {% if template contains 'page' %}
           {% if enable_microdata_schema %}
             {% assign first_brb_item = request.host | append: request.path %}
@@ -91,13 +121,11 @@
               {% assign second_brb_item_name = product.title %}
             {% endif %}
             <a
-              class="color-text-[rgba(var(--color-breadcrumb-text-link))] relative h-fit before-link text-link inline-text-link"
+              class="color-text-[rgba(var(--color-breadcrumb-text-link))] relative h-fit"
               href="{{ collection.url }}"
               title="{{ collection.title }}"
             >{{ collection.title | escape }}</a>
-            <span class="breadcrumb__divider color-border-[rgba(var(--color-breadcrumb-text))] color-text-[rgba(var(--color-breadcrumb-text))]{% if icon_breadcrumbs == "—" %} w-2.5 border-b{% endif %} inline-block bottom-1 ml-1 mr-1" aria-hidden="true">
-              {% if icon_breadcrumbs != "—" %}{{ icon_breadcrumbs  }}{% endif %}
-            </span>
+            <span class="breadcrumb__divider" aria-hidden="true">{% render 'maxbuy-breadcrumb-separator' %}</span>
           {% else %}
             {% if enable_microdata_schema %}
               {% assign first_brb_item = request.origin | append: request.path %}
@@ -108,7 +136,7 @@
         {% elsif template contains 'collection' and collection.handle %}
           {% if collection_breadcrumb_label != blank %}
             <span>Collections</span>
-            <span class="breadcrumb__divider inline-block ml-1 mr-1" aria-hidden="true">{{ icon_breadcrumbs }}</span>
+            <span class="breadcrumb__divider" aria-hidden="true">{% render 'maxbuy-breadcrumb-separator' %}</span>
             <a class="color-text-[rgba(var(--color-breadcrumb-text-link))] relative h-fit" href="{{ collection.url }}" aria-current="page">{{ collection_breadcrumb_label | escape }}</a>
           {% else %}
           {% if current_tags %}
@@ -119,13 +147,11 @@
               {% assign second_brb_item_name = current_tags | join: " + " | capitalize %}
             {% endif %}
             <a 
-              class="color-text-[rgba(var(--color-breadcrumb-text-link))] relative h-fit before-link text-link inline-text-link"
+              class="color-text-[rgba(var(--color-breadcrumb-text-link))] relative h-fit"
               href="{{ collection.url }}" 
               title="{{ collection.title }}"
             >{{ collection.title | escape }}</a>
-            <span class="breadcrumb__divider color-border-[rgba(var(--color-breadcrumb-text))] color-text-[rgba(var(--color-breadcrumb-text))]{% if icon_breadcrumbs == "—" %} w-2.5 border-b{% endif %} inline-block bottom-1 ml-1 mr-1" aria-hidden="true">
-              {% if icon_breadcrumbs != "—" %}{{ icon_breadcrumbs  }}{% endif %}
-            </span>
+            <span class="breadcrumb__divider" aria-hidden="true">{% render 'maxbuy-breadcrumb-separator' %}</span>
             <span>{{ current_tags | join: " + " }}</span>
           {% else %}
             {% if enable_microdata_schema %}
@@ -144,13 +170,11 @@
               {% assign second_brb_item_name = current_tags | join: " + " | capitalize %}
             {% endif %}
             <a 
-              class="color-text-[rgba(var(--color-breadcrumb-text-link))] relative h-fit before-link text-link inline-text-link"
+              class="color-text-[rgba(var(--color-breadcrumb-text-link))] relative h-fit"
               href="{{ blog.url }}" 
               title="{{ blog.title }}"
             >{{ blog.title | escape }}</a>
-            <span class="breadcrumb__divider color-border-[rgba(var(--color-breadcrumb-text))] color-text-[rgba(var(--color-breadcrumb-text))]{% if icon_breadcrumbs == "—" %} w-2.5 border-b{% endif %} inline-block bottom-1 ml-1 mr-1" aria-hidden="true">
-              {% if icon_breadcrumbs != "—" %}{{ icon_breadcrumbs  }}{% endif %}
-            </span>
+            <span class="breadcrumb__divider" aria-hidden="true">{% render 'maxbuy-breadcrumb-separator' %}</span>
             <span>{{ current_tags | join: " + " }}</span>
           {% else %}
             {% if enable_microdata_schema %}
@@ -167,13 +191,11 @@
             {% assign second_brb_item_name = article.title %}
           {% endif %}
           <a 
-            class="color-text-[rgba(var(--color-breadcrumb-text-link))] relative h-fit text-link inline-text-link"
+            class="color-text-[rgba(var(--color-breadcrumb-text-link))] relative h-fit"
             href="{{ blog.url }}" 
             title="{{ blog.title }}"
           >{{ blog.title | escape }}</a>
-          <span class="breadcrumb__divider color-border-[rgba(var(--color-breadcrumb-text))] color-text-[rgba(var(--color-breadcrumb-text))]{% if icon_breadcrumbs == "—" %} w-2.5 border-b{% endif %} inline-block bottom-1 ml-1 mr-1" aria-hidden="true">
-            {% if icon_breadcrumbs != "—" %}{{ icon_breadcrumbs  }}{% endif %}
-          </span>
+          <span class="breadcrumb__divider" aria-hidden="true">{% render 'maxbuy-breadcrumb-separator' %}</span>
           <span>{{ article.title | escape }}</span>
         {% else %}
         <span>{{ page_title | escape }}</span>

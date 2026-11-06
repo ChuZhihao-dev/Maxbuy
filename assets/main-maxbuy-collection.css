@@ -5,8 +5,7 @@
 
 .maxbuy-collection__intro > [class*="breadcrumbs-"] > div { padding: 16px 0 24px; }
 .maxbuy-collection__intro [role="navigation"] { font-size: 12px; line-height: 14px; text-transform: none; text-align: left; }
-.maxbuy-collection__intro [role="navigation"] a { color: inherit; text-decoration: none; }
-.maxbuy-collection__intro [role="navigation"] a:hover { color: rgba(var(--color-breadcrumb-text-link)); }
+.maxbuy-collection__intro [role="navigation"] a { text-decoration: none; }
 .maxbuy-collection__intro [role="navigation"] a::before,
 .maxbuy-collection__intro [role="navigation"] a::after { content: none; }
 .maxbuy-collection__promotion { position: relative; overflow: hidden; isolation: isolate; aspect-ratio: 1232 / 243; border-radius: 6px; margin-bottom: 24px; background: #536578; }

@@ -34,10 +34,8 @@
             assign content = policy_metafield.value
           endif
         when 'payment'
-          if product.metafields.custom.payment.type == 'list.single_line_text_field'
-            assign payment_types = product.metafields.custom.payment.value
-            assign content = payment_types | join: ',' | strip
-          endif
+          assign payment_types = shop.enabled_payment_types
+          assign content = payment_types | join: ',' | strip
           assign arrow = 'product-accordion-payment.svg'
       endcase
       assign row_id = 'ProductInfo-' | append: section.id | append: '-' | append: block.id | append: '-' | append: row
@@ -83,7 +81,11 @@
         </div>
       </collapsible-tab>
     {%- elsif request.design_mode and heading != blank -%}
-      <p class="product-accordion__editor-note">{{ heading | escape }}: add {% case row %}{% when 'description' %}the product metafield custom.product_description (multi-line text){% when 'payment' %}the product metafield custom.payment (single line text list){% when 'shipping' %}the product metafield custom.shipping_policy (rich text){% when 'returns' %}the product metafield custom.return_policy (rich text){% endcase %} to show this row.</p>
+      {% if row == 'payment' %}
+        <p class="product-accordion__editor-note">{{ heading | escape }}: no enabled payment methods are available for this store.</p>
+      {% else %}
+        <p class="product-accordion__editor-note">{{ heading | escape }}: add {% case row %}{% when 'description' %}the product metafield custom.product_description (multi-line text){% when 'shipping' %}the product metafield custom.shipping_policy (rich text){% when 'returns' %}the product metafield custom.return_policy (rich text){% endcase %} to show this row.</p>
+      {% endif %}
     {%- endif -%}
   {%- endfor -%}
 </div>

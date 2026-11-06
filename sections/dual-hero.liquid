@@ -19,7 +19,7 @@
     {{ font_semibold | font_face: font_display: 'swap' }}
     {{ font_bold | font_face: font_display: 'swap' }}
   {% endstyle %}
-  <dual-hero class="dual-hero" style="--hero-font: {{ section.settings.font.family | escape }}, {{ section.settings.font.fallback_families | escape }}; --hero-height-desktop: {{ section.settings.height_desktop | default: 70 }}vh; --hero-height-mobile: {{ section.settings.height_mobile | default: 70 }}vh" data-autoplay="{{ section.settings.autoplay }}" role="region" aria-label="{{ section.settings.accessibility_label | escape }}">
+  <dual-hero class="dual-hero" style="--hero-font: {{ section.settings.font.family | escape }}, {{ section.settings.font.fallback_families | escape }}; --hero-height-desktop: 624px; --hero-height-mobile: 545px" data-autoplay="{{ section.settings.autoplay }}" role="region" aria-label="{{ section.settings.accessibility_label | escape }}">
     {% if category_count > 0 %}
       <div class="dual-hero__categories" data-carousel="categories" role="region" aria-label="Product categories">
         <button class="dual-hero__category-arrow" data-direction="-1" type="button" aria-label="Previous categories" aria-controls="HeroCategories-{{ section.id }}" disabled><img class="dual-hero__desktop-icon" src="{{ 'hero-category-desktop.svg' | asset_url }}" width="36" height="36" alt=""><img class="dual-hero__mobile-icon" src="{{ 'hero-category-prev.svg' | asset_url }}" width="4.24117" height="7.67652" alt=""></button>
@@ -98,8 +98,6 @@
   "tag": "section",
   "max_blocks": 40,
   "settings": [
-    { "type": "range", "id": "height_desktop", "label": "Desktop banner height", "min": 40, "max": 100, "step": 1, "unit": "vh", "default": 70, "info": "Percentage of the viewport height." },
-    { "type": "range", "id": "height_mobile", "label": "Mobile banner height", "min": 40, "max": 100, "step": 1, "unit": "vh", "default": 70, "info": "Percentage of the viewport height." },
     { "type": "font_picker", "id": "font", "label": "Font", "default": "montserrat_n4" },
     { "type": "text", "id": "accessibility_label", "label": "Accessibility label", "default": "Featured promotions and categories" },
     { "type": "range", "id": "autoplay", "label": "Automatic banner interval", "info": "0 turns autoplay off. Stops at the last banner and pauses during interaction.", "min": 0, "max": 12, "step": 1, "unit": "s", "default": 0 }

@@ -3,7 +3,7 @@
 .best-sellers .promotional-collections__heading { margin: 0; color: #000; font-family: var(--heading-font-family); font-size: 32px; font-weight: 600; line-height: normal; text-align: center; }
 .best-sellers .promotional-collections__heading-and-view-all { justify-content: center; }
 .best-sellers .promotional-collections__heading-block { text-align: center; }
-.best-sellers .link-list { gap: 8px; padding: 0; }
+.best-sellers .link-list { gap: 20px; padding: 0; }
 .best-sellers .promotional-collections__tab { min-height: 0; height: auto; padding: 8px 16px; border: 0; border-radius: 8px; background: transparent; color: #0009; font-size: 14px; font-weight: 500; line-height: 1.3; }
 .best-sellers .promotional-collections__tab::before, .best-sellers .promotional-collections__tab::after { display: none; }
 .best-sellers .promotional-collections__tab.is-active { background: #0000000d; color: #000; font-weight: 600; }

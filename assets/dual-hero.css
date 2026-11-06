@@ -20,10 +20,10 @@ dual-hero { display: block; position: relative; isolation: isolate; width: 100%;
 .dual-hero .dual-hero__category-arrow:disabled { cursor: default; opacity: .2; }
 .dual-hero__banners { position: relative; }
 .dual-hero .dual-hero__banner-track { gap: 0; }
-.dual-hero__banner { position: relative; flex: 0 0 100%; height: var(--hero-height-desktop, 70vh); overflow: hidden; }
+.dual-hero__banner { position: relative; flex: 0 0 100%; height: var(--hero-height-desktop, 624px); overflow: hidden; }
 .dual-hero__picture { position: absolute; inset: 0; }
 .dual-hero__picture img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.dual-hero__content { position: relative; z-index: 1; width: 458px; max-width: calc(100% - 160px); padding-top: calc(var(--hero-height-desktop, 70vh) * 0.319); margin-left: max(calc((100% - 1232px) / 2 + 60px), 100px); }
+.dual-hero__content { position: relative; z-index: 1; width: 458px; max-width: calc(100% - 160px); padding-top: calc(var(--hero-height-desktop, 624px) * 0.319); margin-left: max(calc((100% - 1232px) / 2 + 60px), 100px); }
 .dual-hero__badge { display: inline-block; position: relative; padding: 2px 4px; background: linear-gradient(90deg, #ed1c24, #ed1c2400); color: #fff; font-size: 16px; font-weight: 600; line-height: 1.06; }
 .dual-hero__badge img { position: absolute; top: 100%; left: 0; max-width: none; }
 .dual-hero__heading { margin: 5px 0 22px; max-width: 428px; font-family: var(--hero-font); font-size: 48px; font-weight: 500; line-height: normal; color: #fff; }
@@ -50,7 +50,7 @@ dual-hero { display: block; position: relative; isolation: isolate; width: 100%;
 .dual-hero__image-note { position: absolute; bottom: 64px; left: 12px; z-index: 2; }
 .dual-hero__setup { position: absolute; z-index: 4; top: 12px; left: 12px; }
 @media (max-width: 767px) {
-  .dual-hero__banner { height: var(--hero-height-mobile, 70vh); }
+  .dual-hero__banner { height: var(--hero-height-mobile, 545px); }
   .dual-hero__categories { top: 16px; left: 50%; width: calc(100% - 24px); gap: 8px; }
   .dual-hero .dual-hero__category-track { gap: 8px; }
   .dual-hero__category { flex: 0 0 calc((100% - 16px) / 3); width: calc((100% - 16px) / 3); gap: 6px; height: 33.709px; padding: 4px 6px; border-radius: 3.816px; backdrop-filter: blur(3.339px); }
@@ -64,7 +64,7 @@ dual-hero { display: block; position: relative; isolation: isolate; width: 100%;
   .dual-hero__category-arrow { width: 3.054px; height: 33.709px; }
   .dual-hero__category-arrow[data-direction="1"] { margin-left: 0; }
   .dual-hero__category-arrow::before { content: ''; position: absolute; top: 50%; left: 50%; width: 24px; height: 44px; transform: translate(-50%, -50%); }
-  .dual-hero__content { padding-top: calc(var(--hero-height-mobile, 70vh) * 0.156); margin: 0 auto; width: calc(100% - 78px); max-width: 340px; text-align: center; }
+  .dual-hero__content { padding-top: calc(var(--hero-height-mobile, 545px) * 0.156); margin: 0 auto; width: calc(100% - 78px); max-width: 340px; text-align: center; }
   .dual-hero__badge { padding: 1.386px 2.771px; font-size: 10px; }
   .dual-hero__heading { margin: 8px auto 10px; font-size: 32px; }
   .dual-hero__description { max-width: 235px; margin: 0 auto 13px; font-size: 10px; line-height: 1.3; }

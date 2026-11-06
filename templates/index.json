@@ -142,8 +142,6 @@
       ],
       "name": "Hero + category carousel",
       "settings": {
-        "height_desktop": 78,
-        "height_mobile": 80,
         "font": "montserrat_n4",
         "accessibility_label": "Featured promotions and categories",
         "autoplay": 5
