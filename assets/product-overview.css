@@ -3,7 +3,7 @@
 .product-overview__item+.product-overview__item{margin-top:30px}
 .product-overview__heading{margin:0 0 30px;font-family:inherit;font-size:24px;font-weight:700;line-height:1.5;letter-spacing:normal;overflow-wrap:anywhere;scroll-margin-top:120px}
 .product-overview__body{max-width:1043px;font-family:inherit;font-size:18px;font-weight:300;line-height:1.5;overflow-wrap:anywhere}
-.product-overview__body p{margin:0 0 30px;font-weight:300}
+.product-overview__body p{margin:0 0 30px;font-weight:400}
 .product-overview__body strong{font-weight:700}
 .product-overview__body :is(h3,h4,h5,h6){margin:30px 0;font-family:inherit;font-size:18px;font-weight:700;line-height:1.5}
 .product-overview__body>.metafield-rich_text_field>:first-child{margin-top:0}

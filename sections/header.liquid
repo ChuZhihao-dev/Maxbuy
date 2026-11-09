@@ -301,7 +301,7 @@
         {% endif %}
       >
         <div class="header-top {{ logo_pos }} grid {% if is_compact %}lg:flex gap-7.5{% else %}lg:grid gap-x-5 lg:gap-x-10 xl:gap-x-20{% endif %} justify-between {{ section_width }} items-center" {% unless is_compact %}@click="$store.xHeaderMenu.hideMenu('main-menu-item')"{% endunless %}>
-          {%- comment -%} Mobile: hamburger + search {%- endcomment -%}
+          {%- comment -%} Mobile: hamburger; search remains available inside the menu drawer. {%- endcomment -%}
           <div class="header-mobile-toggle lg:hidden flex items-center gap-1">
             <button
               class="header-mobile-toggle-icon icon cursor-pointer flex items-center w-6 h-6 md:h-7{% if rtl %} rotate-180{% endif %} pr-1 py-1"
@@ -311,12 +311,9 @@
               :aria-expanded="$store.xMobileNav.show.toString()"
               aria-controls="x-header-mobile"
             >
-              <span class="w-full translate-y-0" x-show="!$store.xMobileNav.show">{% render 'icon-all', icon: 'icon-hamburger' %}</span>
+              <span class="w-full translate-y-0" x-show="!$store.xMobileNav.show"><img class="maxbuy-header__mobile-art" src="{{ 'maxbuy-header-menu-mobile.svg' | asset_url }}" width="16" height="16" alt="">{% render 'icon-all', icon: 'icon-hamburger' %}</span>
               <span class="px-0.5 py-0.5 translate-y-0" x-show="$store.xMobileNav.show" x-cloak>{% render 'icon-all', icon: 'icon-close' %}</span>
             </button>
-            {%- unless section.settings.show_search_bar_on_mobile -%}
-              {%- render 'header-search', minimal: true, type: 'mobile' -%}
-            {%- endunless -%}
           </div>
           {%- liquid
             comment
@@ -409,7 +406,10 @@
               </div>
             {%- endif -%}
             <div class="x-header-store-selector-desktop self-center lg:block hidden empty:hidden lg:max-w-[200px]"></div>
-            <div class="hidden lg:flex items-center gap-2 empty:hidden">
+            <a class="maxbuy-header__region-link" {% if section.settings.mobile_location_link != blank %}href="{{ section.settings.mobile_location_link }}"{% else %}aria-disabled="true"{% endif %} aria-label="{{ 'store_selector.default_label' | t | escape }}">
+              <span class="maxbuy-header__region-icon"><img class="maxbuy-header__region-icon-mobile" src="{{ 'maxbuy-header-location-mobile.svg' | asset_url }}" width="15.6896" height="19.8" alt=""><img class="maxbuy-header__region-icon-desktop" src="{{ 'maxbuy-header-location-desktop.svg' | asset_url }}" width="19.0177" height="24" alt=""></span>
+            </a>
+            <div class="maxbuy-header__account-wrap hidden lg:flex items-center gap-2 empty:hidden">
               {%- if is_compact -%}
                 {%- render 'header-search', minimal: true, type: 'desktop', is_compact: is_compact -%}
               {%- endif -%}
@@ -419,6 +419,7 @@
                     <div slot="signed-out-avatar">
                       <span class="header-account-icon icon w-11 h-10 pl-3 pr-2.5 pt-2.5 pb-2 block">
                       <img class="maxbuy-header__desktop-art" src="{{ 'maxbuy-header-account.svg' | asset_url }}" width="32" height="32" alt="">{% render 'icon-all', icon: 'icon-account' %}
+                      <img class="maxbuy-header__mobile-art" src="{{ 'maxbuy-header-bag-mobile.svg' | asset_url }}" width="24" height="24" alt="">
                       </span>
                     </div>
                   </shopify-account>
@@ -438,6 +439,7 @@
                 >
                   <span class="w-6 h-6 lg:w-7 lg:h-7 px-0.5 py-0.5 inline-block icon color-text-[rgba(var(--color-heading))] translate-y-0">
                     <img class="maxbuy-header__desktop-art" src="{{ 'maxbuy-header-bag.svg' | asset_url }}" width="32" height="32" alt="">{%- render 'icon-cart', icon: settings.cart_icon -%}
+                    <img class="maxbuy-header__mobile-art" src="{{ 'maxbuy-header-account-mobile.svg' | asset_url }}" width="24" height="24" alt="">
                   </span>
                   <div id="cart-icon-bubble" class="relative -left-0.5 rtl:left-0 rtl:-right-0.5">
                     <div class="cart-bubble__container empty:hidden color-bg-[rgba(var(--color-cart))] color-text-[rgba(var(--color-cart-text))] h-5 w-5 lg:h-6 lg:w-6 rounded-full text-x-small" data-count-item="{{ cart.item_count }}">
@@ -607,16 +609,17 @@
           </div>
         </div>
       </header>
-      {% unless template == 'cart' %}
-        {% if settings.enable_cart_drawer %}
-          {% render 'cart-drawer', transparent: transparent %}
-        {% endif %}
-      {% endunless %}
       {%- unless show_collapse_menu and logo_pos != 'compact' -%}
         {% render "section-divider" %}
       {% endunless %}
     </div>
   </div>
+  {%- comment -%} Keep the fixed drawer outside the header's backdrop-filter containing block. {%- endcomment -%}
+  {% unless template == 'cart' %}
+    {% if settings.enable_cart_drawer %}
+      {% render 'cart-drawer', transparent: transparent %}
+    {% endif %}
+  {% endunless %}
 </div>
 {%- if show_collapse_menu and logo_pos != 'compact' -%}
   <nav {% if is_hover_menu %} @mouseleave="$store.xHeaderMenu.hideMenu('main-menu-item')"{% endif %} class="header-collapse-menu header-bottom hidden lg:block color-{{ section.settings.color_scheme_light }} dark-color-{{ section.settings.color_scheme_dark }}{% if show_collapse_menu and logo_pos != 'compact' and section.settings.show_section_divider %} border-b{% endif %}" aria-label="{{ 'header.main_menu.text' | t }}">
@@ -1003,6 +1006,12 @@
     {
       "type": "header",
       "content": "t:global.header.mobile_layout"
+    },
+    {
+      "type": "url",
+      "id": "mobile_location_link",
+      "label": "Region link (desktop and mobile)",
+      "info": "Shared destination for the header location icon on desktop and mobile. Configure a link to enable navigation. Independent of the store selector."
     },
     {
       "type": "checkbox",

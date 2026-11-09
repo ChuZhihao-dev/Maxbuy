@@ -1,6 +1,31 @@
 .announcement-localization .select-text {
   white-space: nowrap;
 }
+@media (max-width: 767px) {
+  #x-announcement.announcement {
+    min-height: 32px;
+    padding: 0 10px;
+    background: #ed1c24;
+    color: #fff;
+    font-family: var(--body-font-family);
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.06;
+  }
+  #x-announcement > div,
+  #x-announcement .slide-item {
+    min-height: 32px;
+  }
+  #x-announcement .announcement-bar-text {
+    justify-content: center;
+    text-align: center;
+  }
+  #x-announcement .announcement-bar-text > a {
+    font: inherit;
+    color: inherit;
+    text-align: center;
+  }
+}
 .announcement-col-align-left {
   text-align: start;
 }

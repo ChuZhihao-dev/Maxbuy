@@ -526,7 +526,7 @@
       "settings": {
         "show_discount_percentage": false,
         "best_sellers_style": true,
-        "best_sellers_mobile_rows": 2,
+        "best_sellers_mobile_rows": 3,
         "best_sellers_button_label": "Shop Now",
         "best_sellers_badge_label": "Special Offer\nNew\nHOT",
         "subheading": "",

@@ -1,0 +1,20 @@
+/* Homepage 186:1352 — section spacing only; content height stays adaptive. */
+@media (max-width: 767px) {
+  /* 186:2008 — Today's Best Sellers. */
+  #MainContent.theme-template-index .section-promotional-collection.best-sellers {
+    padding-top: 32px;
+    padding-bottom: 12px;
+  }
+
+  /* 186:1913 — Deals You Don't Want To Miss. */
+  #MainContent.theme-template-index .flash-deals-section {
+    padding-top: 32px;
+    padding-bottom: 12px;
+  }
+
+  /* 186:2144 — promotional banner. */
+  #MainContent.theme-template-index .promotion-banner {
+    padding-top: 12px;
+    padding-bottom: 32px;
+  }
+}

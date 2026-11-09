@@ -168,7 +168,7 @@
           "settings": {
             "show_block_divider": false,
             "show_payment_icons": true,
-            "payment_icon": "discover,paypal,jcb,unionpay,visa",
+            "payment_icon": "",
             "show_copyright": true,
             "show_powered_by": true,
             "custom_copyright_text": "",

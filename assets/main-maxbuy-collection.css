@@ -24,7 +24,7 @@
 .maxbuy-collection__filter-header h2 { margin: 0; color: #000; font-size: 20px; font-weight: 700; line-height: 24px; }
 .maxbuy-collection__filter-header button, .maxbuy-collection__show-results, .maxbuy-collection [data-filters-open] { display: none; }
 .maxbuy-collection__toolbar { position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 57px; border-bottom: 1px solid #0000001a; }
-.maxbuy-collection__toolbar h1 { margin: 0; font-size: 20px; line-height: 1.3; font-weight: 700; color: #000; scroll-margin-top: calc(var(--height-header, 80px) + 24px); }
+.maxbuy-collection__toolbar .maxbuy-collection__heading { margin: 0; font-size: 20px; line-height: 1.3; font-weight: 700; color: #000; scroll-margin-top: calc(var(--height-header, 80px) + 24px); }
 .maxbuy-collection__controls { display: flex; align-items: center; gap: 16px; flex: none; }
 .maxbuy-collection__sort { display: flex; align-items: center; gap: 10px; font-size: 14px; line-height: 24px; white-space: nowrap; }
 .maxbuy-collection__sort > label { font-weight: 700; }
@@ -107,7 +107,7 @@ maxbuy-collection:defined .maxbuy-collection__apply { display: none; }
   .maxbuy-collection__promotion-copy h2 { font-size: 28px; }
 }
 @media (max-width: 767px) {
-  .maxbuy-collection.best-sellers { box-sizing: border-box; padding: 0 13px 40px; width: 100%; }
+  .maxbuy-collection.best-sellers { box-sizing: border-box; padding: 0 12.5px 32px; width: 100%; }
   .maxbuy-collection__intro > [class*="breadcrumbs-"] > div { padding: 14px 0; }
   .maxbuy-collection__promotion { min-height: 0; aspect-ratio: 349 / 350; margin-bottom: 24px; border-radius: 8px; }
   .maxbuy-collection__promotion > img, .maxbuy-collection__promotion picture img { object-position: 60% center; }
@@ -125,22 +125,23 @@ maxbuy-collection:defined .maxbuy-collection__apply { display: none; }
   .maxbuy-collection__filter-header button { display: grid; place-items: center; width: 44px; height: 44px; margin-right: -11px; background: transparent; border: 0; }
 
   .maxbuy-collection__toolbar { display: flex; flex-direction: column; gap: 0; border-bottom: 0; }
-  .maxbuy-collection__toolbar h1 { font-size: 20px; font-weight: 600; margin: 20px 0 12px; text-align: center; }
+  .maxbuy-collection__toolbar .maxbuy-collection__heading { font-size: 20px; font-weight: 600; margin: 20px 0 12px; text-align: center; }
   .maxbuy-collection__controls { order: -1; width: 100%; justify-content: space-between; gap: 8px; border-block: 1px solid #0000001a; padding-block: 0; min-height: 44px; }
   .maxbuy-collection [data-filters-open] { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0; background: transparent; font-size: 16px; }
   .maxbuy-collection__sort { font-size: 11px; gap: 6px; min-width: 0; margin-left: auto; }
   .maxbuy-collection__sort select { max-width: 155px; }
   .maxbuy-collection__grid { grid-template-columns: repeat(var(--collection-mobile-columns), minmax(0, 1fr)); gap: 12px 13px; }
   .maxbuy-collection .maxbuy-collection__grid .best-sellers__card { padding: 3px 8px 12px; }
-  .maxbuy-collection .maxbuy-collection__grid .product-card__title { font-size: 10px; line-height: 14.3px; }
-  .maxbuy-collection .maxbuy-collection__grid .product-card__title a { min-height: 28.6px; }
+  .maxbuy-collection .maxbuy-collection__grid .product-card__title { font-size: 10px; line-height: 14.273px; }
+  .maxbuy-collection .maxbuy-collection__grid .product-card__title a { min-height: 0; -webkit-line-clamp: 1; }
   .maxbuy-collection .maxbuy-collection__grid .product-card__info { gap: 6px; }
-  .maxbuy-collection .maxbuy-collection__grid :is(.main-price, .price-wrapper > .price), .maxbuy-collection .maxbuy-collection__grid .price-wrapper { font-size: 12px; line-height: 15.6px; color: #000; }
+  .maxbuy-collection .maxbuy-collection__grid :is(.main-price, .price-wrapper > .price), .maxbuy-collection .maxbuy-collection__grid .price-wrapper { font-size: 12px; line-height: 15.57px; color: #000; gap: 5.19px; }
   .maxbuy-collection .maxbuy-collection__grid .compare-at-price { font-size: 10px; }
   .maxbuy-collection .maxbuy-collection__grid .best-sellers__badges, .maxbuy-collection .maxbuy-collection__grid .best-sellers__badge, .maxbuy-collection .maxbuy-collection__grid .best-sellers__badge-desktop { display: flex; }
   .maxbuy-collection .maxbuy-collection__grid .best-sellers__badges { left: 8px; top: 8px; }
-  .maxbuy-collection .maxbuy-collection__grid .best-sellers__badge { font-size: 9px; }
-  .maxbuy-collection .maxbuy-collection__grid .best-sellers__badge-tail-desktop { display: block; }
+  .maxbuy-collection .maxbuy-collection__grid .best-sellers__badge { padding: .706px 1.412px 0; font-size: 5.649px; line-height: 1; }
+  .maxbuy-collection .maxbuy-collection__grid .best-sellers__card--mobile-sale .best-sellers__badges { display: none; }
+  .maxbuy-collection .maxbuy-collection__grid .best-sellers__badge-tail-desktop { display: none; }
   .maxbuy-collection__value { min-height: 32px; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -162,8 +163,11 @@ maxbuy-collection:defined .maxbuy-collection__apply { display: none; }
 maxbuy-collection:defined [data-filter-reset] { display: inline-block; }
 @media (max-width: 767px) { maxbuy-collection:defined .maxbuy-collection__cancel { display: block; } }
 
-/* The collection card CTA is mobile-only; desktop retains the existing card UI. */
-.maxbuy-collection .best-sellers__shop { display: none; }
+/* Collection card CTA — Figma 186:5400. */
+.maxbuy-collection .best-sellers__shop { display: flex; flex: none; max-width: 100%; margin-top: 11px; }
+@media (min-width: 768px) {
+  .maxbuy-collection .best-sellers__shop { height: 32px; padding: 0 32px; gap: 10px; border-radius: 8px; font-family: 'Maxbuy Collection Public Sans', sans-serif; font-size: 14px; font-weight: 700; line-height: 20px; }
+}
 .maxbuy-collection__filter-icon, .maxbuy-collection__filter-actions { display: none; }
 @media (max-width: 767px) {
   .maxbuy-collection__filter-header h2 { display: flex; align-items: center; gap: 6px; font-size: 16px; font-weight: 400; }
@@ -179,9 +183,9 @@ maxbuy-collection:defined [data-filter-reset] { display: inline-block; }
   .maxbuy-collection__result-meta:has(:only-child) { position: absolute; width: 1px; height: 1px; clip-path: inset(50%); overflow: hidden; }
   .maxbuy-collection .maxbuy-collection__grid .product-card__image-wrapper { padding-bottom: 96%; }
   .maxbuy-collection .maxbuy-collection__grid .best-sellers__card { border-radius: 6px; }
-  .maxbuy-collection .maxbuy-collection__grid .product-card__info { gap: 5.2px; }
+  .maxbuy-collection .maxbuy-collection__grid .product-card__info { gap: 5.19px; }
   .maxbuy-collection .maxbuy-collection__grid .product-card__info-wrapper { margin-top: 5px; }
-  .maxbuy-collection .best-sellers__shop { display: inline-flex; width: fit-content; height: auto; min-height: 18px; margin: 5.2px auto 0; padding: 3.6px 7.2px; gap: 4.8px; border-radius: 4.1px; font-size: 8px; line-height: 10.3px; }
+  .maxbuy-collection .best-sellers__shop { display: inline-flex; width: fit-content; height: auto; min-height: 0; margin: 5.19px auto 0; padding: 3.6px 7.2px; gap: 4.8px; border-radius: 4.111px; font-size: 8px; line-height: 10.277px; }
 }
 
 .maxbuy-collection__promotion-mobile { display: none; }

@@ -1,3 +1,4 @@
+{% render 'maxbuy-mobile-section-padding', section: section %}
 {%- liquid
   assign highlight_field = product.metafields.custom.highlight_features
   assign highlight_images = highlight_field.value
@@ -63,6 +64,9 @@
   "class": "section-product-highlight-features",
   "enabled_on": { "templates": ["product"] },
   "settings": [
+    {"type": "header", "content": "Mobile spacing"},
+    {"type": "range", "id": "padding_top_mobile", "min": 0, "max": 120, "step": 2, "unit": "px", "label": "Mobile padding top", "default": 0},
+    {"type": "range", "id": "padding_bottom_mobile", "min": 0, "max": 120, "step": 2, "unit": "px", "label": "Mobile padding bottom", "default": 0},
     {
       "type": "paragraph",
       "content": "Reads custom.highlight_features for desktop and custom.highlight_features_mobile for mobile (below 768px). Each image list uses its own order. Empty mobile lists fall back to desktop images. If only mobile images exist, they display on both devices."

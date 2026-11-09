@@ -33,6 +33,9 @@ if (!customElements.get('best-sellers-carousel')) {
           this.pages[this.pages.length - 1].append(card);
         });
         this.track.replaceChildren(fragment);
+        this.pageObserver?.disconnect();
+        this.pageObserver = new ResizeObserver(() => this.syncHeight(this.targetIndex ?? this.nearest()));
+        this.pages.forEach(page => this.pageObserver.observe(page));
         const navigation = this.querySelector('.best-sellers__navigation');
         if (navigation) navigation.hidden = this.pages.length <= 1;
         this.classList.add('is-ready');
@@ -57,7 +60,13 @@ if (!customElements.get('best-sellers-carousel')) {
       this.media.addEventListener('change', build, options);
       this.desktopMedia.addEventListener('change', build, options);
       build();
-      this.observer = new ResizeObserver(() => this.go(this.targetIndex ?? this.nearest(), 'instant'));
+      let width = this.track.clientWidth;
+      this.observer = new ResizeObserver(() => {
+        // Height transitions must not continually restart horizontal navigation.
+        if (width === this.track.clientWidth) return;
+        width = this.track.clientWidth;
+        this.go(this.targetIndex ?? this.nearest(), 'instant');
+      });
       this.observer.observe(this.track);
     }
     nearest() {
@@ -83,10 +92,18 @@ if (!customElements.get('best-sellers-carousel')) {
       this.querySelectorAll('[data-direction]').forEach(button => { button.disabled = Number(button.dataset.direction) < 0 ? position <= 1 : position >= maximum - 1; });
       const active = this.nearest();
       this.pages.forEach((page, index) => { page.inert = index !== active; });
+      this.syncHeight(this.targetIndex ?? active);
+    }
+    syncHeight(index) {
+      const page = this.pages?.[index];
+      if (!page) return;
+      const height = Math.ceil(page.getBoundingClientRect().height);
+      if (height > 0 && this.track.style.height !== `${height}px`) this.track.style.height = `${height}px`;
     }
     disconnectedCallback() {
       this.controller?.abort();
       this.observer?.disconnect();
+      this.pageObserver?.disconnect();
       this.tabObserver?.disconnect();
       clearTimeout(this.timer);
     }

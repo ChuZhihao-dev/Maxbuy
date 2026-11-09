@@ -1,3 +1,4 @@
+{% render 'maxbuy-mobile-section-padding', section: section, inner: true %}
 {% liquid
   assign is_enable_sticky_atc = false
   assign buy_buttons_block = section.blocks | where: 'type', 'buy_buttons'
@@ -78,6 +79,9 @@
   "class": "maximize-section section-main-product",
   "tag": "section",
   "settings": [
+    {"type": "header", "content": "Mobile spacing"},
+    {"type": "range", "id": "padding_top_mobile", "min": 0, "max": 120, "step": 2, "unit": "px", "label": "Mobile padding top", "default": 0},
+    {"type": "range", "id": "padding_bottom_mobile", "min": 0, "max": 120, "step": 2, "unit": "px", "label": "Mobile padding bottom", "default": 0},
     {
       "type": "checkbox",
       "id": "enable_sticky_content",

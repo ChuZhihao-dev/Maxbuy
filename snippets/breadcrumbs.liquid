@@ -61,6 +61,31 @@
     font-size: 14px;
     line-height: 1;
   }
+  @media (max-width: 767px) {
+    .breadcrumbs-{{ section.id }} .maxbuy-breadcrumbs[role="navigation"] {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 10px;
+      font-family: var(--body-font-family);
+      font-weight: 300;
+      line-height: 10px;
+      text-align: start;
+      text-transform: capitalize;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    .breadcrumbs-{{ section.id }} .maxbuy-breadcrumbs[role="navigation"] > a,
+    .breadcrumbs-{{ section.id }} .maxbuy-breadcrumbs[role="navigation"] > span {
+      flex: none;
+    }
+    .breadcrumbs-{{ section.id }} .maxbuy-breadcrumbs[role="navigation"] > :last-child {
+      flex: 0 1 auto;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
   .breadcrumbs-{{ section.id }} .maxbuy-breadcrumbs[role="navigation"] a,
   .breadcrumbs-{{ section.id }} .maxbuy-breadcrumbs[role="navigation"] .breadcrumb__divider {
     color: rgba(0, 0, 0, 0.4);
@@ -79,6 +104,26 @@
   .breadcrumbs-{{ section.id }} .breadcrumb__divider svg {
     display: block;
     flex: none;
+  }
+  .breadcrumbs-{{ section.id }} .breadcrumb__divider {
+    position: relative;
+  }
+  .breadcrumbs-{{ section.id }} .breadcrumb__divider::after {
+    display: none;
+    content: '';
+    position: absolute;
+    inset: -3.84% -13.02% -3.84% -5.33%;
+    background: url({{ 'maxbuy-breadcrumb-separator-mobile.svg' | asset_url }}) center / 100% 100% no-repeat;
+  }
+  @media (max-width: 767px) {
+    .breadcrumbs-{{ section.id }} .maxbuy-breadcrumbs[role="navigation"] .breadcrumb__divider {
+      width: 3px;
+      height: 5px;
+      margin-inline: 0;
+      overflow: visible;
+    }
+    .breadcrumbs-{{ section.id }} .breadcrumb__divider svg { display: none; }
+    .breadcrumbs-{{ section.id }} .breadcrumb__divider::after { display: block; }
   }
   .breadcrumbs-{{ section.id }} .maxbuy-breadcrumbs[role="navigation"] a {
     background-image: none;

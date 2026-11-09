@@ -1457,6 +1457,13 @@ class CustomCollections extends HTMLElement {
 
   disconnectedCallback() {
     // Clean up observer if element removed before init fired
+    cancelAnimationFrame(this.collectionHeightFrame);
+    this.collectionHeightAnimation?.cancel();
+    this.collectionHeightAnimation = null;
+    if (this.collectionsWrapperEl) {
+      this.collectionsWrapperEl.style.height = '';
+      this.collectionsWrapperEl.style.overflow = '';
+    }
     if (this._observer) {
       this._observer.disconnect();
       this._observer = null;
@@ -1535,7 +1542,7 @@ class CustomCollections extends HTMLElement {
     const tabIndexKey = `tabIndex-${index}`;
 
     if (this.cachedData[tabIndexKey]) {
-      this.collectionsWrapperEl.innerHTML = this.cachedData[tabIndexKey];
+      this.replaceCollectionContent(this.cachedData[tabIndexKey]);
       // Elements restored from cache have no anm-reveal-item (stripped before caching)
       // and no is-visible (server HTML never has it), so add is-visible immediately —
       // the user has already seen this tab, no entrance animation needed.
@@ -1553,7 +1560,7 @@ class CustomCollections extends HTMLElement {
         const html = new DOMParser().parseFromString(responseText, "text/html");
         const newContent = html.getElementById(`Collections--${this.sectionId}`);
         if (newContent) {
-          this.collectionsWrapperEl.innerHTML = newContent.innerHTML;
+          this.replaceCollectionContent(newContent.innerHTML);
           this.anmRevealItems = newContent.querySelectorAll(".anm-reveal-item");
           this.anmRevealItems.forEach((item) => {
             item.classList.remove("anm-reveal-item");
@@ -1567,6 +1574,39 @@ class CustomCollections extends HTMLElement {
 
       this.selectCollectionButtonsLoading(false, index);
     }
+  }
+
+  replaceCollectionContent(html) {
+    const wrapper = this.collectionsWrapperEl;
+    const animateHeight = this.classList.contains('best-sellers') && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const previousHeight = wrapper.getBoundingClientRect().height;
+    this.collectionHeightAnimation?.cancel();
+    this.collectionHeightAnimation = null;
+    cancelAnimationFrame(this.collectionHeightFrame);
+    wrapper.style.height = '';
+    wrapper.style.overflow = '';
+    wrapper.innerHTML = html;
+    if (!animateHeight) return;
+    // New carousels measure their first page on the preceding animation frame.
+    // Hold the old height until then to prevent a one-frame layout jump.
+    wrapper.style.height = `${previousHeight}px`;
+    wrapper.style.overflow = 'clip';
+    this.collectionHeightFrame = requestAnimationFrame(() => {
+      if (!this.isConnected) return;
+      wrapper.style.height = '';
+      const nextHeight = wrapper.getBoundingClientRect().height;
+      const animation = wrapper.animate([
+        { height: `${previousHeight}px` },
+        { height: `${nextHeight}px` }
+      ], { duration: 600, easing: 'cubic-bezier(.22,.68,0,1)' });
+      this.collectionHeightAnimation = animation;
+      const finish = () => {
+        if (this.collectionHeightAnimation !== animation) return;
+        wrapper.style.overflow = '';
+        this.collectionHeightAnimation = null;
+      };
+      animation.finished.then(finish, finish);
+    });
   }
 }
 

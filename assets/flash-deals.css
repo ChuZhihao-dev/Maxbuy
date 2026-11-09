@@ -65,7 +65,7 @@
   .flash-deals__carousel { margin-top: 26px; }
   .flash-deals__track { gap: 9px; }
   .flash-deals__track::after { flex-basis: 8px; }
-  .flash-deals .best-sellers__card { flex-basis: 127px; width: 127px; min-height: 196px; padding: 2.5px 2.5px 11px; border-radius: 6.943px; }
+  .flash-deals .best-sellers__card { flex-basis: 168px; width: 168px; }
   .flash-deals .product-card__info-wrapper, .flash-deals .product-card-skeleton__info-wrapper { margin-top: 2px; }
   .flash-deals .product-card__info, .flash-deals .product-card-skeleton__info { gap: 5.19px; }
   .flash-deals .product-card__title { min-height: 0; font-size: 10px; line-height: 14.273px; }
@@ -73,7 +73,7 @@
   .flash-deals .compare-at-price { font-size: 10px; }
   .flash-deals .price-wrapper { gap: 5.19px; }
   .flash-deals .best-sellers__shop { gap: 4.8px; margin-top: 5.19px; padding: 3.6px 7.2px; font-size: 8px; line-height: 10.277px; }
-  .flash-deals__badge { top: 6px; left: 6px; font-size: 5.649px; padding: .706px 1.412px 0; }
+  .flash-deals__badge { top: 7px; left: 8px; font-size: 5.649px; font-weight: 600; line-height: 1; padding: .706px 1.412px 0; }
   .flash-deals__badge-desktop { display: none; }
   .flash-deals__badge-mobile { display: block; }
   .flash-deals__shade { bottom: 48px; }

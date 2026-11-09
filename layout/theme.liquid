@@ -163,6 +163,9 @@
     window.StandardEvents = SE;
   </script>
   {{ content_for_header }}
+  {% if request.page_type == 'index' %}
+    {{ 'homepage-mobile-spacing.min.css' | asset_url | stylesheet_tag }}
+  {% endif %}
   {{ settings.additional_head }}
 </head>
 <body

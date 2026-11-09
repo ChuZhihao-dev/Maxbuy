@@ -1,4 +1,4 @@
-/* Product detail mobile layout — Figma 136:230. Desktop and quick view keep their existing layout. */
+/* Product detail mobile layout — Figma 186:4128. Desktop and quick view keep their existing layout. */
 
 @media (max-width: 767px) {
   .section-main-product {
@@ -37,7 +37,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-size: 8px;
+    font-size: 10px;
     line-height: 10px;
   }
 
@@ -466,10 +466,6 @@
     padding-bottom: 18px;
     font-size: 10px;
     line-height: 1.6;
-  }
-
-  .theme-template-product .section-product-section-nav {
-    margin-block: 24px 12px;
   }
 
   .theme-template-product .product-section-nav__links {

@@ -226,6 +226,7 @@
         "padding_top": 24,
         "padding_bottom": 24,
         "show_section_divider": false,
+        "mobile_location_link": "shopify://pages/store-locator",
         "display_menu_title": true,
         "logo_width_mobile": 120,
         "color_scheme_light": "scheme-823f967a-dfe8-4a0a-8b87-483905b01e19",

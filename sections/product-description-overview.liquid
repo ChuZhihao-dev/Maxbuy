@@ -1,3 +1,4 @@
+{% render 'maxbuy-mobile-section-padding', section: section, overview: true %}
 {%- if product.description != blank -%}
   {{ 'product-overview.css' | asset_url | stylesheet_tag }}
   {{ 'product-description-overview.css' | asset_url | stylesheet_tag }}
@@ -51,6 +52,9 @@
     ]
   },
   "settings": [
+    {"type": "header", "content": "Mobile spacing"},
+    {"type": "range", "id": "padding_top_mobile", "min": 0, "max": 120, "step": 2, "unit": "px", "label": "Mobile padding top", "default": 24},
+    {"type": "range", "id": "padding_bottom_mobile", "min": 0, "max": 120, "step": 2, "unit": "px", "label": "Mobile padding bottom", "default": 24},
     {
       "type": "paragraph",
       "content": "Reads the current product Description, including SKU and other details if entered there. Add headings, paragraphs and a simple two-column table in the product editor."

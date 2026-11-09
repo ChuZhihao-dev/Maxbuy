@@ -1,0 +1,19 @@
+{% comment %}Per-instance mobile spacing in pixels; desktop uses existing section settings.{% endcomment %}
+{% style %}
+  @media (max-width: 767px) {
+    #shopify-section-{{ section.id }}{% if inner %} .section--{{ section.id }}{% endif %} {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+      {% if navigation %}margin-block: 0;{% endif %}
+    }
+    {% if overview %}
+      #shopify-section-{{ section.id }} .product-description-overview__heading-wrap {
+        padding-top: 0;
+        padding-bottom: 16px;
+      }
+      #shopify-section-{{ section.id }} .product-description-overview {
+        padding-block: 0;
+      }
+    {% endif %}
+  }
+{% endstyle %}

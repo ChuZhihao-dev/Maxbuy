@@ -50,7 +50,20 @@
       }, options);
       this.initContent();
       this.updateTitle();
-      this.cache.set(this.cacheKey(new URL(location.href)), this.results.innerHTML);
+      this.currentURL = this.dataset.independentSource === 'true'
+        ? this.buildURL([], this.dataset.collectionUrl)
+        : new URL(location.href);
+      const savedURL = history.state?.maxbuyCollections?.[this.dataset.sectionId];
+      const restoredURL = savedURL ? new URL(savedURL, location.href) : null;
+      const canRestore = restoredURL?.origin === location.origin && (this.dataset.independentSource !== 'true' || restoredURL.pathname === this.currentURL.pathname);
+      const pageHasCollectionState = [...new URL(location.href).searchParams.keys()].some(key => key.startsWith('filter.') || key === 'sort_by' || key === 'page' || key.startsWith('page_'));
+      if (canRestore && this.independent) {
+        this.navigate(restoredURL, { history: false });
+      } else if (this.dataset.independentSource === 'true' && pageHasCollectionState) {
+        this.navigate(this.currentURL, { history: false });
+      } else {
+        this.cache.set(this.cacheKey(this.currentURL), { html: this.results.innerHTML, handle: this.dataset.collectionHandle, count: this.dataset.productCount });
+      }
     }
     disconnectedCallback() {
       clearTimeout(this.timer);
@@ -62,6 +75,9 @@
       this.life = null;
     }
     get results() { return this.querySelector('[data-collection-results]'); }
+    get independent() {
+      return this.dataset.independentSource === 'true' || document.querySelectorAll('maxbuy-collection').length > 1;
+    }
     get duration() {
       return this.reduced.matches ? 0 : parseFloat(getComputedStyle(this).getPropertyValue('--collection-motion')) || 0;
     }
@@ -93,6 +109,7 @@
       this.previousOverflow = undefined;
     }
     updateTitle() {
+      if (this.independent) return;
       const title = this.querySelector('[data-document-title]')?.dataset.documentTitle;
       if (title) document.title = title;
     }
@@ -177,7 +194,8 @@
       if (!link || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
       const url = new URL(link.href);
       if (url.origin !== location.origin) return;
-      const current = new URL(location.href);
+      if (this.dataset.independentSource === 'true') url.pathname = new URL(this.dataset.collectionUrl, location.href).pathname;
+      const current = this.currentURL || new URL(location.href);
       current.searchParams.forEach((value, key) => {
         if (!key.startsWith('filter.') && !['sort_by', 'page', 'section_id', 'sections'].includes(key) && !key.startsWith('page_') && !url.searchParams.has(key)) url.searchParams.append(key, value);
       });
@@ -244,7 +262,7 @@
       this.timer = setTimeout(() => this.submit(), wait);
     }
     buildURL(entries, action) {
-      const current = new URL(location.href);
+      const current = this.currentURL || new URL(location.href);
       const target = new URL(action, current);
       if (target.origin !== current.origin) throw new Error('Invalid collection target');
       // Preserve market/locale in the configured action and preview context from this page.
@@ -298,7 +316,7 @@
     async navigate(url, options = {}) {
       clearTimeout(this.timer);
       if (url.origin !== location.origin) return;
-      if (url.pathname !== location.pathname) { location.assign(url.href); return; }
+      if (url.pathname !== location.pathname && !this.independent) { location.assign(url.href); return; }
       url.searchParams.delete('section_id');
       url.searchParams.delete('sections');
       const token = ++this.sequence;
@@ -314,8 +332,8 @@
       const timeout = setTimeout(() => request.abort(new DOMException('Collection request timed out', 'TimeoutError')), 15000);
       try {
         const key = this.cacheKey(url);
-        let html = this.cache.get(key);
-        if (!html) {
+        let content = this.cache.get(key);
+        if (!content) {
           const endpoint = new URL(url);
           endpoint.searchParams.set('section_id', this.dataset.sectionId);
           const response = await fetch(endpoint, { signal: this.request.signal, headers: { 'X-Requested-With': 'XMLHttpRequest' } });
@@ -323,10 +341,10 @@
           const documentHTML = new DOMParser().parseFromString(await response.text(), 'text/html');
           const section = documentHTML.getElementById(this.id);
           const results = section?.querySelector('[data-collection-results]');
-          if (!results?.querySelector('h1') || !results.querySelector('[data-collection-grid]') || !results.querySelector('[data-collection-form]')) throw new Error('Collection section missing');
-          html = results.innerHTML;
+          if (!results?.querySelector('[data-collection-heading]') || !results.querySelector('[data-collection-grid]') || !results.querySelector('[data-collection-form]')) throw new Error('Collection section missing');
+          content = { html: results.innerHTML, handle: section.dataset.collectionHandle, count: section.dataset.productCount };
           if (this.cache.size >= 12) this.cache.delete(this.cache.keys().next().value);
-          this.cache.set(key, html);
+          this.cache.set(key, content);
         }
         if (token !== this.sequence || !this.isConnected) { updateEvent?.reject(new DOMException('Superseded collection request', 'AbortError')); return; }
         const modalOpen = false;
@@ -338,7 +356,10 @@
         this.replacing = true;
         this.closingPanel = false;
         this.dialog?.close();
-        this.results.innerHTML = html;
+        this.results.innerHTML = content.html;
+        this.dataset.collectionHandle = content.handle;
+        this.dataset.productCount = content.count;
+        this.currentURL = new URL(url);
         this.initContent();
         this.updateTitle();
         this.querySelectorAll('[data-filter-key]').forEach(details => {
@@ -350,8 +371,16 @@
         }
         this.replacing = false;
         if (!modalOpen) this.unlockBody();
-        if (options.history !== false && key !== this.cacheKey(new URL(location.href))) history.pushState({ maxbuyCollection: true }, '', key);
-        const heading = this.querySelector('h1');
+        if (options.history !== false) {
+          if (this.independent) {
+            const state = history.state || {};
+            const collections = { ...state.maxbuyCollections, [this.dataset.sectionId]: url.href };
+            history.pushState({ ...state, maxbuyCollections: collections }, '', location.href);
+          } else if (key !== this.cacheKey(new URL(location.href))) {
+            history.pushState({ ...history.state, maxbuyCollection: true }, '', key);
+          }
+        }
+        const heading = this.querySelector('[data-collection-heading]');
         if (options.scroll) heading.scrollIntoView({ behavior: this.duration ? 'smooth' : 'instant', block: 'start' });
         if (options.focusHeading) heading.focus({ preventScroll: true });
         else if (focusedID) {
@@ -365,7 +394,7 @@
       } catch (failure) {
         updateEvent?.reject(failure);
         if (token === this.sequence && (failure.name !== 'AbortError' || this.request.signal.reason?.name === 'TimeoutError')) {
-          location.assign(url.href);
+          if (!this.independent) location.assign(url.href);
           error.hidden = false;
           this.querySelector('[data-collection-reload]').href = url.href;
           // Keep an error actionable while the modal makes the background inert.

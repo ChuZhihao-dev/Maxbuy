@@ -2,6 +2,7 @@
   const selector = '[data-product-section-nav]';
   const productSelector = '.section-product-description-overview';
   const recommendationSelector = '.section-product-recommendations';
+  const promotionalSelector = '.section-promotional-collections';
 
   function init(nav) {
     if (nav.dataset.initialized) return;
@@ -9,9 +10,23 @@
 
     const section = nav.closest('.section-product-section-nav');
     const links = Array.from(nav.querySelectorAll('[data-product-nav-target]'));
+    const linkScroller = nav.querySelector('.product-section-nav__links');
     const observedSections = new WeakSet();
     let activeTargets = [];
     let queued = false;
+    let activeLink = null;
+
+    function revealActiveLink(link) {
+      if (!linkScroller || !window.matchMedia('(max-width: 1023px)').matches) return;
+      const viewport = linkScroller.getBoundingClientRect();
+      const bounds = link.getBoundingClientRect();
+      if (bounds.left >= viewport.left + 12 && bounds.right <= viewport.right - 12) return;
+      // Scroll only the horizontal list; scrollIntoView would also move the page.
+      linkScroller.scrollBy({
+        left: (bounds.left + bounds.right - viewport.left - viewport.right) / 2,
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'
+      });
+    }
 
     function resolveTargets() {
       const description = document.querySelector(productSelector);
@@ -23,8 +38,16 @@
 
       const recommendations = document.querySelector(recommendationSelector);
       const recommendationHeading = recommendations?.querySelector('.product-recommendations h2, .product-recommendations h3');
-      if (recommendationHeading && !document.getElementById('you-may-also-like')) {
-        recommendationHeading.id = 'you-may-also-like';
+      const recommendationLink = links.find((link) => link.dataset.productNavTarget === 'you-may-also-like');
+      const normalizeLabel = (text) => (text || '').replace(/\s+/g, ' ').trim().toLowerCase();
+      const recommendationLabels = new Set([normalizeLabel(recommendationLink?.dataset.label), 'you may also like']);
+      const promotionalHeading = Array.from(document.querySelectorAll(`${promotionalSelector} .promotional-collections__heading`))
+        .find((heading) => recommendationLabels.has(normalizeLabel(heading.textContent)));
+      // Native recommendations load only near the viewport. Anchor their existing
+      // container so clicking the navigation can scroll there and trigger loading.
+      const recommendationTarget = recommendationHeading || recommendations?.querySelector('.product-recommendations') || promotionalHeading;
+      if (recommendationTarget && !document.getElementById('you-may-also-like')) {
+        recommendationTarget.id = 'you-may-also-like';
       }
 
       activeTargets = links.map((link) => {
@@ -66,6 +89,11 @@
         if (item === current) item.link.setAttribute('aria-current', 'location');
         else item.link.removeAttribute('aria-current');
       }
+      const nextLink = current?.link || null;
+      if (nextLink !== activeLink) {
+        activeLink = nextLink;
+        if (activeLink) revealActiveLink(activeLink);
+      }
     }
 
     function scheduleUpdate() {
@@ -95,14 +123,17 @@
 
     const observer = new MutationObserver(resolveTargets);
     function observeDynamicSections() {
-      document.querySelectorAll(`${productSelector}, ${recommendationSelector}`).forEach((targetSection) => {
+      document.querySelectorAll(`${productSelector}, ${recommendationSelector}, ${promotionalSelector}`).forEach((targetSection) => {
         if (observedSections.has(targetSection)) return;
         observedSections.add(targetSection);
         observer.observe(targetSection, { childList: true, subtree: true });
       });
     }
     window.addEventListener('scroll', scheduleUpdate, { passive: true });
-    window.addEventListener('resize', scheduleUpdate);
+    window.addEventListener('resize', () => {
+      activeLink = null;
+      scheduleUpdate();
+    });
     document.addEventListener('shopify:section:load', () => {
       observeDynamicSections();
       resolveTargets();
