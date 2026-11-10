@@ -65,7 +65,24 @@
   .flash-deals__carousel { margin-top: 26px; }
   .flash-deals__track { gap: 9px; }
   .flash-deals__track::after { flex-basis: 8px; }
-  .flash-deals .best-sellers__card { flex-basis: 168px; width: 168px; }
+  /* Figma 186:1913: override the shared Best Sellers mobile card geometry. */
+  .flash-deals.best-sellers .best-sellers__card {
+    flex-basis: 127px;
+    width: 127px;
+    height: 196px;
+    min-height: 196px;
+    padding: 2.337px 2.337px 0;
+  }
+  .flash-deals.best-sellers .best-sellers__card .product-card__image-container,
+  .flash-deals.best-sellers .best-sellers__card .product-card-skeleton__image-wrapper {
+    width: 122.326px;
+    margin-inline: auto;
+  }
+  .flash-deals.best-sellers .best-sellers__card .product-card__image-wrapper,
+  .flash-deals.best-sellers .best-sellers__card .product-card-skeleton__image-wrapper {
+    height: 122.326px;
+    padding-bottom: 0 !important;
+  }
   .flash-deals .product-card__info-wrapper, .flash-deals .product-card-skeleton__info-wrapper { margin-top: 2px; }
   .flash-deals .product-card__info, .flash-deals .product-card-skeleton__info { gap: 5.19px; }
   .flash-deals .product-card__title { min-height: 0; font-size: 10px; line-height: 14.273px; }

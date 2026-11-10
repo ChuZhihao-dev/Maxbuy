@@ -35,8 +35,8 @@
       </div>
       {% if section.blocks.size > 0 %}
         <div class="shop-by-brand__navigation">
-          <button type="button" data-direction="-1" aria-label="Previous brands" aria-controls="BrandTrack-{{ section.id }}" disabled>{% render 'brand-design-svg', asset: 'arrow-prev', width: 36, height: 36, mobile_width: 24, mobile_height: 24 %}</button>
-          <button type="button" data-direction="1" aria-label="Next brands" aria-controls="BrandTrack-{{ section.id }}"{% if section.blocks.size <= 3 %} disabled{% endif %}>{% render 'brand-design-svg', asset: 'arrow-next', width: 36, height: 36, mobile_width: 24, mobile_height: 24 %}</button>
+          <button type="button" data-direction="-1" aria-label="{{ 'maxbuy_components.previous_brands' | t | escape }}" aria-controls="BrandTrack-{{ section.id }}" disabled>{% render 'brand-design-svg', asset: 'arrow-prev', width: 36, height: 36, mobile_width: 24, mobile_height: 24 %}</button>
+          <button type="button" data-direction="1" aria-label="{{ 'maxbuy_components.next_brands' | t | escape }}" aria-controls="BrandTrack-{{ section.id }}"{% if section.blocks.size <= 3 %} disabled{% endif %}>{% render 'brand-design-svg', asset: 'arrow-next', width: 36, height: 36, mobile_width: 24, mobile_height: 24 %}</button>
         </div>
       {% endif %}
     </div>

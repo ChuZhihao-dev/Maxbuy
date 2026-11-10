@@ -201,6 +201,8 @@
         "product_social_sharing"
       ],
       "settings": {
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 24,
         "enable_sticky_content": true,
         "make_content_center": false,
         "desktop_media_width": "default",
@@ -229,6 +231,8 @@
     "product_section_nav": {
       "type": "product-section-nav",
       "settings": {
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0,
         "highlights_label": "Highlight Features",
         "overview_label": "Product Overview",
         "specifications_label": "Product Specifications",
@@ -238,12 +242,17 @@
     },
     "highlight_features": {
       "type": "product-highlight-features",
-      "settings": {}
+      "settings": {
+        "padding_top_mobile": 12,
+        "padding_bottom_mobile": 0
+      }
     },
     "product_description_overview": {
       "type": "product-description-overview",
       "name": "Product Overview",
       "settings": {
+        "padding_top_mobile": 24,
+        "padding_bottom_mobile": 24,
         "heading": "Product Overview",
         "promote_bold_titles": true,
         "section_width": "page-width",
@@ -263,6 +272,8 @@
       "type": "product-recommendations",
       "disabled": true,
       "settings": {
+        "padding_top_mobile": 24,
+        "padding_bottom_mobile": 24,
         "heading": "You may also like",
         "heading_size": "medium",
         "heading_tag": "h2",

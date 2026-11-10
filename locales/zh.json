@@ -8,6 +8,41 @@
  * ------------------------------------------------------------
  */
 {
+  "maxbuy_components": {
+    "view_more": "查看更多",
+    "all_categories": "所有分类",
+    "shop_now": "立即选购",
+    "empty_collection": "此商品系列暂无商品。",
+    "categories": "商品分类",
+    "subcategories": "子分类",
+    "previous_brands": "上一组品牌",
+    "next_brands": "下一组品牌",
+    "remaining": "剩余时间",
+    "promotional_products": "促销商品",
+    "previous_deals": "上一组优惠",
+    "next_deals": "下一组优惠",
+    "product_sections": "商品详情导航",
+    "previous_categories": "上一组分类",
+    "next_categories": "下一组分类",
+    "promotions": "促销活动",
+    "previous_promotion": "上一个促销活动",
+    "next_promotion": "下一个促销活动",
+    "choose_promotion": "选择促销活动",
+    "countdown_setup": "请设置倒计时结束日期（YYYY-MM-DD）和时间。",
+    "category_setup": "请为此分类选择商品系列。",
+    "categories_setup": "请在分类区块中选择商品系列以显示分类轮播。",
+    "desktop_banner_setup": "请上传桌面横幅图片（背景和商品，不含文字）。",
+    "mobile_banner_setup": "请上传符合移动端构图的横幅图片。",
+    "banner_setup": "请添加横幅区块以显示首页主视觉。",
+    "features_setup": "请在此商品的 custom.highlight_features 元字段中添加图片。",
+    "overview_setup": "商品文字概述：请为此商品添加描述，使用标题和两列表格展示规格。",
+    "shop_product": "立即选购：{{ title }}",
+    "promotion_number": "促销活动 {{ number }}",
+    "days": "天",
+    "hours": "小时",
+    "minutes": "分钟",
+    "seconds": "秒"
+  },
   "maxbuy_catalog": {"price_error": "请输入有效价格，最低价不能高于最高价。"},
 
   "general": {

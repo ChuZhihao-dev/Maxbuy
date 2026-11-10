@@ -39,7 +39,7 @@
     </div>
   </product-description-overview>
 {%- elsif request.design_mode -%}
-  <div class="page-width product-overview__empty"><p>Product Overview - Text: add a description to this product. Use headings and a two-column table for specifications.</p></div>
+  <div class="page-width product-overview__empty"><p>{{ 'maxbuy_components.overview_setup' | t | escape }}</p></div>
 {%- endif -%}
 {% schema %}
 {

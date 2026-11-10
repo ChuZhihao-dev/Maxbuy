@@ -36,7 +36,7 @@
         {% if block.settings.menu.links.size > 4 %}
           <div class="maxbuy-mobile-menu__more-row">
             <button class="maxbuy-mobile-menu__more" type="button" data-maxbuy-mobile-brands-toggle aria-expanded="false" aria-controls="MaxbuyMobileBrands-{{ block.id }}">
-              <span>View More</span>
+              <span>{{ 'maxbuy_components.view_more' | t | escape }}</span>
               <img src="{{ 'maxbuy-mobile-more.svg' | asset_url }}" width="5" height="3" alt="">
             </button>
           </div>

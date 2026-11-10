@@ -5,5 +5,5 @@
   <label class="sr-only" for="MaxbuyDrawerSearch-{{ section_id }}">{{ 'general.search.search' | t }}</label>
   <input id="MaxbuyDrawerSearch-{{ section_id }}" class="maxbuy-mobile-menu__search-input" type="search" name="q" placeholder="What Are You Looking For ?" value="{{ search.terms | escape }}">
   <input type="hidden" name="options[prefix]" value="last">
-  <a class="maxbuy-mobile-menu__all-categories" href="{{ routes.all_products_collection_url }}">All Categories</a>
+  <a class="maxbuy-mobile-menu__all-categories" href="{{ routes.all_products_collection_url }}">{{ 'maxbuy_components.all_categories' | t | escape }}</a>
 </form>

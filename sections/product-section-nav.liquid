@@ -2,7 +2,7 @@
 {{ 'product-section-nav.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'product-section-nav.js' | asset_url }}" defer></script>
 
-<nav class="product-section-nav" aria-label="Product sections" data-product-section-nav hidden>
+<nav class="product-section-nav" aria-label="{{ 'maxbuy_components.product_sections' | t | escape }}" data-product-section-nav hidden>
   <div class="product-section-nav__links">
     <a class="product-section-nav__link" href="#highlight-features" data-product-nav-target="highlight-features" data-label="{{ section.settings.highlights_label | escape }}" hidden><span>{{ section.settings.highlights_label | escape }}</span></a>
     <a class="product-section-nav__link" href="#product-overview" data-product-nav-target="product-overview" data-label="{{ section.settings.overview_label | escape }}" hidden><span>{{ section.settings.overview_label | escape }}</span></a>

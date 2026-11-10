@@ -8,6 +8,41 @@
  * ------------------------------------------------------------
  */
 {
+  "maxbuy_components": {
+    "view_more": "View More",
+    "all_categories": "All Categories",
+    "shop_now": "Shop Now",
+    "empty_collection": "No products in this collection yet.",
+    "categories": "Product categories",
+    "subcategories": "Subcategories",
+    "previous_brands": "Previous brands",
+    "next_brands": "Next brands",
+    "remaining": "Time remaining",
+    "promotional_products": "Promotional products",
+    "previous_deals": "Previous deals",
+    "next_deals": "Next deals",
+    "product_sections": "Product sections",
+    "previous_categories": "Previous categories",
+    "next_categories": "Next categories",
+    "promotions": "Promotions",
+    "previous_promotion": "Previous promotion",
+    "next_promotion": "Next promotion",
+    "choose_promotion": "Choose promotion",
+    "countdown_setup": "Set the countdown end date (YYYY-MM-DD) and time.",
+    "category_setup": "Select a collection for this category.",
+    "categories_setup": "Select collections in the category blocks to display the category carousel.",
+    "desktop_banner_setup": "Upload the desktop banner image (background + product, without text).",
+    "mobile_banner_setup": "Upload a mobile banner image to match the mobile composition.",
+    "banner_setup": "Add a banner block to display the hero section.",
+    "features_setup": "Add images to this product's custom.highlight_features metafield to display them here.",
+    "overview_setup": "Product Overview - Text: add a description to this product. Use headings and a two-column table for specifications.",
+    "shop_product": "Shop Now: {{ title }}",
+    "promotion_number": "Promotion {{ number }}",
+    "days": "Days",
+    "hours": "Hours",
+    "minutes": "Minutes",
+    "seconds": "Seconds"
+  },
   "maxbuy_catalog": {"price_error": "Enter valid prices with minimum no greater than maximum."},
 
   "general": {

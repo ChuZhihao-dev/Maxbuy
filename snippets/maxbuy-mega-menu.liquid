@@ -6,7 +6,7 @@
   hidden
 >
   <div class="maxbuy-mega-menu__inner">
-    <nav class="maxbuy-mega-menu__parents" aria-label="Product categories">
+    <nav class="maxbuy-mega-menu__parents" aria-label="{{ 'maxbuy_components.categories' | t | escape }}">
       {% for parent_link in menu.links %}
         <a
           class="maxbuy-mega-menu__category{% if forloop.first %} is-active{% endif %}"
@@ -20,7 +20,7 @@
       {% endfor %}
     </nav>
 
-    <nav class="maxbuy-mega-menu__children" aria-label="Subcategories">
+    <nav class="maxbuy-mega-menu__children" aria-label="{{ 'maxbuy_components.subcategories' | t | escape }}">
       {% for parent_link in menu.links %}
         <div
           class="maxbuy-mega-menu__child-group"

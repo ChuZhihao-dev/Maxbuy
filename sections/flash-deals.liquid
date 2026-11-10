@@ -26,17 +26,16 @@
         {% if section.settings.enable_countdown %}
           <div class="flash-deals__countdown" hidden>
             {% if section.settings.countdown_label != blank %}<p class="flash-deals__countdown-label">{{ section.settings.countdown_label | escape }}</p>{% endif %}
-            <div class="flash-deals__timer" role="timer" aria-label="Time remaining">
+            <div class="flash-deals__timer" role="timer" aria-label="{{ 'maxbuy_components.remaining' | t | escape }}">
               {% assign parts = 'days,hours,minutes,seconds' | split: ',' %}
-              {% assign labels = 'Days,Hours,Minutes,Seconds' | split: ',' %}
-              {% for part in parts %}{% unless forloop.first %}<span class="flash-deals__colon" aria-hidden="true">:</span>{% endunless %}<span class="flash-deals__time"><span class="flash-deals__number" data-time="{{ part }}">00</span><span class="flash-deals__unit">{{ labels[forloop.index0] }}</span></span>{% endfor %}
+              {% for part in parts %}{% unless forloop.first %}<span class="flash-deals__colon" aria-hidden="true">:</span>{% endunless %}<span class="flash-deals__time"><span class="flash-deals__number" data-time="{{ part }}">00</span><span class="flash-deals__unit">{% assign unit_key = 'maxbuy_components.' | append: part %}{{ unit_key | t | escape }}</span></span>{% endfor %}
             </div>
           </div>
-          {% if request.design_mode and section.settings.end_date == blank %}<p class="flash-deals__setup">Set the countdown end date (YYYY-MM-DD) and time.</p>{% endif %}
+          {% if request.design_mode and section.settings.end_date == blank %}<p class="flash-deals__setup">{{ 'maxbuy_components.countdown_setup' | t | escape }}</p>{% endif %}
         {% endif %}
       </div>
       <div class="flash-deals__carousel">
-        <div class="flash-deals__track" id="DealsTrack-{{ section.id }}" tabindex="0" role="region" aria-label="Promotional products">
+        <div class="flash-deals__track" id="DealsTrack-{{ section.id }}" tabindex="0" role="region" aria-label="{{ 'maxbuy_components.promotional_products' | t | escape }}">
           {% for product in products limit: section.settings.product_limit %}
             {% render 'best-sellers-card', product: product, section: section, index: forloop.index, collection: collection, deals_card: true %}
           {% else %}
@@ -45,8 +44,8 @@
         </div>
         <div class="flash-deals__shade" aria-hidden="true" hidden></div>
         <div class="flash-deals__navigation"{% if products == blank and request.design_mode == false %} hidden{% endif %}>
-          <button type="button" data-direction="-1" aria-label="Previous deals" aria-controls="DealsTrack-{{ section.id }}" disabled>{% render 'hero-carousel-arrow' %}</button>
-          <button type="button" data-direction="1" aria-label="Next deals" aria-controls="DealsTrack-{{ section.id }}" disabled>{% render 'hero-carousel-arrow' %}</button>
+          <button type="button" data-direction="-1" aria-label="{{ 'maxbuy_components.previous_deals' | t | escape }}" aria-controls="DealsTrack-{{ section.id }}" disabled>{% render 'hero-carousel-arrow' %}</button>
+          <button type="button" data-direction="1" aria-label="{{ 'maxbuy_components.next_deals' | t | escape }}" aria-controls="DealsTrack-{{ section.id }}" disabled>{% render 'hero-carousel-arrow' %}</button>
         </div>
         <span class="visually-hidden" data-deals-status aria-live="polite"></span>
       </div>

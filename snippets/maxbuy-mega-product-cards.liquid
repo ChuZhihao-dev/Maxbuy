@@ -40,13 +40,13 @@
           </span>
         </a>
         {% if mobile %}
-          <a class="maxbuy-mobile-products__shop" href="{{ product.url }}" aria-label="Shop Now: {{ product.title | escape }}">
-            <img src="{{ 'maxbuy-mobile-cart.svg' | asset_url }}" width="8.222" height="8.222" alt=""><span>Shop Now</span>
+          <a class="maxbuy-mobile-products__shop" href="{{ product.url }}" aria-label="{{ 'maxbuy_components.shop_product' | t: title: product.title | escape }}">
+            <img src="{{ 'maxbuy-mobile-cart.svg' | asset_url }}" width="8.222" height="8.222" alt=""><span>{{ 'maxbuy_components.shop_now' | t | escape }}</span>
           </a>
         {% endif %}
       </li>
     {% endfor %}
   </ul>
 {% else %}
-  <p class="maxbuy-mega-menu__empty">No products in this collection yet.</p>
+  <p class="maxbuy-mega-menu__empty">{{ 'maxbuy_components.empty_collection' | t | escape }}</p>
 {% endif %}
