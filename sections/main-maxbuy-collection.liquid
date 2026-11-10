@@ -1,6 +1,7 @@
 {{ 'best-sellers.css' | asset_url | stylesheet_tag }}
 {{ 'main-maxbuy-collection.min.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'main-maxbuy-collection.min.js' | asset_url }}" defer></script>
+{% if request.page_type != 'page' or section.settings.source_collection != blank %}
 {% liquid
   assign independent_source = false
   if section.settings.source_collection != blank
@@ -82,7 +83,7 @@
   #shopify-section-{{ section.id }} { background: {{ section.settings.background }}; }
   #Collection-{{ section.id }} { --collection-columns: {{ section.settings.desktop_products_per_row }}; --collection-mobile-columns: {{ section.settings.mobile_products_per_row }}; --collection-motion: {% if section.settings.enable_motion %}{{ section.settings.motion_duration }}ms{% else %}0ms{% endif %}; --collection-delay: {{ section.settings.motion_delay }}ms; --collection-background: {{ section.settings.background }}; }
 {% endstyle %}
-<maxbuy-collection id="Collection-{{ section.id }}" class="maxbuy-collection best-sellers" data-section-id="{{ section.id }}" data-independent-source="{{ independent_source }}" data-pool-url="{{ pool_url }}" data-catalog-mode="{{ catalog_mode }}" data-price-error="{{ 'maxbuy_catalog.price_error' | t | escape }}" data-collection-url="{{ collection.url }}" data-collection-handle="{{ collection.handle }}" data-product-count="{{ collection.all_products_count }}">
+<maxbuy-collection id="Collection-{{ section.id }}" class="maxbuy-collection best-sellers" data-section-id="{{ section.id }}" data-page-context="{% if request.page_type == 'page' %}true{% else %}false{% endif %}" data-independent-source="{{ independent_source }}" data-pool-url="{{ pool_url }}" data-catalog-mode="{{ catalog_mode }}" data-price-error="{{ 'maxbuy_catalog.price_error' | t | escape }}" data-collection-url="{{ collection.url }}" data-collection-handle="{{ collection.handle }}" data-product-count="{{ collection.all_products_count }}">
   <div data-collection-results>
   <div class="maxbuy-collection__intro">
     {% assign collection_breadcrumb_label = collection.title %}
@@ -90,7 +91,13 @@
     {% if section.settings.show_breadcrumbs != false %}
       {% render 'breadcrumbs', complete_collection_schema: true, collection_breadcrumb_label: collection_breadcrumb_label, collection: collection %}
     {% endif %}
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":{{ 'general.breadcrumbs.home' | t | json }},"item":{{ request.origin | append: routes.root_url | json }}},{"@type":"ListItem","position":2,"name":"Collections","item":{{ request.origin | append: routes.collections_url | json }}},{"@type":"ListItem","position":3,"name":{{ collection_breadcrumb_label | json }},"item":{{ request.origin | append: collection.url | json }}}]}</script>
+    {% if request.page_type == 'page' %}
+      {% if section.settings.show_breadcrumbs != false %}
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":{{ 'general.breadcrumbs.home' | t | json }},"item":{{ request.origin | append: routes.root_url | json }}},{"@type":"ListItem","position":2,"name":{{ page.title | json }},"item":{{ request.origin | append: page.url | json }}}]}</script>
+      {% endif %}
+    {% else %}
+      <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":{{ 'general.breadcrumbs.home' | t | json }},"item":{{ request.origin | append: routes.root_url | json }}},{"@type":"ListItem","position":2,"name":"Collections","item":{{ request.origin | append: routes.collections_url | json }}},{"@type":"ListItem","position":3,"name":{{ collection_breadcrumb_label | json }},"item":{{ request.origin | append: collection.url | json }}}]}</script>
+    {% endif %}
     {% if section.settings.show_promotion %}
       <div class="maxbuy-collection__promotion">
         {% if section.settings.promotion_image %}
@@ -212,13 +219,16 @@
   <p class="maxbuy-collection__status sr-only" role="status" aria-live="polite" data-collection-status></p>
   <div class="maxbuy-collection__error" role="alert" hidden><p>{{ section.settings.error_label | escape }}</p><button type="button" data-collection-retry>{{ section.settings.retry_label | escape }}</button><a href="{{ collection.url }}" data-collection-reload>{{ section.settings.reload_label | escape }}</a></div>
 </maxbuy-collection>
+{% elsif request.design_mode %}
+  <div class="maxbuy-collection"><p class="maxbuy-collection__empty">Choose a collection in the Display collection setting to show products on this page.</p></div>
+{% endif %}
 {% schema %}
 {
   "name": "Maxbuy collection",
   "tag": "section",
   "class": "maxbuy-collection-section",
   "enabled_on": {
-    "templates": ["collection"]
+    "templates": ["collection", "page"]
   },
   "presets": [
     {
@@ -230,7 +240,7 @@
       "type": "collection",
       "id": "source_collection",
       "label": "Display collection",
-      "info": "Choose the products for this section. Leave blank to use the current page collection. Selected collections filter, sort and paginate independently."
+      "info": "Required on Pages. On collection pages, leave blank to use the current collection. Selected collections filter, sort and paginate independently."
     },
     {
       "type": "select",

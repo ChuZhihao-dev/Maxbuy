@@ -7,7 +7,7 @@ function component(url = 'https://shop.test/en-gh/collections/tvs?preview_theme_
   const assigned = [];
   const location = new URL(url);
   location.assign = value => assigned.push(value);
-  const context = { HTMLElement: class {}, URL, URLSearchParams, Set, Map, JSON, Number, Math, AbortController, DOMException, setTimeout, clearTimeout, location,
+  const context = { HTMLElement: class { constructor() { this.dataset = {}; } }, document: { querySelectorAll: () => [null] }, URL, URLSearchParams, Set, Map, JSON, Number, Math, AbortController, DOMException, setTimeout, clearTimeout, location,
     customElements: { get: () => undefined, define: (_, value) => { Component = value; } } };
   vm.runInNewContext(fs.readFileSync('assets/main-maxbuy-collection.js', 'utf8'), context);
   return { instance: new Component(), assigned, location, context };
@@ -132,4 +132,54 @@ test('mobile Clear all clears the draft without committing or resetting sort', (
   assert.equal(input.checked, false);
   assert.equal(price.value, '');
   assert.equal(submitted, false);
+});
+
+test('Page filtering keeps the host URL, title and intro while requesting its configured section', async () => {
+  const { instance, context, assigned, location } = component('https://shop.test/en-gh/pages/deals?preview_theme_id=42');
+  instance.dataset = { sectionId: 'page-section', independentSource: 'true', pageContext: 'true' };
+  instance.id = 'Collection-page-section';
+  instance.cache = new Map();
+  instance.animations = new Map();
+  instance.sequence = 0;
+  instance.isConnected = true;
+  instance.contains = () => false;
+  instance.querySelectorAll = () => [];
+  instance.setAttribute = instance.removeAttribute = instance.initContent = instance.dispatchEvent = () => {};
+  instance.collectionEvent = () => undefined;
+  const results = { innerHTML: 'initial Page products' };
+  const error = { hidden: true };
+  const intro = { breadcrumbs: 'Home > Deals' };
+  let restoredIntro, requested;
+  instance.querySelector = selector => ({
+    '[data-collection-results]': results,
+    '.maxbuy-collection__error': error,
+    '.maxbuy-collection__intro': { cloneNode: () => intro, replaceWith: value => { restoredIntro = value; } },
+    '[data-result-count]': { textContent: '1 product', dataset: { count: '1' } },
+    '[data-collection-status]': {}
+  })[selector];
+  context.document.title = 'Deals';
+  context.history = { state: {}, pushState(state, _, url) { this.state = state; assert.equal(url, location.href); } };
+  context.CustomEvent = class {};
+  context.fetch = async url => { requested = new URL(url); return { ok: true, text: async () => 'section response' }; };
+  context.DOMParser = class {
+    parseFromString() {
+      return { getElementById: id => id === instance.id ? {
+        dataset: { collectionHandle: 'lg', productCount: '1' },
+        querySelector: selector => selector === '[data-collection-results]' ? {
+          innerHTML: 'filtered products', querySelector: () => ({})
+        } : null
+      } : null };
+    }
+  };
+  await instance.navigate(new URL('https://shop.test/en-gh/collections/lg?filter.v.availability=1&preview_theme_id=42'));
+  assert.equal(requested.pathname, '/en-gh/collections/lg');
+  assert.equal(requested.searchParams.get('section_id'), 'page-section');
+  assert.equal(requested.searchParams.get('filter.v.availability'), '1');
+  assert.equal(requested.searchParams.get('preview_theme_id'), '42');
+  assert.equal(results.innerHTML, 'filtered products');
+  assert.equal(restoredIntro, intro);
+  assert.equal(context.document.title, 'Deals');
+  assert.equal(error.hidden, true);
+  assert.deepEqual(assigned, []);
+  assert.equal(context.history.state.maxbuyCollections['page-section'], instance.currentURL.href);
 });

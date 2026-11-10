@@ -151,6 +151,7 @@
 .product-accessories__copy {
     display: flex;
     flex: 1 1 0;
+    min-width: 0;
     flex-direction: column;
     gap: 4px;
 }
@@ -172,7 +173,7 @@
     white-space: nowrap;
     color: #929292;
     font-size: 12px;
-    font-weight: 400;
+    font-weight: 300;
     line-height: normal
 }
 
@@ -182,8 +183,8 @@
     flex-direction: column;
     align-items: center;
     gap: 1px;
-    font-family: Montserrat;
-    font-weight: 500;
+    font-family: 'DIN Next LT Pro', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 400;
     white-space: nowrap;
     line-height: normal
 }

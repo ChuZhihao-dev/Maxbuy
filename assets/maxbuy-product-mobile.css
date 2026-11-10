@@ -257,7 +257,7 @@
   }
 
   .section-main-product .product-accessories__header {
-    min-height: 15px;
+    min-height: 14.286px;
     margin-bottom: 5px;
   }
 
@@ -266,8 +266,8 @@
   }
 
   .section-main-product .product-accessories__more {
-    font: 700 8.333px/15px var(--body-font-family);
-    gap: 6px;
+    font: 700 8.333px/14.286px var(--body-font-family);
+    gap: 5.952px;
   }
 
   .section-main-product .product-accessories__list {
@@ -277,7 +277,7 @@
   .section-main-product .product-accessories__card {
     gap: 8px;
     min-height: 44px;
-    padding: 8px;
+    padding: 6.81px 8px;
     border-width: 1.19px;
     border-radius: 6px;
   }
@@ -300,21 +300,24 @@
     overflow-wrap: anywhere;
     font-size: 10px;
     font-weight: 600;
-    line-height: 14px;
+    line-height: normal;
   }
 
   .section-main-product .product-accessories__copy {
-    gap: 2.4px;
+    gap: 2.381px;
   }
 
   .section-main-product .product-accessories__details {
     font-size: 6px;
-    line-height: 8px;
+    font-weight: 400;
+    line-height: normal;
   }
 
   .section-main-product .product-accessories__prices {
+    min-width: 41px;
     gap: 2px;
     font-family: var(--body-font-family);
+    font-weight: 500;
   }
 
   .section-main-product .product-accessories__selected img {
@@ -334,12 +337,13 @@
 
   .section-main-product .product-accessories__price {
     font-size: 10px;
-    line-height: 14px;
+    line-height: normal;
   }
 
   .section-main-product .product-accessories__compare {
+    color: #ccc;
     font-size: 8px;
-    line-height: 11px;
+    line-height: normal;
   }
 
   .section-main-product .product-form__purchase-row {
@@ -500,7 +504,7 @@
   }
 
   .theme-template-product .product-description-overview__content :is(h2, h3, h4, h5, h6) {
-    margin-block: 0;
+    margin-block: 0 13px;
     font-size: 16px;
     line-height: 1.5;
   }
@@ -511,6 +515,14 @@
   }
 
   .theme-template-product .product-description-overview__content table :is(th, td) {
-    padding: 12px 7px !important;
+    padding: 11.877px 7.423px !important;
+  }
+
+  .theme-template-product .product-description-overview__content table :is(th, td):first-child {
+    width: 111.346px !important;
+  }
+
+  .theme-template-product .product-description-overview__content .product-overview__specifications {
+    margin-block: 26px 24px;
   }
 }

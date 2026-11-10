@@ -1,5 +1,13 @@
 # Collection 页面：设计对比、开发方案与验收
 
+## 普通 Page 模板复用（2026-11-10）
+
+- `Maxbuy collection` 现在允许添加到 `collection` 和 `page` 模板。在主题编辑器选择普通页面模板，添加该组件，并在 **Display collection** 中选择商品集合；每个实例可选择不同集合。
+- Page 中必须指定集合；未选择时，编辑器显示配置提示，前台不显示商品列表。自动标题使用 H2；页面本身需保留一个 H1。已有页面面包屑时可关闭组件的 **Show breadcrumbs**。
+- 筛选、排序、分页继续使用原生集合上下文和当前实例的 Section ID。Page 内更新保留所在页面 URL、页面标题、面包屑及促销区域；关闭 JavaScript 时表单使用集合 URL。
+- 通过：开发主题真实 HTML（`/pages/about-us?view=maxbuy-preview`）显示 15 件商品、每页 6 件、组件 H2、整页一个 H1；同一 Page Section 的 LG 筛选返回 1 件商品，价格降序第 2 页正确返回。`node --test tests/maxbuy-catalog.test.cjs` 共 12 项通过；Theme Check 与修改前相比无新增诊断，仓库历史错误仍存在；`git diff --check` 通过。
+- 待验证：浏览器桌面/手机视觉与实际点击、主题编辑器添加及配置流程。当前浏览器连接不可用，原生电脑操作未获权限；服务端与自动化检查不能代替这些验证。本次仅同步开发主题，未发布正式主题。
+
 ## 当前方案
 
 统一商品池和入口映射的最终实现、后台数据差异与验收结果，见 [Collection Catalog 实施记录](collection-catalog-implementation.md)。下文保留早期设计与历史验证记录，关于分类单选导航、品牌来源及缺失项数量的旧方案已被新方案取代。

@@ -356,7 +356,10 @@
         this.replacing = true;
         this.closingPanel = false;
         this.dialog?.close();
+        // Collection-context responses must keep the host Page's breadcrumbs and promotion.
+        const pageIntro = this.dataset.pageContext === 'true' ? this.querySelector('.maxbuy-collection__intro')?.cloneNode(true) : null;
         this.results.innerHTML = content.html;
+        if (pageIntro) this.querySelector('.maxbuy-collection__intro')?.replaceWith(pageIntro);
         this.dataset.collectionHandle = content.handle;
         this.dataset.productCount = content.count;
         this.currentURL = new URL(url);

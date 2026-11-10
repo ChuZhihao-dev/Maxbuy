@@ -2,6 +2,12 @@
     display: block
 }
 
+/* Figma 186:2981: the text and specification grid have different widths. */
+.product-description-overview .product-overview__card {
+    padding: 42px 64px 66px;
+    border-radius: 8px;
+}
+
 .product-description-overview__content {
     max-width: none
 }
@@ -59,7 +65,7 @@
     border: 0 !important;
     background: transparent !important;
     text-align: start !important;
-    vertical-align: top;
+    vertical-align: middle;
     font-family: inherit !important;
     font-size: inherit !important;
     line-height: inherit !important;
@@ -116,12 +122,20 @@
 }
 
 @media(max-width:1023px) {
+    .product-description-overview .product-overview__card {
+        padding: 32px;
+    }
+
     .product-description-overview__content table :is(th, td):first-child {
         width: 40% !important
     }
 }
 
 @media(max-width:767px) {
+    .product-description-overview .product-overview__card {
+        padding: 16px;
+    }
+
     .product-description-overview__content :is(h2, h3, h4, h5, h6) {
         margin-block: 24px 20px;
         font-size: 20px
