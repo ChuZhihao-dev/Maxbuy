@@ -47,3 +47,15 @@ sh scripts/build-product-css.sh --watch=forever
 ```
 
 脚本使用固定版本 esbuild 0.28.1；首次通过 npx 使用时需要网络下载工具。已有 esbuild 可通过 `ESBUILD_BIN` 指定可执行文件。
+
+## 公共面包屑
+
+各页面共用 `snippets/breadcrumbs.liquid` 和 `assets/maxbuy-breadcrumbs.css`。面包屑代表当前页面层级；模板只启用一个主要 Section 的面包屑，作为附加内容使用的集合等 Section 应关闭面包屑。保留原有 Section 外层容器、后台开关和 Banner Block 顺序，避免移动导航时改变现有布局。
+
+公共间距由 `.maxbuy-breadcrumb__inner` 管理。集合页和商品页的现有间距在各自 CSS 中通过该类覆盖，不依赖多层 `div` 或工具类。修改公共样式或集合页覆盖后，重新生成加载文件：
+
+```sh
+npx --yes esbuild@0.28.1 assets/maxbuy-breadcrumbs.css assets/main-maxbuy-collection.css --minify --outdir=assets --out-extension:.css=.min.css
+```
+
+商品移动端覆盖仍通过上面的 `scripts/build-product-css.sh` 构建。

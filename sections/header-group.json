@@ -119,7 +119,7 @@
             "heading": "Super Deals",
             "menu": "",
             "desktop_layout": "dropdown",
-            "menu_item_link": "",
+            "menu_item_link": "shopify://pages/super-deals",
             "open_new_window": false,
             "enable_on_mobile": true,
             "label": "",

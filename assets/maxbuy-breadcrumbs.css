@@ -1,0 +1,95 @@
+/* Shared page navigation. Parent sections retain their existing width and spacing overrides. */
+  .maxbuy-breadcrumb {
+    --color-text: var(--color-breadcrumb-text);
+    --color-link: var(--color-breadcrumb-text-link);
+  }
+  .maxbuy-breadcrumb .maxbuy-breadcrumbs[role="navigation"] {
+    color: rgba(0, 0, 0, 0.4);
+    font-size: 14px;
+    line-height: 1;
+  }
+  @media (max-width: 767px) {
+    .maxbuy-breadcrumb .maxbuy-breadcrumbs[role="navigation"] {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 10px;
+      font-family: var(--body-font-family);
+      font-weight: 300;
+      line-height: 10px;
+      text-align: start;
+      text-transform: capitalize;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    .maxbuy-breadcrumb .maxbuy-breadcrumbs[role="navigation"] > a,
+    .maxbuy-breadcrumb .maxbuy-breadcrumbs[role="navigation"] > span {
+      flex: none;
+    }
+    .maxbuy-breadcrumb .maxbuy-breadcrumbs[role="navigation"] > :last-child {
+      flex: 0 1 auto;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+  .maxbuy-breadcrumb .maxbuy-breadcrumbs[role="navigation"] a,
+  .maxbuy-breadcrumb .maxbuy-breadcrumbs[role="navigation"] .breadcrumb__divider {
+    color: rgba(0, 0, 0, 0.4);
+    border-color: currentColor;
+    text-decoration: none;
+  }
+  .maxbuy-breadcrumb .breadcrumb__divider {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 5px;
+    height: 8px;
+    margin-inline: 16px;
+    vertical-align: middle;
+  }
+  .maxbuy-breadcrumb .breadcrumb__divider svg {
+    display: block;
+    flex: none;
+  }
+  .maxbuy-breadcrumb .breadcrumb__divider {
+    position: relative;
+  }
+  .maxbuy-breadcrumb .breadcrumb__divider::after {
+    display: none;
+    content: '';
+    position: absolute;
+    inset: -3.84% -13.02% -3.84% -5.33%;
+    background: var(--maxbuy-breadcrumb-separator-mobile) center / 100% 100% no-repeat;
+  }
+  @media (max-width: 767px) {
+    .maxbuy-breadcrumb .maxbuy-breadcrumbs[role="navigation"] .breadcrumb__divider {
+      width: 3px;
+      height: 5px;
+      margin-inline: 0;
+      overflow: visible;
+    }
+    .maxbuy-breadcrumb .breadcrumb__divider svg { display: none; }
+    .maxbuy-breadcrumb .breadcrumb__divider::after { display: block; }
+  }
+  .maxbuy-breadcrumb .maxbuy-breadcrumbs[role="navigation"] a {
+    background-image: none;
+  }
+  .maxbuy-breadcrumb .maxbuy-breadcrumbs[role="navigation"] a::before,
+  .maxbuy-breadcrumb .maxbuy-breadcrumbs[role="navigation"] a::after {
+    content: none;
+  }
+  .maxbuy-breadcrumb .maxbuy-breadcrumbs[role="navigation"] > span:last-child,
+  .maxbuy-breadcrumb .maxbuy-breadcrumbs[role="navigation"] [aria-current="page"] {
+    color: #000;
+  }
+
+.maxbuy-breadcrumb__inner { padding: 0.75rem 1rem; }
+@media (min-width: 768px) {
+  .maxbuy-breadcrumb__inner { padding: 1rem 2rem; }
+}
+
+/* Ordinary pages already receive horizontal gutters from their page-width wrapper. */
+.page__breadcrumbs > .maxbuy-breadcrumb > .maxbuy-breadcrumb__inner {
+  padding-inline: 0;
+}

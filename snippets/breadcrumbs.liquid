@@ -1,5 +1,6 @@
 {% comment %}
-  Renders a breadcrumbs.
+  Shared page breadcrumbs. Keep parent section wrappers in place to preserve layout.
+  Page templates should enable a single breadcrumb owner; supporting sections should disable theirs.
 
   Accepts:
   - show_image_banner: {Boolean} Setting showing image after/before breadcrumbs
@@ -29,7 +30,11 @@
     assign enable_microdata_schema = true
   endif
 %}
+{{ 'maxbuy-breadcrumbs.min.css' | asset_url | stylesheet_tag }}
 {%- style -%}
+  .breadcrumbs-{{ section.id }} {
+    --maxbuy-breadcrumb-separator-mobile: url({{ 'maxbuy-breadcrumb-separator-mobile.svg' | asset_url }});
+  }
   .breadcrumbs-{{ section.id }}:not(.dark .breadcrumbs-{{ section.id }}) {
     {% if background_color_light != blank and background_color_light.alpha != 0.0  %}
       --color-breadcrumb-background: {{ background_color_light.red }} {{ background_color_light.green }} {{ background_color_light.blue }} / {{ background_color_light.alpha }};
@@ -52,97 +57,13 @@
       --color-breadcrumb-text-link: {{ text_link_color_dark.red }} {{ text_link_color_dark.green }} {{ text_link_color_dark.blue }} / {{ text_link_color_dark.alpha }};
     {% endif %}
   }
-  .breadcrumbs-{{ section.id }} {
-    --color-text: var(--color-breadcrumb-text);
-    --color-link: var(--color-breadcrumb-text-link);
-  }
-  .breadcrumbs-{{ section.id }} .maxbuy-breadcrumbs[role="navigation"] {
-    color: rgba(0, 0, 0, 0.4);
-    font-size: 14px;
-    line-height: 1;
-  }
-  @media (max-width: 767px) {
-    .breadcrumbs-{{ section.id }} .maxbuy-breadcrumbs[role="navigation"] {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 10px;
-      font-family: var(--body-font-family);
-      font-weight: 300;
-      line-height: 10px;
-      text-align: start;
-      text-transform: capitalize;
-      white-space: nowrap;
-      overflow: hidden;
-    }
-    .breadcrumbs-{{ section.id }} .maxbuy-breadcrumbs[role="navigation"] > a,
-    .breadcrumbs-{{ section.id }} .maxbuy-breadcrumbs[role="navigation"] > span {
-      flex: none;
-    }
-    .breadcrumbs-{{ section.id }} .maxbuy-breadcrumbs[role="navigation"] > :last-child {
-      flex: 0 1 auto;
-      min-width: 0;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-  }
-  .breadcrumbs-{{ section.id }} .maxbuy-breadcrumbs[role="navigation"] a,
-  .breadcrumbs-{{ section.id }} .maxbuy-breadcrumbs[role="navigation"] .breadcrumb__divider {
-    color: rgba(0, 0, 0, 0.4);
-    border-color: currentColor;
-    text-decoration: none;
-  }
-  .breadcrumbs-{{ section.id }} .breadcrumb__divider {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 5px;
-    height: 8px;
-    margin-inline: 16px;
-    vertical-align: middle;
-  }
-  .breadcrumbs-{{ section.id }} .breadcrumb__divider svg {
-    display: block;
-    flex: none;
-  }
-  .breadcrumbs-{{ section.id }} .breadcrumb__divider {
-    position: relative;
-  }
-  .breadcrumbs-{{ section.id }} .breadcrumb__divider::after {
-    display: none;
-    content: '';
-    position: absolute;
-    inset: -3.84% -13.02% -3.84% -5.33%;
-    background: url({{ 'maxbuy-breadcrumb-separator-mobile.svg' | asset_url }}) center / 100% 100% no-repeat;
-  }
-  @media (max-width: 767px) {
-    .breadcrumbs-{{ section.id }} .maxbuy-breadcrumbs[role="navigation"] .breadcrumb__divider {
-      width: 3px;
-      height: 5px;
-      margin-inline: 0;
-      overflow: visible;
-    }
-    .breadcrumbs-{{ section.id }} .breadcrumb__divider svg { display: none; }
-    .breadcrumbs-{{ section.id }} .breadcrumb__divider::after { display: block; }
-  }
-  .breadcrumbs-{{ section.id }} .maxbuy-breadcrumbs[role="navigation"] a {
-    background-image: none;
-  }
-  .breadcrumbs-{{ section.id }} .maxbuy-breadcrumbs[role="navigation"] a::before,
-  .breadcrumbs-{{ section.id }} .maxbuy-breadcrumbs[role="navigation"] a::after {
-    content: none;
-  }
-  .breadcrumbs-{{ section.id }} .maxbuy-breadcrumbs[role="navigation"] > span:last-child,
-  .breadcrumbs-{{ section.id }} .maxbuy-breadcrumbs[role="navigation"] [aria-current="page"] {
-    color: #000;
-  }
 {%- endstyle -%}
-<div class="breadcrumbs-{{ section.id }} ml-0 mr-0 color-bg-[rgba(var(--color-breadcrumb-background))] color-text-[rgba(var(--color-breadcrumb-text))] ltr {{ class_border -}}
+<div class="maxbuy-breadcrumb breadcrumbs-{{ section.id }} ml-0 mr-0 color-bg-[rgba(var(--color-breadcrumb-background))] color-text-[rgba(var(--color-breadcrumb-text))] ltr {{ class_border -}}
   {%- if settings.edges_type == 'rounded_corners' %} my-1{% endif -%}
   {%- if settings.edges_type == 'rounded_corners' and background_color_light != blank or settings.breadcrumbs_background_color.alpha != 0.0 %} brb-rounded-corners{% endif -%}
   {%- if settings.edges_type == 'rounded_corners' and background_color_dark != blank or settings.breadcrumbs_background_color_dark.alpha != 0.0%} brb-rounded-corners-dark{%- else %} brb-square-corners{% endif -%}"
 >
-  <div class="py-3 md:py-4 px-4 md:px-8">
+  <div class="maxbuy-breadcrumb__inner">
     {% unless template == 'index' or template == 'cart' %}
       <div class="maxbuy-breadcrumbs capitalize text-small {{ settings.breadcrumbs_mobile_alignment }} md:{{ settings.breadcrumbs_desktop_alignment }}"
         role="navigation" aria-label="breadcrumbs"

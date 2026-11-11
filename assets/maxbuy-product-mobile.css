@@ -28,7 +28,7 @@
     margin-block: 0;
   }
 
-  .section-main-product [id^="Breadcrumbs__"]>div>div>div {
+  .section-main-product .maxbuy-breadcrumb > .maxbuy-breadcrumb__inner {
     padding: 10px 0;
   }
 

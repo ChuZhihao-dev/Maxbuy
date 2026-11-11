@@ -3,7 +3,7 @@
 .maxbuy-collection.best-sellers { display: block; box-sizing: content-box; max-width: 1232px; margin-inline: auto; padding: 0 40px 80px; color: #000; background: var(--collection-background); font-family: var(--body-font-family); }
 .maxbuy-collection [hidden] { display: none !important; }
 
-.maxbuy-collection__intro > [class*="breadcrumbs-"] > div { padding: 16px 0 24px; }
+.maxbuy-collection__intro > .maxbuy-breadcrumb > .maxbuy-breadcrumb__inner { padding: 16px 0 24px; }
 .maxbuy-collection__intro [role="navigation"] { font-size: 12px; line-height: 14px; text-transform: none; text-align: left; }
 .maxbuy-collection__intro [role="navigation"] a { text-decoration: none; }
 .maxbuy-collection__intro [role="navigation"] a::before,
@@ -108,7 +108,7 @@ maxbuy-collection:defined .maxbuy-collection__apply { display: none; }
 }
 @media (max-width: 767px) {
   .maxbuy-collection.best-sellers { box-sizing: border-box; padding: 0 12.5px 32px; width: 100%; }
-  .maxbuy-collection__intro > [class*="breadcrumbs-"] > div { padding: 14px 0; }
+  .maxbuy-collection__intro > .maxbuy-breadcrumb > .maxbuy-breadcrumb__inner { padding: 14px 0; }
   .maxbuy-collection__promotion { min-height: 0; aspect-ratio: 349 / 350; margin-bottom: 24px; border-radius: 8px; }
   .maxbuy-collection__promotion > img, .maxbuy-collection__promotion picture img { object-position: 60% center; }
   .maxbuy-collection__promotion-copy { min-height: 0; padding: 36px 16px 0; max-width: 100%; align-items: center; text-align: center; }
